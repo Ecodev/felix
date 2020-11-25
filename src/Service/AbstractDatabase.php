@@ -35,15 +35,10 @@ STRING;
      */
     public static function dumpData(string $dumpFile): void
     {
-        $config = require 'config/autoload/local.php';
-        $dbConfig = $config['doctrine']['connection']['orm_default']['params'];
-        $host = $dbConfig['host'];
-        $username = $dbConfig['user'];
-        $database = $dbConfig['dbname'];
-        $password = $dbConfig['password'];
+        $mysqlArgs = self::getMysqlArgs();
 
         echo "dumping $dumpFile...\n";
-        $dumpCmd = "mysqldump -v --user=$username --password=$password --host=$host $database | sed 's/DEFINER=[^*]*\\*/\\*/g' | gzip > $dumpFile";
+        $dumpCmd = "mysqldump -v $mysqlArgs | sed 's/DEFINER=[^*]*\\*/\\*/g' | gzip > $dumpFile";
         self::executeLocalCommand($dumpCmd);
     }
 
@@ -65,22 +60,32 @@ STRING;
      */
     public static function loadData(string $dumpFile): void
     {
-        $config = require 'config/autoload/local.php';
-        $dbConfig = $config['doctrine']['connection']['orm_default']['params'];
-        $host = $dbConfig['host'] ?? 'localhost';
-        $username = $dbConfig['user'];
-        $database = $dbConfig['dbname'];
-        $password = $dbConfig['password'];
-
+        $mysqlArgs = self::getMysqlArgs();
         $dumpFile = self::absolutePath($dumpFile);
 
         echo "loading dump $dumpFile...\n";
 
         self::executeLocalCommand(PHP_BINARY . ' ./vendor/bin/doctrine orm:schema-tool:drop --ansi --full-database --force');
-        self::executeLocalCommand("gunzip -c \"$dumpFile\" | mysql --user=$username --password=$password --host=$host $database");
+        self::executeLocalCommand("gunzip -c \"$dumpFile\" | mysql $mysqlArgs");
         self::executeLocalCommand(PHP_BINARY . ' ./vendor/bin/doctrine-migrations --ansi migrations:migrate --no-interaction');
         self::loadTriggers();
         self::loadTestUsers();
+    }
+
+    private static function getMysqlArgs(): string
+    {
+        $dbConfig = _em()->getConnection()->getParams();
+
+        $host = $dbConfig['host'] ?? 'localhost';
+        $username = $dbConfig['user'];
+        $database = $dbConfig['dbname'];
+        $password = $dbConfig['password'];
+        $port = $dbConfig['port'] ?? 3306;
+
+        // It's possible to have no password at all
+        $password = $password ? '-p' . $password : '';
+
+        return "--user=$username $password --host=$host --port=$port $database";
     }
 
     public static function loadRemoteData(string $remote): void
@@ -143,14 +148,11 @@ STRING;
     private static function importFile(string $file): void
     {
         $file = self::absolutePath($file);
+        $mysqlArgs = self::getMysqlArgs();
 
         echo 'importing ' . $file . "\n";
-        $connection = _em()->getConnection();
-        $database = $connection->getDatabase();
-        $username = $connection->getUsername();
-        $password = empty($connection->getPassword()) ? '' : '-p' . $connection->getPassword();
 
-        $importCommand = "cat $file | mysql -u $username $password $database";
+        $importCommand = "cat $file | mysql $mysqlArgs";
 
         self::executeLocalCommand($importCommand);
     }
