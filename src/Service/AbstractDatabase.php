@@ -13,7 +13,6 @@ use Exception;
  *
  * - ssh access to remote server (via ~/.ssh/config)
  * - both local and remote sites must be accesible via: /sites/MY_SITE
- * - both local and remote config/autoload/local.php files must contains the database connection info
  */
 abstract class AbstractDatabase
 {
