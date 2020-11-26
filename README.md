@@ -1,6 +1,6 @@
 # Felix
 
-[![Build Status](https://github.com/ecodev/felix/workflows/build/badge.svg)](https://github.com/ecodev/felix/actions)
+[![Build Status](https://github.com/ecodev/felix/workflows/main/badge.svg)](https://github.com/ecodev/felix/actions)
 [![Code Quality](https://scrutinizer-ci.com/g/Ecodev/felix/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Ecodev/felix/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/Ecodev/felix/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Ecodev/felix/?branch=master)
 [![Total Downloads](https://poser.pugx.org/Ecodev/felix/downloads.png)](https://packagist.org/packages/Ecodev/felix)
