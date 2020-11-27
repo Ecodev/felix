@@ -37,7 +37,7 @@ trait LogRepository
     {
         $event['creation_date'] = Chronos::instance($event['timestamp'])->toIso8601String();
         $event['extra'] = json_encode($event['extra']);
-        unset($event['timestamp'], $event['priorityName']);
+        unset($event['timestamp'], $event['priorityName'], $event['login']);
 
         $this->getEntityManager()->getConnection()->insert('log', $event);
     }

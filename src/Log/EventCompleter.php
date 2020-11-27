@@ -5,40 +5,24 @@ declare(strict_types=1);
 namespace Ecodev\Felix\Log;
 
 use Ecodev\Felix\Model\CurrentUser;
-use Ecodev\Felix\Repository\LogRepository;
-use Laminas\Log\Writer\AbstractWriter;
+use Laminas\Log\Processor\ProcessorInterface;
 
-class DbWriter extends AbstractWriter
+class EventCompleter implements ProcessorInterface
 {
-    /**
-     * @var LogRepository
-     */
-    private $logRepository;
-
     /**
      * @var string
      */
     private $baseUrl;
 
-    public function __construct(LogRepository $logRepository, string $baseUrl, $options = null)
+    public function __construct(string $baseUrl)
     {
-        parent::__construct($options);
-        $this->logRepository = $logRepository;
         $this->baseUrl = $baseUrl;
     }
 
     /**
-     * Write a message to the log
-     *
-     * @param array $event log data event
+     * Complete a log event with extra data, including stacktrace and any global stuff relevant to the app
      */
-    final protected function doWrite(array $event): void
-    {
-        $completedEvent = $this->completeEvent($event);
-        $this->logRepository->log($completedEvent);
-    }
-
-    protected function completeEvent(array $event): array
+    public function process(array $event): array
     {
         $envData = $this->getEnvData();
         $event = array_merge($event, $envData);
@@ -78,6 +62,7 @@ class DbWriter extends AbstractWriter
 
         $envData = [
             'creator_id' => $user ? $user->getId() : null,
+            'login' => $user ? $user->getLogin() : null,
             'url' => $url,
             'referer' => $referer,
             'request' => json_encode($request, JSON_PRETTY_PRINT),

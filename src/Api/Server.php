@@ -100,7 +100,7 @@ class Server
     private function handleError(Throwable $exception, callable $formatter): array
     {
         // Always log exception in DB (and by email)
-        _log()->err($exception->__toString());
+        _log()->err($exception->__toString(), ['exception' => $exception]);
 
         // If we are absolutely certain that the error comes from one of our trigger with a custom message for end-user,
         // then wrap the exception to make it showable to the end-user
