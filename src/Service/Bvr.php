@@ -132,10 +132,6 @@ final class Bvr
         }
 
         $digits = mb_str_split($number);
-        if ($digits === false) {
-            throw new Exception('Could not split number into digits');
-        }
-
         foreach ($digits as $value) {
             $report = self::TABLE[$report][(int) $value];
         }

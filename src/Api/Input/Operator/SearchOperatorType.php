@@ -135,10 +135,8 @@ abstract class SearchOperatorType extends AbstractOperator
                 $fieldWheres[] = $field . ' LIKE :' . $parameterName;
             }
 
-            if ($fieldWheres) {
-                $wordWheres[] = '(' . implode(' OR ', $fieldWheres) . ')';
-                $queryBuilder->setParameter($parameterName, '%' . $word . '%');
-            }
+            $wordWheres[] = '(' . implode(' OR ', $fieldWheres) . ')';
+            $queryBuilder->setParameter($parameterName, '%' . $word . '%');
         }
 
         return implode(' AND ', $wordWheres);
