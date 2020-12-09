@@ -72,8 +72,17 @@ class EventCompleter implements ProcessorInterface
         return $envData;
     }
 
+    /**
+     * Remove password value from GraphQL variables well-known structure
+     */
     protected function removeSensitiveData(array $request): array
     {
+        foreach ($request as &$r) {
+            if (is_array($r)) {
+                unset($r['variables']['password']);
+            }
+        }
+
         return $request;
     }
 
