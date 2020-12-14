@@ -30,15 +30,17 @@ final class PaginationInputType extends InputObjectType
                 return [
                     'offset' => [
                         'type' => self::int(),
-                        'description' => 'The zero-based index of the displayed list of items',
+                        'defaultValue' => null,
+                        'description' => 'The zero-based index of first item of the page. If given a value greater than zero, then `pageIndex` is ignored.',
                     ],
                     'pageIndex' => [
                         'type' => self::int(),
                         'defaultValue' => 0,
-                        'description' => 'The zero-based page index of the displayed list of items',
+                        'description' => 'The zero-based index of the page',
                     ],
                     'pageSize' => [
                         'type' => self::int(),
+                        'defaultValue' => 50,
                         'description' => 'Number of items to display on a page',
                     ],
                 ];

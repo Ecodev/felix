@@ -26,7 +26,7 @@ final class PaginationType extends ObjectType
             'fields' => function () use ($class, $extraFields): array {
                 $fields = [
                     'offset' => [
-                        'type' => self::nonNull(self::int()),
+                        'type' => self::int(),
                         'description' => 'The zero-based index of the displayed list of items',
                     ],
                     'pageIndex' => [
