@@ -2,16 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Ecodev\Felix\Action;
+namespace Ecodev\Felix\Handler;
 
 use Doctrine\Persistence\ObjectRepository;
 use Ecodev\Felix\Model\File;
 use Laminas\Diactoros\Response;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\RequestHandlerInterface;
 
-final class FileAction extends AbstractAction
+final class FileHandler extends AbstractHandler
 {
     /**
      * @var ObjectRepository
@@ -26,7 +25,7 @@ final class FileAction extends AbstractAction
     /**
      * Serve a downloaded file from disk
      */
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $id = $request->getAttribute('id');
 

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace EcodevTests\Felix\Action;
+namespace EcodevTests\Felix\Handler;
 
 use Doctrine\Persistence\ObjectRepository;
-use Ecodev\Felix\Action\ImageAction;
+use Ecodev\Felix\Handler\ImageHandler;
 use Ecodev\Felix\Model\Image;
 use Ecodev\Felix\Service\ImageResizer;
 use Laminas\Diactoros\ServerRequest;
@@ -13,9 +13,8 @@ use org\bovigo\vfs\vfsStream;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\RequestHandlerInterface;
 
-class ImageActionTest extends TestCase
+class ImageHandlerTest extends TestCase
 {
     protected function setUp(): void
     {
@@ -45,7 +44,7 @@ class ImageActionTest extends TestCase
         $request = new ServerRequest();
         $request = $request->withAttribute('maxHeight', $maxHeight);
 
-        $response = $this->process($repository, $imageResizer, $request);
+        $response = $this->handle($repository, $imageResizer, $request);
 
         self::assertSame('image/jpeg', $response->getHeaderLine('content-type'));
         self::assertSame('16', $response->getHeaderLine('content-length'));
@@ -68,18 +67,17 @@ class ImageActionTest extends TestCase
         $request = $request->withAttribute('maxHeight', $maxHeight)
             ->withHeader('accept', 'text/html, image/webp, */*;q=0.8');
 
-        $response = $this->process($repository, $imageResizer, $request);
+        $response = $this->handle($repository, $imageResizer, $request);
 
         self::assertSame('image/webp', $response->getHeaderLine('content-type'));
         self::assertSame('15', $response->getHeaderLine('content-length'));
     }
 
-    private function process(ObjectRepository $repository, ImageResizer $imageResizer, ServerRequestInterface $request): ResponseInterface
+    private function handle(ObjectRepository $repository, ImageResizer $imageResizer, ServerRequestInterface $request): ResponseInterface
     {
-        $action = new ImageAction($repository, $imageResizer);
-        $handler = $this->createMock(RequestHandlerInterface::class);
+        $handler = new ImageHandler($repository, $imageResizer);
 
-        return $action->process($request, $handler);
+        return $handler->handle($request);
     }
 
     private function createImageMock(): Image

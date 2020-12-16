@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Ecodev\Felix\Action;
+namespace Ecodev\Felix\Handler;
 
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 
-abstract class AbstractAction implements MiddlewareInterface
+abstract class AbstractHandler implements RequestHandlerInterface
 {
     protected function createError(string $message): ResponseInterface
     {

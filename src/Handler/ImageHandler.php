@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ecodev\Felix\Action;
+namespace Ecodev\Felix\Handler;
 
 use Doctrine\Persistence\ObjectRepository;
 use Ecodev\Felix\Model\Image;
@@ -10,9 +10,8 @@ use Ecodev\Felix\Service\ImageResizer;
 use Laminas\Diactoros\Response;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\RequestHandlerInterface;
 
-final class ImageAction extends AbstractAction
+final class ImageHandler extends AbstractHandler
 {
     /**
      * @var ObjectRepository
@@ -33,7 +32,7 @@ final class ImageAction extends AbstractAction
     /**
      * Serve an image from disk, with optional dynamic resizing
      */
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $id = $request->getAttribute('id');
 
