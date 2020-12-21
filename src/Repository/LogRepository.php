@@ -26,6 +26,11 @@ interface LogRepository
     const UPDATE_PASSWORD = 'update password';
 
     /**
+     * Log message to be used when a user requests a link to change his password
+     */
+    const REQUEST_PASSWORD_RESET = 'request password reset';
+
+    /**
      * Log message to be used when user cannot change his password
      */
     const UPDATE_PASSWORD_FAILED = 'update password failed';
@@ -46,6 +51,8 @@ interface LogRepository
     public function loginFailedOften(): bool;
 
     public function updatePasswordFailedOften(): bool;
+
+    public function requestPasswordResetOften(): bool;
 
     /**
      * Delete log entries which are errors/warnings and older than one month
