@@ -60,6 +60,11 @@ trait LogRepository
         return $this->failedOften(LogRepositoryInterface::UPDATE_PASSWORD, LogRepositoryInterface::REQUEST_PASSWORD_RESET, 10);
     }
 
+    public function registerOften(): bool
+    {
+        return $this->$this->failedOften(LogRepositoryInterface::REGISTER_CONFIRM, LogRepositoryInterface::REGISTER, 10);
+    }
+
     private function failedOften(string $success, string $failed, int $maxFailureCount = 20): bool
     {
         if (PHP_SAPI === 'cli') {
@@ -107,7 +112,11 @@ trait LogRepository
             ->delete('log')
             ->andWhere('log.priority != :priority OR message IN (:message)')
             ->setParameter('priority', Logger::INFO)
-            ->setParameter('message', [LogRepositoryInterface::LOGIN_FAILED, LogRepositoryInterface::REQUEST_PASSWORD_RESET], Connection::PARAM_STR_ARRAY)
+            ->setParameter('message', [
+                LogRepositoryInterface::LOGIN_FAILED,
+                LogRepositoryInterface::REQUEST_PASSWORD_RESET,
+                LogRepositoryInterface::REGISTER,
+            ], Connection::PARAM_STR_ARRAY)
             ->andWhere('log.creation_date < DATE_SUB(NOW(), INTERVAL 1 MONTH)');
 
         $connection->query('LOCK TABLES `log` WRITE;');

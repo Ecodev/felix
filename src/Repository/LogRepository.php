@@ -36,6 +36,16 @@ interface LogRepository
     const UPDATE_PASSWORD_FAILED = 'update password failed';
 
     /**
+     * Log message to be used when a new user is trying to register (token sent)
+     */
+    const REGISTER = 'register';
+
+    /**
+     * Log message to be used when a new user account is confirmed (valid token)
+     */
+    const REGISTER_CONFIRM = 'confirm registration';
+
+    /**
      * Log message to be used when trying to send email but it's already running
      */
     const MAILER_LOCKED = 'Unable to obtain lock for mailer, try again later.';
@@ -53,6 +63,8 @@ interface LogRepository
     public function updatePasswordFailedOften(): bool;
 
     public function requestPasswordResetOften(): bool;
+
+    public function registerOften(): bool;
 
     /**
      * Delete log entries which are errors/warnings and older than one month
