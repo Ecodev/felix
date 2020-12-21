@@ -62,7 +62,7 @@ trait LogRepository
 
     public function registerOften(): bool
     {
-        return $this->$this->failedOften(LogRepositoryInterface::REGISTER_CONFIRM, LogRepositoryInterface::REGISTER, 10);
+        return $this->failedOften(LogRepositoryInterface::REGISTER_CONFIRM, LogRepositoryInterface::REGISTER, 10);
     }
 
     private function failedOften(string $success, string $failed, int $maxFailureCount = 20): bool
