@@ -16,7 +16,7 @@ final class NoMail implements FilterInterface
     {
         $exception = $event['extra']['exception'] ?? null;
 
-        if ($exception instanceof NoMailLogging || ($exception instanceof Error && $exception->getPrevious() instanceof NoMailLogging)) {
+        if ($exception instanceof NoMailLogging || ($exception instanceof Error && ($exception->getPrevious() instanceof NoMailLogging || mb_strpos($event['message'], 'Cannot query field') === 0))) {
             return false;
         }
 
