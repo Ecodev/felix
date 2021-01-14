@@ -40,21 +40,20 @@ class EventCompleterTest extends TestCase
             ->willReturn('my login');
 
         CurrentUser::set($user);
+        putenv('REMOTE_ADDR=127.0.0.1');
         $completed = new EventCompleter('https://example.com');
-
         $actual = $completed->process([
             'message' => '',
             'extra' => [
                 'errno' => 1,
             ],
         ]);
-
         self::assertStringContainsString('Stacktrace:', $actual['message']);
         self::assertSame(123, $actual['creator_id']);
         self::assertSame('my login', $actual['login']);
         self::assertIsString($actual['url']);
         self::assertIsString($actual['referer']);
         self::assertIsString($actual['request']);
-        self::assertSame('script', $actual['ip']);
+        self::assertSame('127.0.0.1', $actual['ip']);
     }
 }

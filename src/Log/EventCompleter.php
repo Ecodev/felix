@@ -48,7 +48,7 @@ class EventCompleter implements ProcessorInterface
         if (PHP_SAPI === 'cli') {
             global $argv;
             $request = $argv;
-            $ip = 'script';
+            $ip = !empty(getenv('REMOTE_ADDR')) ? getenv('REMOTE_ADDR') : 'script';
             $url = implode(' ', $argv);
             $referer = '';
         } else {

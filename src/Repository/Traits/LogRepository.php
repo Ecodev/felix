@@ -68,7 +68,7 @@ trait LogRepository
     private function failedOften(string $success, string $failed, int $maxFailureCount = 20): bool
     {
         if (PHP_SAPI === 'cli') {
-            $ip = 'script';
+            $ip = !empty(getenv('REMOTE_ADDR')) ? getenv('REMOTE_ADDR') : 'script';
         } else {
             $ip = $_SERVER['REMOTE_ADDR'] ?? '';
         }
