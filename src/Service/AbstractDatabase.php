@@ -12,14 +12,14 @@ use Exception;
  * Requirements:
  *
  * - ssh access to remote server (via ~/.ssh/config)
- * - both local and remote sites must be accesible via: /sites/MY_SITE
+ * - both local and remote sites must be accessible via: /sites/MY_SITE
  */
 abstract class AbstractDatabase
 {
     /**
      * Dump data from database on $remote server
      */
-    private static function dumpDataRemotely(string $remote, string $dumpFile): void
+    protected static function dumpDataRemotely(string $remote, string $dumpFile): void
     {
         $sshCmd = <<<STRING
                     ssh $remote "cd /sites/$remote/ && php7.4 bin/dump-data.php $dumpFile"
@@ -44,7 +44,7 @@ STRING;
     /**
      * Copy a file from $remote
      */
-    private static function copyFile(string $remote, string $dumpFile): void
+    protected static function copyFile(string $remote, string $dumpFile): void
     {
         $copyCmd = <<<STRING
                     rsync -avz --progress $remote:$dumpFile $dumpFile
@@ -71,7 +71,7 @@ STRING;
         self::loadTestUsers();
     }
 
-    private static function getMysqlArgs(): string
+    protected static function getMysqlArgs(): string
     {
         $dbConfig = _em()->getConnection()->getParams();
 
@@ -133,7 +133,7 @@ STRING;
     /**
      * Load test users
      */
-    private static function loadTestUsers(): void
+    protected static function loadTestUsers(): void
     {
         self::importFile('tests/data/users.sql');
     }
@@ -144,7 +144,7 @@ STRING;
      * This use mysql command, instead of DBAL methods, to allow to see errors if any, and
      * also because it seems trigger creation do not work with DBAL for some unclear reasons.
      */
-    private static function importFile(string $file): void
+    protected static function importFile(string $file): void
     {
         $file = self::absolutePath($file);
         $mysqlArgs = self::getMysqlArgs();
@@ -156,7 +156,7 @@ STRING;
         self::executeLocalCommand($importCommand);
     }
 
-    private static function absolutePath(string $file): string
+    protected static function absolutePath(string $file): string
     {
         $absolutePath = realpath($file);
         if ($absolutePath === false) {
