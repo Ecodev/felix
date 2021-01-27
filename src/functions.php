@@ -18,7 +18,7 @@ function _types(): Types
 }
 
 /**
- * Returns the EM
+ * Returns the Entity Manager
  */
 function _em(): EntityManager
 {
