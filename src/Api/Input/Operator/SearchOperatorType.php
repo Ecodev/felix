@@ -32,7 +32,7 @@ abstract class SearchOperatorType extends AbstractOperator
             return null;
         }
 
-        $words = preg_split('/[[:space:]]+/', $args['value'], -1, PREG_SPLIT_NO_EMPTY);
+        $words = $this->parseWords($args['value']);
         if (!$words) {
             return null;
         }
@@ -140,5 +140,32 @@ abstract class SearchOperatorType extends AbstractOperator
         }
 
         return implode(' AND ', $wordWheres);
+    }
+
+    /**
+     * Parse the term to extract a list of words and quoted terms
+     *
+     * @return string[]
+     */
+    private function parseWords(string $term): array
+    {
+        // Drop empty quote
+        $term = str_replace('""', '', $term);
+
+        // Extract exact terms that are quoted
+        preg_match_all('~"([^"]*)"~', $term, $m);
+        $exactTerms = $m[1];
+        $termWithoutExact = str_replace($m[0], ' ', $term);
+
+        // Split words by any whitespace
+        $words = preg_split('/[[:space:]]+/', $termWithoutExact, -1, PREG_SPLIT_NO_EMPTY) ?: [];
+
+        // Combine both list
+        array_push($words, ...$exactTerms);
+
+        // Drop duplicates
+        $words = array_unique($words);
+
+        return $words;
     }
 }

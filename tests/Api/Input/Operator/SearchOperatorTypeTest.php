@@ -21,7 +21,7 @@ final class SearchOperatorTypeTest extends OperatorType
     /**
      * @dataProvider providerSearch
      */
-    public function testSearch(string $class, string $term, int $expectedJoinCount, string $expected): void
+    public function testSearch(string $class, string $term, int $expectedJoinCount, ?string $expected): void
     {
         $operator = new class($this->types, Type::string()) extends SearchOperatorType {
             protected function getSearchableFieldsWhitelist(ClassMetadata $metadata): array
@@ -50,6 +50,36 @@ final class SearchOperatorTypeTest extends OperatorType
     public function providerSearch(): array
     {
         return [
+            'empty term' => [
+                User::class,
+                '',
+                0,
+                null,
+            ],
+            'only whitespace is dropped' => [
+                User::class,
+                '    ',
+                0,
+                null,
+            ],
+            'quoted whitespace is kept' => [
+                User::class,
+                '"    "',
+                0,
+                '(a.name LIKE :filter1 OR a.email LIKE :filter1)',
+            ],
+            'empty quoted term' => [
+                User::class,
+                '""',
+                0,
+                null,
+            ],
+            'mixed empty term' => [
+                User::class,
+                '   ""  ""  ',
+                0,
+                null,
+            ],
             'search predefined fields' => [
                 User::class,
                 'john',
@@ -62,11 +92,29 @@ final class SearchOperatorTypeTest extends OperatorType
                 0,
                 '(a.name LIKE :filter1 OR a.email LIKE :filter1) AND (a.name LIKE :filter2 OR a.email LIKE :filter2)',
             ],
+            'quoted words are not split' => [
+                User::class,
+                '"john doe"',
+                0,
+                '(a.name LIKE :filter1 OR a.email LIKE :filter1)',
+            ],
             'trimmed split words' => [
                 User::class,
                 '  foo   bar   ',
                 0,
                 '(a.name LIKE :filter1 OR a.email LIKE :filter1) AND (a.name LIKE :filter2 OR a.email LIKE :filter2)',
+            ],
+            'mixed quoted and non-quoted' => [
+                User::class,
+                ' a b "john doe" c d e " f g h i j k l m n o p q r s t u v w x y z "  ',
+                0,
+                '(a.name LIKE :filter1 OR a.email LIKE :filter1) AND (a.name LIKE :filter2 OR a.email LIKE :filter2) AND (a.name LIKE :filter3 OR a.email LIKE :filter3) AND (a.name LIKE :filter4 OR a.email LIKE :filter4) AND (a.name LIKE :filter5 OR a.email LIKE :filter5) AND (a.name LIKE :filter6 OR a.email LIKE :filter6) AND (a.name LIKE :filter7 OR a.email LIKE :filter7)',
+            ],
+            'no duplicates' => [
+                User::class,
+                'dup "dup" dup "dup"',
+                0,
+                '(a.name LIKE :filter1 OR a.email LIKE :filter1)',
             ],
             'joined entities' => [
                 Post::class,
