@@ -161,7 +161,9 @@ abstract class SearchOperatorType extends AbstractOperator
         $words = preg_split('/[[:space:]]+/', $termWithoutExact, -1, PREG_SPLIT_NO_EMPTY) ?: [];
 
         // Combine both list
-        array_push($words, ...$exactTerms);
+        if ($exactTerms) {
+            array_push($words, ...$exactTerms);
+        }
 
         // Drop duplicates
         $words = array_unique($words);
