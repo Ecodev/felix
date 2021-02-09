@@ -21,6 +21,7 @@ jobs:
         with:
           php-version: ${{ matrix.php-version }}
           coverage: none
+          extensions: bcmath, fileinfo, json, pdo
 
       - name: Cache composer dependencies
         uses: actions/cache@v2
@@ -52,6 +53,7 @@ jobs:
         with:
           php-version: 7.4
           coverage: none
+          extensions: bcmath, fileinfo, json, pdo
           tools: cs2pr
 
       - name: Cache composer dependencies
@@ -78,6 +80,7 @@ jobs:
         with:
           php-version: 7.4
           coverage: none
+          extensions: bcmath, fileinfo, json, pdo
 
       - name: Cache composer dependencies
         uses: actions/cache@v2
@@ -103,6 +106,7 @@ jobs:
         with:
           php-version: 7.4
           coverage: pcov
+          extensions: bcmath, fileinfo, json, pdo
 
       - name: Cache composer dependencies
         uses: actions/cache@v2
