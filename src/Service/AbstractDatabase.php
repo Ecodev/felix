@@ -151,7 +151,7 @@ STRING;
 
         echo 'importing ' . $file . "\n";
 
-        $importCommand = "cat $file | mysql $mysqlArgs";
+        $importCommand = "echo 'SET NAMES utf8mb4;' | cat - $file | mysql $mysqlArgs";
 
         self::executeLocalCommand($importCommand);
     }
