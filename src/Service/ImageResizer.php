@@ -26,13 +26,15 @@ class ImageResizer
     }
 
     /**
-     * Resize image as JPG and return the path to the resized version
+     * Resize image as JPG or WEBP and return the path to the resized version
      */
     public function resize(Image $image, int $maxHeight, bool $useWebp): string
     {
-        if ($image->getHeight() <= $maxHeight || $image->getMime() === 'image/svg+xml') {
+        if ($image->getMime() === 'image/svg+xml') {
             return $image->getPath();
         }
+
+        $maxHeight = min($maxHeight, $image->getHeight());
 
         $basename = pathinfo($image->getFilename(), PATHINFO_FILENAME);
         $extension = $useWebp ? '.webp' : '.jpg';
