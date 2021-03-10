@@ -26,6 +26,11 @@
             "EcodevTests\\Felix\\": "tests"
         }
     },
+    "extra": {
+        "laminas": {
+            "config-provider": "Ecodev\\Felix\\ConfigProvider"
+        }
+    },
     "require": {
         "php": "^7.2",
         "ext-bcmath": "*",
