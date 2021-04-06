@@ -19,7 +19,7 @@ abstract class AbstractDatabase
     /**
      * Dump data from database on $remote server
      */
-    protected static function dumpDataRemotely(string $remote, string $dumpFile): void
+    private static function dumpDataRemotely(string $remote, string $dumpFile): void
     {
         $sshCmd = <<<STRING
                     ssh $remote "cd /sites/$remote/ && php7.4 bin/dump-data.php $dumpFile"
@@ -32,7 +32,7 @@ STRING;
     /**
      * Dump data from database
      */
-    public static function dumpData(string $dumpFile): void
+    final public static function dumpData(string $dumpFile): void
     {
         $mysqlArgs = self::getMysqlArgs();
 
@@ -44,7 +44,7 @@ STRING;
     /**
      * Copy a file from $remote
      */
-    protected static function copyFile(string $remote, string $dumpFile): void
+    private static function copyFile(string $remote, string $dumpFile): void
     {
         $copyCmd = <<<STRING
                     rsync -avz --progress $remote:$dumpFile $dumpFile
@@ -57,7 +57,7 @@ STRING;
     /**
      * Load SQL dump in local database
      */
-    public static function loadData(string $dumpFile): void
+    final public static function loadData(string $dumpFile): void
     {
         $mysqlArgs = self::getMysqlArgs();
         $dumpFile = self::absolutePath($dumpFile);
@@ -71,7 +71,7 @@ STRING;
         self::loadTestUsers();
     }
 
-    protected static function getMysqlArgs(): string
+    private static function getMysqlArgs(): string
     {
         $dbConfig = _em()->getConnection()->getParams();
 
@@ -87,7 +87,7 @@ STRING;
         return "--user=$username $password --host=$host --port=$port $database";
     }
 
-    public static function loadRemoteData(string $remote): void
+    final public static function loadRemoteData(string $remote): void
     {
         $dumpFile = "/tmp/$remote." . exec('whoami') . '.backup.sql.gz';
         self::dumpDataRemotely($remote, $dumpFile);
@@ -100,7 +100,7 @@ STRING;
     /**
      * Execute a shell command and throw exception if fails
      */
-    public static function executeLocalCommand(string $command): void
+    final public static function executeLocalCommand(string $command): void
     {
         $return_var = null;
         $fullCommand = "$command 2>&1";
@@ -113,7 +113,7 @@ STRING;
     /**
      * Load test data
      */
-    public static function loadTestData(): void
+    final public static function loadTestData(): void
     {
         self::executeLocalCommand(PHP_BINARY . ' ./vendor/bin/doctrine orm:schema-tool:drop --ansi --full-database --force');
         self::executeLocalCommand(PHP_BINARY . ' ./vendor/bin/doctrine-migrations migrations:migrate --ansi --no-interaction');
@@ -125,7 +125,7 @@ STRING;
     /**
      * Load triggers
      */
-    public static function loadTriggers(): void
+    final public static function loadTriggers(): void
     {
         self::importFile('data/triggers.sql');
     }
@@ -133,7 +133,7 @@ STRING;
     /**
      * Load test users
      */
-    protected static function loadTestUsers(): void
+    private static function loadTestUsers(): void
     {
         self::importFile('tests/data/users.sql');
     }
@@ -144,7 +144,7 @@ STRING;
      * This use mysql command, instead of DBAL methods, to allow to see errors if any, and
      * also because it seems trigger creation do not work with DBAL for some unclear reasons.
      */
-    protected static function importFile(string $file): void
+    final public static function importFile(string $file): void
     {
         $file = self::absolutePath($file);
         $mysqlArgs = self::getMysqlArgs();
@@ -156,7 +156,7 @@ STRING;
         self::executeLocalCommand($importCommand);
     }
 
-    protected static function absolutePath(string $file): string
+    private static function absolutePath(string $file): string
     {
         $absolutePath = realpath($file);
         if ($absolutePath === false) {
