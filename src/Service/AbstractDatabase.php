@@ -63,12 +63,19 @@ STRING;
         $dumpFile = self::absolutePath($dumpFile);
 
         echo "loading dump $dumpFile...\n";
-
+        $database = self::getDatabaseName();
         self::executeLocalCommand(PHP_BINARY . ' ./vendor/bin/doctrine orm:schema-tool:drop --ansi --full-database --force');
-        self::executeLocalCommand("gunzip -c \"$dumpFile\" | mysql $mysqlArgs");
+        self::executeLocalCommand("gunzip -c \"$dumpFile\" | sed  's/ALTER DATABASE `[^`]*`/ALTER DATABASE `$database`/g' | mysql $mysqlArgs");
         self::executeLocalCommand(PHP_BINARY . ' ./vendor/bin/doctrine-migrations --ansi migrations:migrate --no-interaction');
         self::loadTriggers();
         self::loadTestUsers();
+    }
+
+    private static function getDatabaseName(): string
+    {
+        $dbConfig = _em()->getConnection()->getParams();
+
+        return $dbConfig['dbname'];
     }
 
     private static function getMysqlArgs(): string
