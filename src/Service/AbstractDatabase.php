@@ -17,12 +17,23 @@ use Exception;
 abstract class AbstractDatabase
 {
     /**
+     * This is lazy architecture and we should instead convert the whole class
+     * into instantiable service with configuration in constructor, and default
+     * factory that get the PHP version from config.
+     */
+    protected static function getPhp(): string
+    {
+        return 'php7.4';
+    }
+
+    /**
      * Dump data from database on $remote server
      */
     private static function dumpDataRemotely(string $remote, string $dumpFile): void
     {
+        $php = static::getPhp();
         $sshCmd = <<<STRING
-                    ssh $remote "cd /sites/$remote/ && php7.4 bin/dump-data.php $dumpFile"
+                    ssh $remote "cd /sites/$remote/ && $php bin/dump-data.php $dumpFile"
 STRING;
 
         echo "dumping data $dumpFile on $remote...\n";
@@ -64,11 +75,17 @@ STRING;
 
         echo "loading dump $dumpFile...\n";
         $database = self::getDatabaseName();
+
+        // We close the connection to DB here to avoid a timeout when loading the backup
+        // It will be re-opened automatically
+        echo "closing connection to DB\n";
+        _em()->getConnection()->close();
+
         self::executeLocalCommand(PHP_BINARY . ' ./vendor/bin/doctrine orm:schema-tool:drop --ansi --full-database --force');
         self::executeLocalCommand("gunzip -c \"$dumpFile\" | sed  's/ALTER DATABASE `[^`]*`/ALTER DATABASE `$database`/g' | mysql $mysqlArgs");
-        self::executeLocalCommand(PHP_BINARY . ' ./vendor/bin/doctrine-migrations --ansi migrations:migrate --no-interaction');
-        self::loadTriggers();
-        self::loadTestUsers();
+        self::executeLocalCommand(PHP_BINARY . ' ./vendor/bin/doctrine-migrations migrations:migrate --ansi --no-interaction');
+        static::loadTriggers();
+        static::loadTestUsers();
     }
 
     private static function getDatabaseName(): string
@@ -109,8 +126,16 @@ STRING;
      */
     final public static function executeLocalCommand(string $command): void
     {
+        // This allow to specify an application environnement even for commands that are not ours, such as Doctrine one.
+        // Thus this allow us to correctly load test data in a separate test database for OKpilot.
+        if (defined('APPLICATION_ENV')) {
+            $env = 'APPLICATION_ENV=' . APPLICATION_ENV;
+        } else {
+            $env = '';
+        }
+
         $return_var = null;
-        $fullCommand = "$command 2>&1";
+        $fullCommand = "$env $command 2>&1";
         passthru($fullCommand, $return_var);
         if ($return_var) {
             throw new Exception('FAILED executing: ' . $command);
@@ -120,19 +145,19 @@ STRING;
     /**
      * Load test data
      */
-    final public static function loadTestData(): void
+    public static function loadTestData(): void
     {
         self::executeLocalCommand(PHP_BINARY . ' ./vendor/bin/doctrine orm:schema-tool:drop --ansi --full-database --force');
         self::executeLocalCommand(PHP_BINARY . ' ./vendor/bin/doctrine-migrations migrations:migrate --ansi --no-interaction');
-        self::loadTriggers();
-        self::loadTestUsers();
+        static::loadTriggers();
+        static::loadTestUsers();
         self::importFile('tests/data/fixture.sql');
     }
 
     /**
      * Load triggers
      */
-    final public static function loadTriggers(): void
+    public static function loadTriggers(): void
     {
         self::importFile('data/triggers.sql');
     }
@@ -140,7 +165,7 @@ STRING;
     /**
      * Load test users
      */
-    private static function loadTestUsers(): void
+    protected static function loadTestUsers(): void
     {
         self::importFile('tests/data/users.sql');
     }
