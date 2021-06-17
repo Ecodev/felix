@@ -9,9 +9,6 @@ use Doctrine\DBAL\Platforms\AbstractPlatform;
 
 final class ChronosType extends \Doctrine\DBAL\Types\DateTimeType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
         if ($value === null || $value instanceof Chronos) {

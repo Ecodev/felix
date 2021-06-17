@@ -13,9 +13,3 @@ parameters:
         -
             message: '~^Cannot call method .*\(\) on Throwable\|null\.$~'
             path: src/Api/Server.php
-        -
-            message: '~^Parameter \#1 \$entityName of method Doctrine\\ORM\\EntityManager\:\:getRepository\(\) expects class\-string\<mixed\>, string given\.$~'
-            path: src/ORM/Query/Filter/AclFilter.php
-        -
-            message: '~^Unable to resolve the template type T in call to method Doctrine\\ORM\\EntityManager\:\:getRepository\(\)$~'
-            path: src/ORM/Query/Filter/AclFilter.php

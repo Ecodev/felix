@@ -9,9 +9,6 @@ use Doctrine\DBAL\Platforms\AbstractPlatform;
 
 final class DateType extends \Doctrine\DBAL\Types\DateType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
         if ($value === null || $value instanceof Date) {

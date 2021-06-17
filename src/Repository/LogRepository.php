@@ -13,42 +13,42 @@ interface LogRepository
     /**
      * Log message to be used when user log in
      */
-    const LOGIN = 'login';
+    public const LOGIN = 'login';
 
     /**
      * Log message to be used when user cannot log in
      */
-    const LOGIN_FAILED = 'login failed';
+    public const LOGIN_FAILED = 'login failed';
 
     /**
      * Log message to be used when user change his password
      */
-    const UPDATE_PASSWORD = 'update password';
+    public const UPDATE_PASSWORD = 'update password';
 
     /**
      * Log message to be used when a user requests a link to change his password
      */
-    const REQUEST_PASSWORD_RESET = 'request password reset';
+    public const REQUEST_PASSWORD_RESET = 'request password reset';
 
     /**
      * Log message to be used when user cannot change his password
      */
-    const UPDATE_PASSWORD_FAILED = 'update password failed';
+    public const UPDATE_PASSWORD_FAILED = 'update password failed';
 
     /**
      * Log message to be used when a new user is trying to register (token sent)
      */
-    const REGISTER = 'register';
+    public const REGISTER = 'register';
 
     /**
      * Log message to be used when a new user account is confirmed (valid token)
      */
-    const REGISTER_CONFIRM = 'confirm registration';
+    public const REGISTER_CONFIRM = 'confirm registration';
 
     /**
      * Log message to be used when trying to send email but it's already running
      */
-    const MAILER_LOCKED = 'Unable to obtain lock for mailer, try again later.';
+    public const MAILER_LOCKED = 'Unable to obtain lock for mailer, try again later.';
 
     /**
      * This should NOT be called directly, instead use `_log()` to log stuff

@@ -31,7 +31,7 @@ abstract class EnumType extends Type
         }
 
         if (!in_array($value, $this->getPossibleValues(), true)) {
-            throw new InvalidArgumentException("Invalid '" . $value . "' value fetched from database for enum " . get_class($this));
+            throw new InvalidArgumentException("Invalid '" . $value . "' value fetched from database for enum " . static::class);
         }
 
         return (string) $value;
@@ -44,7 +44,7 @@ abstract class EnumType extends Type
         }
 
         if (!in_array($value, $this->getPossibleValues(), true)) {
-            throw new InvalidArgumentException("Invalid '" . $value . "' value to be stored in database for enum " . get_class($this));
+            throw new InvalidArgumentException("Invalid '" . $value . "' value to be stored in database for enum " . static::class);
         }
 
         return (string) $value;

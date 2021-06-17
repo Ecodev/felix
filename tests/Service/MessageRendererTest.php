@@ -37,7 +37,8 @@ final class MessageRendererTest extends TestCase
                         return $viewModel->getTemplate() === 'my-type' &&
                             $viewModel->getVariables() === $variables;
                     }),
-                ], [
+                ],
+                [
                     self::callback(function (ViewModel $viewModel) use ($user) {
                         $variables = [
                             'fooLayout' => 'barLayout',
