@@ -11,7 +11,6 @@ use Doctrine\ORM\QueryBuilder;
 use Ecodev\Felix\Model\User;
 use Ecodev\Felix\Repository\LogRepository as LogRepositoryInterface;
 use Laminas\Log\Logger;
-use PDO;
 
 trait LogRepository
 {
@@ -85,7 +84,7 @@ trait LogRepository
             ->setParameter('ip', $ip)
             ->orderBy('id', 'DESC');
 
-        $events = $select->execute()->fetchAll(PDO::FETCH_COLUMN);
+        $events = $select->execute()->fetchFirstColumn();
 
         // Goes from present to past and count failure, until the last time we succeeded logging in
         $failureCount = 0;
@@ -119,9 +118,9 @@ trait LogRepository
             ], Connection::PARAM_STR_ARRAY)
             ->andWhere('log.creation_date < DATE_SUB(NOW(), INTERVAL 1 MONTH)');
 
-        $connection->query('LOCK TABLES `log` WRITE;');
+        $connection->executeStatement('LOCK TABLES `log` WRITE;');
         $count = $query->execute();
-        $connection->query('UNLOCK TABLES;');
+        $connection->executeStatement('UNLOCK TABLES;');
 
         return $count;
     }

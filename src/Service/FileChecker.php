@@ -6,7 +6,6 @@ namespace Ecodev\Felix\Service;
 
 use Doctrine\DBAL\Connection;
 use Exception;
-use PDO;
 
 /**
  * Check missing files on disk and non-needed files on disk.
@@ -59,7 +58,7 @@ Unneeded files on disk: ' . count($unneededFiles) . '
 
         $query = implode(' UNION ', $queries);
 
-        return $this->connection->executeQuery($query)->fetchAll(PDO::FETCH_COLUMN);
+        return $this->connection->executeQuery($query)->fetchFirstColumn();
     }
 
     private function readDisk(array $config): array
