@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace EcodevTests\Felix\Service;
 
 use Ecodev\Felix\Service\Bvr;
-use Money\Money;
 use PHPUnit\Framework\TestCase;
 
 final class BvrTest extends TestCase
@@ -74,54 +73,6 @@ final class BvrTest extends TestCase
             ['80082600000000000000000009', 6],
             ['80082600000000000000000010', 8],
         ];
-    }
-
-    /**
-     * @dataProvider providerGetEncodingLine
-     */
-    public function testGetEncodingLine(string $bankAccount, string $referenceNumber, string $postalAccount, ?Money $amount, string $expected): void
-    {
-        $actual = Bvr::getEncodingLine($bankAccount, $referenceNumber, $postalAccount, $amount);
-        self::assertSame($expected, $actual);
-    }
-
-    public function providerGetEncodingLine(): array
-    {
-        return [
-            ['800826', '00000000000000000201', '01-4567-0', null, '042>800826000000000000000002016+ 010045670>'],
-            ['000000', '', '1-2-3', null, '042>000000000000000000000000000+ 010000023>'],
-            ['000000', '123', '01-4567-0', Money::CHF(145), '0100000001453>000000000000000000000001236+ 010045670>'],
-        ];
-    }
-
-    public function testGetEncodingLineMustThrowIfTooLongReference(): void
-    {
-        $this->expectExceptionMessage('Invalid custom ID. It must be 20 or less digits, but got: `000000000000000000000000000`');
-        Bvr::getEncodingLine('123456', str_repeat('0', 27), '01-4567-0');
-    }
-
-    public function testGetEncodingLineMustThrowIfInvalidReference(): void
-    {
-        $this->expectExceptionMessage('Invalid custom ID. It must be 20 or less digits, but got: `0.0`');
-        Bvr::getEncodingLine('123456', '0.0', '01-4567-0');
-    }
-
-    public function testGetEncodingLineMustThrowIfInvalidPostAccount(): void
-    {
-        $this->expectExceptionMessage('Invalid post account number');
-        Bvr::getEncodingLine('123456', '0', '0145670');
-    }
-
-    public function testGetEncodingLineMustThrowIfTooLongPostAccount(): void
-    {
-        $this->expectExceptionMessage('The post account number is too long');
-        Bvr::getEncodingLine('123456', '0', '0123-456789-0');
-    }
-
-    public function testGetEncodingLineMustThrowIfInvalidAmount(): void
-    {
-        $this->expectExceptionMessage('Invalid amount. Must be positive, but got: `-100`');
-        Bvr::getEncodingLine('123456', '0', '01-4567-0', Money::CHF(-100));
     }
 
     /**
