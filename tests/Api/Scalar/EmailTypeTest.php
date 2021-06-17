@@ -57,8 +57,8 @@ final class EmailTypeTest extends TestCase
     {
         return [
             ['john@example.com', 'john@example.com', true],
-            ['josé@example.com', 'josé@example.com', true],
-            ['josé@example.non-existing-tld', 'josé@example.non-existing-tld', false],
+            ['josé@example.com', 'josé@example.com', false],
+            ['john@example.non-existing-tld', 'john@example.non-existing-tld', false],
             ['root@localhost', 'root@localhost', false],
             ['', null, true],
             ['foo', 'foo', false],

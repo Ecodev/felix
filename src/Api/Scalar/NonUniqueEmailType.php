@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Ecodev\Felix\Api\Scalar;
 
-use Laminas\Validator\EmailAddress;
+use Ecodev\Felix\Validator\DeliverableEmail;
 
 /**
  * Represent an email address that can be empty string
@@ -22,7 +22,7 @@ final class NonUniqueEmailType extends AbstractStringBasedType
      */
     protected function isValid($value): bool
     {
-        $validator = new EmailAddress();
+        $validator = new DeliverableEmail();
 
         return $value === '' || (is_string($value) && $validator->isValid($value));
     }

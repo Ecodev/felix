@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Ecodev\Felix\Api\Scalar;
 
+use Ecodev\Felix\Validator\DeliverableEmail;
 use GraphQL\Language\AST\Node;
 use GraphQL\Language\AST\StringValueNode;
-use Laminas\Validator\EmailAddress;
 
 /**
  * Represent an email address
@@ -24,7 +24,7 @@ final class EmailType extends AbstractStringBasedType
      */
     protected function isValid($value): bool
     {
-        $validator = new EmailAddress();
+        $validator = new DeliverableEmail();
 
         return $value === null || (is_string($value) && $validator->isValid($value));
     }
