@@ -41,7 +41,7 @@ abstract class AbstractServer extends TestCase
     /**
      * @dataProvider providerQuery
      */
-    public function testQuery(?string $user, ServerRequest $request, array $expected, ?callable $dataPreparator = null): void
+    public function testQuery(?string $user, ServerRequest $request, array $expected, ?callable $dataPreparator = null, ?callable $additionalAsserts = null): void
     {
         $this->setCurrentUser($user);
 
@@ -67,6 +67,10 @@ abstract class AbstractServer extends TestCase
         }
 
         self::assertEquals($expected, $actual);
+
+        if ($additionalAsserts) {
+            $additionalAsserts(_em()->getConnection());
+        }
     }
 
     public function providerQuery(): array
