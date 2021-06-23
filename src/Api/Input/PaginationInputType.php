@@ -36,12 +36,12 @@ final class PaginationInputType extends InputObjectType
                     'pageIndex' => [
                         'type' => self::int(),
                         'defaultValue' => 0,
-                        'description' => 'The zero-based index of the page',
+                        'description' => 'The zero-based index of the page. If given negative value, then fallback to 0.',
                     ],
                     'pageSize' => [
                         'type' => self::int(),
                         'defaultValue' => 50,
-                        'description' => 'Number of items to display on a page',
+                        'description' => 'Number of items to display on a page. If given negative value, then fallback to 0.',
                     ],
                 ];
             },
