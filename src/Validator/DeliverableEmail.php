@@ -16,7 +16,7 @@ class DeliverableEmail extends EmailAddress
     public function isValid($value)
     {
         // This regexp should be kep in sync with the original one in Natural
-        if (!preg_match('/^[a-zA-Z0-9.!#$%&\'*+\/=?^_`{|}~-]+@[^@]+\.[^@]+$/u', $value)) {
+        if (!preg_match('/^[a-zA-Z0-9.!#$%&\'*+\/=?^_`{|}~-]+@[^@ ]+\.[^@]+$/u', $value)) {
             $this->error(self::INVALID_LOCAL_PART);
 
             return false;
