@@ -18,9 +18,9 @@ class Acl extends \Laminas\Permissions\Acl\Acl
     private $message;
 
     /**
-     * @var null|string
+     * @var string[]
      */
-    private $reason;
+    private $reasons = [];
 
     protected function createModelResource(string $class): ModelResource
     {
@@ -39,7 +39,7 @@ class Acl extends \Laminas\Permissions\Acl\Acl
     {
         $resource = new ModelResource($this->getClass($model), $model);
         $role = $this->getCurrentRole();
-        $this->reason = null;
+        $this->reasons = [];
 
         $isAllowed = $this->isAllowed($role, $resource, $privilege);
 
@@ -58,7 +58,7 @@ class Acl extends \Laminas\Permissions\Acl\Acl
      */
     public function reject(string $reason): bool
     {
-        $this->reason = $reason;
+        $this->reasons[] = $reason;
 
         return false;
     }
@@ -92,8 +92,14 @@ class Acl extends \Laminas\Permissions\Acl\Acl
 
         $message = "$userName with role $role is not allowed on resource \"$resource\" with privilege \"$privilege\"";
 
-        if ($this->reason) {
-            $message .= ' because ' . $this->reason;
+        $count = count($this->reasons);
+        if ($count === 1) {
+            $message .= ' because ' . $this->reasons[0];
+        } elseif ($count) {
+            $list = array_map(function ($reason) {
+                return '- ' . $reason;
+            }, $this->reasons);
+            $message .= ' because:' . PHP_EOL . PHP_EOL . implode(PHP_EOL, $list);
         }
 
         return $message;

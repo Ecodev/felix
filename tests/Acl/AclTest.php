@@ -8,6 +8,9 @@ use Ecodev\Felix\Acl\Acl;
 use Ecodev\Felix\Acl\Assertion\IsMyself;
 use Ecodev\Felix\Model\CurrentUser;
 use EcodevTests\Felix\Blog\Model\User;
+use Laminas\Permissions\Acl\Assertion\AssertionInterface;
+use Laminas\Permissions\Acl\Resource\ResourceInterface;
+use Laminas\Permissions\Acl\Role\RoleInterface;
 use PHPUnit\Framework\TestCase;
 
 final class AclTest extends TestCase
@@ -54,5 +57,46 @@ final class AclTest extends TestCase
         CurrentUser::set(null);
         self::assertFalse($acl->isCurrentUserAllowed($user, 'update'), 'anonymous cannot update');
         self::assertSame('Non-logged user with role anonymous is not allowed on resource "User#null" with privilege "update"', $acl->getLastDenialMessage());
+    }
+
+    public function testMultipleReasons(): void
+    {
+        $acl = new class() extends Acl {
+            public function __construct()
+            {
+                $user = $this->createModelResource(User::class);
+                $this->addRole('anonymous');
+                $this->addRole('member', 'anonymous');
+                $this->allow(
+                    'anonymous',
+                    [$user],
+                    ['update'],
+                    new class() implements AssertionInterface {
+                        /**
+                         * @param \Ecodev\Felix\Acl\Acl $acl
+                         * @param null|mixed $privilege
+                         */
+                        public function assert(\Laminas\Permissions\Acl\Acl $acl, ?RoleInterface $role = null, ?ResourceInterface $resource = null, $privilege = null)
+                        {
+                            return $acl->reject('mocked reason');
+                        }
+                    }
+                );
+                $this->allow('member', [$user], ['update'], new IsMyself());
+            }
+        };
+
+        $user = new User();
+        $user->setName('sarah');
+        CurrentUser::set($user);
+
+        self::assertFalse($acl->isCurrentUserAllowed(new User(), 'update'), 'student cannot update even if user');
+        $expected = <<<STRING
+User "sarah" with role member is not allowed on resource "User#null" with privilege "update" because:
+
+- it is not himself
+- mocked reason
+STRING;
+        self::assertSame($expected, $acl->getLastDenialMessage());
     }
 }
