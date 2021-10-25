@@ -108,7 +108,7 @@ STRING;
         // It's possible to have no password at all
         $password = $password ? '-p' . $password : '';
 
-        return "--user=$username $password --host=$host --port=$port $database";
+        return "--user=$username $password --host=$host --protocol tcp --port=$port $database";
     }
 
     final public static function loadRemoteData(string $remote): void
