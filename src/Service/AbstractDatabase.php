@@ -103,12 +103,18 @@ STRING;
         $username = $dbConfig['user'];
         $database = $dbConfig['dbname'];
         $password = $dbConfig['password'];
-        $port = $dbConfig['port'] ?? 3306;
+        $port = $dbConfig['port'] ?? null;
+
+        if ($port) {
+            $port = "--protocol tcp --port=$port";
+        } else {
+            $port = '--protocol socket';
+        }
 
         // It's possible to have no password at all
         $password = $password ? '-p' . $password : '';
 
-        return "--user=$username $password --host=$host --protocol tcp --port=$port $database";
+        return "--user=$username $password --host=$host $port $database";
     }
 
     final public static function loadRemoteData(string $remote): void
