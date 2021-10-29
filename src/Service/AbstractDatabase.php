@@ -95,7 +95,7 @@ STRING;
         return $dbConfig['dbname'];
     }
 
-    private static function getMysqlArgs(): string
+    protected static function getMysqlArgs(): string
     {
         $dbConfig = _em()->getConnection()->getParams();
 
