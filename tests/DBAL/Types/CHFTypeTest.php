@@ -25,10 +25,7 @@ final class CHFTypeTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->type = $this->getMockBuilder(CHFType::class)
-            ->disableOriginalConstructor()
-            ->onlyMethods([])
-            ->getMock();
+        $this->type = new CHFType();
 
         $this->platform = new MySqlPlatform();
     }

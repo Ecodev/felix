@@ -6,9 +6,9 @@ namespace Ecodev\Felix\DBAL\Types;
 
 use Money\Money;
 
-class CHFType extends AbstractMoneyType
+final class CHFType extends AbstractMoneyType
 {
-    public function getName()
+    public function getName(): string
     {
         return 'CHF';
     }

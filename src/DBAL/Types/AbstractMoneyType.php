@@ -13,7 +13,7 @@ abstract class AbstractMoneyType extends IntegerType
 {
     abstract protected function createMoney(string $value): Money;
 
-    public function getName()
+    public function getName(): string
     {
         return 'Money';
     }
