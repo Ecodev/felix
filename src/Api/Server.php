@@ -60,7 +60,9 @@ class Server
     public function execute(ServerRequestInterface $request)
     {
         if (!$request->getParsedBody()) {
-            $request = $request->withParsedBody(json_decode($request->getBody()->getContents(), true));
+            /** @var array $parsedBody */
+            $parsedBody = json_decode($request->getBody()->getContents(), true);
+            $request = $request->withParsedBody($parsedBody);
         }
 
         // Affect it to global request so it is available for log purpose in case of error

@@ -22,6 +22,7 @@ final class RendererFactory implements FactoryInterface
     {
         $renderer = new PhpRenderer();
 
+        /** @var HelperPluginManager $helperPluginManager */
         $helperPluginManager = $container->get(HelperPluginManager::class);
         $renderer->setHelperPluginManager($helperPluginManager);
 

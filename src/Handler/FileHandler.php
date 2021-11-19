@@ -27,7 +27,7 @@ final class FileHandler extends AbstractHandler
      */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $id = $request->getAttribute('id');
+        $id = (int) $request->getAttribute('id');
 
         /** @var null|File $file */
         $file = $this->fileRepository->find($id);

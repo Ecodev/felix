@@ -30,6 +30,7 @@ class OperatorType extends \PHPUnit\Framework\TestCase
         $filter = $this->getFilter($field, $operator, $values);
         $qb = _types()->createFilteredQueryBuilder($class, $filter, []);
 
+        // @phpstan-ignore-next-line
         return $qb->getQuery()->getResult();
     }
 

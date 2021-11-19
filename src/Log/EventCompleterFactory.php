@@ -14,6 +14,7 @@ class EventCompleterFactory implements FactoryInterface
      */
     public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null): EventCompleter
     {
+        /** @var array $config */
         $config = $container->get('config');
         $baseUrl = 'https://' . $config['hostname'];
 

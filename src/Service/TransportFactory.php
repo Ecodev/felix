@@ -20,6 +20,7 @@ final class TransportFactory implements FactoryInterface
      */
     public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null): TransportInterface
     {
+        /** @var array $config */
         $config = $container->get('config');
 
         // Setup SMTP transport, or a mock one

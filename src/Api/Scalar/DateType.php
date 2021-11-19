@@ -39,10 +39,8 @@ final class DateType extends ScalarType
      * Parses an externally provided value (query variable) to use as an input.
      *
      * @param mixed $value
-     *
-     * @return mixed
      */
-    public function parseValue($value)
+    public function parseValue($value): Date
     {
         if (!is_string($value)) {
             throw new UnexpectedValueException('Cannot represent value as Chronos date: ' . Utils::printSafe($value));
@@ -55,10 +53,8 @@ final class DateType extends ScalarType
 
     /**
      * Parses an externally provided literal value to use as an input (e.g. in Query AST).
-     *
-     * @return null|string
      */
-    public function parseLiteral(Node $ast, ?array $variables = null)
+    public function parseLiteral(Node $ast, ?array $variables = null): ?string
     {
         // Note: throwing GraphQL\Error\Error vs \UnexpectedValueException to benefit from GraphQL
         // error location in query:

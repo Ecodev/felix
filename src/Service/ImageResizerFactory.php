@@ -17,6 +17,7 @@ final class ImageResizerFactory implements FactoryInterface
      */
     public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null): ImageResizer
     {
+        /** @var ImagineInterface $imagine */
         $imagine = $container->get(ImagineInterface::class);
 
         return new ImageResizer($imagine);

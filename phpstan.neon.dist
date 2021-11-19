@@ -10,6 +10,10 @@ parameters:
         - '~^Cannot call method getInstance\(\) on Laminas\\Permissions\\Acl\\Resource\\ResourceInterface\|null\.$~'
         - '~^Parameter \#1 \$argument of class ReflectionClass constructor expects class\-string\<object\>\|object, object\|string given\.$~'
         - '~^Parameter #1 \$wrappedType of static method GraphQL\\Type\\Definition\\Type\:\:nonNull\(\) expects \(callable\(\)\: mixed\)\|GraphQL\\Type\\Definition\\NullableType, GraphQL\\Type\\Definition\\LeafType given\.$~'
-        -
-            message: '~^Cannot call method .*\(\) on Throwable\|null\.$~'
-            path: src/Api/Server.php
+        - '~^Property EcodevTests\\Felix\\Blog\\Model\\.*\:\:\$.* is never read, only written\.$~'
+        - '~^Property EcodevTests\\Felix\\Blog\\Model\\.*\:\:\$.* is unused\.$~'
+        - '~^Cannot cast mixed to int\.$~'
+
+includes:
+    - vendor/phpstan/phpstan-phpunit/extension.neon
+    - vendor/phpstan/phpstan-phpunit/rules.neon

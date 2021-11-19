@@ -92,8 +92,8 @@ class Mailer
         }
 
         $args = [
-            realpath('bin/send-message.php'),
-            $message->getId(),
+            (string) realpath('bin/send-message.php'),
+            (string) $message->getId(),
         ];
 
         $escapedArgs = array_map('escapeshellarg', $args);

@@ -40,10 +40,8 @@ final class ChronosType extends ScalarType
      * Parses an externally provided value (query variable) to use as an input.
      *
      * @param mixed $value
-     *
-     * @return mixed
      */
-    public function parseValue($value)
+    public function parseValue($value): ?Chronos
     {
         if (!is_string($value)) {
             throw new UnexpectedValueException('Cannot represent value as Chronos date: ' . Utils::printSafe($value));

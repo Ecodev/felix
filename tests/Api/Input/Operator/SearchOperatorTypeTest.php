@@ -46,6 +46,7 @@ final class SearchOperatorTypeTest extends OperatorType
         self::assertSame($expected, $actual);
 
         $joins = $qb->getDQLPart('join');
+        // @phpstan-ignore-next-line
         self::assertCount($expectedJoinCount, $joins['a'] ?? []);
     }
 

@@ -76,11 +76,9 @@ abstract class AbstractDecimalType extends ScalarType
     /**
      * Parses an externally provided value (query variable) to use as an input.
      *
-     * @param mixed $value
-     *
-     * @return mixed
+     * @param null|float|int|string $value
      */
-    public function parseValue($value)
+    public function parseValue($value): string
     {
         $parsedValue = (string) $value;
         if (!$this->isValid($parsedValue)) {

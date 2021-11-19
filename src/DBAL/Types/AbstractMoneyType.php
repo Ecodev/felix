@@ -18,7 +18,10 @@ abstract class AbstractMoneyType extends IntegerType
         return 'Money';
     }
 
-    public function convertToPHPValue($value, AbstractPlatform $platform)
+    /**
+     * @param null|float|int|string $value
+     */
+    public function convertToPHPValue($value, AbstractPlatform $platform): ?Money
     {
         if ($value === null) {
             return $value;

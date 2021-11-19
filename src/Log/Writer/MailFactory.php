@@ -21,6 +21,7 @@ final class MailFactory implements FactoryInterface
      */
     public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null): ?WriterInterface
     {
+        /** @var array $config */
         $config = $container->get('config');
 
         $emailsTo = $config['log']['emails'] ?? [];
@@ -35,10 +36,16 @@ final class MailFactory implements FactoryInterface
         $mail->setFrom($emailFrom)
             ->addTo($emailsTo);
 
+        /** @var TransportInterface $transport */
         $transport = $container->get(TransportInterface::class);
+        /** @var EventCompleter $eventCompleter */
         $eventCompleter = $container->get(EventCompleter::class);
+        /** @var Extras $formatter */
+        $formatter = $container->get(Extras::class);
+
         $writerEmail = new Mail($mail, $transport, $eventCompleter);
-        $writerEmail->setFormatter($container->get(Extras::class));
+
+        $writerEmail->setFormatter($formatter);
 
         // Set subject text for use; summary of number of errors is appended to the
         // subject line before sending the message.

@@ -51,4 +51,10 @@ class LocalizedTypeTest extends TestCase
         $this->expectExceptionMessage("Could not convert PHP type 'string' to 'json', as an 'value must be a PHP array' error was triggered by the serialization");
         $this->type->convertToDatabaseValue('', $this->platform);
     }
+
+    public function testConvertToPHPValueWillThrowIfNotJsonArray(): void
+    {
+        $this->expectExceptionMessage("Could not convert database value to 'json' as an error was triggered by the unserialization: 'value in DB is not a JSON encoded associative array'");
+        $this->type->convertToPHPValue('"foo"', $this->platform);
+    }
 }

@@ -31,11 +31,13 @@ final class LoggerFactory implements FactoryInterface
             $this->logger->addWriter($fileWriter);
 
             // Log to DB
+            /** @var Db $dbWriter */
             $dbWriter = $container->get(Db::class);
             $dbWriter->addFilter(Logger::INFO);
             $this->logger->addWriter($dbWriter);
 
             // Maybe log to emails
+            /** @var null|Mail $mailWriter */
             $mailWriter = $container->get(Mail::class);
             if ($mailWriter) {
                 $this->logger->addWriter($mailWriter);

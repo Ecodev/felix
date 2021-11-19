@@ -92,6 +92,7 @@ STRING;
     {
         $dbConfig = _em()->getConnection()->getParams();
 
+        // @phpstan-ignore-next-line
         return $dbConfig['dbname'];
     }
 
@@ -106,6 +107,7 @@ STRING;
         $port = $dbConfig['port'] ?? null;
 
         if ($port) {
+            /** @phpstan-ignore-next-line */
             $port = "--protocol tcp --port=$port";
         } else {
             $port = '--protocol socket';
@@ -114,6 +116,7 @@ STRING;
         // It's possible to have no password at all
         $password = $password ? '-p' . $password : '';
 
+        // @phpstan-ignore-next-line
         return "--user=$username $password --host=$host $port $database";
     }
 

@@ -25,6 +25,9 @@ final class LocalizedType extends JsonType
         return 'localized';
     }
 
+    /**
+     * @param null|string $value
+     */
     public function convertToPHPValue($value, AbstractPlatform $platform): array
     {
         if ($value === null || $value === '') {
@@ -32,6 +35,10 @@ final class LocalizedType extends JsonType
         }
 
         $val = parent::convertToPHPValue($value, $platform);
+
+        if (!is_array($val)) {
+            throw ConversionException::conversionFailedUnserialization('json', 'value in DB is not a JSON encoded associative array');
+        }
 
         return $val;
     }
@@ -46,6 +53,7 @@ final class LocalizedType extends JsonType
             return '';
         }
 
+        // @phpstan-ignore-next-line
         return parent::convertToDatabaseValue($value, $platform);
     }
 }

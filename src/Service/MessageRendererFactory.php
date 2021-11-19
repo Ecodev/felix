@@ -20,7 +20,9 @@ final class MessageRendererFactory implements FactoryInterface
      */
     public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null): MessageRenderer
     {
+        /** @var RendererInterface $viewRenderer */
         $viewRenderer = $container->get(RendererInterface::class);
+        /** @var array $config */
         $config = $container->get('config');
 
         return new MessageRenderer($viewRenderer, $config['hostname']);

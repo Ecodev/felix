@@ -34,7 +34,7 @@ final class ImageHandler extends AbstractHandler
      */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $id = $request->getAttribute('id');
+        $id = (int) $request->getAttribute('id');
 
         /** @var null|Image $image */
         $image = $this->imageRepository->find($id);

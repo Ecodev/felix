@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ecodev\Felix\Testing\Api\Input\Sorting;
 
+use Ecodev\Felix\Model\Model;
 use GraphQL\Doctrine\Types;
 use PHPUnit\Framework\TestCase;
 
@@ -15,7 +16,9 @@ abstract class AbstractSorting extends TestCase
         $qb = $types->createFilteredQueryBuilder($class, [], $sorting);
 
         $result = [];
-        foreach ($qb->getQuery()->getResult() as $item) {
+        /** @var Model[] $items */
+        $items = $qb->getQuery()->getResult();
+        foreach ($items as $item) {
             $result[] = $item->getId();
         }
 

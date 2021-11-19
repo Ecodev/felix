@@ -126,6 +126,7 @@ abstract class AbstractServer extends TestCase
         $result = $result->toArray();
         if ($debug) {
             ve($result);
+            // @phpstan-ignore-next-line
             unset($result['errors'][0]['trace']);
         }
 
