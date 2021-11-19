@@ -9,22 +9,22 @@ interface Image extends File
     public function getWidth(): int;
 
     /**
-     * Set image width
+     * Set image width.
      */
     public function setWidth(int $width): void;
 
     /**
-     * Get image height
+     * Get image height.
      */
     public function getHeight(): int;
 
     /**
-     * Set image height
+     * Set image height.
      */
     public function setHeight(int $height): void;
 
     /**
-     * Get mime
+     * Get mime.
      */
     public function getMime(): string;
 }

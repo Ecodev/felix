@@ -12,7 +12,7 @@ final class ColorType extends AbstractStringBasedType
     public $description = 'A color expressed in hexadecimal CSS notation (eg: `#AA00FF`) or an empty string `""`.';
 
     /**
-     * Validate a color in hexadecimal CSS notation
+     * Validate a color in hexadecimal CSS notation.
      *
      * @param mixed $value
      */

@@ -7,17 +7,17 @@ namespace Ecodev\Felix\Model;
 interface File
 {
     /**
-     * Get absolute path to file on disk
+     * Get absolute path to file on disk.
      */
     public function getPath(): string;
 
     /**
-     * Get filename (without path)
+     * Get filename (without path).
      */
     public function getFilename(): string;
 
     /**
-     * Set filename (without path)
+     * Set filename (without path).
      */
     public function setFilename(string $filename): void;
 }

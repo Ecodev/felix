@@ -16,12 +16,12 @@ use UnexpectedValueException;
 abstract class AbstractDecimalType extends ScalarType
 {
     /**
-     * Return the number of digits after the decimal
+     * Return the number of digits after the decimal.
      */
     abstract protected function getScale(): int;
 
     /**
-     * Return the minimum accepted value, if any
+     * Return the minimum accepted value, if any.
      */
     protected function getMinimum(): ?string
     {
@@ -29,7 +29,7 @@ abstract class AbstractDecimalType extends ScalarType
     }
 
     /**
-     * Return the maximum accepted value, if any
+     * Return the maximum accepted value, if any.
      */
     protected function getMaximum(): ?string
     {
@@ -37,7 +37,7 @@ abstract class AbstractDecimalType extends ScalarType
     }
 
     /**
-     * Validate value
+     * Validate value.
      */
     private function isValid(string $value): bool
     {
@@ -74,7 +74,7 @@ abstract class AbstractDecimalType extends ScalarType
     }
 
     /**
-     * Parses an externally provided value (query variable) to use as an input
+     * Parses an externally provided value (query variable) to use as an input.
      *
      * @param mixed $value
      *
@@ -91,7 +91,7 @@ abstract class AbstractDecimalType extends ScalarType
     }
 
     /**
-     * Parses an externally provided literal value to use as an input (e.g. in Query AST)
+     * Parses an externally provided literal value to use as an input (e.g. in Query AST).
      *
      * @return null|string
      */

@@ -7,7 +7,7 @@ namespace Ecodev\Felix\Service;
 use Exception;
 
 /**
- * Tool to reload the entire local database from remote database for a given site
+ * Tool to reload the entire local database from remote database for a given site.
  *
  * Requirements:
  *
@@ -27,7 +27,7 @@ abstract class AbstractDatabase
     }
 
     /**
-     * Dump data from database on $remote server
+     * Dump data from database on $remote server.
      */
     private static function dumpDataRemotely(string $remote, string $dumpFile): void
     {
@@ -41,7 +41,7 @@ STRING;
     }
 
     /**
-     * Dump data from database
+     * Dump data from database.
      */
     final public static function dumpData(string $dumpFile): void
     {
@@ -53,7 +53,7 @@ STRING;
     }
 
     /**
-     * Copy a file from $remote
+     * Copy a file from $remote.
      */
     private static function copyFile(string $remote, string $dumpFile): void
     {
@@ -66,7 +66,7 @@ STRING;
     }
 
     /**
-     * Load SQL dump in local database
+     * Load SQL dump in local database.
      */
     final public static function loadData(string $dumpFile): void
     {
@@ -128,7 +128,7 @@ STRING;
     }
 
     /**
-     * Execute a shell command and throw exception if fails
+     * Execute a shell command and throw exception if fails.
      */
     final public static function executeLocalCommand(string $command): void
     {
@@ -149,7 +149,7 @@ STRING;
     }
 
     /**
-     * Load test data
+     * Load test data.
      */
     public static function loadTestData(): void
     {
@@ -161,7 +161,7 @@ STRING;
     }
 
     /**
-     * Load triggers
+     * Load triggers.
      */
     public static function loadTriggers(): void
     {
@@ -169,7 +169,7 @@ STRING;
     }
 
     /**
-     * Load test users
+     * Load test users.
      */
     protected static function loadTestUsers(): void
     {
@@ -177,7 +177,7 @@ STRING;
     }
 
     /**
-     * Import a SQL file into DB
+     * Import a SQL file into DB.
      *
      * This use mysql command, instead of DBAL methods, to allow to see errors if any, and
      * also because it seems trigger creation do not work with DBAL for some unclear reasons.

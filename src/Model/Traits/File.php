@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Ecodev\Felix\Model\Traits;
 
 /**
- * An uploaded file
+ * An uploaded file.
  */
 trait File
 {

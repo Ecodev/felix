@@ -28,7 +28,7 @@ class PaginationTypeFactory implements AbstractFactoryInterface
 
     public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null): PaginationType
     {
-        /** @var class-string|null $class */
+        /** @var null|class-string $class */
         $class = $this->getClass($requestedName);
         if (!$class) {
             throw new Exception('Cannot create a PaginationType for a name not matching a model: ' . $requestedName);
@@ -62,7 +62,7 @@ class PaginationTypeFactory implements AbstractFactoryInterface
     }
 
     /**
-     * GraphQL configuration for extra fields, typically for aggregated fields only available on some entities
+     * GraphQL configuration for extra fields, typically for aggregated fields only available on some entities.
      */
     protected function getExtraFields(string $class): array
     {

@@ -11,7 +11,7 @@ use InvalidArgumentException;
 use Laminas\Permissions\Acl\Resource\GenericResource;
 
 /**
- * An ACL resource linked to a specific instance of a Model
+ * An ACL resource linked to a specific instance of a Model.
  *
  * Usage:
  *
@@ -21,14 +21,14 @@ use Laminas\Permissions\Acl\Resource\GenericResource;
 final class ModelResource extends GenericResource
 {
     /**
-     * Unique id of the instance of resource
+     * Unique id of the instance of resource.
      *
      * @var null|Model
      */
     private $instance;
 
     /**
-     * Sets the Resource identifier
+     * Sets the Resource identifier.
      *
      * @param string $class must be a model class name
      * @param Model $instance the instance itself
@@ -54,7 +54,7 @@ final class ModelResource extends GenericResource
     }
 
     /**
-     * Returns a name identifying this resource for exception messages for developers
+     * Returns a name identifying this resource for exception messages for developers.
      */
     public function getName(): string
     {

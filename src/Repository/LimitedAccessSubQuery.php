@@ -7,7 +7,7 @@ namespace Ecodev\Felix\Repository;
 use Ecodev\Felix\Model\User;
 
 /**
- * Interface for repositories whose objects access must be limited for user
+ * Interface for repositories whose objects access must be limited for user.
  */
 interface LimitedAccessSubQuery
 {

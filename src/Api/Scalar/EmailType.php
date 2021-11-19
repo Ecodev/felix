@@ -9,7 +9,7 @@ use GraphQL\Language\AST\Node;
 use GraphQL\Language\AST\StringValueNode;
 
 /**
- * Represent an email address
+ * Represent an email address.
  *
  * This exceptionally accept empty string as null because email address are often unique
  * in DB and thus can never be empty string to indicate absence of email. So we simplify
@@ -18,7 +18,7 @@ use GraphQL\Language\AST\StringValueNode;
 final class EmailType extends AbstractStringBasedType
 {
     /**
-     * Validate a email
+     * Validate a email.
      *
      * @param mixed $value
      */

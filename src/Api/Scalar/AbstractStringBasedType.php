@@ -14,7 +14,7 @@ use UnexpectedValueException;
 abstract class AbstractStringBasedType extends ScalarType
 {
     /**
-     * Validate value
+     * Validate value.
      *
      * @param mixed $value
      */
@@ -34,7 +34,7 @@ abstract class AbstractStringBasedType extends ScalarType
     }
 
     /**
-     * Parses an externally provided value (query variable) to use as an input
+     * Parses an externally provided value (query variable) to use as an input.
      *
      * @param mixed $value
      *
@@ -50,7 +50,7 @@ abstract class AbstractStringBasedType extends ScalarType
     }
 
     /**
-     * Parses an externally provided literal value to use as an input (e.g. in Query AST)
+     * Parses an externally provided literal value to use as an input (e.g. in Query AST).
      *
      * @return null|string
      */

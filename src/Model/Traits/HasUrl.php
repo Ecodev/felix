@@ -7,7 +7,7 @@ namespace Ecodev\Felix\Model\Traits;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Trait for all objects with an URL
+ * Trait for all objects with an URL.
  */
 trait HasUrl
 {
@@ -18,7 +18,7 @@ trait HasUrl
     private $url = '';
 
     /**
-     * Set url
+     * Set url.
      */
     public function setUrl(string $url): void
     {
@@ -26,7 +26,7 @@ trait HasUrl
     }
 
     /**
-     * Get url
+     * Get url.
      */
     public function getUrl(): string
     {

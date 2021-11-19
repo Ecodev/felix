@@ -19,7 +19,7 @@ abstract class AbstractServer extends TestCase
     use TestWithTransaction;
 
     /**
-     * Should get user and call User::setCurrent()
+     * Should get user and call User::setCurrent().
      */
     abstract protected function setCurrentUser(?string $user): void;
 

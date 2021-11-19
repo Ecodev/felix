@@ -17,7 +17,7 @@ use Laminas\Mime\Mime;
 use Laminas\Mime\Part as MimePart;
 
 /**
- * Service to send a message as an email
+ * Service to send a message as an email.
  */
 class Mailer
 {
@@ -103,7 +103,7 @@ class Mailer
     }
 
     /**
-     * Send a message
+     * Send a message.
      */
     public function sendMessage(Message $message): void
     {
@@ -132,7 +132,7 @@ class Mailer
     }
 
     /**
-     * Convert our model message to a mail message
+     * Convert our model message to a mail message.
      */
     protected function modelMessageToMailMessage(Message $modelMessage): Mail\Message
     {
@@ -156,7 +156,7 @@ class Mailer
     }
 
     /**
-     * Send all messages that are not sent yet
+     * Send all messages that are not sent yet.
      */
     public function sendAllMessages(): void
     {
@@ -169,7 +169,7 @@ class Mailer
     }
 
     /**
-     * Acquire an exclusive lock
+     * Acquire an exclusive lock.
      *
      * This is to ensure only one mailer can run at any given time. This is to prevent sending the same email twice.
      */
@@ -190,7 +190,7 @@ class Mailer
             echo 'If the problem persist and another mailing is not in progress, try deleting ' . $lockFile . PHP_EOL;
 
             // Not getting the lock is not considered as error to avoid being spammed
-            die();
+            exit();
         }
     }
 }

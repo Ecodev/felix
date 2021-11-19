@@ -9,7 +9,7 @@ use Laminas\View\Model\ViewModel;
 use Laminas\View\Renderer\RendererInterface;
 
 /**
- * Service to render message to HTML
+ * Service to render message to HTML.
  */
 final class MessageRenderer
 {
@@ -30,7 +30,7 @@ final class MessageRenderer
     }
 
     /**
-     * Render a message by templating
+     * Render a message by templating.
      */
     public function render(?User $user, string $email, string $subject, string $type, array $mailParams, array $layoutParams = [], ?string $hostname = null): string
     {

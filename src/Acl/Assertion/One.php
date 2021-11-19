@@ -17,7 +17,7 @@ final class One implements AssertionInterface
     private $asserts;
 
     /**
-     * Check if at least one assert is true
+     * Check if at least one assert is true.
      */
     public function __construct(AssertionInterface ...$asserts)
     {
@@ -25,7 +25,7 @@ final class One implements AssertionInterface
     }
 
     /**
-     * Assert that at least one of the given assert is correct (OR logic)
+     * Assert that at least one of the given assert is correct (OR logic).
      *
      * @param \Ecodev\Felix\Acl\Acl $acl
      * @param RoleInterface $role

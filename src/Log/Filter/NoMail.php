@@ -10,7 +10,7 @@ use Laminas\Log\Filter\FilterInterface;
 final class NoMail implements FilterInterface
 {
     /**
-     * Ignore exception that are explicitly marked as ignored
+     * Ignore exception that are explicitly marked as ignored.
      */
     public function filter(array $event): bool
     {

@@ -7,7 +7,7 @@ namespace Ecodev\Felix;
 final class Debug
 {
     /**
-     * Export variables omitting array keys that are strictly numeric
+     * Export variables omitting array keys that are strictly numeric.
      *
      * By default will output result
      *

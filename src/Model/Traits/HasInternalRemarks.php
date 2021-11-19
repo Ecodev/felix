@@ -14,7 +14,7 @@ trait HasInternalRemarks
     private $internalRemarks = '';
 
     /**
-     * Set internalRemarks
+     * Set internalRemarks.
      */
     public function setInternalRemarks(string $internalRemarks): void
     {
@@ -22,7 +22,7 @@ trait HasInternalRemarks
     }
 
     /**
-     * Get internalRemarks
+     * Get internalRemarks.
      */
     public function getInternalRemarks(): string
     {

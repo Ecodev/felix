@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use GraphQL\Doctrine\Annotation as API;
 
 /**
- * A message sent to a user
+ * A message sent to a user.
  */
 trait Message
 {
@@ -48,7 +48,7 @@ trait Message
     private $body = '';
 
     /**
-     * Set type
+     * Set type.
      *
      * @API\Input(type="MessageType")
      */
@@ -58,7 +58,7 @@ trait Message
     }
 
     /**
-     * Get type
+     * Get type.
      *
      * @API\Field(type="MessageType")
      */
@@ -88,7 +88,7 @@ trait Message
     }
 
     /**
-     * Get sent time
+     * Get sent time.
      */
     public function getDateSent(): ?Chronos
     {
@@ -96,7 +96,7 @@ trait Message
     }
 
     /**
-     * Set sent time
+     * Set sent time.
      *
      * @API\Exclude
      */
@@ -106,7 +106,7 @@ trait Message
     }
 
     /**
-     * Recipient email address
+     * Recipient email address.
      */
     public function getEmail(): string
     {
@@ -114,7 +114,7 @@ trait Message
     }
 
     /**
-     * Recipient email address
+     * Recipient email address.
      */
     public function setEmail(string $email): void
     {

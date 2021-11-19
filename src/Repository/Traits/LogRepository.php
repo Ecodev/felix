@@ -30,7 +30,7 @@ trait LogRepository
     abstract public function createQueryBuilder($alias, $indexBy = null);
 
     /**
-     * This should NOT be called directly, instead use `_log()` to log stuff
+     * This should NOT be called directly, instead use `_log()` to log stuff.
      */
     public function log(array $event): void
     {
@@ -42,7 +42,7 @@ trait LogRepository
     }
 
     /**
-     * Returns whether the current IP often failed to login
+     * Returns whether the current IP often failed to login.
      */
     public function loginFailedOften(): bool
     {
@@ -100,7 +100,7 @@ trait LogRepository
 
     /**
      * Delete log entries which are errors/warnings and older than one month
-     * We always keep Logger::INFO level because we use it for statistics
+     * We always keep Logger::INFO level because we use it for statistics.
      *
      * @return int the count deleted logs
      */

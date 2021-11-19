@@ -16,7 +16,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Throwable;
 
 /**
- * A thin wrapper to serve GraphQL via HTTP or CLI
+ * A thin wrapper to serve GraphQL via HTTP or CLI.
  */
 class Server
 {
@@ -87,7 +87,7 @@ class Server
     }
 
     /**
-     * Send response to CLI
+     * Send response to CLI.
      */
     public function sendCli(ExecutionResult $result): void
     {
@@ -95,7 +95,7 @@ class Server
     }
 
     /**
-     * Custom error handler to log in DB and show trigger messages to end-user
+     * Custom error handler to log in DB and show trigger messages to end-user.
      */
     private function handleError(Throwable $exception, callable $formatter): array
     {

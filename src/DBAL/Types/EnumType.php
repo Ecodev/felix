@@ -51,14 +51,14 @@ abstract class EnumType extends Type
     }
 
     /**
-     * Return all possibles values as an array of string
+     * Return all possibles values as an array of string.
      *
      * @return string[]
      */
     abstract protected function getPossibleValues(): array;
 
     /**
-     * Returns the type name based on actual class name
+     * Returns the type name based on actual class name.
      */
     public function getName(): string
     {

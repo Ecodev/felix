@@ -7,7 +7,7 @@ namespace Ecodev\Felix\Model;
 interface HasOwner
 {
     /**
-     * Get owner
+     * Get owner.
      */
     public function getOwner(): ?User;
 }

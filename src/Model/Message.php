@@ -19,29 +19,29 @@ interface Message extends Model
     public function getDateSent(): ?Chronos;
 
     /**
-     * Set sent time
+     * Set sent time.
      *
      * @API\Exclude
      */
     public function setDateSent(?Chronos $dateSent): void;
 
     /**
-     * Recipient email address
+     * Recipient email address.
      */
     public function getEmail(): string;
 
     /**
-     * Recipient email address
+     * Recipient email address.
      */
     public function setEmail(string $email): void;
 
     /**
-     * Get recipient
+     * Get recipient.
      */
     public function getRecipient(): ?User;
 
     /**
-     * Get type
+     * Get type.
      */
     public function getType(): string;
 }

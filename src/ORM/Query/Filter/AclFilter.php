@@ -24,21 +24,21 @@ final class AclFilter extends SQLFilter
 
     /**
      * Cache of subqueries to get accessible IDs.
-     * Keys are class name of object
+     * Keys are class name of object.
      *
      * @var array possible values of the array are: null|string
      */
     private $subQueriesCache = [];
 
     /**
-     * The number of time the filter has been deactivated
+     * The number of time the filter has been deactivated.
      *
      * @var int
      */
     private $disabledCount = 0;
 
     /**
-     * Disable the ACL filter forever
+     * Disable the ACL filter forever.
      *
      * The only way to re-enable it is to create a new instance.
      */
@@ -48,7 +48,7 @@ final class AclFilter extends SQLFilter
     }
 
     /**
-     * Run the given callable with ACL temporarily disabled
+     * Run the given callable with ACL temporarily disabled.
      *
      * This method MUST be used instead of `$entityManager->getFilters()->enable()` because
      * that method destroy the filter object and thus losing the current user. So to keep
@@ -68,7 +68,7 @@ final class AclFilter extends SQLFilter
     }
 
     /**
-     * Enable or disable the filter
+     * Enable or disable the filter.
      */
     private function setEnabled(bool $enabled): void
     {
@@ -99,7 +99,7 @@ final class AclFilter extends SQLFilter
     }
 
     /**
-     * Set the current user for which we should apply access limitations
+     * Set the current user for which we should apply access limitations.
      */
     public function setUser(?User $user): void
     {

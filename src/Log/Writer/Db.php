@@ -28,7 +28,7 @@ class Db extends AbstractWriter
     }
 
     /**
-     * Write a message to the log
+     * Write a message to the log.
      *
      * @param array $event log data event
      */

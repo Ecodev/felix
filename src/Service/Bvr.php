@@ -42,7 +42,7 @@ final class Bvr
     ];
 
     /**
-     * Get the reference number, including the verification digit
+     * Get the reference number, including the verification digit.
      */
     public static function getReferenceNumber(string $bankAccount, string $customId): string
     {
@@ -59,7 +59,7 @@ final class Bvr
     }
 
     /**
-     * Extract the custom ID as string from a valid reference number
+     * Extract the custom ID as string from a valid reference number.
      */
     public static function extractCustomId(string $referenceNumber): string
     {
@@ -77,7 +77,7 @@ final class Bvr
     }
 
     /**
-     * Check if an IBAN is actually a valid Swiss QR-IBAN
+     * Check if an IBAN is actually a valid Swiss QR-IBAN.
      */
     public static function isQrIban(string $iban): bool
     {

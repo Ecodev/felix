@@ -10,17 +10,17 @@ use GraphQL\Doctrine\Annotation as API;
 use Psr\Http\Message\UploadedFileInterface;
 
 /**
- * Wrapping class for an uploaded file
+ * Wrapping class for an uploaded file.
  */
 trait AbstractFile
 {
     /**
-     * Get base path where the files are stored in the server
+     * Get base path where the files are stored in the server.
      */
     abstract protected function getBasePath(): string;
 
     /**
-     * Get list of accepted MIME types
+     * Get list of accepted MIME types.
      *
      * @return string[]
      */
@@ -42,7 +42,7 @@ trait AbstractFile
     private $mime = '';
 
     /**
-     * Set the file
+     * Set the file.
      */
     public function setFile(UploadedFileInterface $file): void
     {
@@ -58,7 +58,7 @@ trait AbstractFile
     }
 
     /**
-     * Set filename (without path)
+     * Set filename (without path).
      *
      * @API\Exclude
      */
@@ -68,7 +68,7 @@ trait AbstractFile
     }
 
     /**
-     * Get filename (without path)
+     * Get filename (without path).
      *
      * @API\Exclude
      */
@@ -78,7 +78,7 @@ trait AbstractFile
     }
 
     /**
-     * Get mime
+     * Get mime.
      */
     public function getMime(): string
     {
@@ -86,7 +86,7 @@ trait AbstractFile
     }
 
     /**
-     * Get absolute path to file on disk
+     * Get absolute path to file on disk.
      *
      * @API\Exclude
      */
@@ -111,7 +111,7 @@ trait AbstractFile
     }
 
     /**
-     * Generate unique filename while trying to preserve original extension
+     * Generate unique filename while trying to preserve original extension.
      */
     private function generateUniqueFilename(string $originalFilename): void
     {
@@ -121,7 +121,7 @@ trait AbstractFile
     }
 
     /**
-     * Delete file and throw exception if MIME type is invalid
+     * Delete file and throw exception if MIME type is invalid.
      */
     private function validateMimeType(): void
     {

@@ -13,7 +13,7 @@ use Laminas\Permissions\Acl\Role\RoleInterface;
 final class IsMyself implements AssertionInterface
 {
     /**
-     * Assert that the user is the current user himself
+     * Assert that the user is the current user himself.
      *
      * @param \Ecodev\Felix\Acl\Acl $acl
      * @param RoleInterface $role

@@ -25,7 +25,7 @@ class FileChecker
     }
 
     /**
-     * Print the result
+     * Print the result.
      *
      * @param array $config must be $table => $basePath
      */
@@ -80,7 +80,7 @@ Unneeded files on disk: ' . count($unneededFiles) . '
     }
 
     /**
-     * Print a list of files if non empty
+     * Print a list of files if non empty.
      */
     private function printFiles(string $title, array $files): void
     {

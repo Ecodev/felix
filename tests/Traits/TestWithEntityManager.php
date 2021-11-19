@@ -9,7 +9,7 @@ use Doctrine\ORM\Tools\Setup;
 use Laminas\ServiceManager\ServiceManager;
 
 /**
- * Trait to easily set up a dummy entity manager
+ * Trait to easily set up a dummy entity manager.
  */
 trait TestWithEntityManager
 {

@@ -11,7 +11,7 @@ use Money\Money;
 abstract class Format
 {
     /**
-     * Truncate a string and append '…' at the end
+     * Truncate a string and append '…' at the end.
      *
      * @param string $ellipsis the string to indicate truncation happened
      *
@@ -28,7 +28,7 @@ abstract class Format
     }
 
     /**
-     * Shortcut to format money
+     * Shortcut to format money.
      */
     public static function money(Money $money): string
     {

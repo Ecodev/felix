@@ -34,8 +34,8 @@ final class MessageRendererTest extends TestCase
                             'serverUrl' => 'https://example.com',
                         ];
 
-                        return $viewModel->getTemplate() === 'my-type' &&
-                            $viewModel->getVariables() === $variables;
+                        return $viewModel->getTemplate() === 'my-type'
+                            && $viewModel->getVariables() === $variables;
                     }),
                 ],
                 [
@@ -49,8 +49,8 @@ final class MessageRendererTest extends TestCase
                             'hostname' => 'example.com',
                         ];
 
-                        return $viewModel->getTemplate() === 'layout' &&
-                            $viewModel->getVariables() === $variables;
+                        return $viewModel->getTemplate() === 'layout'
+                            && $viewModel->getVariables() === $variables;
                     }),
                 ]
             )->willReturnOnConsecutiveCalls('mocked-rendered-view', 'mocked-rendered-layout');

@@ -9,7 +9,7 @@ use Imagine\Image\Box;
 use Imagine\Image\ImagineInterface;
 
 /**
- * Service to resize image's images
+ * Service to resize image's images.
  */
 class ImageResizer
 {
@@ -26,7 +26,7 @@ class ImageResizer
     }
 
     /**
-     * Resize image as JPG or WEBP and return the path to the resized version
+     * Resize image as JPG or WEBP and return the path to the resized version.
      */
     public function resize(Image $image, int $maxHeight, bool $useWebp): string
     {

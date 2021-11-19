@@ -11,7 +11,7 @@ use ReflectionClass;
 abstract class Utility
 {
     /**
-     * Returns the short class name of any object, eg: Application\Model\Calendar => Calendar
+     * Returns the short class name of any object, eg: Application\Model\Calendar => Calendar.
      *
      * @param object|string $object
      */
@@ -23,7 +23,7 @@ abstract class Utility
     }
 
     /**
-     * Replace EntityID model and don't touch other values
+     * Replace EntityID model and don't touch other values.
      *
      * @param array $data mix of objects and scalar values
      */
@@ -43,7 +43,7 @@ abstract class Utility
     }
 
     /**
-     * Replace object by their ID in the array and don't touch other values
+     * Replace object by their ID in the array and don't touch other values.
      *
      * Support both AbstractModel and EntityID.
      *

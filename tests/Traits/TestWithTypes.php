@@ -9,7 +9,7 @@ use GraphQL\Doctrine\Types;
 use Laminas\ServiceManager\ServiceManager;
 
 /**
- * Trait to easily set up types and assert them
+ * Trait to easily set up types and assert them.
  */
 trait TestWithTypes
 {

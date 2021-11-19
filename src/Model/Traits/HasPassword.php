@@ -10,7 +10,7 @@ use Exception;
 use GraphQL\Doctrine\Annotation as API;
 
 /**
- * Trait for a user with a password and password reset capabilities
+ * Trait for a user with a password and password reset capabilities.
  */
 trait HasPassword
 {
@@ -33,7 +33,7 @@ trait HasPassword
     private $token;
 
     /**
-     * The time when user asked to reset password
+     * The time when user asked to reset password.
      *
      * @var null|Chronos
      *
@@ -44,7 +44,7 @@ trait HasPassword
     private $tokenCreationDate;
 
     /**
-     * Hash and change the user password
+     * Hash and change the user password.
      */
     public function setPassword(string $password): void
     {
@@ -65,7 +65,7 @@ trait HasPassword
     }
 
     /**
-     * Returns the hashed password
+     * Returns the hashed password.
      *
      * @API\Exclude
      */
@@ -75,7 +75,7 @@ trait HasPassword
     }
 
     /**
-     * Generate a new random token to reset password
+     * Generate a new random token to reset password.
      */
     public function createToken(): string
     {
@@ -86,7 +86,7 @@ trait HasPassword
     }
 
     /**
-     * Destroy existing token
+     * Destroy existing token.
      */
     public function revokeToken(): void
     {

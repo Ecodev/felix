@@ -5,17 +5,17 @@ declare(strict_types=1);
 namespace Ecodev\Felix\Model;
 
 /**
- * Tiny bit dirty way to easily pass current user from app to Felix
+ * Tiny bit dirty way to easily pass current user from app to Felix.
  */
 final class CurrentUser
 {
     /**
      * @var null|User
      */
-    private static $currentUser = null;
+    private static $currentUser;
 
     /**
-     * Set currently logged in user
+     * Set currently logged in user.
      */
     public static function set(?User $user): void
     {
@@ -23,7 +23,7 @@ final class CurrentUser
     }
 
     /**
-     * Returns currently logged user or null
+     * Returns currently logged user or null.
      */
     public static function get(): ?User
     {

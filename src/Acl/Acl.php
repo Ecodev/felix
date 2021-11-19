@@ -11,7 +11,7 @@ use Ecodev\Felix\Model\Model;
 class Acl extends \Laminas\Permissions\Acl\Acl
 {
     /**
-     * The message explaining the last denial
+     * The message explaining the last denial.
      *
      * @var null|string
      */
@@ -31,7 +31,7 @@ class Acl extends \Laminas\Permissions\Acl\Acl
     }
 
     /**
-     * Return whether the current user is allowed to do something
+     * Return whether the current user is allowed to do something.
      *
      * This should be the main method to do all ACL checks.
      */
@@ -49,7 +49,7 @@ class Acl extends \Laminas\Permissions\Acl\Acl
     }
 
     /**
-     * Set the reason for rejection that will be shown to end-user
+     * Set the reason for rejection that will be shown to end-user.
      *
      * This method always return false for usage convenience and should be used by all assertions,
      * instead of only return false themselves.
@@ -100,7 +100,7 @@ class Acl extends \Laminas\Permissions\Acl\Acl
     }
 
     /**
-     * Returns the message explaining the last denial, if any
+     * Returns the message explaining the last denial, if any.
      */
     public function getLastDenialMessage(): ?string
     {

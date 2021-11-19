@@ -7,12 +7,12 @@ namespace Ecodev\Felix\Testing\Traits;
 use Doctrine\ORM\EntityManager;
 
 /**
- * Allow to run test within a database transaction, so database will be unchanged after test
+ * Allow to run test within a database transaction, so database will be unchanged after test.
  */
 trait TestWithTransaction
 {
     /**
-     * Get EntityManager
+     * Get EntityManager.
      */
     public function getEntityManager(): EntityManager
     {
@@ -20,7 +20,7 @@ trait TestWithTransaction
     }
 
     /**
-     * Start transaction
+     * Start transaction.
      */
     protected function setUp(): void
     {
@@ -29,7 +29,7 @@ trait TestWithTransaction
     }
 
     /**
-     * Cancel transaction, to undo all changes made
+     * Cancel transaction, to undo all changes made.
      */
     protected function tearDown(): void
     {

@@ -23,7 +23,7 @@ final class FileHandler extends AbstractHandler
     }
 
     /**
-     * Serve a downloaded file from disk
+     * Serve a downloaded file from disk.
      */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {

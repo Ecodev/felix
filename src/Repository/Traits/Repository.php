@@ -10,7 +10,7 @@ use Ecodev\Felix\Model\User;
 use Ecodev\Felix\ORM\Query\Filter\AclFilter;
 
 /**
- * Trait for common method of repository
+ * Trait for common method of repository.
  */
 trait Repository
 {
@@ -25,7 +25,7 @@ trait Repository
     abstract protected function getClassMetadata();
 
     /**
-     * Returns the AclFilter to fetch ACL filtering SQL
+     * Returns the AclFilter to fetch ACL filtering SQL.
      */
     public function getAclFilter(): AclFilter
     {
@@ -36,7 +36,7 @@ trait Repository
     }
 
     /**
-     * Return native SQL query to get all ID
+     * Return native SQL query to get all ID.
      */
     protected function getAllIdsQuery(): string
     {
@@ -49,7 +49,7 @@ trait Repository
     }
 
     /**
-     * Return native SQL query to get all ID of object owned by given user
+     * Return native SQL query to get all ID of object owned by given user.
      */
     protected function getAllIdsForOwnerQuery(User $user): string
     {

@@ -7,7 +7,7 @@ namespace Ecodev\Felix\Validator;
 use Laminas\Validator\EmailAddress;
 
 /**
- * Validate an email address according to RFC, and also that it is publicly deliverable (not "root@localhost" or "root@127.0.0.1")
+ * Validate an email address according to RFC, and also that it is publicly deliverable (not "root@localhost" or "root@127.0.0.1").
  *
  * This is meant to replace **all** usages of Laminas too permissive `\Laminas\Validator\EmailAddress`
  */

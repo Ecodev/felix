@@ -14,7 +14,7 @@ trait HasDescription
     private $description = '';
 
     /**
-     * Set description
+     * Set description.
      */
     public function setDescription(string $description): void
     {
@@ -22,7 +22,7 @@ trait HasDescription
     }
 
     /**
-     * Get description
+     * Get description.
      */
     public function getDescription(): string
     {

@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use GraphQL\Doctrine\Annotation as API;
 
 /**
- * Log
+ * Log.
  */
 trait Log
 {
@@ -50,7 +50,7 @@ trait Log
     private $ip;
 
     /**
-     * The statistics data
+     * The statistics data.
      *
      * @var array
      *
@@ -61,7 +61,7 @@ trait Log
     private $extra = [];
 
     /**
-     * Set priority
+     * Set priority.
      */
     public function setPriority(int $priority): void
     {
@@ -69,7 +69,7 @@ trait Log
     }
 
     /**
-     * Get priority
+     * Get priority.
      */
     public function getPriority(): int
     {
@@ -77,7 +77,7 @@ trait Log
     }
 
     /**
-     * Set message
+     * Set message.
      */
     public function setMessage(string $message): void
     {
@@ -85,7 +85,7 @@ trait Log
     }
 
     /**
-     * Get message
+     * Get message.
      */
     public function getMessage(): string
     {
@@ -93,7 +93,7 @@ trait Log
     }
 
     /**
-     * Set referer
+     * Set referer.
      */
     public function setReferer(string $referer): void
     {
@@ -101,7 +101,7 @@ trait Log
     }
 
     /**
-     * Get referer
+     * Get referer.
      */
     public function getReferer(): string
     {
@@ -109,7 +109,7 @@ trait Log
     }
 
     /**
-     * Set request
+     * Set request.
      */
     public function setRequest(string $request): void
     {
@@ -117,7 +117,7 @@ trait Log
     }
 
     /**
-     * Get request
+     * Get request.
      */
     public function getRequest(): string
     {
@@ -125,7 +125,7 @@ trait Log
     }
 
     /**
-     * Set ip
+     * Set ip.
      */
     public function setIp(string $ip): void
     {
@@ -133,7 +133,7 @@ trait Log
     }
 
     /**
-     * Get ip
+     * Get ip.
      */
     public function getIp(): string
     {

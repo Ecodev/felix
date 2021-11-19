@@ -7,7 +7,7 @@ namespace EcodevTests\Felix\Blog\Model;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * A blog post with title and body
+ * A blog post with title and body.
  *
  * @ORM\Entity(repositoryClass="EcodevTests\Felix\Blog\Repository\PostRepository")
  */

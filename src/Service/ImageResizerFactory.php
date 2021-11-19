@@ -11,7 +11,7 @@ use Laminas\ServiceManager\Factory\FactoryInterface;
 final class ImageResizerFactory implements FactoryInterface
 {
     /**
-     * Return the image service to be used to resize images
+     * Return the image service to be used to resize images.
      *
      * @param string $requestedName
      */

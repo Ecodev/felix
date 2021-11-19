@@ -17,7 +17,7 @@ final class All implements AssertionInterface
     private $asserts;
 
     /**
-     * Check if all asserts are true
+     * Check if all asserts are true.
      */
     public function __construct(AssertionInterface ...$asserts)
     {
@@ -25,7 +25,7 @@ final class All implements AssertionInterface
     }
 
     /**
-     * Assert that all given assert are correct (AND logic)
+     * Assert that all given assert are correct (AND logic).
      *
      * @param \Ecodev\Felix\Acl\Acl $acl
      * @param RoleInterface $role

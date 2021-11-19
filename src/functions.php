@@ -8,7 +8,7 @@ use GraphQL\Doctrine\Types;
 use Laminas\Log\LoggerInterface;
 
 /**
- * Returns the type registry
+ * Returns the type registry.
  */
 function _types(): Types
 {
@@ -18,7 +18,7 @@ function _types(): Types
 }
 
 /**
- * Returns the Entity Manager
+ * Returns the Entity Manager.
  */
 function _em(): EntityManager
 {
@@ -28,7 +28,7 @@ function _em(): EntityManager
 }
 
 /**
- * Returns logger
+ * Returns logger.
  */
 function _log(): LoggerInterface
 {
@@ -38,7 +38,7 @@ function _log(): LoggerInterface
 }
 
 /**
- * Export variables omitting array keys that are strictly numeric
+ * Export variables omitting array keys that are strictly numeric.
  *
  * By default will output result
  *
@@ -52,7 +52,7 @@ function ve($data, bool $return = false): string
 }
 
 /**
- * Dump all arguments
+ * Dump all arguments.
  */
 function v(): void
 {
@@ -60,7 +60,7 @@ function v(): void
 }
 
 /**
- * Dump all arguments and die
+ * Dump all arguments and die.
  */
 function w(): void
 {
@@ -70,5 +70,5 @@ function w(): void
     echo "\n" . ($isHtml ? '</br>' : '') . '_________________________________________________________________________________________________________________________' . ($isHtml ? '<pre>' : '') . "\n";
     debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
     echo '' . ($isHtml ? '</pre>' : '') . '_________________________________________________________________________________________________________________________' . ($isHtml ? '</br>' : '') . "\n";
-    die("script aborted on purpose.\n");
+    exit("script aborted on purpose.\n");
 }

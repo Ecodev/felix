@@ -14,7 +14,7 @@ use Laminas\ServiceManager\Factory\FactoryInterface;
 final class TransportFactory implements FactoryInterface
 {
     /**
-     * Return a configured mail transport
+     * Return a configured mail transport.
      *
      * @param string $requestedName
      */

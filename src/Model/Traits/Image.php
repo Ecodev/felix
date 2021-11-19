@@ -11,7 +11,7 @@ use Imagine\Image\ImagineInterface;
 use Psr\Http\Message\UploadedFileInterface;
 
 /**
- * An image and some information about it
+ * An image and some information about it.
  */
 trait Image
 {
@@ -51,7 +51,7 @@ trait Image
     private $height = 0;
 
     /**
-     * Get image width
+     * Get image width.
      */
     public function getWidth(): int
     {
@@ -59,7 +59,7 @@ trait Image
     }
 
     /**
-     * Set image width
+     * Set image width.
      *
      * @API\Exclude
      */
@@ -69,7 +69,7 @@ trait Image
     }
 
     /**
-     * Get image height
+     * Get image height.
      */
     public function getHeight(): int
     {
@@ -77,7 +77,7 @@ trait Image
     }
 
     /**
-     * Set image height
+     * Set image height.
      *
      * @API\Exclude
      */
@@ -87,7 +87,7 @@ trait Image
     }
 
     /**
-     * Set the file
+     * Set the file.
      */
     public function setFile(UploadedFileInterface $file): void
     {
@@ -96,7 +96,7 @@ trait Image
     }
 
     /**
-     * Read dimension and size from file on disk
+     * Read dimension and size from file on disk.
      */
     private function readFileInfo(): void
     {

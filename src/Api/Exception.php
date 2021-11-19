@@ -7,7 +7,7 @@ namespace Ecodev\Felix\Api;
 use GraphQL\Error\ClientAware;
 
 /**
- * Exception that will show its message to end-user even on production server
+ * Exception that will show its message to end-user even on production server.
  */
 class Exception extends \Exception implements ClientAware
 {

@@ -7,7 +7,7 @@ namespace Ecodev\Felix\Model\Traits;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Trait for all objects with a name
+ * Trait for all objects with a name.
  */
 trait HasName
 {
@@ -18,7 +18,7 @@ trait HasName
     private $name;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct(string $name = '')
     {
@@ -26,7 +26,7 @@ trait HasName
     }
 
     /**
-     * Set name
+     * Set name.
      */
     public function setName(string $name): void
     {
@@ -34,7 +34,7 @@ trait HasName
     }
 
     /**
-     * Get name
+     * Get name.
      */
     public function getName(): string
     {

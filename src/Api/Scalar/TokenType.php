@@ -12,7 +12,7 @@ final class TokenType extends AbstractStringBasedType
     public $description = 'A user token is an lowercase hexadecimal string of 32 characters.';
 
     /**
-     * Validate a token
+     * Validate a token.
      *
      * @param mixed $value
      */

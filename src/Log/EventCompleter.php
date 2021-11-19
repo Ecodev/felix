@@ -20,7 +20,7 @@ class EventCompleter implements ProcessorInterface
     }
 
     /**
-     * Complete a log event with extra data, including stacktrace and any global stuff relevant to the app
+     * Complete a log event with extra data, including stacktrace and any global stuff relevant to the app.
      */
     public function process(array $event): array
     {
@@ -73,7 +73,7 @@ class EventCompleter implements ProcessorInterface
     }
 
     /**
-     * Remove password value from GraphQL variables well-known structure
+     * Remove password value from GraphQL variables well-known structure.
      */
     protected function removeSensitiveData(array $request): array
     {
@@ -87,7 +87,7 @@ class EventCompleter implements ProcessorInterface
     }
 
     /**
-     * Returns the backtrace excluding the most recent calls to this function so we only get the interesting parts
+     * Returns the backtrace excluding the most recent calls to this function so we only get the interesting parts.
      */
     private function getStacktrace(): string
     {

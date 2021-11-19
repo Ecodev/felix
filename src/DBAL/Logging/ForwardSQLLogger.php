@@ -8,7 +8,7 @@ use Doctrine\DBAL\Logging\DebugStack;
 use Doctrine\DBAL\Logging\SQLLogger;
 
 /**
- * A SQL logger that forward logs to Laminas Log
+ * A SQL logger that forward logs to Laminas Log.
  */
 final class ForwardSQLLogger extends DebugStack implements SQLLogger
 {
@@ -22,7 +22,7 @@ final class ForwardSQLLogger extends DebugStack implements SQLLogger
     }
 
     /**
-     * Forward query to file logger
+     * Forward query to file logger.
      */
     private function forwardLog(array $query): void
     {

@@ -10,7 +10,7 @@ use GraphQL\Doctrine\DefaultFieldResolver;
 use GraphQL\Type\Definition\ResolveInfo;
 
 /**
- * A field resolver that will ensure that filtered entity are never returned via getter
+ * A field resolver that will ensure that filtered entity are never returned via getter.
  */
 final class FilteredFieldResolver
 {

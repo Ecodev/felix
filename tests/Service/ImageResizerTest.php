@@ -32,7 +32,7 @@ class ImageResizerTest extends TestCase
 
                 break;
             default:
-                throw  new Exception('Unsupported extension: ' . $extension);
+                throw new Exception('Unsupported extension: ' . $extension);
         }
 
         $imagineImage = $this->createMock(ImageInterface::class);

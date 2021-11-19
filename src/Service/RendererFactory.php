@@ -14,7 +14,7 @@ use Laminas\View\Resolver\TemplatePathStack;
 final class RendererFactory implements FactoryInterface
 {
     /**
-     * Return a configured mailer
+     * Return a configured mailer.
      *
      * @param string $requestedName
      */

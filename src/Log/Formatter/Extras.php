@@ -7,12 +7,12 @@ namespace Ecodev\Felix\Log\Formatter;
 use Laminas\Log\Formatter\Simple;
 
 /**
- * Simple formatter that show the Felix extras fields
+ * Simple formatter that show the Felix extras fields.
  */
 final class Extras extends Simple
 {
     /**
-     * Class constructor
+     * Class constructor.
      */
     public function __construct()
     {

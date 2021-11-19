@@ -8,7 +8,7 @@ use Doctrine\ORM\EntityRepository;
 use Ecodev\Felix\Repository\LimitedAccessSubQuery;
 
 /**
- * A fake repository
+ * A fake repository.
  */
 final class PostRepository extends EntityRepository implements LimitedAccessSubQuery
 {

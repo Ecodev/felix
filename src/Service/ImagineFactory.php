@@ -12,7 +12,7 @@ use Laminas\ServiceManager\Factory\FactoryInterface;
 final class ImagineFactory implements FactoryInterface
 {
     /**
-     * Return the preferred driver available on this system
+     * Return the preferred driver available on this system.
      *
      * @param string $requestedName
      */

@@ -9,12 +9,12 @@ use Laminas\ServiceManager\Factory\FactoryInterface;
 use Laminas\View\Renderer\RendererInterface;
 
 /**
- * Service to render message to HTML
+ * Service to render message to HTML.
  */
 final class MessageRendererFactory implements FactoryInterface
 {
     /**
-     * Return a configured mailer
+     * Return a configured mailer.
      *
      * @param string $requestedName
      */
