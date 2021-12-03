@@ -31,8 +31,8 @@ jobs:
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
           restore-keys: ${{ runner.os }}-composer-
 
-      - name: Remove lock for PHP 8
-        if: matrix.php-version == '8.0'
+      - name: Remove lock for newer PHP
+        if: matrix.php-version != '7.2'
         run: rm composer.lock && composer require symfony/cache
 
       - name: Install dependencies
@@ -119,6 +119,9 @@ jobs:
           path: ~/.cache/composer
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
           restore-keys: ${{ runner.os }}-composer-
+
+      - name: Remove lock for newer PHP
+        run: rm composer.lock && composer require symfony/cache
 
       - name: Install dependencies
         run: composer install

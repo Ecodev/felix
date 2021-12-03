@@ -59,6 +59,9 @@ final class AclTest extends TestCase
         self::assertSame('Non-logged user with role anonymous is not allowed on resource "User#null" with privilege "update"', $acl->getLastDenialMessage());
     }
 
+    /**
+     * @requires PHP 7.3
+     */
     public function testMultipleReasons(): void
     {
         $acl = new class() extends Acl {
