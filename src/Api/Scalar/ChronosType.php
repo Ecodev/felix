@@ -59,10 +59,8 @@ final class ChronosType extends ScalarType
 
     /**
      * Parses an externally provided literal value to use as an input (e.g. in Query AST).
-     *
-     * @return null|string
      */
-    public function parseLiteral(Node $ast, ?array $variables = null)
+    public function parseLiteral(Node $ast, ?array $variables = null): ?Chronos
     {
         // Note: throwing GraphQL\Error\Error vs \UnexpectedValueException to benefit from GraphQL
         // error location in query:
@@ -70,6 +68,6 @@ final class ChronosType extends ScalarType
             throw new Error('Query error: Can only parse strings got: ' . $ast->kind, $ast);
         }
 
-        return $ast->value;
+        return $this->parseValue($ast->value);
     }
 }
