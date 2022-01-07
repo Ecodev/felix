@@ -71,6 +71,8 @@ Unneeded files on disk: ' . count($unneededFiles) . '
                 throw new Exception('Could not glob path: ' . $basePath);
             }
 
+            $filesFound = array_filter($filesFound, 'is_file');
+
             $files = array_merge($files, $filesFound);
         }
 
