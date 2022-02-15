@@ -13,15 +13,9 @@ use PHPUnit\Framework\TestCase;
 
 final class CHFTypeTest extends TestCase
 {
-    /**
-     * @var CHFType
-     */
-    private $type;
+    private CHFType $type;
 
-    /**
-     * @var AbstractPlatform
-     */
-    private $platform;
+    private AbstractPlatform $platform;
 
     protected function setUp(): void
     {

@@ -14,23 +14,17 @@ use Doctrine\ORM\Mapping as ORM;
 final class Post extends AbstractModel
 {
     /**
-     * @var string
-     *
      * @ORM\Column(type="string", length=50, options={"default" = ""})
      */
-    private $title = '';
+    private string $title = '';
 
     /**
-     * @var string
-     *
      * @ORM\Column(type="text")
      */
-    private $body = '';
+    private string $body = '';
 
     /**
-     * @var User
-     *
      * @ORM\ManyToOne(targetEntity="EcodevTests\Felix\Blog\Model\User", inversedBy="posts")
      */
-    private $user;
+    private User $user;
 }

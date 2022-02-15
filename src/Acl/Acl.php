@@ -12,15 +12,13 @@ class Acl extends \Laminas\Permissions\Acl\Acl
 {
     /**
      * The message explaining the last denial.
-     *
-     * @var null|string
      */
-    private $message;
+    private ?string $message = null;
 
     /**
      * @var string[]
      */
-    private $reasons = [];
+    private array $reasons = [];
 
     protected function createModelResource(string $class): ModelResource
     {
@@ -88,7 +86,7 @@ class Acl extends \Laminas\Permissions\Acl\Acl
 
         $user = CurrentUser::get();
         $userName = $user ? 'User "' . $user->getLogin() . '"' : 'Non-logged user';
-        $privilege = $privilege === null ? 'NULL' : $privilege;
+        $privilege ??= 'NULL';
 
         $message = "$userName with role $role is not allowed on resource \"$resource\" with privilege \"$privilege\"";
 

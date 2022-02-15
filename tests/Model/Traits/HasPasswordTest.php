@@ -10,10 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 final class HasPasswordTest extends TestCase
 {
-    /**
-     * @var \Ecodev\Felix\Model\HasPassword
-     */
-    private $user;
+    private \Ecodev\Felix\Model\HasPassword $user;
 
     protected function setUp(): void
     {

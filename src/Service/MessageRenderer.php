@@ -13,15 +13,9 @@ use Laminas\View\Renderer\RendererInterface;
  */
 final class MessageRenderer
 {
-    /**
-     * @var RendererInterface
-     */
-    private $viewRenderer;
+    private RendererInterface $viewRenderer;
 
-    /**
-     * @var string
-     */
-    private $hostname;
+    private string $hostname;
 
     public function __construct(RendererInterface $viewRenderer, string $hostname)
     {

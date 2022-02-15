@@ -15,10 +15,7 @@ class ImageResizer
 {
     private const CACHE_IMAGE_PATH = 'data/cache/images/';
 
-    /**
-     * @var ImagineInterface
-     */
-    private $imagine;
+    private ImagineInterface $imagine;
 
     public function __construct(ImagineInterface $imagine)
     {
@@ -45,7 +42,7 @@ class ImageResizer
         }
 
         $image = $this->imagine->open($image->getPath());
-        $image->thumbnail(new Box(1000000, $maxHeight))->save($path);
+        $image->thumbnail(new Box(1_000_000, $maxHeight))->save($path);
 
         return $path;
     }

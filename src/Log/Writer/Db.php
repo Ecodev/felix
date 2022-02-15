@@ -10,15 +10,9 @@ use Laminas\Log\Writer\AbstractWriter;
 
 class Db extends AbstractWriter
 {
-    /**
-     * @var LogRepository
-     */
-    private $logRepository;
+    private LogRepository $logRepository;
 
-    /**
-     * @var EventCompleter
-     */
-    private $eventCompleter;
+    private EventCompleter $eventCompleter;
 
     public function __construct(LogRepository $logRepository, EventCompleter $extrasCompleter, $options = null)
     {

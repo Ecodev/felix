@@ -12,10 +12,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 final class GraphQLHandler implements RequestHandlerInterface
 {
-    /**
-     * @var Server
-     */
-    private $server;
+    private Server $server;
 
     public function __construct(Server $server)
     {

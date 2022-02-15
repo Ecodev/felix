@@ -24,10 +24,7 @@ abstract class AbstractModel implements HasOwner, Model
      */
     protected $id;
 
-    /**
-     * @var null|User
-     */
-    private $owner;
+    private ?User $owner = null;
 
     public function getId(): ?int
     {

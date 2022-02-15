@@ -14,10 +14,7 @@ use Exception;
  */
 class FileChecker
 {
-    /**
-     * @var Connection
-     */
-    private $connection;
+    private Connection $connection;
 
     public function __construct(Connection $connection)
     {
@@ -73,7 +70,7 @@ Unneeded files on disk: ' . count($unneededFiles) . '
 
             $filesFound = array_filter($filesFound, 'is_file');
 
-            $files = array_merge($files, $filesFound);
+            $files = [...$files, ...$filesFound];
         }
 
         sort($files);

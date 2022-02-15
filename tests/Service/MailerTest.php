@@ -6,14 +6,16 @@ namespace EcodevTests\Felix\Service;
 
 use Cake\Chronos\Chronos;
 use Doctrine\ORM\EntityManager;
+use Ecodev\Felix\Model\Message;
 use Ecodev\Felix\Model\User;
 use Ecodev\Felix\Repository\MessageRepository;
 use Ecodev\Felix\Service\Mailer;
 use Laminas\Mail;
 use Laminas\Mail\Address;
 use Laminas\Mail\Transport\TransportInterface;
+use PHPUnit\Framework\TestCase;
 
-final class MailerTest extends \PHPUnit\Framework\TestCase
+final class MailerTest extends TestCase
 {
     private function createMockMailer(): Mailer
     {
@@ -86,13 +88,10 @@ final class MailerTest extends \PHPUnit\Framework\TestCase
         self::assertNotNull($message->getDateSent());
     }
 
-    private function createMockMessage(): \Ecodev\Felix\Model\Message
+    private function createMockMessage(): Message
     {
-        return new class() implements \Ecodev\Felix\Model\Message {
-            /**
-             * @var null|Chronos
-             */
-            private $dateSent;
+        return new class() implements Message {
+            private ?Chronos $dateSent = null;
 
             public function getSubject(): string
             {

@@ -20,15 +20,9 @@ use Throwable;
  */
 class Server
 {
-    /**
-     * @var StandardServer
-     */
-    private $server;
+    private StandardServer $server;
 
-    /**
-     * @var ServerConfig
-     */
-    private $config;
+    private ServerConfig $config;
 
     public function __construct(Schema $schema, bool $debug, array $rootValue = [])
     {
@@ -61,7 +55,7 @@ class Server
     {
         if (!$request->getParsedBody()) {
             /** @var array $parsedBody */
-            $parsedBody = json_decode($request->getBody()->getContents(), true);
+            $parsedBody = json_decode($request->getBody()->getContents(), true, 512, JSON_THROW_ON_ERROR);
             $request = $request->withParsedBody($parsedBody);
         }
 

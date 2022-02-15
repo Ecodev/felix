@@ -13,15 +13,9 @@ use Psr\Http\Message\ServerRequestInterface;
 
 final class ImageHandler extends AbstractHandler
 {
-    /**
-     * @var ObjectRepository
-     */
-    private $imageRepository;
+    private ObjectRepository $imageRepository;
 
-    /**
-     * @var ImageResizer
-     */
-    private $imageResizer;
+    private ImageResizer $imageResizer;
 
     public function __construct(ObjectRepository $imageRepository, ImageResizer $imageService)
     {

@@ -14,7 +14,7 @@ final class All implements AssertionInterface
     /**
      * @var AssertionInterface[]
      */
-    private $asserts;
+    private array $asserts;
 
     /**
      * Check if all asserts are true.

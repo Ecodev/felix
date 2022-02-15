@@ -22,10 +22,8 @@ final class ModelResource extends GenericResource
 {
     /**
      * Unique id of the instance of resource.
-     *
-     * @var null|Model
      */
-    private $instance;
+    private ?Model $instance;
 
     /**
      * Sets the Resource identifier.

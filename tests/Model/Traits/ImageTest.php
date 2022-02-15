@@ -9,10 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 final class ImageTest extends TestCase
 {
-    /**
-     * @var \Ecodev\Felix\Model\Image
-     */
-    private $image;
+    private \Ecodev\Felix\Model\Image $image;
 
     protected function setUp(): void
     {

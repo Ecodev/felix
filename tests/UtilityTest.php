@@ -8,9 +8,10 @@ use Ecodev\Felix\Model\Model;
 use Ecodev\Felix\Utility;
 use EcodevTests\Felix\Blog\Model\User;
 use GraphQL\Doctrine\Definition\EntityID;
+use PHPUnit\Framework\TestCase;
 use stdClass;
 
-final class UtilityTest extends \PHPUnit\Framework\TestCase
+final class UtilityTest extends TestCase
 {
     public function testGetShortClassName(): void
     {

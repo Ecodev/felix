@@ -73,7 +73,7 @@ final class AclTest extends TestCase
                     ['update'],
                     new class() implements AssertionInterface {
                         /**
-                         * @param \Ecodev\Felix\Acl\Acl $acl
+                         * @param Acl $acl
                          * @param null|mixed $privilege
                          */
                         public function assert(\Laminas\Permissions\Acl\Acl $acl, ?RoleInterface $role = null, ?ResourceInterface $resource = null, $privilege = null)

@@ -13,10 +13,7 @@ use Laminas\ServiceManager\Factory\FactoryInterface;
 
 final class LoggerFactory implements FactoryInterface
 {
-    /**
-     * @var null|Logger
-     */
-    private $logger;
+    private ?Logger $logger = null;
 
     /**
      * @param string $requestedName

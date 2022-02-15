@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace EcodevTests\Felix\Blog\Model;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use GraphQL\Doctrine\Annotation as API;
 
@@ -15,33 +16,25 @@ use GraphQL\Doctrine\Annotation as API;
 final class User extends AbstractModel implements \Ecodev\Felix\Model\User
 {
     /**
-     * @var string
-     *
      * @ORM\Column(name="custom_column_name", type="string", length=50, options={"default" = ""})
      */
-    private $name = '';
+    private string $name = '';
 
     /**
-     * @var null|string
-     *
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $email;
+    private ?string $email = null;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="password", type="string", length=255)
      * @Api\Exclude
      */
-    private $password;
+    private string $password;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
      * @ORM\OneToMany(targetEntity="EcodevTests\Felix\Blog\Model\Post", mappedBy="user")
      */
-    private $posts;
+    private Collection $posts;
 
     public function getName(): string
     {

@@ -9,10 +9,7 @@ namespace Ecodev\Felix\Model;
  */
 final class CurrentUser
 {
-    /**
-     * @var null|User
-     */
-    private static $currentUser;
+    private static ?User $currentUser = null;
 
     /**
      * Set currently logged in user.

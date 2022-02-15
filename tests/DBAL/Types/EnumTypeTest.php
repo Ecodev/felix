@@ -12,15 +12,9 @@ use PHPUnit\Framework\TestCase;
 
 final class EnumTypeTest extends TestCase
 {
-    /**
-     * @var EnumType
-     */
-    private $type;
+    private EnumType $type;
 
-    /**
-     * @var AbstractPlatform
-     */
-    private $platform;
+    private AbstractPlatform $platform;
 
     protected function setUp(): void
     {

@@ -9,10 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 final class FileTest extends TestCase
 {
-    /**
-     * @var \Ecodev\Felix\Model\File
-     */
-    private $file;
+    private \Ecodev\Felix\Model\File $file;
 
     protected function setUp(): void
     {

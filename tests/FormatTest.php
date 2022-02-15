@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace EcodevTests\Felix;
 
 use Ecodev\Felix\Format;
+use PHPUnit\Framework\TestCase;
 
-final class FormatTest extends \PHPUnit\Framework\TestCase
+final class FormatTest extends TestCase
 {
     public function truncateProvider(): array
     {

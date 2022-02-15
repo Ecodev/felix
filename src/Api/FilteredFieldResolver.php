@@ -14,10 +14,7 @@ use GraphQL\Type\Definition\ResolveInfo;
  */
 final class FilteredFieldResolver
 {
-    /**
-     * @var DefaultFieldResolver
-     */
-    private $resolver;
+    private DefaultFieldResolver $resolver;
 
     public function __construct()
     {

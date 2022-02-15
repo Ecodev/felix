@@ -11,15 +11,9 @@ use PHPUnit\Framework\TestCase;
 
 class LocalizedTypeTest extends TestCase
 {
-    /**
-     * @var LocalizedType
-     */
-    private $type;
+    private LocalizedType $type;
 
-    /**
-     * @var AbstractPlatform
-     */
-    private $platform;
+    private AbstractPlatform $platform;
 
     protected function setUp(): void
     {

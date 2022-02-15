@@ -18,20 +18,11 @@ final class AbstractDecimalTypeTest extends TestCase
         return new class($decimal, $minimum, $maximum) extends AbstractDecimalType {
             public $name = 'TestDecimal';
 
-            /**
-             * @var int
-             */
-            private $decimal;
+            private int $decimal;
 
-            /**
-             * @var null|string
-             */
-            private $minimum;
+            private ?string $minimum;
 
-            /**
-             * @var null|string
-             */
-            private $maximum;
+            private ?string $maximum;
 
             public function __construct(int $decimal, ?string $minimum, ?string $maximum)
             {

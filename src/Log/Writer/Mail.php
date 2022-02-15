@@ -10,10 +10,7 @@ use Laminas\Mail\Transport\TransportInterface;
 
 class Mail extends \Laminas\Log\Writer\Mail
 {
-    /**
-     * @var EventCompleter
-     */
-    private $eventCompleter;
+    private EventCompleter $eventCompleter;
 
     public function __construct(Message $mail, TransportInterface $transport, EventCompleter $extrasCompleter)
     {

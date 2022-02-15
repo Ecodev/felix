@@ -17,10 +17,7 @@ use Ecodev\Felix\Repository\LimitedAccessSubQuery;
  */
 final class AclFilter extends SQLFilter
 {
-    /**
-     * @var null|User
-     */
-    private $user;
+    private ?User $user = null;
 
     /**
      * Cache of subqueries to get accessible IDs.
@@ -28,14 +25,12 @@ final class AclFilter extends SQLFilter
      *
      * @var array possible values of the array are: null|string
      */
-    private $subQueriesCache = [];
+    private array $subQueriesCache = [];
 
     /**
      * The number of time the filter has been deactivated.
-     *
-     * @var int
      */
-    private $disabledCount = 0;
+    private int $disabledCount = 0;
 
     /**
      * Disable the ACL filter forever.

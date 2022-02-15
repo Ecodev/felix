@@ -26,40 +26,22 @@ class Mailer
      */
     private $lock;
 
-    /**
-     * @var EntityManager
-     */
-    private $entityManager;
+    private EntityManager $entityManager;
 
-    /**
-     * @var TransportInterface
-     */
-    private $transport;
+    private TransportInterface $transport;
 
-    /**
-     * @var null|string
-     */
-    private $toEmailOverride;
+    private ?string $toEmailOverride;
 
-    /**
-     * @var string
-     */
-    private $fromEmail;
+    private string $fromEmail;
 
-    /**
-     * @var string
-     */
-    private $phpPath;
+    private string $phpPath;
 
     /**
      * @var string
      */
     protected $fromName;
 
-    /**
-     * @var MessageRepository
-     */
-    private $messageRepository;
+    private MessageRepository $messageRepository;
 
     public function __construct(
         EntityManager $entityManager,

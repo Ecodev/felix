@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace Ecodev\Felix\Testing\Api\Input\Operator;
 
 use GraphQL\Doctrine\Definition\EntityID;
+use PHPUnit\Framework\TestCase;
 
-class OperatorType extends \PHPUnit\Framework\TestCase
+class OperatorType extends TestCase
 {
     private function getFilter(string $field, string $operator, array $values): array
     {
