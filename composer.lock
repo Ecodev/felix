@@ -1198,16 +1198,16 @@
         },
         {
             "name": "ecodev/graphql-doctrine",
-            "version": "7.2.1",
+            "version": "7.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Ecodev/graphql-doctrine.git",
-                "reference": "273b28b0a2c6dc4d069a46bffcd689a271fbd2ce"
+                "reference": "4a3a72e1b759f38bf191b4dcff62ecb3ef3cc4f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Ecodev/graphql-doctrine/zipball/273b28b0a2c6dc4d069a46bffcd689a271fbd2ce",
-                "reference": "273b28b0a2c6dc4d069a46bffcd689a271fbd2ce",
+                "url": "https://api.github.com/repos/Ecodev/graphql-doctrine/zipball/4a3a72e1b759f38bf191b4dcff62ecb3ef3cc4f7",
+                "reference": "4a3a72e1b759f38bf191b4dcff62ecb3ef3cc4f7",
                 "shasum": ""
             },
             "require": {
@@ -1243,9 +1243,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Ecodev/graphql-doctrine/issues",
-                "source": "https://github.com/Ecodev/graphql-doctrine/tree/7.2.1"
+                "source": "https://github.com/Ecodev/graphql-doctrine/tree/7.2.2"
             },
-            "time": "2022-02-15T13:51:49+00:00"
+            "time": "2022-02-15T14:19:45+00:00"
         },
         {
             "name": "friendsofphp/proxy-manager-lts",
