@@ -72,9 +72,7 @@ class MailFactoryTest extends TestCase
             ],
             'factories' => [
                 EventCompleter::class => EventCompleterFactory::class,
-                TransportInterface::class => function () use ($transport) {
-                    return $transport;
-                },
+                TransportInterface::class => fn () => $transport,
             ],
         ]);
 

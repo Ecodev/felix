@@ -108,9 +108,7 @@ class EventCompleter implements ProcessorInterface
         }
 
         // Renumber backtrace items.
-        $renumberedTrace = preg_replace_callback('/^#(\d+)/m', function ($matches) {
-            return '#' . ($matches[1] - 5);
-        }, $shortenTrace);
+        $renumberedTrace = preg_replace_callback('/^#(\d+)/m', fn ($matches) => '#' . ((int) $matches[1] - 5), $shortenTrace);
 
         if ($renumberedTrace === null) {
             return $shortenTrace;

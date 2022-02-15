@@ -28,9 +28,7 @@ trait TestWithEntityManager
         global $container;
         $container = new ServiceManager([
             'factories' => [
-                EntityManager::class => function () {
-                    return $this->entityManager;
-                },
+                EntityManager::class => fn () => $this->entityManager,
             ],
         ]);
     }

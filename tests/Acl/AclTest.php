@@ -59,9 +59,6 @@ final class AclTest extends TestCase
         self::assertSame('Non-logged user with role anonymous is not allowed on resource "User#null" with privilege "update"', $acl->getLastDenialMessage());
     }
 
-    /**
-     * @requires PHP 7.3
-     */
     public function testMultipleReasons(): void
     {
         $acl = new class() extends Acl {
@@ -95,11 +92,11 @@ final class AclTest extends TestCase
 
         self::assertFalse($acl->isCurrentUserAllowed(new User(), 'update'), 'student cannot update even if user');
         $expected = <<<STRING
-User "sarah" with role member is not allowed on resource "User#null" with privilege "update" because:
+            User "sarah" with role member is not allowed on resource "User#null" with privilege "update" because:
 
-- it is not himself
-- mocked reason
-STRING;
+            - it is not himself
+            - mocked reason
+            STRING;
         self::assertSame($expected, $acl->getLastDenialMessage());
     }
 }

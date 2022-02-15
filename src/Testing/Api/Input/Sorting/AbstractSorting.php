@@ -10,6 +10,9 @@ use PHPUnit\Framework\TestCase;
 
 abstract class AbstractSorting extends TestCase
 {
+    /**
+     * @param class-string $class
+     */
     protected function getSortedQueryResult(Types $types, string $class, string $field): array
     {
         $sorting = $this->getSorting($field);

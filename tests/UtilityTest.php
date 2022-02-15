@@ -29,7 +29,7 @@ final class UtilityTest extends \PHPUnit\Framework\TestCase
                 {
                 }
 
-                public function getEntity()
+                public function getEntity(): string
                 {
                     return 'real entity';
                 }

@@ -25,6 +25,9 @@ class OperatorType extends \PHPUnit\Framework\TestCase
         ];
     }
 
+    /**
+     * @param class-string $class
+     */
     protected function getFilteredResult(string $class, string $field, string $operator, array $values): array
     {
         $filter = $this->getFilter($field, $operator, $values);

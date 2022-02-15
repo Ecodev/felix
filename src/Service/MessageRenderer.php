@@ -35,7 +35,7 @@ final class MessageRenderer
     public function render(?User $user, string $email, string $subject, string $type, array $mailParams, array $layoutParams = [], ?string $hostname = null): string
     {
         // Override hostname if given
-        $hostname = $hostname ?? $this->hostname;
+        $hostname ??= $this->hostname;
 
         // First render the view
         $serverUrl = 'https://' . $hostname;

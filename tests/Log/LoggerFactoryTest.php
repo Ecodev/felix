@@ -29,12 +29,8 @@ class LoggerFactoryTest extends TestCase
     {
         $container = new ServiceManager([
             'factories' => [
-                Db::class => function () {
-                    return self::createMock(Db::class);
-                },
-                Mail::class => function () {
-                    return self::createMock(Mail::class);
-                },
+                Db::class => fn () => self::createMock(Db::class),
+                Mail::class => fn () => self::createMock(Mail::class),
             ],
         ]);
 
@@ -48,12 +44,8 @@ class LoggerFactoryTest extends TestCase
     {
         $container = new ServiceManager([
             'factories' => [
-                Db::class => function () {
-                    return self::createMock(Db::class);
-                },
-                Mail::class => function () {
-                    return null;
-                },
+                Db::class => fn () => self::createMock(Db::class),
+                Mail::class => fn () => null,
             ],
         ]);
 

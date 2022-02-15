@@ -33,8 +33,8 @@ abstract class AbstractDatabase
     {
         $php = static::getPhp();
         $sshCmd = <<<STRING
-                    ssh $remote "cd /sites/$remote/ && $php bin/dump-data.php $dumpFile"
-STRING;
+            ssh $remote "cd /sites/$remote/ && $php bin/dump-data.php $dumpFile"
+            STRING;
 
         echo "dumping data $dumpFile on $remote...\n";
         self::executeLocalCommand($sshCmd);
@@ -58,8 +58,8 @@ STRING;
     private static function copyFile(string $remote, string $dumpFile): void
     {
         $copyCmd = <<<STRING
-                    rsync -avz --progress $remote:$dumpFile $dumpFile
-STRING;
+            rsync -avz --progress $remote:$dumpFile $dumpFile
+            STRING;
 
         echo "copying dump to $dumpFile ...\n";
         self::executeLocalCommand($copyCmd);

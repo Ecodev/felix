@@ -15,9 +15,7 @@ abstract class EnumType extends Type
     public function getSqlDeclaration(array $fieldDeclaration, AbstractPlatform $platform): string
     {
         $possibleValues = $this->getPossibleValues();
-        $quotedPossibleValues = implode(', ', array_map(function ($str) {
-            return "'" . (string) $str . "'";
-        }, $possibleValues));
+        $quotedPossibleValues = implode(', ', array_map(fn ($str) => "'" . (string) $str . "'", $possibleValues));
 
         $sql = 'ENUM(' . $quotedPossibleValues . ')';
 

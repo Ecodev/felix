@@ -96,9 +96,7 @@ class Acl extends \Laminas\Permissions\Acl\Acl
         if ($count === 1) {
             $message .= ' because ' . $this->reasons[0];
         } elseif ($count) {
-            $list = array_map(function ($reason) {
-                return '- ' . $reason;
-            }, $this->reasons);
+            $list = array_map(fn ($reason) => '- ' . $reason, $this->reasons);
             $message .= ' because:' . PHP_EOL . PHP_EOL . implode(PHP_EOL, $list);
         }
 
