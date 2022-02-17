@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace EcodevTests\Felix\DBAL\Types;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Platforms\MySqlPlatform;
+use Doctrine\DBAL\Platforms\MySQLPlatform;
 use Ecodev\Felix\DBAL\Types\CHFType;
 use InvalidArgumentException;
 use Money\Money;
@@ -21,7 +21,7 @@ final class CHFTypeTest extends TestCase
     {
         $this->type = new CHFType();
 
-        $this->platform = new MySqlPlatform();
+        $this->platform = new MySQLPlatform();
     }
 
     public function testMoney(): void

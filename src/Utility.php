@@ -13,9 +13,9 @@ abstract class Utility
     /**
      * Returns the short class name of any object, eg: Application\Model\Calendar => Calendar.
      *
-     * @param object|string $object
+     * @param class-string|object $object
      */
-    public static function getShortClassName($object): string
+    public static function getShortClassName(object|string $object): string
     {
         $reflect = new ReflectionClass($object);
 

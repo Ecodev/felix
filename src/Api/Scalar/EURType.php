@@ -13,6 +13,9 @@ final class EURType extends AbstractMoneyType
      */
     public $description = 'An EUR money amount.';
 
+    /**
+     * @param numeric-string $value
+     */
     protected function createMoney(string $value): Money
     {
         return Money::EUR($value);

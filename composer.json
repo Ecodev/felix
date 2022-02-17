@@ -38,16 +38,16 @@
         }
     },
     "require": {
-        "php": "^7.4 || ^8.0",
+        "php": "^8.1",
         "ext-bcmath": "*",
         "ext-fileinfo": "*",
         "ext-json": "*",
         "ext-pdo": "*",
         "cakephp/chronos": "^2.3",
-        "doctrine/dbal": "^2.13",
-        "doctrine/migrations": "^2.2 || ^3.0",
+        "doctrine/dbal": "^3.3",
+        "doctrine/migrations": "^3.4",
         "ecodev/graphql-doctrine": "^7.2",
-        "imagine/imagine": "^1.2",
+        "imagine/imagine": "dev-develop#60a78ce7973eb6b818f40a2858b85b7b9774a676",
         "laminas/laminas-diactoros": "^2.8",
         "laminas/laminas-log": "^2.15",
         "laminas/laminas-mail": "^2.15",
@@ -56,8 +56,8 @@
         "laminas/laminas-validator": "^2.16",
         "laminas/laminas-view": "^2.19",
         "mezzio/mezzio-session": "^1.6",
-        "moneyphp/money": "^3.3",
-        "symfony/cache": "^5.4"
+        "moneyphp/money": "^4.0",
+        "symfony/cache": "^6.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "@stable",

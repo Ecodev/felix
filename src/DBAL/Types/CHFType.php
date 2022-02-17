@@ -13,6 +13,9 @@ final class CHFType extends AbstractMoneyType
         return 'CHF';
     }
 
+    /**
+     * @param numeric-string $value
+     */
     protected function createMoney(string $value): Money
     {
         return Money::CHF($value);
