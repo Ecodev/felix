@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "df1cceb5112ae86f951beeb91510b6ce",
+    "content-hash": "b7cfd1f119a6a291dc39d0d7a916f490",
     "packages": [
         {
             "name": "cakephp/chronos",
@@ -7235,7 +7235,14 @@
             "time": "2021-07-28T10:34:58+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "package": "imagine/imagine",
+            "version": "dev-develop",
+            "alias": "1.2",
+            "alias_normalized": "1.2.0.0"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "imagine/imagine": 20,
