@@ -105,7 +105,7 @@ trait AbstractFile
     public function deleteFile(): void
     {
         $path = $this->getPath();
-        if (file_exists($path) && is_file($path) && mb_strpos($this->getFilename(), 'dw4jV3zYSPsqE2CB8BcP8ABD0.') === false) {
+        if (file_exists($path) && is_file($path) && !str_contains($this->getFilename(), 'dw4jV3zYSPsqE2CB8BcP8ABD0.')) {
             unlink($path);
         }
     }

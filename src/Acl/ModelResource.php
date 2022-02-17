@@ -21,18 +21,15 @@ use Laminas\Permissions\Acl\Resource\GenericResource;
 final class ModelResource extends GenericResource
 {
     /**
-     * Unique id of the instance of resource.
-     */
-    private ?Model $instance;
-
-    /**
      * Sets the Resource identifier.
      *
      * @param string $class must be a model class name
      * @param Model $instance the instance itself
      */
-    public function __construct(string $class, ?Model $instance = null)
-    {
+    public function __construct(
+        string $class,
+        private readonly ?Model $instance = null
+    ) {
         if (!is_subclass_of($class, Model::class)) {
             throw new InvalidArgumentException('The class name must be an implementation of Model but given: ' . $class);
         }
@@ -40,7 +37,6 @@ final class ModelResource extends GenericResource
         $class = ClassUtils::getRealClass($class);
 
         parent::__construct($class);
-        $this->instance = $instance;
     }
 
     /**

@@ -14,7 +14,7 @@ final class One implements AssertionInterface
     /**
      * @var AssertionInterface[]
      */
-    private array $asserts;
+    private readonly array $asserts;
 
     /**
      * Check if at least one assert is true.

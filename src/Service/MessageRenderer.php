@@ -13,14 +13,8 @@ use Laminas\View\Renderer\RendererInterface;
  */
 final class MessageRenderer
 {
-    private RendererInterface $viewRenderer;
-
-    private string $hostname;
-
-    public function __construct(RendererInterface $viewRenderer, string $hostname)
+    public function __construct(private readonly RendererInterface $viewRenderer, private string $hostname)
     {
-        $this->viewRenderer = $viewRenderer;
-        $this->hostname = $hostname;
     }
 
     /**

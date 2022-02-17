@@ -13,14 +13,8 @@ use Psr\Http\Message\ServerRequestInterface;
 
 final class ImageHandler extends AbstractHandler
 {
-    private ObjectRepository $imageRepository;
-
-    private ImageResizer $imageResizer;
-
-    public function __construct(ObjectRepository $imageRepository, ImageResizer $imageService)
+    public function __construct(private readonly ObjectRepository $imageRepository, private readonly ImageResizer $imageResizer)
     {
-        $this->imageRepository = $imageRepository;
-        $this->imageResizer = $imageService;
     }
 
     /**
@@ -44,7 +38,7 @@ final class ImageHandler extends AbstractHandler
         $maxHeight = (int) $request->getAttribute('maxHeight');
         if ($maxHeight) {
             $accept = $request->getHeaderLine('accept');
-            $useWebp = mb_strpos($accept, 'image/webp') !== false;
+            $useWebp = str_contains($accept, 'image/webp');
 
             $path = $this->imageResizer->resize($image, $maxHeight, $useWebp);
         }

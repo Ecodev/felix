@@ -9,11 +9,8 @@ use Laminas\Log\Processor\ProcessorInterface;
 
 class EventCompleter implements ProcessorInterface
 {
-    private string $baseUrl;
-
-    public function __construct(string $baseUrl)
+    public function __construct(private readonly string $baseUrl)
     {
-        $this->baseUrl = $baseUrl;
     }
 
     /**

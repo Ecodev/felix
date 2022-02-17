@@ -20,9 +20,9 @@ use Throwable;
  */
 class Server
 {
-    private StandardServer $server;
+    private readonly StandardServer $server;
 
-    private ServerConfig $config;
+    private readonly ServerConfig $config;
 
     public function __construct(Schema $schema, bool $debug, array $rootValue = [])
     {
@@ -51,7 +51,7 @@ class Server
     /**
      * @return ExecutionResult|ExecutionResult[]
      */
-    public function execute(ServerRequestInterface $request)
+    public function execute(ServerRequestInterface $request): array|ExecutionResult
     {
         if (!$request->getParsedBody()) {
             /** @var array $parsedBody */
@@ -77,7 +77,7 @@ class Server
      *
      * @param ExecutionResult|ExecutionResult[] $result
      */
-    public function sendHttp($result): void
+    public function sendHttp(array|ExecutionResult $result): void
     {
         $this->server->getHelper()->sendResponse($result);
     }

@@ -108,7 +108,7 @@ abstract class AbstractServer extends TestCase
     /**
      * @param ExecutionResult|ExecutionResult[] $result
      */
-    private function resultToArray($result, bool $debug): array
+    private function resultToArray(array|ExecutionResult $result, bool $debug): array
     {
         if (is_array($result)) {
             foreach ($result as &$one) {

@@ -14,7 +14,7 @@ use GraphQL\Type\Definition\ResolveInfo;
  */
 final class FilteredFieldResolver
 {
-    private DefaultFieldResolver $resolver;
+    private readonly DefaultFieldResolver $resolver;
 
     public function __construct()
     {
@@ -51,7 +51,7 @@ final class FilteredFieldResolver
         if ($object instanceof Proxy) {
             try {
                 $object->__load();
-            } catch (EntityNotFoundException $exception) {
+            } catch (EntityNotFoundException) {
                 return null;
             }
         }

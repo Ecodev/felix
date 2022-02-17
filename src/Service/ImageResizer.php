@@ -15,11 +15,8 @@ class ImageResizer
 {
     private const CACHE_IMAGE_PATH = 'data/cache/images/';
 
-    private ImagineInterface $imagine;
-
-    public function __construct(ImagineInterface $imagine)
+    public function __construct(private readonly ImagineInterface $imagine)
     {
-        $this->imagine = $imagine;
     }
 
     /**

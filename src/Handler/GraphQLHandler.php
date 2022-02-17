@@ -12,11 +12,8 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 final class GraphQLHandler implements RequestHandlerInterface
 {
-    private Server $server;
-
-    public function __construct(Server $server)
+    public function __construct(private readonly Server $server)
     {
-        $this->server = $server;
     }
 
     /**

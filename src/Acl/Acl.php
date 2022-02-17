@@ -63,7 +63,7 @@ class Acl extends \Laminas\Permissions\Acl\Acl
 
     private function getClass(Model $resource): string
     {
-        return ClassUtils::getRealClass(get_class($resource));
+        return ClassUtils::getRealClass($resource::class);
     }
 
     private function getCurrentRole(): string

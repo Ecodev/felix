@@ -12,11 +12,8 @@ use Psr\Http\Message\ServerRequestInterface;
 
 final class FileHandler extends AbstractHandler
 {
-    private ObjectRepository $fileRepository;
-
-    public function __construct(ObjectRepository $fileRepository)
+    public function __construct(private readonly ObjectRepository $fileRepository)
     {
-        $this->fileRepository = $fileRepository;
     }
 
     /**

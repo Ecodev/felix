@@ -62,7 +62,7 @@ function v(): void
 /**
  * Dump all arguments and die.
  */
-function w(): void
+function w(): never
 {
     $isHtml = (PHP_SAPI !== 'cli');
     echo "\n_________________________________________________________________________________________________________________________" . ($isHtml ? '</br>' : '') . "\n";
