@@ -18,22 +18,12 @@ class ImageResizerTest extends TestCase
      */
     public function testResize(string $extension, int $wantedHeight, bool $useWebp, string $expected): void
     {
-        switch ($extension) {
-            case 'png':
-                $mime = 'image/png';
-
-                break;
-            case 'svg':
-                $mime = 'image/svg+xml';
-
-                break;
-            case 'tiff':
-                $mime = 'image/tiff';
-
-                break;
-            default:
-                throw new Exception('Unsupported extension: ' . $extension);
-        }
+        $mime = match ($extension) {
+            'png' => 'image/png',
+            'svg' => 'image/svg+xml',
+            'tiff' => 'image/tiff',
+            default => throw new Exception('Unsupported extension: ' . $extension),
+        };
 
         $imagineImage = $this->createMock(ImageInterface::class);
         $imagineImage->expects(self::any())->method('thumbnail')->willReturnSelf();

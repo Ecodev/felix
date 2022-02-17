@@ -18,18 +18,9 @@ final class AbstractDecimalTypeTest extends TestCase
         return new class($decimal, $minimum, $maximum) extends AbstractDecimalType {
             public $name = 'TestDecimal';
 
-            private int $decimal;
-
-            private ?string $minimum;
-
-            private ?string $maximum;
-
-            public function __construct(int $decimal, ?string $minimum, ?string $maximum)
+            public function __construct(private readonly int $decimal, private readonly ?string $minimum, private readonly ?string $maximum)
             {
                 parent::__construct([]);
-                $this->decimal = $decimal;
-                $this->minimum = $minimum;
-                $this->maximum = $maximum;
             }
 
             protected function getScale(): int

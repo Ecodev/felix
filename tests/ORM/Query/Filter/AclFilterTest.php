@@ -108,10 +108,10 @@ final class AclFilterTest extends TestCase
         $filter = new AclFilter($this->entityManager);
 
         try {
-            $filter->runWithoutAcl(function (): void {
+            $filter->runWithoutAcl(function (): never {
                 throw new Exception();
             });
-        } catch (Exception $e) {
+        } catch (Exception) {
         }
 
         self::assertNotSame('', $filter->addFilterConstraint($targetEntity, 'test'), 'enabled even after exception');

@@ -69,16 +69,10 @@ final class FilteredFieldResolverTest extends TestCase
     {
         $model = new class($value) {
             /**
-             * @var mixed
-             */
-            private $value;
-
-            /**
              * @param mixed $value
              */
-            public function __construct($value)
+            public function __construct(private $value)
             {
-                $this->value = $value;
             }
 
             /**
