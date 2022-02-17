@@ -56,7 +56,7 @@ trait Log
      *
      * @API\Exclude
      *
-     * @ORM\Column(type="json_array")
+     * @ORM\Column(type="json", options={"default" = "[]"})
      */
     private $extra = [];
 
