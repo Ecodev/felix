@@ -164,7 +164,7 @@ return (new PhpCsFixer\Config())
         'php_unit_method_casing' => true,
         'php_unit_mock' => true,
         'php_unit_mock_short_will_return' => true,
-        'php_unit_namespaced' => false, // Requires PHPUnit 8+
+        'php_unit_namespaced' => true,
         'php_unit_no_expectation_annotation' => true,
         'php_unit_set_up_tear_down_visibility' => true,
         'php_unit_size_class' => false, // That seems extra work to maintain for little benefits
