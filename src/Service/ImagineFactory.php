@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ecodev\Felix\Service;
 
 use Exception;
+use Gmagick;
 use Imagick;
 use Imagine\Image\ImagineInterface;
 use Imagine\Imagick\Imagine;
@@ -20,7 +21,7 @@ final class ImagineFactory implements FactoryInterface
      */
     public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null): ImagineInterface
     {
-        if (class_exists('Gmagick')) {
+        if (class_exists(Gmagick::class)) {
             return new \Imagine\Gmagick\Imagine();
         }
 
