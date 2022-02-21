@@ -41,6 +41,7 @@ class OperatorType extends TestCase
     /**
      * Parse an array of ID into an array of EntityID.
      *
+     * @param class-string $entity
      * @param null|int[] $ids
      *
      * @return null|EntityID[]
