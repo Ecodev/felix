@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "81db0e9b0ce368a5669977e52975ca40",
+    "content-hash": "b1b206864c1c66e7d4c188ce930b929b",
     "packages": [
         {
             "name": "cakephp/chronos",
@@ -1333,20 +1333,20 @@
         },
         {
             "name": "imagine/imagine",
-            "version": "dev-develop",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-imagine/Imagine.git",
-                "reference": "60a78ce7973eb6b818f40a2858b85b7b9774a676"
+                "reference": "6261e08598f9ba3d1b79a134a0e33471b1e6045a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-imagine/Imagine/zipball/60a78ce7973eb6b818f40a2858b85b7b9774a676",
-                "reference": "60a78ce7973eb6b818f40a2858b85b7b9774a676",
+                "url": "https://api.github.com/repos/php-imagine/Imagine/zipball/6261e08598f9ba3d1b79a134a0e33471b1e6045a",
+                "reference": "6261e08598f9ba3d1b79a134a0e33471b1e6045a",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.2"
+                "php": ">=5.5"
             },
             "require-dev": {
                 "phpunit/phpunit": "^4.8 || ^5.7 || ^6.5 || ^7.5 || ^8.4 || ^9.3"
@@ -1357,11 +1357,10 @@
                 "ext-gmagick": "to use the Gmagick implementation",
                 "ext-imagick": "to use the Imagick implementation"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-develop": "0.7-dev"
+                    "dev-develop": "1.x-dev"
                 }
             },
             "autoload": {
@@ -1390,9 +1389,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-imagine/Imagine/issues",
-                "source": "https://github.com/php-imagine/Imagine/tree/develop"
+                "source": "https://github.com/php-imagine/Imagine/tree/1.3.0"
             },
-            "time": "2021-10-21T12:26:17+00:00"
+            "time": "2022-03-15T10:41:05+00:00"
         },
         {
             "name": "laminas/laminas-code",
@@ -7236,17 +7235,9 @@
             "time": "2021-07-28T10:34:58+00:00"
         }
     ],
-    "aliases": [
-        {
-            "package": "imagine/imagine",
-            "version": "dev-develop",
-            "alias": "1.2",
-            "alias_normalized": "1.2.0.0"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "imagine/imagine": 20,
         "friendsofphp/php-cs-fixer": 0,
         "mikey179/vfsstream": 0,
         "phpstan/phpstan": 0,
