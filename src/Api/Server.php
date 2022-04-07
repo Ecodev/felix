@@ -70,19 +70,6 @@ class Server
     }
 
     /**
-     * Send response using standard PHP `header()` and `echo`.
-     *
-     * Most of the time you should not use this and instead return the
-     * response directly to the middleware.
-     *
-     * @param ExecutionResult|ExecutionResult[] $result
-     */
-    public function sendHttp(array|ExecutionResult $result): void
-    {
-        $this->server->getHelper()->sendResponse($result);
-    }
-
-    /**
      * Send response to CLI.
      */
     public function sendCli(ExecutionResult $result): void
