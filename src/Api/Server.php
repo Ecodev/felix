@@ -55,7 +55,7 @@ class Server
     {
         if (!$request->getParsedBody()) {
             /** @var array $parsedBody */
-            $parsedBody = json_decode($request->getBody()->getContents(), true, 512, JSON_THROW_ON_ERROR);
+            $parsedBody = json_decode($request->getBody()->getContents(), true) ?? [];
             $request = $request->withParsedBody($parsedBody);
         }
 
