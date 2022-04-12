@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Ecodev\Felix\Model;
 
+use Ecodev\Felix\Acl\MultipleRoles;
+
 interface User extends Model
 {
     /**
@@ -19,5 +21,5 @@ interface User extends Model
     /**
      * Returns the user role.
      */
-    public function getRole(): string;
+    public function getRole(): MultipleRoles|string;
 }

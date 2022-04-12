@@ -6,6 +6,7 @@ namespace EcodevTests\Felix\Blog\Model;
 
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Ecodev\Felix\Acl\MultipleRoles;
 use GraphQL\Doctrine\Annotation as API;
 
 /**
@@ -36,6 +37,10 @@ final class User extends AbstractModel implements \Ecodev\Felix\Model\User
      */
     private Collection $posts;
 
+    public function __construct(private MultipleRoles|string $role = 'member')
+    {
+    }
+
     public function getName(): string
     {
         return $this->name;
@@ -46,9 +51,9 @@ final class User extends AbstractModel implements \Ecodev\Felix\Model\User
         $this->name = $name;
     }
 
-    public function getRole(): string
+    public function getRole(): string|MultipleRoles
     {
-        return 'member';
+        return $this->role;
     }
 
     public function getLogin(): ?string

@@ -6,6 +6,7 @@ namespace EcodevTests\Felix\Acl;
 
 use Ecodev\Felix\Acl\Acl;
 use Ecodev\Felix\Acl\Assertion\IsMyself;
+use Ecodev\Felix\Acl\MultipleRoles;
 use Ecodev\Felix\Model\CurrentUser;
 use EcodevTests\Felix\Blog\Model\User;
 use Laminas\Permissions\Acl\Assertion\AssertionInterface;
@@ -98,5 +99,34 @@ final class AclTest extends TestCase
             - mocked reason
             STRING;
         self::assertSame($expected, $acl->getLastDenialMessage());
+    }
+
+    public function testMultipleRoles(): void
+    {
+        $acl = new class() extends Acl {
+            public function __construct()
+            {
+                $user = $this->createModelResource(User::class);
+                $this->addRole('reader');
+                $this->addRole('writer');
+                $this->allow('writer', [$user], ['update']);
+            }
+        };
+
+        CurrentUser::set(new User(new MultipleRoles()));
+        self::assertFalse($acl->isCurrentUserAllowed(new User(), 'update'));
+        self::assertSame('User "" with role [] is not allowed on resource "User#null" with privilege "update"', $acl->getLastDenialMessage());
+
+        CurrentUser::set(new User(new MultipleRoles(['reader'])));
+        self::assertFalse($acl->isCurrentUserAllowed(new User(), 'update'));
+        self::assertSame('User "" with role [reader] is not allowed on resource "User#null" with privilege "update"', $acl->getLastDenialMessage());
+
+        CurrentUser::set(new User(new MultipleRoles(['reader', 'writer'])));
+        self::assertTrue($acl->isCurrentUserAllowed(new User(), 'update'));
+        self::assertNull($acl->getLastDenialMessage());
+
+        self::assertFalse($acl->isAllowed(new MultipleRoles(), User::class, 'update'));
+        self::assertFalse($acl->isAllowed(new MultipleRoles(['reader']), User::class, 'update'));
+        self::assertTrue($acl->isAllowed(new MultipleRoles(['reader', 'writer']), User::class, 'update'));
     }
 }

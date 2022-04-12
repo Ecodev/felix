@@ -7,6 +7,8 @@ namespace Ecodev\Felix\Acl;
 use Doctrine\Common\Util\ClassUtils;
 use Ecodev\Felix\Model\CurrentUser;
 use Ecodev\Felix\Model\Model;
+use Laminas\Permissions\Acl\Resource\ResourceInterface;
+use Laminas\Permissions\Acl\Role\RoleInterface;
 
 class Acl extends \Laminas\Permissions\Acl\Acl
 {
@@ -26,6 +28,32 @@ class Acl extends \Laminas\Permissions\Acl\Acl
         $this->addResource($resource);
 
         return $resource;
+    }
+
+    /**
+     * Override parent to provide compatibility with MultipleRoles.
+     *
+     * @param RoleInterface|string $role
+     * @param ResourceInterface|string $resource
+     * @param string $privilege
+     */
+    public function isAllowed($role = null, $resource = null, $privilege = null): bool
+    {
+        // Normalize roles
+        if ($role instanceof MultipleRoles) {
+            $roles = $role->getRoles();
+        } else {
+            $roles = [$role];
+        }
+
+        // If at least one role is allowed, then return early
+        foreach ($roles as $role) {
+            if (parent::isAllowed($role, $resource, $privilege)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -66,7 +94,7 @@ class Acl extends \Laminas\Permissions\Acl\Acl
         return ClassUtils::getRealClass($resource::class);
     }
 
-    private function getCurrentRole(): string
+    private function getCurrentRole(): MultipleRoles|string
     {
         $user = CurrentUser::get();
         if (!$user) {
@@ -76,7 +104,7 @@ class Acl extends \Laminas\Permissions\Acl\Acl
         return $user->getRole();
     }
 
-    private function buildMessage(ModelResource $resource, ?string $privilege, string $role, bool $isAllowed): ?string
+    private function buildMessage(ModelResource $resource, ?string $privilege, MultipleRoles|string $role, bool $isAllowed): ?string
     {
         if ($isAllowed) {
             return null;
