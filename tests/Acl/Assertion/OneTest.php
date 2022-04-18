@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace EcodevTests\Felix\Acl\Assertion;
 
 use Ecodev\Felix\Acl\Acl;
+use Ecodev\Felix\Acl\Assertion\NamedAssertion;
 use Ecodev\Felix\Acl\Assertion\One;
-use Laminas\Permissions\Acl\Assertion\AssertionInterface;
 use PHPUnit\Framework\TestCase;
 
 class OneTest extends TestCase
@@ -18,7 +18,7 @@ class OneTest extends TestCase
     {
         $assertions = [];
         foreach ($input as $value) {
-            $internalAssertion = $this->createMock(AssertionInterface::class);
+            $internalAssertion = $this->createMock(NamedAssertion::class);
             $internalAssertion->expects(self::atMost(1))
                 ->method('assert')
                 ->willReturn($value);
@@ -43,5 +43,21 @@ class OneTest extends TestCase
             [[false, false], false],
             [[false], false],
         ];
+    }
+
+    public function testGetName(): void
+    {
+        $assert1 = $this->createMock(NamedAssertion::class);
+        $assert1->expects(self::once())
+            ->method('getName')
+            ->willReturn('assert1');
+
+        $assert2 = $this->createMock(NamedAssertion::class);
+        $assert2->expects(self::once())
+            ->method('getName')
+            ->willReturn('assert2');
+
+        $assert = new One($assert1, $assert2);
+        self::assertSame('assert1, ou assert2', $assert->getName());
     }
 }

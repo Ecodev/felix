@@ -7,6 +7,7 @@ namespace Ecodev\Felix\Acl;
 use Doctrine\Common\Util\ClassUtils;
 use Ecodev\Felix\Model\CurrentUser;
 use Ecodev\Felix\Model\Model;
+use Laminas\Permissions\Acl\Assertion\AssertionInterface;
 use Laminas\Permissions\Acl\Resource\ResourceInterface;
 use Laminas\Permissions\Acl\Role\RoleInterface;
 
@@ -21,6 +22,41 @@ class Acl extends \Laminas\Permissions\Acl\Acl
      * @var string[]
      */
     private array $reasons = [];
+
+    private DebugAcl $debugAcl;
+
+    public function __construct()
+    {
+        $this->debugAcl = new DebugAcl();
+    }
+
+    public function addRole($role, $parents = null)
+    {
+        $this->debugAcl->addRole($role, $parents);
+
+        return parent::addRole($role, $parents);
+    }
+
+    public function addResource($resource, $parent = null)
+    {
+        $this->debugAcl->addResource($resource, $parent);
+
+        return parent::addResource($resource, $parent);
+    }
+
+    public function allow($roles = null, $resources = null, $privileges = null, ?AssertionInterface $assert = null)
+    {
+        $this->debugAcl->allow($roles, $resources, $privileges, $assert);
+
+        return parent::allow($roles, $resources, $privileges, $assert);
+    }
+
+    public function deny($roles = null, $resources = null, $privileges = null, ?AssertionInterface $assert = null)
+    {
+        $this->debugAcl->deny($roles, $resources, $privileges, $assert);
+
+        return parent::deny($roles, $resources, $privileges, $assert);
+    }
 
     protected function createModelResource(string $class): ModelResource
     {
@@ -135,5 +171,32 @@ class Acl extends \Laminas\Permissions\Acl\Acl
     public function getLastDenialMessage(): ?string
     {
         return $this->message;
+    }
+
+    /**
+     * @return array<array{resource:string, privileges: array<int, array{privilege:null|string, allowed: bool, allowIf: string[], denyIf: string[]}>}>
+     */
+    public function show(MultipleRoles|string $role): array
+    {
+        $result = [];
+        /** @var string[] $resources */
+        $resources = $this->getResources();
+        sort($resources);
+
+        foreach ($resources as $resource) {
+            $privileges = [];
+            foreach ($this->debugAcl->getPrivileges() as $privilege) {
+                $privileges[] = $this->debugAcl->show($role, $resource, $privilege);
+            }
+
+            $result[] = [
+                'resource' => $resource,
+                'privileges' => $privileges,
+            ];
+        }
+
+        ksort($result);
+
+        return $result;
     }
 }

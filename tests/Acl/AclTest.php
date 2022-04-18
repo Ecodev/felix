@@ -26,6 +26,7 @@ final class AclTest extends TestCase
         $acl = new class() extends Acl {
             public function __construct()
             {
+                parent::__construct();
                 $user = $this->createModelResource(User::class);
                 $this->addRole('anonymous');
                 $this->addRole('member');
@@ -65,6 +66,7 @@ final class AclTest extends TestCase
         $acl = new class() extends Acl {
             public function __construct()
             {
+                parent::__construct();
                 $user = $this->createModelResource(User::class);
                 $this->addRole('anonymous');
                 $this->addRole('member', 'anonymous');
@@ -106,6 +108,7 @@ final class AclTest extends TestCase
         $acl = new class() extends Acl {
             public function __construct()
             {
+                parent::__construct();
                 $user = $this->createModelResource(User::class);
                 $this->addRole('reader');
                 $this->addRole('writer');

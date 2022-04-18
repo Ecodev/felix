@@ -6,11 +6,10 @@ namespace Ecodev\Felix\Acl\Assertion;
 
 use Ecodev\Felix\Model\CurrentUser;
 use Laminas\Permissions\Acl\Acl;
-use Laminas\Permissions\Acl\Assertion\AssertionInterface;
 use Laminas\Permissions\Acl\Resource\ResourceInterface;
 use Laminas\Permissions\Acl\Role\RoleInterface;
 
-final class IsMyself implements AssertionInterface
+final class IsMyself implements NamedAssertion
 {
     /**
      * Assert that the user is the current user himself.
@@ -31,5 +30,10 @@ final class IsMyself implements AssertionInterface
         }
 
         return $acl->reject('it is not himself');
+    }
+
+    public function getName(): string
+    {
+        return "c'est moi-même";
     }
 }

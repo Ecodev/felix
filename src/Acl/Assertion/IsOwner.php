@@ -7,11 +7,10 @@ namespace Ecodev\Felix\Acl\Assertion;
 use Ecodev\Felix\Model\CurrentUser;
 use Ecodev\Felix\Model\HasOwner;
 use Laminas\Permissions\Acl\Acl;
-use Laminas\Permissions\Acl\Assertion\AssertionInterface;
 use Laminas\Permissions\Acl\Resource\ResourceInterface;
 use Laminas\Permissions\Acl\Role\RoleInterface;
 
-final class IsOwner implements AssertionInterface
+final class IsOwner implements NamedAssertion
 {
     /**
      * Assert that the object belongs to the current user.
@@ -33,5 +32,10 @@ final class IsOwner implements AssertionInterface
         }
 
         return $acl->reject('the object does not belong to the user');
+    }
+
+    public function getName(): string
+    {
+        return "l'objet m'appartient";
     }
 }

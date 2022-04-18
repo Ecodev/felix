@@ -13,6 +13,7 @@ parameters:
         - '~^Property EcodevTests\\Felix\\Blog\\Model\\.*\:\:\$.* is never read, only written\.$~'
         - '~^Property EcodevTests\\Felix\\Blog\\Model\\.*\:\:\$.* is unused\.$~'
         - '~^Cannot cast mixed to int\.$~'
+        - '~^Parameter \#1 \$wrappedType of static method GraphQL\\Type\\Definition\\Type\:\:nonNull\(\) expects \(callable\(\)\: mixed\)\|GraphQL\\Type\\Definition\\NullableType, GraphQL\\Type\\Definition\\Type given\.$~'
 
 includes:
     - vendor/phpstan/phpstan-phpunit/extension.neon

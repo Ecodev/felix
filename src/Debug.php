@@ -18,7 +18,9 @@ final class Debug
     public static function export($data, bool $return = false, int $level = 0): string
     {
         $result = '';
-        if (is_array($data)) {
+        if (is_array($data) && !$data) {
+            $result .= '[]';
+        } elseif (is_array($data)) {
             $needKey = array_keys($data) !== range(0, count($data) - 1);
             $result .= '[' . PHP_EOL;
             foreach ($data as $key => $value) {

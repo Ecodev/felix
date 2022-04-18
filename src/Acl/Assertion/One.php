@@ -5,21 +5,20 @@ declare(strict_types=1);
 namespace Ecodev\Felix\Acl\Assertion;
 
 use Laminas\Permissions\Acl\Acl;
-use Laminas\Permissions\Acl\Assertion\AssertionInterface;
 use Laminas\Permissions\Acl\Resource\ResourceInterface;
 use Laminas\Permissions\Acl\Role\RoleInterface;
 
-final class One implements AssertionInterface
+final class One implements NamedAssertion
 {
     /**
-     * @var AssertionInterface[]
+     * @var NamedAssertion[]
      */
     private readonly array $asserts;
 
     /**
      * Check if at least one assert is true.
      */
-    public function __construct(AssertionInterface ...$asserts)
+    public function __construct(NamedAssertion ...$asserts)
     {
         $this->asserts = $asserts;
     }
@@ -43,5 +42,10 @@ final class One implements AssertionInterface
         }
 
         return false;
+    }
+
+    public function getName(): string
+    {
+        return implode(', ou ', array_map(fn ($a) => $a->getName(), $this->asserts));
     }
 }
