@@ -46,6 +46,6 @@ final class One implements NamedAssertion
 
     public function getName(): string
     {
-        return implode(', ou ', array_map(fn ($a) => $a->getName(), $this->asserts));
+        return implode(_tr(', ou '), array_map(fn ($a) => $a->getName(), $this->asserts));
     }
 }

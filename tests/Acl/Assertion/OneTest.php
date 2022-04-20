@@ -7,10 +7,18 @@ namespace EcodevTests\Felix\Acl\Assertion;
 use Ecodev\Felix\Acl\Acl;
 use Ecodev\Felix\Acl\Assertion\NamedAssertion;
 use Ecodev\Felix\Acl\Assertion\One;
+use EcodevTests\Felix\Traits\TestWithContainer;
 use PHPUnit\Framework\TestCase;
 
 class OneTest extends TestCase
 {
+    use TestWithContainer;
+
+    protected function setUp(): void
+    {
+        $this->createDefaultFelixContainer();
+    }
+
     /**
      * @dataProvider providerAssert
      */

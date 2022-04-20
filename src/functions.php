@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Doctrine\ORM\EntityManager;
 use Ecodev\Felix\Debug;
+use Ecodev\Felix\I18n\Translator;
 use GraphQL\Doctrine\Types;
 use Laminas\Log\LoggerInterface;
 
@@ -71,4 +72,33 @@ function w(): never
     debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
     echo '' . ($isHtml ? '</pre>' : '') . '_________________________________________________________________________________________________________________________' . ($isHtml ? '</br>' : '') . "\n";
     exit("script aborted on purpose.\n");
+}
+
+/**
+ * Translate given message in current language.
+ *
+ * If replacements are given, they will be replaced after translation:
+ *
+ * ```php
+ * _tr('Hello %my-name%', ['my-name' => 'John']); // Bonjour John
+ * ```
+ *
+ * @param array<string, null|float|int|string> $replacements
+ */
+function _tr(string $message, array $replacements = []): string
+{
+    global $container;
+
+    $translator = $container->get(Translator::class);
+    $translation = $translator->translate($message);
+    if (!$replacements) {
+        return $translation;
+    }
+
+    $finalReplacements = [];
+    foreach ($replacements as $key => $value) {
+        $finalReplacements['%' . $key . '%'] = $value;
+    }
+
+    return strtr($translation, $finalReplacements);
 }

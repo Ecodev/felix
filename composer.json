@@ -54,13 +54,15 @@
         "laminas/laminas-permissions-acl": "^2.9",
         "laminas/laminas-servicemanager": "^3.10",
         "laminas/laminas-validator": "^2.16",
-        "laminas/laminas-view": "^2.19",
+        "laminas/laminas-view": "^2.20",
         "mezzio/mezzio-session": "^1.6",
         "moneyphp/money": "^4.0",
         "symfony/cache": "^5.4 || ^6.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "@stable",
+        "laminas/laminas-config-aggregator": "^1.7",
+        "laminas/laminas-i18n": "^2.15",
         "mikey179/vfsstream": "@stable",
         "phpstan/phpstan": "@stable",
         "phpstan/phpstan-phpunit": "@stable",

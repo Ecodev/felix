@@ -36,6 +36,6 @@ final class IsOwner implements NamedAssertion
 
     public function getName(): string
     {
-        return "l'objet m'appartient";
+        return _tr("l'objet m'appartient");
     }
 }

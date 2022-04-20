@@ -8,6 +8,7 @@ use Ecodev\Felix\Acl\Assertion\IsMyself;
 use Ecodev\Felix\Acl\Assertion\NamedAssertion;
 use Ecodev\Felix\Acl\DebugAcl;
 use Ecodev\Felix\Acl\MultipleRoles;
+use EcodevTests\Felix\Traits\TestWithContainer;
 use Exception;
 use Laminas\Permissions\Acl\Acl;
 use Laminas\Permissions\Acl\Resource\ResourceInterface;
@@ -16,12 +17,15 @@ use PHPUnit\Framework\TestCase;
 
 class DebugAclTest extends TestCase
 {
+    use TestWithContainer;
+
     private DebugAcl $acl;
 
     private NamedAssertion $adminAssertion;
 
     protected function setUp(): void
     {
+        $this->createDefaultFelixContainer();
         $this->acl = new DebugAcl();
 
         $this->acl->addRole('member');

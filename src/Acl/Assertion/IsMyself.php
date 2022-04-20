@@ -34,6 +34,6 @@ final class IsMyself implements NamedAssertion
 
     public function getName(): string
     {
-        return "c'est moi-même";
+        return _tr("c'est moi-même");
     }
 }

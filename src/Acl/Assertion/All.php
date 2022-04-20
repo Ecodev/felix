@@ -46,6 +46,6 @@ final class All implements NamedAssertion
 
     public function getName(): string
     {
-        return implode(', et ', array_map(fn ($a) => $a->getName(), $this->asserts));
+        return implode(_tr(', et '), array_map(fn ($a) => $a->getName(), $this->asserts));
     }
 }
