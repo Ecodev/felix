@@ -16,13 +16,9 @@ final class IsOwner implements NamedAssertion
      * Assert that the object belongs to the current user.
      *
      * @param \Ecodev\Felix\Acl\Acl $acl
-     * @param RoleInterface $role
-     * @param ResourceInterface $resource
-     * @param string $privilege
-     *
-     * @return bool
+     * @param ?string $privilege
      */
-    public function assert(Acl $acl, ?RoleInterface $role = null, ?ResourceInterface $resource = null, $privilege = null)
+    public function assert(Acl $acl, ?RoleInterface $role = null, ?ResourceInterface $resource = null, $privilege = null): bool
     {
         /** @var HasOwner $object */
         $object = $resource->getInstance();

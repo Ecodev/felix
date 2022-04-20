@@ -22,12 +22,8 @@ final class ChronosType extends ScalarType
 
     /**
      * Serializes an internal value to include in a response.
-     *
-     * @param mixed $value
-     *
-     * @return mixed
      */
-    public function serialize($value)
+    public function serialize(mixed $value): mixed
     {
         if ($value instanceof Chronos) {
             return $value->format('c');
@@ -38,10 +34,8 @@ final class ChronosType extends ScalarType
 
     /**
      * Parses an externally provided value (query variable) to use as an input.
-     *
-     * @param mixed $value
      */
-    public function parseValue($value): ?Chronos
+    public function parseValue(mixed $value): ?Chronos
     {
         if (!is_string($value)) {
             throw new UnexpectedValueException('Cannot represent value as Chronos date: ' . Utils::printSafe($value));

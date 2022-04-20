@@ -39,16 +39,14 @@ trait Image
     }
 
     /**
-     * @var int
      * @ORM\Column(type="integer")
      */
-    private $width = 0;
+    private int $width = 0;
 
     /**
-     * @var int
      * @ORM\Column(type="integer")
      */
-    private $height = 0;
+    private int $height = 0;
 
     /**
      * Get image width.

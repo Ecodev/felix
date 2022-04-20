@@ -13,10 +13,7 @@ use Laminas\ServiceManager\ServiceManager;
  */
 trait TestWithEntityManager
 {
-    /**
-     * @var EntityManager
-     */
-    private $entityManager;
+    private EntityManager $entityManager;
 
     public function setUp(): void
     {

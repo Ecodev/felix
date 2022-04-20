@@ -15,50 +15,38 @@ trait Log
     use HasUrl;
 
     /**
-     * @var int
-     *
      * @ORM\Column(type="smallint")
      */
-    private $priority;
+    private int $priority;
 
     /**
-     * @var string
-     *
      * @ORM\Column(type="string", length=5000, nullable=false)
      */
-    private $message;
+    private string $message = '';
 
     /**
-     * @var string
-     *
      * @ORM\Column(type="string", length=500, nullable=false)
      */
-    private $referer;
+    private string $referer = '';
 
     /**
-     * @var string
-     *
      * @ORM\Column(type="string", length=1000, nullable=false)
      */
-    private $request;
+    private string $request = '';
 
     /**
-     * @var string
-     *
      * @ORM\Column(type="string", length=40, nullable=false)
      */
-    private $ip;
+    private string $ip = '';
 
     /**
      * The statistics data.
-     *
-     * @var array
      *
      * @API\Exclude
      *
      * @ORM\Column(type="json", options={"default" = "[]"})
      */
-    private $extra = [];
+    private array $extra = [];
 
     /**
      * Set priority.

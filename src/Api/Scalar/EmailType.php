@@ -19,17 +19,15 @@ final class EmailType extends AbstractStringBasedType
 {
     /**
      * Validate a email.
-     *
-     * @param mixed $value
      */
-    protected function isValid($value): bool
+    protected function isValid(?string $value): bool
     {
         $validator = new DeliverableEmail();
 
-        return $value === null || (is_string($value) && $validator->isValid($value));
+        return $value === null || $validator->isValid($value);
     }
 
-    public function serialize($value)
+    public function serialize(mixed $value): mixed
     {
         if ($value === '') {
             return null;
@@ -38,7 +36,7 @@ final class EmailType extends AbstractStringBasedType
         return parent::serialize($value);
     }
 
-    public function parseValue($value)
+    public function parseValue(mixed $value): ?string
     {
         if ($value === '') {
             return null;
@@ -47,7 +45,7 @@ final class EmailType extends AbstractStringBasedType
         return parent::parseValue($value);
     }
 
-    public function parseLiteral(Node $ast, ?array $variables = null)
+    public function parseLiteral(Node $ast, ?array $variables = null): ?string
     {
         if ($ast instanceof StringValueNode && $ast->value === '') {
             return null;

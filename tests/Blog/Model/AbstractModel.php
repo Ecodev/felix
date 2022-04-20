@@ -16,13 +16,11 @@ use Ecodev\Felix\Model\Model;
 abstract class AbstractModel implements HasOwner, Model
 {
     /**
-     * @var int
-     *
      * @ORM\Column(type="integer", options={"unsigned" = true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    protected $id;
+    protected ?int $id = null;
 
     private ?User $owner = null;
 

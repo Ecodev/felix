@@ -112,7 +112,7 @@ final class DebugAcl extends \Laminas\Permissions\Acl\Acl
      *
      * @param RoleInterface|string $role
      * @param ResourceInterface|string $resource
-     * @param string $privilege
+     * @param ?string $privilege
      */
     public function isAllowed($role = null, $resource = null, $privilege = null): bool
     {

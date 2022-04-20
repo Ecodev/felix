@@ -27,13 +27,9 @@ final class One implements NamedAssertion
      * Assert that at least one of the given assert is correct (OR logic).
      *
      * @param \Ecodev\Felix\Acl\Acl $acl
-     * @param RoleInterface $role
-     * @param ResourceInterface $resource
-     * @param string $privilege
-     *
-     * @return bool
+     * @param ?string $privilege
      */
-    public function assert(Acl $acl, ?RoleInterface $role = null, ?ResourceInterface $resource = null, $privilege = null)
+    public function assert(Acl $acl, ?RoleInterface $role = null, ?ResourceInterface $resource = null, $privilege = null): bool
     {
         foreach ($this->asserts as $assert) {
             if ($assert->assert($acl, $role, $resource, $privilege)) {

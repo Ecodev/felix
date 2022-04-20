@@ -21,12 +21,8 @@ final class DateType extends ScalarType
 
     /**
      * Serializes an internal value to include in a response.
-     *
-     * @param mixed $value
-     *
-     * @return mixed
      */
-    public function serialize($value)
+    public function serialize(mixed $value): mixed
     {
         if ($value instanceof Date) {
             return $value->format('Y-m-d');
@@ -37,10 +33,8 @@ final class DateType extends ScalarType
 
     /**
      * Parses an externally provided value (query variable) to use as an input.
-     *
-     * @param mixed $value
      */
-    public function parseValue($value): Date
+    public function parseValue(mixed $value): Date
     {
         if (!is_string($value)) {
             throw new UnexpectedValueException('Cannot represent value as Chronos date: ' . Utils::printSafe($value));

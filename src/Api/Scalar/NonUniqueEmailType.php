@@ -17,10 +17,8 @@ final class NonUniqueEmailType extends AbstractStringBasedType
 {
     /**
      * Validate a email.
-     *
-     * @param mixed $value
      */
-    protected function isValid($value): bool
+    protected function isValid(?string $value): bool
     {
         $validator = new DeliverableEmail();
 

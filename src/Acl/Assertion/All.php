@@ -24,16 +24,12 @@ final class All implements NamedAssertion
     }
 
     /**
-     * Assert that all given assert are correct (AND logic).
+     * Assert that all given asserts are correct (AND logic).
      *
      * @param \Ecodev\Felix\Acl\Acl $acl
-     * @param RoleInterface $role
-     * @param ResourceInterface $resource
-     * @param string $privilege
-     *
-     * @return bool
+     * @param ?string $privilege
      */
-    public function assert(Acl $acl, ?RoleInterface $role = null, ?ResourceInterface $resource = null, $privilege = null)
+    public function assert(Acl $acl, ?RoleInterface $role = null, ?ResourceInterface $resource = null, $privilege = null): bool
     {
         foreach ($this->asserts as $assert) {
             if (!$assert->assert($acl, $role, $resource, $privilege)) {

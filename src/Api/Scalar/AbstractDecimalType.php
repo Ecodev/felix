@@ -62,12 +62,8 @@ abstract class AbstractDecimalType extends ScalarType
 
     /**
      * Serializes an internal value to include in a response.
-     *
-     * @param mixed $value
-     *
-     * @return mixed
      */
-    public function serialize($value)
+    public function serialize(mixed $value): mixed
     {
         // Assuming internal representation is always correct:
         return $value;
@@ -78,7 +74,7 @@ abstract class AbstractDecimalType extends ScalarType
      *
      * @param null|float|int|string $value
      */
-    public function parseValue($value): string
+    public function parseValue(mixed $value): string
     {
         $parsedValue = (string) $value;
         if (!$this->isValid($parsedValue)) {
@@ -90,10 +86,8 @@ abstract class AbstractDecimalType extends ScalarType
 
     /**
      * Parses an externally provided literal value to use as an input (e.g. in Query AST).
-     *
-     * @return null|string
      */
-    public function parseLiteral(Node $ast, ?array $variables = null)
+    public function parseLiteral(Node $ast, ?array $variables = null): string
     {
         // Note: throwing GraphQL\Error\Error vs \UnexpectedValueException to benefit from GraphQL
         // error location in query:

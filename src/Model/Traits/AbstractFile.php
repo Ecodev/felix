@@ -27,19 +27,16 @@ trait AbstractFile
     abstract protected function getAcceptedMimeTypes(): array;
 
     /**
-     * @var string
-     *
      * @API\Exclude
      *
      * @ORM\Column(type="string", length=190, options={"default" = ""})
      */
-    private $filename = '';
+    private string $filename = '';
 
     /**
-     * @var string
      * @ORM\Column(type="string", length=255, options={"default" = ""})
      */
-    private $mime = '';
+    private string $mime = '';
 
     /**
      * Set the file.

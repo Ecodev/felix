@@ -13,11 +13,9 @@ class LoginType extends AbstractStringBasedType
 
     /**
      * Validate a login.
-     *
-     * @param mixed $value
      */
-    protected function isValid($value): bool
+    protected function isValid(?string $value): bool
     {
-        return is_string($value) && preg_match('/^[a-zA-Z0-9\\.-]+$/', $value);
+        return is_string($value) && preg_match('/^[a-zA-Z0-9.-]+$/', $value);
     }
 }

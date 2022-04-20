@@ -12,10 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
 trait HasName
 {
     /**
-     * @var string
      * @ORM\Column(type="string", length=191)
      */
-    private $name;
+    private string $name = '';
 
     /**
      * Constructor.
@@ -38,6 +37,6 @@ trait HasName
      */
     public function getName(): string
     {
-        return (string) $this->name;
+        return $this->name;
     }
 }

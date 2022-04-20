@@ -14,38 +14,29 @@ use GraphQL\Doctrine\Annotation as API;
 trait Message
 {
     /**
-     * @var string
      * @ORM\Column(type="string", length=191)
      */
-    private $email;
+    private string $email = '';
 
     /**
-     * @var string
-     *
      * @ORM\Column(type="MessageType")
      */
-    private $type;
+    private string $type;
 
     /**
-     * @var null|Chronos
-     *
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $dateSent;
+    private ?Chronos $dateSent = null;
 
     /**
-     * @var string
-     *
      * @ORM\Column(type="string", length=255, options={"default" = ""})
      */
-    private $subject = '';
+    private string $subject = '';
 
     /**
-     * @var string
-     *
      * @ORM\Column(type="text", length=65535, options={"default" = ""})
      */
-    private $body = '';
+    private string $body = '';
 
     /**
      * Set type.

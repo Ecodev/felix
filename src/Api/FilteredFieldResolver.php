@@ -22,13 +22,9 @@ final class FilteredFieldResolver
     }
 
     /**
-     * @param mixed $source
      * @param mixed[] $args
-     * @param mixed $context
-     *
-     * @return null|mixed
      */
-    public function __invoke($source, array $args, $context, ResolveInfo $info)
+    public function __invoke(mixed $source, array $args, mixed $context, ResolveInfo $info): mixed
     {
         $value = $this->resolver->__invoke($source, $args, $context, $info);
 
@@ -42,11 +38,9 @@ final class FilteredFieldResolver
      * AclFilter, but that are accessed via lazy-loaded by doctrine on a *-to-one relation.
      * This scenario is described in details on https://github.com/doctrine/doctrine2/issues/4543
      *
-     * @param mixed $object or any kind of value
-     *
-     * @return mixed
+     * @param mixed $object object or any kind of value
      */
-    private function load($object)
+    private function load(mixed $object): mixed
     {
         if ($object instanceof Proxy) {
             try {

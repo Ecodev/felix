@@ -9,13 +9,11 @@ final class Debug
     /**
      * Export variables omitting array keys that are strictly numeric.
      *
-     * By default will output result
-     *
-     * @param mixed $data
+     * By default, will output result
      *
      * @return string string representation of variable
      */
-    public static function export($data, bool $return = false, int $level = 0): string
+    public static function export(mixed $data, bool $return = false, int $level = 0): string
     {
         $result = '';
         if (is_array($data) && !$data) {

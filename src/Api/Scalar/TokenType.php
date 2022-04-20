@@ -13,10 +13,8 @@ final class TokenType extends AbstractStringBasedType
 
     /**
      * Validate a token.
-     *
-     * @param mixed $value
      */
-    protected function isValid($value): bool
+    protected function isValid(?string $value): bool
     {
         return is_string($value) && preg_match('/^[\da-z]{32}$/', $value);
     }

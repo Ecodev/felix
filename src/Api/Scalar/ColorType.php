@@ -13,10 +13,8 @@ final class ColorType extends AbstractStringBasedType
 
     /**
      * Validate a color in hexadecimal CSS notation.
-     *
-     * @param mixed $value
      */
-    protected function isValid($value): bool
+    protected function isValid(?string $value): bool
     {
         return is_string($value) && preg_match('~^(#[[:xdigit:]]{6}|)$~', $value);
     }

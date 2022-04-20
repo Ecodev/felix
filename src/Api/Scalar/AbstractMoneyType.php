@@ -20,12 +20,8 @@ abstract class AbstractMoneyType extends ScalarType
 
     /**
      * Serializes an internal value to include in a response.
-     *
-     * @param mixed $value
-     *
-     * @return mixed
      */
-    public function serialize($value)
+    public function serialize(mixed $value): mixed
     {
         if (is_numeric($value)) {
             $value = $this->createMoney((string) $value);
@@ -40,12 +36,8 @@ abstract class AbstractMoneyType extends ScalarType
 
     /**
      * Parses an externally provided value (query variable) to use as an input.
-     *
-     * @param mixed $value
-     *
-     * @return Money
      */
-    public function parseValue($value)
+    public function parseValue(mixed $value): Money
     {
         if (!is_scalar($value)) {
             throw new UnexpectedValueException('Cannot represent value as Money: ' . Utils::printSafe($value));
@@ -64,10 +56,8 @@ abstract class AbstractMoneyType extends ScalarType
 
     /**
      * Parses an externally provided literal value to use as an input (e.g. in Query AST).
-     *
-     * @return Money
      */
-    public function parseLiteral(Node $ast, ?array $variables = null)
+    public function parseLiteral(Node $ast, ?array $variables = null): Money
     {
         if ($ast instanceof StringValueNode || $ast instanceof IntValueNode || $ast instanceof FloatValueNode) {
             return $this->parseValue($ast->value);
@@ -76,10 +66,7 @@ abstract class AbstractMoneyType extends ScalarType
         throw new Error('Query error: Can only parse strings got: ' . $ast->kind, $ast);
     }
 
-    /**
-     * @param mixed $value
-     */
-    private function isValid($value): bool
+    private function isValid(mixed $value): bool
     {
         return is_string($value) && preg_match('~^-?\d+(\.\d{0,2})?$~', $value);
     }

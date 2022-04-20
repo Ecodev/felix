@@ -13,10 +13,8 @@ final class PasswordType extends AbstractStringBasedType
 
     /**
      * Validate a password.
-     *
-     * @param mixed $value
      */
-    protected function isValid($value): bool
+    protected function isValid(?string $value): bool
     {
         return is_string($value) && mb_strlen($value) >= 12;
     }

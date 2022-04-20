@@ -17,10 +17,7 @@ trait TestWithTypes
         setUp as setUpEntityManager;
     }
 
-    /**
-     * @var Types
-     */
-    private $types;
+    private Types $types;
 
     public function setUp(): void
     {

@@ -13,10 +13,8 @@ final class UrlType extends AbstractStringBasedType
 
     /**
      * Validate an URL.
-     *
-     * @param mixed $value
      */
-    protected function isValid($value): bool
+    protected function isValid(?string $value): bool
     {
         // Here we use a naive pattern that should ideally be kept in sync with Natural validator
         return is_string($value) && preg_match('~^https?://(?:[^.\s]+\.)+[^.\s]+$~', $value);

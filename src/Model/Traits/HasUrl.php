@@ -12,10 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
 trait HasUrl
 {
     /**
-     * @var string
      * @ORM\Column(type="string", length=2000, options={"default" = ""})
      */
-    private $url = '';
+    private string $url = '';
 
     /**
      * Set url.

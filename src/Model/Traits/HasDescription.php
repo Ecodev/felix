@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Ecodev\Felix\Model\Traits;
 
+use Doctrine\ORM\Mapping as ORM;
+
 trait HasDescription
 {
     /**
-     * @var string
-     *
      * @ORM\Column(type="text", length=65535)
      */
-    private $description = '';
+    private string $description = '';
 
     /**
      * Set description.

@@ -49,9 +49,13 @@ final class AclFilter extends SQLFilter
      * that method destroy the filter object and thus losing the current user. So to keep
      * our internal state intact we must implement a custom enable/disable mechanism.
      *
-     * @return mixed whatever the callable returned
+     * @template T
+     *
+     * @param callable(): T $callable
+     *
+     * @return T whatever the callable returned
      */
-    public function runWithoutAcl(callable $callable)
+    public function runWithoutAcl(callable $callable): mixed
     {
         $this->setEnabled(false);
 

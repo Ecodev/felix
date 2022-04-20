@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Ecodev\Felix\Model\Traits;
 
+use Doctrine\ORM\Mapping as ORM;
+
 trait HasInternalRemarks
 {
     /**
-     * @var string
-     *
      * @ORM\Column(type="text", length=65535)
      */
-    private $internalRemarks = '';
+    private string $internalRemarks = '';
 
     /**
      * Set internalRemarks.

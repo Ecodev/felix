@@ -15,33 +15,27 @@ use GraphQL\Doctrine\Annotation as API;
 trait HasPassword
 {
     /**
-     * @var string
-     *
      * @API\Exclude
      *
      * @ORM\Column(type="string", length=255)
      */
-    private $password = '';
+    private string $password = '';
 
     /**
-     * @var null|string
-     *
      * @API\Exclude
      *
      * @ORM\Column(type="string", length=32, nullable=true, unique=true)
      */
-    private $token;
+    private ?string $token = null;
 
     /**
      * The time when user asked to reset password.
-     *
-     * @var null|Chronos
      *
      * @API\Exclude
      *
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $tokenCreationDate;
+    private ?Chronos $tokenCreationDate = null;
 
     /**
      * Hash and change the user password.
