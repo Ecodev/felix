@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Ecodev\Felix\Service;
 
-use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Laminas\View\Renderer\RendererInterface;
+use Psr\Container\ContainerInterface;
 
 /**
  * Service to render message to HTML.

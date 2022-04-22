@@ -6,8 +6,8 @@ namespace Ecodev\Felix\Api\Output;
 
 use Ecodev\Felix\Model\Model;
 use Exception;
-use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\AbstractFactoryInterface;
+use Psr\Container\ContainerInterface;
 
 /**
  * Create a Pagination type for the entity extracted from name.

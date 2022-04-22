@@ -52,7 +52,7 @@
         "laminas/laminas-log": "^2.15",
         "laminas/laminas-mail": "^2.15",
         "laminas/laminas-permissions-acl": "^2.9",
-        "laminas/laminas-servicemanager": "^3.10",
+        "laminas/laminas-servicemanager": "^3.11",
         "laminas/laminas-validator": "^2.16",
         "laminas/laminas-view": "^2.20",
         "mezzio/mezzio-session": "^1.6",

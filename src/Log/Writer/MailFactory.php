@@ -7,12 +7,12 @@ namespace Ecodev\Felix\Log\Writer;
 use Ecodev\Felix\Log\EventCompleter;
 use Ecodev\Felix\Log\Filter\NoMail;
 use Ecodev\Felix\Log\Formatter\Extras;
-use Interop\Container\ContainerInterface;
 use Laminas\Log\Logger;
 use Laminas\Log\Writer\WriterInterface;
 use Laminas\Mail\Message;
 use Laminas\Mail\Transport\TransportInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Psr\Container\ContainerInterface;
 
 final class MailFactory implements FactoryInterface
 {

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Ecodev\Felix\Service;
 
-use Interop\Container\ContainerInterface;
 use Laminas\Mail\Transport\InMemory;
 use Laminas\Mail\Transport\Smtp;
 use Laminas\Mail\Transport\SmtpOptions;
 use Laminas\Mail\Transport\TransportInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Psr\Container\ContainerInterface;
 
 final class TransportFactory implements FactoryInterface
 {

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Ecodev\Felix\Service;
 
 use Imagine\Image\ImagineInterface;
-use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Psr\Container\ContainerInterface;
 
 final class ImageResizerFactory implements FactoryInterface
 {

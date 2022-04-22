@@ -8,8 +8,8 @@ use Ecodev\Felix\Service\ImagineFactory;
 use Imagine\Image\Box;
 use Imagine\Image\ImageInterface;
 use Imagine\Image\ImagineInterface;
-use Interop\Container\ContainerInterface;
 use PHPUnit\Framework\TestCase;
+use Psr\Container\ContainerInterface;
 
 class ImagineFactoryTest extends TestCase
 {

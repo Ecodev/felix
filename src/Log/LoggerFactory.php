@@ -6,10 +6,10 @@ namespace Ecodev\Felix\Log;
 
 use Ecodev\Felix\Log\Writer\Db;
 use Ecodev\Felix\Log\Writer\Mail;
-use Interop\Container\ContainerInterface;
 use Laminas\Log\Logger;
 use Laminas\Log\Writer\Stream;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Psr\Container\ContainerInterface;
 
 final class LoggerFactory implements FactoryInterface
 {

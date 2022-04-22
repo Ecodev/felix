@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Ecodev\Felix\Service;
 
-use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Laminas\View\HelperPluginManager;
 use Laminas\View\Renderer\PhpRenderer;
 use Laminas\View\Renderer\RendererInterface;
 use Laminas\View\Resolver\TemplatePathStack;
+use Psr\Container\ContainerInterface;
 
 final class RendererFactory implements FactoryInterface
 {

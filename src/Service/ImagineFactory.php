@@ -9,8 +9,8 @@ use Gmagick;
 use Imagick;
 use Imagine\Image\ImagineInterface;
 use Imagine\Imagick\Imagine;
-use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Psr\Container\ContainerInterface;
 
 final class ImagineFactory implements FactoryInterface
 {
