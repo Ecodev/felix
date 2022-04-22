@@ -19,7 +19,7 @@ abstract class AbstractAcl extends TestCase
     final public function testRole(string $role): void
     {
         $acl = $this->createAcl();
-        $actual = $acl->show($role);
+        $actual = $acl->show($role, false);
 
         $file = "tests/data/acl/$role.php";
         $logFile = "logs/$file";
@@ -43,5 +43,13 @@ abstract class AbstractAcl extends TestCase
 
         $expected = require $file;
         self::assertTrue($expected === $actual, 'File content does not match, compare with: meld ' . $file . ' ' . $logFile);
+    }
+
+    final public function testEverythingIsTranslated(): void
+    {
+        $acl = $this->createAcl();
+        $roles = $acl->getRoles();
+        $config = $acl->show(reset($roles));
+        self::assertIsArray($config);
     }
 }

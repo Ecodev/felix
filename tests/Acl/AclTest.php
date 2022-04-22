@@ -132,4 +132,55 @@ final class AclTest extends TestCase
         self::assertFalse($acl->isAllowed(new MultipleRoles(['reader']), User::class, 'update'));
         self::assertTrue($acl->isAllowed(new MultipleRoles(['reader', 'writer']), User::class, 'update'));
     }
+
+    public function testIsTranslatable(): void
+    {
+        $acl = new Acl();
+        $acl->addRole('my-role');
+        $acl->addResource('my-resource');
+        $acl->allow('my-role', 'my-resource', 'my-privilege');
+
+        $acl->setTranslations(['my-resource' => 'translated-resource'], ['my-privilege' => 'translated-privilege']);
+
+        self::assertSame([
+            [
+                'resource' => 'translated-resource',
+                'privileges' => [
+                    [
+                        'privilege' => 'translated-privilege',
+                        'allowed' => true,
+                        'allowIf' => [],
+                        'denyIf' => [],
+                    ],
+                ],
+            ],
+        ], $acl->show('my-role'));
+
+        self::assertSame([
+            [
+                'resource' => 'my-resource',
+                'privileges' => [
+                    [
+                        'privilege' => 'my-privilege',
+                        'allowed' => true,
+                        'allowIf' => [],
+                        'denyIf' => [],
+                    ],
+                ],
+            ],
+        ], $acl->show('my-role', false));
+    }
+
+    public function testIncompleteTranslationWillThrowException(): void
+    {
+        $acl = new Acl();
+        $acl->addRole('my-role');
+        $acl->addResource('my-resource');
+        $acl->allow('my-role', 'my-resource', 'my-privilege');
+
+        $acl->setTranslations(['my-resource' => 'translated-resource'], ['typo-here' => 'translated-privilege']);
+
+        $this->expectExceptionMessage('Was not marked as translatable: my-privilege');
+        $acl->show('my-role');
+    }
 }

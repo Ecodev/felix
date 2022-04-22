@@ -7,6 +7,7 @@ namespace Ecodev\Felix\Acl;
 use Doctrine\Common\Util\ClassUtils;
 use Ecodev\Felix\Model\CurrentUser;
 use Ecodev\Felix\Model\Model;
+use Exception;
 use Laminas\Permissions\Acl\Assertion\AssertionInterface;
 use Laminas\Permissions\Acl\Resource\ResourceInterface;
 use Laminas\Permissions\Acl\Role\RoleInterface;
@@ -24,6 +25,16 @@ class Acl extends \Laminas\Permissions\Acl\Acl
     private array $reasons = [];
 
     private DebugAcl $debugAcl;
+
+    /**
+     * @var array<string, string>
+     */
+    private array $resourceTranslations = [];
+
+    /**
+     * @var array<string, string>
+     */
+    private array $privilegeTranslations = [];
 
     public function __construct()
     {
@@ -176,7 +187,7 @@ class Acl extends \Laminas\Permissions\Acl\Acl
     /**
      * @return array<array{resource:string, privileges: array<int, array{privilege:null|string, allowed: bool, allowIf: string[], denyIf: string[]}>}>
      */
-    public function show(MultipleRoles|string $role): array
+    public function show(MultipleRoles|string $role, bool $useTranslations = true): array
     {
         $result = [];
         /** @var string[] $resources */
@@ -197,6 +208,39 @@ class Acl extends \Laminas\Permissions\Acl\Acl
 
         ksort($result);
 
+        if ($useTranslations && ($this->resourceTranslations || $this->privilegeTranslations)) {
+            foreach ($result as &$resource) {
+                $resource['resource'] = $this->translate($this->resourceTranslations, $resource['resource']);
+                foreach ($resource['privileges'] as &$privilege) {
+                    $privilege['privilege'] = $this->translate($this->privilegeTranslations, $privilege['privilege'] ?? '');
+                }
+            }
+        }
+
         return $result;
+    }
+
+    /**
+     * Configure the translations for all resources and all privileges for the `show()` method.
+     *
+     * If this is set but one translation is missing, then `show()` will throw an exception when called.
+     *
+     * To disable translation altogether you can pass two empty lists.
+     *
+     * @param array<string, string> $resourceTranslations
+     * @param array<string, string> $privilegeTranslations
+     */
+    public function setTranslations(array $resourceTranslations, array $privilegeTranslations): void
+    {
+        $this->resourceTranslations = $resourceTranslations;
+        $this->privilegeTranslations = $privilegeTranslations;
+    }
+
+    /**
+     * @param array<string, string> $translations
+     */
+    private function translate(array $translations, string $message): string
+    {
+        return $translations[$message] ?? throw new Exception('Was not marked as translatable: ' . $message);
     }
 }
