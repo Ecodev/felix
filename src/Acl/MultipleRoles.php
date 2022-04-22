@@ -4,14 +4,17 @@ declare(strict_types=1);
 
 namespace Ecodev\Felix\Acl;
 
+use ArrayIterator;
 use Exception;
+use IteratorAggregate;
 use Laminas\Permissions\Acl\Role\RoleInterface;
 use Stringable;
+use Traversable;
 
 /**
  * A role containing multiple roles.
  */
-class MultipleRoles implements RoleInterface, Stringable
+class MultipleRoles implements IteratorAggregate, RoleInterface, Stringable
 {
     /**
      * @var string[]
@@ -65,5 +68,13 @@ class MultipleRoles implements RoleInterface, Stringable
     public function __toString(): string
     {
         return '[' . implode(', ', $this->roles) . ']';
+    }
+
+    /**
+     * @return Traversable<int, string>
+     */
+    public function getIterator(): Traversable
+    {
+        return new ArrayIterator($this->roles);
     }
 }

@@ -192,7 +192,7 @@ return (new PhpCsFixer\Config())
         'phpdoc_summary' => true,
         'phpdoc_tag_casing' => true,
         'phpdoc_tag_type' => true,
-        'phpdoc_to_comment' => true,
+        'phpdoc_to_comment' => false, // Because we need to specify variable types and the fix is not merged yet: https://github.com/FriendsOfPHP/PHP-CS-Fixer/pull/4649
         'phpdoc_to_param_type' => false, // Because experimental, but interesting for one shot use
         'phpdoc_to_property_type' => false, // Because experimental, but interesting for one shot use
         'phpdoc_to_return_type' => false, // Because experimental, but interesting for one shot use
