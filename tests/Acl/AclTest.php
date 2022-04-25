@@ -63,28 +63,14 @@ final class AclTest extends TestCase
 
     public function testMultipleReasons(): void
     {
-        $acl = new class() extends Acl {
-            public function __construct()
+        $acl = new class($this->createRejectAssertion()) extends Acl {
+            public function __construct(private AssertionInterface $reject)
             {
                 parent::__construct();
                 $user = $this->createModelResource(User::class);
                 $this->addRole('anonymous');
                 $this->addRole('member', 'anonymous');
-                $this->allow(
-                    'anonymous',
-                    [$user],
-                    ['update'],
-                    new class() implements AssertionInterface {
-                        /**
-                         * @param Acl $acl
-                         * @param null|mixed $privilege
-                         */
-                        public function assert(\Laminas\Permissions\Acl\Acl $acl, ?RoleInterface $role = null, ?ResourceInterface $resource = null, $privilege = null)
-                        {
-                            return $acl->reject('mocked reason');
-                        }
-                    }
-                );
+                $this->allow('anonymous', [$user], ['update'], $this->reject);
                 $this->allow('member', [$user], ['update'], new IsMyself());
             }
         };
@@ -101,6 +87,17 @@ final class AclTest extends TestCase
             - mocked reason
             STRING;
         self::assertSame($expected, $acl->getLastDenialMessage());
+    }
+
+    public function testResourceCanBeStringToo(): void
+    {
+        $acl = new Acl();
+        $acl->addRole('anonymous');
+        $acl->addResource('my-resource');
+        $acl->allow('anonymous', 'my-resource', ['update'], $this->createRejectAssertion());
+
+        self::assertFalse($acl->isCurrentUserAllowed('my-resource', 'update'), 'student cannot update even if user');
+        self::assertSame('Non-logged user with role anonymous is not allowed on resource "my-resource" with privilege "update" because mocked reason', $acl->getLastDenialMessage());
     }
 
     public function testMultipleRoles(): void
@@ -182,5 +179,18 @@ final class AclTest extends TestCase
 
         $this->expectExceptionMessage('Was not marked as translatable: my-privilege');
         $acl->show('my-role');
+    }
+
+    private function createRejectAssertion(): AssertionInterface
+    {
+        return new class() implements AssertionInterface {
+            /**
+             * @param Acl $acl
+             */
+            public function assert(\Laminas\Permissions\Acl\Acl $acl, ?RoleInterface $role = null, ?ResourceInterface $resource = null, mixed $privilege = null)
+            {
+                return $acl->reject('mocked reason');
+            }
+        };
     }
 }

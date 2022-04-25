@@ -108,9 +108,9 @@ class Acl extends \Laminas\Permissions\Acl\Acl
      *
      * This should be the main method to do all ACL checks.
      */
-    public function isCurrentUserAllowed(Model $model, string $privilege): bool
+    public function isCurrentUserAllowed(Model|string $modelOrResource, string $privilege): bool
     {
-        $resource = new ModelResource($this->getClass($model), $model);
+        $resource = is_string($modelOrResource) ? $modelOrResource : new ModelResource($this->getClass($modelOrResource), $modelOrResource);
         $role = $this->getCurrentRole();
         $this->reasons = [];
 
@@ -151,13 +151,15 @@ class Acl extends \Laminas\Permissions\Acl\Acl
         return $user->getRole();
     }
 
-    private function buildMessage(ModelResource $resource, ?string $privilege, MultipleRoles|string $role, bool $isAllowed): ?string
+    private function buildMessage(ModelResource|string $resource, ?string $privilege, MultipleRoles|string $role, bool $isAllowed): ?string
     {
         if ($isAllowed) {
             return null;
         }
 
-        $resource = $resource->getName();
+        if ($resource instanceof ModelResource) {
+            $resource = $resource->getName();
+        }
 
         $user = CurrentUser::get();
         $userName = $user ? 'User "' . $user->getLogin() . '"' : 'Non-logged user';
