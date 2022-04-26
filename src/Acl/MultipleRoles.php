@@ -58,11 +58,11 @@ class MultipleRoles implements IteratorAggregate, RoleInterface, Stringable
     }
 
     /**
-     * Return whether the given role is included in the list.
+     * Return whether at least one of the given role is included in the list.
      */
-    public function has(string $role): bool
+    public function has(string ...$roles): bool
     {
-        return in_array($role, $this->roles, true);
+        return (bool) array_intersect($this->roles, $roles);
     }
 
     public function __toString(): string
