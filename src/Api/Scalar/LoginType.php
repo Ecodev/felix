@@ -9,13 +9,13 @@ class LoginType extends AbstractStringBasedType
     /**
      * @var string
      */
-    public $description = 'A user login is a non-empty string containing only letters, digits, `.` and `-`.';
+    public $description = 'A user login is a non-empty string containing only letters, digits, `.`, `_` and `-`.';
 
     /**
      * Validate a login.
      */
     protected function isValid(?string $value): bool
     {
-        return is_string($value) && preg_match('/^[a-zA-Z0-9.-]+$/', $value);
+        return is_string($value) && preg_match('/^[a-zA-Z0-9._-]+$/', $value);
     }
 }

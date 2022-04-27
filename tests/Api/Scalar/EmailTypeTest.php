@@ -5,55 +5,20 @@ declare(strict_types=1);
 namespace EcodevTests\Felix\Api\Scalar;
 
 use Ecodev\Felix\Api\Scalar\EmailType;
-use GraphQL\Language\AST\StringValueNode;
-use PHPUnit\Framework\TestCase;
 
-final class EmailTypeTest extends TestCase
+final class EmailTypeTest extends AbstractStringBasedType
 {
-    /**
-     * @dataProvider providerEmails
-     */
-    public function testSerialize(?string $input, ?string $expected, bool $isValid): void
+    public function createType(): \Ecodev\Felix\Api\Scalar\AbstractStringBasedType
     {
-        $type = new EmailType();
-        $actual = $type->serialize($input);
-        self::assertSame($expected, $actual);
+        return new EmailType();
     }
 
-    /**
-     * @dataProvider providerEmails
-     */
-    public function testParseValue(?string $input, ?string $expected, bool $isValid): void
+    public function getTypeName(): string
     {
-        $type = new EmailType();
-
-        if (!$isValid) {
-            $this->expectExceptionMessage('Query error: Not a valid Email');
-        }
-
-        $actual = $type->parseValue($input);
-
-        self::assertSame($expected, $actual);
+        return 'Email';
     }
 
-    /**
-     * @dataProvider providerEmails
-     */
-    public function testParseLiteral(?string $input, ?string $expected, bool $isValid): void
-    {
-        $type = new EmailType();
-        $ast = new StringValueNode(['value' => $input]);
-
-        if (!$isValid) {
-            $this->expectExceptionMessage('Query error: Not a valid Email');
-        }
-
-        $actual = $type->parseLiteral($ast);
-
-        self::assertSame($expected, $actual);
-    }
-
-    public function providerEmails(): array
+    public function providerValues(): iterable
     {
         return [
             ['john@example.com', 'john@example.com', true],

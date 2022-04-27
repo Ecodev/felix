@@ -5,55 +5,20 @@ declare(strict_types=1);
 namespace EcodevTests\Felix\Api\Scalar;
 
 use Ecodev\Felix\Api\Scalar\NonUniqueEmailType;
-use GraphQL\Language\AST\StringValueNode;
-use PHPUnit\Framework\TestCase;
 
-final class NonUniqueEmailTypeTest extends TestCase
+final class NonUniqueEmailTypeTest extends AbstractStringBasedType
 {
-    /**
-     * @dataProvider providerEmails
-     */
-    public function testSerialize(?string $input, ?string $expected, bool $isValid): void
+    public function createType(): \Ecodev\Felix\Api\Scalar\AbstractStringBasedType
     {
-        $type = new NonUniqueEmailType();
-        $actual = $type->serialize($input);
-        self::assertSame($expected, $actual);
+        return new NonUniqueEmailType();
     }
 
-    /**
-     * @dataProvider providerEmails
-     */
-    public function testParseValue(?string $input, ?string $expected, bool $isValid): void
+    public function getTypeName(): string
     {
-        $type = new NonUniqueEmailType();
-
-        if (!$isValid) {
-            $this->expectExceptionMessage('Query error: Not a valid NonUniqueEmail');
-        }
-
-        $actual = $type->parseValue($input);
-
-        self::assertSame($expected, $actual);
+        return 'NonUniqueEmail';
     }
 
-    /**
-     * @dataProvider providerEmails
-     */
-    public function testParseLiteral(?string $input, ?string $expected, bool $isValid): void
-    {
-        $type = new NonUniqueEmailType();
-        $ast = new StringValueNode(['value' => $input]);
-
-        if (!$isValid) {
-            $this->expectExceptionMessage('Query error: Not a valid NonUniqueEmail');
-        }
-
-        $actual = $type->parseLiteral($ast);
-
-        self::assertSame($expected, $actual);
-    }
-
-    public function providerEmails(): array
+    public function providerValues(): iterable
     {
         return [
             ['john@example.com', 'john@example.com', true],

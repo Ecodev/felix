@@ -5,66 +5,31 @@ declare(strict_types=1);
 namespace EcodevTests\Felix\Api\Scalar;
 
 use Ecodev\Felix\Api\Scalar\ColorType;
-use GraphQL\Language\AST\StringValueNode;
-use PHPUnit\Framework\TestCase;
 
-final class ColorTypeTest extends TestCase
+final class ColorTypeTest extends AbstractStringBasedType
 {
-    /**
-     * @dataProvider providerColors
-     */
-    public function testSerialize(?string $input, bool $isValid): void
+    public function createType(): \Ecodev\Felix\Api\Scalar\AbstractStringBasedType
     {
-        $type = new ColorType();
-        $actual = $type->serialize($input);
-        self::assertSame($input, $actual);
+        return new ColorType();
     }
 
-    /**
-     * @dataProvider providerColors
-     */
-    public function testParseValue(?string $input, bool $isValid): void
+    public function getTypeName(): string
     {
-        $type = new ColorType();
-
-        if (!$isValid) {
-            $this->expectExceptionMessage('Query error: Not a valid Color');
-        }
-
-        $actual = $type->parseValue($input);
-
-        self::assertSame($input, $actual);
+        return 'Color';
     }
 
-    /**
-     * @dataProvider providerColors
-     */
-    public function testParseLiteral(?string $input, bool $isValid): void
-    {
-        $type = new ColorType();
-        $ast = new StringValueNode(['value' => $input]);
-
-        if (!$isValid) {
-            $this->expectExceptionMessage('Query error: Not a valid Color');
-        }
-
-        $actual = $type->parseLiteral($ast);
-
-        self::assertSame($input, $actual);
-    }
-
-    public function providerColors(): array
+    public function providerValues(): iterable
     {
         return [
-            ['', true],
-            ['#AABBCC', true],
-            ['#AABBC', false],
-            ['#AABBCCC', false],
-            ['#01aB9F', true],
-            ['#ZZZZZZ', false],
-            ['AABBCC', false],
-            [null, false],
-            [' ', false],
+            ['', '', true],
+            ['#AABBCC', '#AABBCC', true],
+            ['#AABBC', '#AABBC', false],
+            ['#AABBCCC', '#AABBCCC', false],
+            ['#01aB9F', '#01aB9F', true],
+            ['#ZZZZZZ', '#ZZZZZZ', false],
+            ['AABBCC', 'AABBCC', false],
+            [null, null, false],
+            [' ', ' ', false],
         ];
     }
 }
