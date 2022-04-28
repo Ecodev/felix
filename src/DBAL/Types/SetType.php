@@ -30,7 +30,7 @@ abstract class SetType extends Type
 
         $values = is_string($value) ? preg_split('/,/', $value, -1, PREG_SPLIT_NO_EMPTY) : null;
         if (!$this->isValid($values)) {
-            throw new InvalidArgumentException("Invalid '" . $value . "' value fetched from database for set " . static::class);
+            throw new InvalidArgumentException("Invalid '" . $value . "' value fetched from database for set " . $this->getName());
         }
 
         /** @var array $values */
@@ -45,7 +45,7 @@ abstract class SetType extends Type
 
         $value = is_array($values) ? implode(',', $values) : null;
         if (!$this->isValid($values)) {
-            throw new InvalidArgumentException("Invalid '" . $value . "' value to be stored in database for set " . static::class);
+            throw new InvalidArgumentException("Invalid '" . $value . "' value to be stored in database for set " . $this->getName());
         }
 
         return $value;
