@@ -13,6 +13,7 @@ use Laminas\Diactoros\ServerRequest;
 use Mezzio\Session\Session;
 use Mezzio\Session\SessionMiddleware;
 use PHPUnit\Framework\TestCase;
+use Throwable;
 
 abstract class AbstractServer extends TestCase
 {
@@ -25,9 +26,9 @@ abstract class AbstractServer extends TestCase
 
     abstract protected function createSchema(): Schema;
 
-    protected function createServer(bool $debug): Server
+    protected function createServer(): Server
     {
-        return new Server($this->createSchema(), $debug);
+        return new Server($this->createSchema(), true);
     }
 
     public function testSchemaIsValid(): void
@@ -49,24 +50,23 @@ abstract class AbstractServer extends TestCase
             $dataPreparator(_em()->getConnection());
         }
 
-        // Use this flag to easily debug API test issues
-        /** @var bool $debug */
-        $debug = false;
-
         // Configure server
-        $server = $this->createServer($debug);
+        $server = $this->createServer();
 
         // Execute query
         $result = $server->execute($request);
 
-        $actual = $this->resultToArray($result, $debug);
+        $actual = $this->resultToArray($result);
+        $actualWithoutTrace = $this->removeTrace($actual);
 
-        if ($debug) {
+        try {
+            self::assertEquals($expected, $actualWithoutTrace);
+        } catch (Throwable $e) {
+            // If assertion fails, print the version of the result with trace for easier debugging
             ve($actual);
-            unset($actual['errors'][0]['trace']);
-        }
 
-        self::assertEquals($expected, $actual);
+            throw $e;
+        }
 
         if ($additionalAsserts) {
             $additionalAsserts(_em()->getConnection());
@@ -108,26 +108,33 @@ abstract class AbstractServer extends TestCase
     /**
      * @param ExecutionResult|ExecutionResult[] $result
      */
-    private function resultToArray(array|ExecutionResult $result, bool $debug): array
+    private function resultToArray(array|ExecutionResult $result): array
     {
         if (is_array($result)) {
             foreach ($result as &$one) {
-                $one = $this->oneResultToArray($one, $debug);
+                $one = $one->toArray();
             }
         } else {
-            $result = $this->oneResultToArray($result, $debug);
+            $result = $result->toArray();
         }
 
         return $result;
     }
 
-    private function oneResultToArray(ExecutionResult $result, bool $debug): array
+    private function removeTrace(array $result): array
     {
-        $result = $result->toArray();
-        if ($debug) {
-            ve($result);
-            // @phpstan-ignore-next-line
-            unset($result['errors'][0]['trace']);
+        if (array_key_exists('errors', $result)) {
+            foreach ($result['errors'] as &$error) {
+                unset($error['trace']);
+            }
+        } else {
+            foreach ($result as $r) {
+                if (array_key_exists('errors', $r)) {
+                    foreach ($r['errors'] as &$error) {
+                        unset($error['trace']);
+                    }
+                }
+            }
         }
 
         return $result;
