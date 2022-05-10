@@ -34,6 +34,11 @@ final class DebugAcl extends \Laminas\Permissions\Acl\Acl
      */
     private array $privileges = [];
 
+    /**
+     * @var array<string, array<string>> All possible privileges
+     */
+    private array $privilegesByResource = [];
+
     private function wrapAssertion(?AssertionInterface $assert, bool $isAllow): ?AssertionInterface
     {
         if (!$assert) {
@@ -56,7 +61,7 @@ final class DebugAcl extends \Laminas\Permissions\Acl\Acl
 
     public function allow($roles = null, $resources = null, $privileges = null, ?AssertionInterface $assert = null)
     {
-        $this->storePrivileges($privileges);
+        $this->storePrivileges($resources, $privileges);
         $assert = $this->wrapAssertion($assert, true);
 
         return parent::allow($roles, $resources, $privileges, $assert);
@@ -64,19 +69,57 @@ final class DebugAcl extends \Laminas\Permissions\Acl\Acl
 
     public function deny($roles = null, $resources = null, $privileges = null, ?AssertionInterface $assert = null)
     {
-        $this->storePrivileges($privileges);
+        $this->storePrivileges($resources, $privileges);
         $assert = $this->wrapAssertion($assert, false);
 
         return parent::deny($roles, $resources, $privileges, $assert);
     }
 
-    private function storePrivileges(null|string|array $privileges): void
+    private function storePrivileges(null|string|array|ResourceInterface $resource, null|string|array $privileges): void
     {
+        if (!is_array($resource)) {
+            $resource = [$resource];
+        }
+
         if (!is_array($privileges)) {
             $privileges = [$privileges];
         }
 
         $this->privileges = array_merge($this->privileges, $privileges);
+
+        // Keep non-null privileges only
+        $privileges = array_filter($privileges);
+        if (!$privileges) {
+            return;
+        }
+
+        foreach ($resource as $oneResource) {
+            $oneResource = (string) $oneResource;
+            if (!$oneResource) {
+                continue;
+            }
+
+            if (!isset($this->privilegesByResource[$oneResource])) {
+                $this->privilegesByResource[$oneResource] = [];
+            }
+
+            $this->privilegesByResource[$oneResource] = array_merge($this->privilegesByResource[$oneResource], $privileges);
+        }
+    }
+
+    /**
+     * Returns all non-null privileges indexed by all non-null resources.
+     *
+     * @return array<string, array<string>>
+     */
+    public function getPrivilegesByResource(): array
+    {
+        foreach ($this->privilegesByResource as &$privileges) {
+            $privileges = array_unique($privileges);
+            sort($privileges);
+        }
+
+        return $this->privilegesByResource;
     }
 
     /**
@@ -137,7 +180,7 @@ final class DebugAcl extends \Laminas\Permissions\Acl\Acl
     }
 
     /**
-     * Returns whether the privilege is allowed and the assertions that were used to determine that.s.
+     * Returns whether the privilege is allowed and the assertions that were used to determine that.
      *
      * @return array{privilege: null|string, allowed: bool, allowIf: string[], denyIf: string[]}
      */

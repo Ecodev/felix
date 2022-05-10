@@ -80,9 +80,9 @@ class Acl extends \Laminas\Permissions\Acl\Acl
     /**
      * Override parent to provide compatibility with MultipleRoles.
      *
-     * @param RoleInterface|string $role
-     * @param ResourceInterface|string $resource
-     * @param ?string $privilege
+     * @param null|RoleInterface|string $role
+     * @param null|ResourceInterface|string $resource
+     * @param null|string $privilege
      */
     public function isAllowed($role = null, $resource = null, $privilege = null): bool
     {
@@ -187,6 +187,8 @@ class Acl extends \Laminas\Permissions\Acl\Acl
     }
 
     /**
+     * Show the ACL configuration for the given role in a structured array.
+     *
      * @return array<array{resource:string, privileges: array<int, array{privilege:null|string, allowed: bool, allowIf: string[], denyIf: string[]}>}>
      */
     public function show(MultipleRoles|string $role, bool $useTranslations = true): array
@@ -244,5 +246,15 @@ class Acl extends \Laminas\Permissions\Acl\Acl
     private function translate(array $translations, string $message): string
     {
         return $translations[$message] ?? throw new Exception('Was not marked as translatable: ' . $message);
+    }
+
+    /**
+     * Returns all non-null privileges indexed by all non-null resources.
+     *
+     * @return array<string, array<string>>
+     */
+    public function getPrivilegesByResource(): array
+    {
+        return $this->debugAcl->getPrivilegesByResource();
     }
 }

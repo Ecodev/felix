@@ -168,6 +168,20 @@ final class AclTest extends TestCase
         ], $acl->show('my-role', false));
     }
 
+    public function testGetPrivilegesByResource(): void
+    {
+        $acl = new Acl();
+        $acl->addRole('my-role');
+        $acl->addResource('my-resource');
+        $acl->allow('my-role', 'my-resource', 'my-privilege');
+
+        self::assertSame([
+            'my-resource' => [
+                'my-privilege',
+            ],
+        ], $acl->getPrivilegesByResource());
+    }
+
     public function testIncompleteTranslationWillThrowException(): void
     {
         $acl = new Acl();

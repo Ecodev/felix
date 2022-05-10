@@ -7,7 +7,10 @@ namespace EcodevTests\Felix\Acl;
 use Ecodev\Felix\Acl\Assertion\IsMyself;
 use Ecodev\Felix\Acl\Assertion\NamedAssertion;
 use Ecodev\Felix\Acl\DebugAcl;
+use Ecodev\Felix\Acl\ModelResource;
 use Ecodev\Felix\Acl\MultipleRoles;
+use EcodevTests\Felix\Blog\Model\Post;
+use EcodevTests\Felix\Blog\Model\User;
 use EcodevTests\Felix\Traits\TestWithContainer;
 use Exception;
 use Laminas\Permissions\Acl\Acl;
@@ -53,16 +56,20 @@ class DebugAclTest extends TestCase
 
         $this->acl->allow('member', 'user', 'read');
         self::assertSame(['read'], $this->acl->getPrivileges());
+        self::assertSame(['user' => ['read']], $this->acl->getPrivilegesByResource());
 
         $this->acl->allow('member', 'post', 'read');
         self::assertSame(['read'], $this->acl->getPrivileges());
+        self::assertSame(['user' => ['read'], 'post' => ['read']], $this->acl->getPrivilegesByResource());
 
         $this->acl->allow('admin', 'post', ['create', 'unusual-privilege']);
         $this->acl->deny('admin', 'post', ['denied-privilege']);
         self::assertSame(['create', 'read', 'denied-privilege', 'unusual-privilege'], $this->acl->getPrivileges());
+        self::assertSame(['user' => ['read'], 'post' => ['create', 'denied-privilege', 'read', 'unusual-privilege']], $this->acl->getPrivilegesByResource());
 
         $this->acl->allow('admin', 'post', null);
         self::assertSame([null, 'create', 'read', 'denied-privilege', 'unusual-privilege'], $this->acl->getPrivileges());
+        self::assertSame(['user' => ['read'], 'post' => ['create', 'denied-privilege', 'read', 'unusual-privilege']], $this->acl->getPrivilegesByResource());
 
         self::assertSame(
             [
@@ -73,6 +80,35 @@ class DebugAclTest extends TestCase
             ],
             $this->acl->show('member', 'user', 'create')
         );
+    }
+
+    public function testGetPrivilegesByResource(): void
+    {
+        self::assertSame([], $this->acl->getPrivileges());
+
+        $this->acl->allow('member', null, 'read');
+        self::assertSame([], $this->acl->getPrivilegesByResource());
+
+        $this->acl->allow('member', 'user', null);
+        self::assertSame([], $this->acl->getPrivilegesByResource());
+
+        $this->acl->allow('member', ['user', 'post'], 'read');
+        self::assertSame(['user' => ['read'], 'post' => ['read']], $this->acl->getPrivilegesByResource());
+
+        $this->acl->allow('member', ['user', 'post'], 'read');
+        self::assertSame(['user' => ['read'], 'post' => ['read']], $this->acl->getPrivilegesByResource());
+
+        $user = new ModelResource(User::class);
+        $this->acl->addResource($user);
+
+        $post = new ModelResource(Post::class);
+        $this->acl->addResource($post);
+
+        $this->acl->allow('member', $user, 'read');
+        self::assertSame(['user' => ['read'], 'post' => ['read'], User::class => ['read']], $this->acl->getPrivilegesByResource());
+
+        $this->acl->allow('member', [$post, $user], 'create');
+        self::assertSame(['user' => ['read'], 'post' => ['read'], User::class => ['create', 'read'], Post::class => ['create']], $this->acl->getPrivilegesByResource());
     }
 
     public function testNamedAssertionsWithAllow(): void
