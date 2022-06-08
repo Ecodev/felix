@@ -89,6 +89,31 @@ final class AclTest extends TestCase
         self::assertSame($expected, $acl->getLastDenialMessage());
     }
 
+    public function testMultipleReasonsNotDuplicated(): void
+    {
+        $acl = new class($this->createRejectAssertion()) extends Acl {
+            public function __construct(private AssertionInterface $reject)
+            {
+                parent::__construct();
+                $user = $this->createModelResource(User::class);
+                $this->addRole('anonymous');
+                $this->addRole('member', 'anonymous');
+                $this->allow('anonymous', [$user], ['update'], $this->reject);
+                $this->allow('member', [$user], ['update'], $this->reject);
+            }
+        };
+
+        $user = new User();
+        $user->setName('sarah');
+        CurrentUser::set($user);
+
+        self::assertFalse($acl->isCurrentUserAllowed(new User(), 'update'), 'student cannot update even if user');
+        $expected = <<<STRING
+            User "sarah" with role member is not allowed on resource "User#null" with privilege "update" because mocked reason
+            STRING;
+        self::assertSame($expected, $acl->getLastDenialMessage());
+    }
+
     public function testResourceCanBeStringToo(): void
     {
         $acl = new Acl();

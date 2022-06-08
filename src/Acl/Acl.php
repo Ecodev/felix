@@ -167,6 +167,7 @@ class Acl extends \Laminas\Permissions\Acl\Acl
 
         $message = "$userName with role $role is not allowed on resource \"$resource\" with privilege \"$privilege\"";
 
+        $this->reasons = array_unique($this->reasons);
         $count = count($this->reasons);
         if ($count === 1) {
             $message .= ' because ' . $this->reasons[0];
