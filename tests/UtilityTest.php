@@ -10,6 +10,7 @@ use EcodevTests\Felix\Blog\Model\User;
 use GraphQL\Doctrine\Definition\EntityID;
 use PHPUnit\Framework\TestCase;
 use stdClass;
+use Throwable;
 
 final class UtilityTest extends TestCase
 {
@@ -65,5 +66,60 @@ final class UtilityTest extends TestCase
         $expected['entity'] = 123456;
 
         self::assertSame($expected, $actual, 'models must be replaced by their ids, other values should be preserved');
+    }
+
+    private function createArray(): array
+    {
+        $object1 = new class() {
+        };
+
+        $object2 = new class() {
+        };
+
+        return [
+            $object1,
+            3,
+            $object2,
+            3,
+            $object1,
+            2,
+            '2',
+        ];
+    }
+
+    public function testUnique(): void
+    {
+        $array = $this->createArray();
+        $actual = Utility::unique($array);
+
+        $expected = [
+            $array[0],
+            $array[1],
+            $array[2],
+            $array[5],
+            $array[6],
+        ];
+
+        self::assertSame($expected, $actual);
+    }
+
+    /**
+     * @dataProvider providerNativeUniqueWillThrowWithOurTestObject
+     */
+    public function testNativeUniqueWillThrowWithOurTestObject(int $flag): void
+    {
+        try {
+            $foo = array_unique($this->createArray(), $flag);
+        } catch (Throwable $e) {
+            self::assertStringStartsWith('Object of class class@anonymous could not be converted to ', $e->getMessage());
+        }
+    }
+
+    public function providerNativeUniqueWillThrowWithOurTestObject(): iterable
+    {
+        yield [SORT_REGULAR];
+        yield [SORT_NUMERIC];
+        yield [SORT_STRING];
+        yield [SORT_LOCALE_STRING];
     }
 }

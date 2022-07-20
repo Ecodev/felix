@@ -64,6 +64,11 @@ abstract class Utility
         return $data;
     }
 
+    /**
+     * Removes duplicate values from an array by using strict comparison.
+     *
+     * So it can be used with objects, whereas the native `array_unique` cannot.
+     */
     public static function unique(array $array): array
     {
         $result = [];
