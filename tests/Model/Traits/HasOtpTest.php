@@ -47,6 +47,21 @@ final class HasOtpTest extends TestCase
         self::assertTrue($this->user->isOtp());
     }
 
+    public function testCreateOtpSecretWillThrowWithoutLogin(): void
+    {
+        $user = new class() implements \Ecodev\Felix\Model\HasOtp {
+            use HasOtp;
+
+            public function getLogin(): ?string
+            {
+                return null;
+            }
+        };
+
+        self::expectExceptionMessage('User must have a login to initialize OTP');
+        $user->createOtpSecret('felix.lan');
+    }
+
     public function testRevokeSecret(): void
     {
         $this->user->createOtpSecret('felix.lan');
