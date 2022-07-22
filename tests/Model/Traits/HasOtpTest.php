@@ -30,9 +30,6 @@ final class HasOtpTest extends TestCase
         self::assertNull($this->user->getOtpUri(), 'should have no OTP secret at first');
         self::assertFalse($this->user->isOtp(), 'should have OTP disabled at first');
 
-        self::expectExceptionMessage('Cannot enable OTP without a secret');
-        $this->user->setOtp(true);
-
         $this->user->createOtpSecret('felix.lan');
         $otp1 = $this->user->getOtpUri();
         self::assertIsString($otp1);
@@ -47,6 +44,12 @@ final class HasOtpTest extends TestCase
         self::assertTrue($this->user->isOtp());
     }
 
+    public function testCreateOtpSecretWillThrowWithoutSecret(): void
+    {
+        $this->expectExceptionMessage('Cannot enable OTP without a secret');
+        $this->user->setOtp(true);
+    }
+
     public function testCreateOtpSecretWillThrowWithoutLogin(): void
     {
         $user = new class() implements \Ecodev\Felix\Model\HasOtp {
@@ -58,7 +61,7 @@ final class HasOtpTest extends TestCase
             }
         };
 
-        self::expectExceptionMessage('User must have a login to initialize OTP');
+        $this->expectExceptionMessage('User must have a login to initialize OTP');
         $user->createOtpSecret('felix.lan');
     }
 
