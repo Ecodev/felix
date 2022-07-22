@@ -6,6 +6,7 @@ namespace EcodevTests\Felix\Model\Traits;
 
 use Ecodev\Felix\Model\Traits\HasOtp;
 use OTPHP\Factory;
+use OTPHP\TOTPInterface;
 use PHPUnit\Framework\TestCase;
 
 final class HasOtpTest extends TestCase
@@ -65,8 +66,11 @@ final class HasOtpTest extends TestCase
 
         self::assertFalse($this->user->verifyOtp('123456'), 'Wrong OTP given');
 
-        $otp = Factory::loadFromProvisioningUri($this->user->getOtpUri());
+        $uri = $this->user->getOtpUri();
+        self::assertNotNull($uri);
 
+        $otp = Factory::loadFromProvisioningUri($uri);
+        self::assertInstanceOf(TOTPInterface::class, $otp);
         self::assertTrue($this->user->verifyOtp($otp->now()), 'Correct OTP given');
     }
 }
