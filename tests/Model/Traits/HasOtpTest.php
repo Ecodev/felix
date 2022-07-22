@@ -32,16 +32,15 @@ final class HasOtpTest extends TestCase
         self::expectExceptionMessage('Cannot enable OTP without a secret');
         $this->user->setOtp(true);
 
-        $this->user->createOtpSecret('felix.lan', 30, 'sha1', 6);
+        $this->user->createOtpSecret('felix.lan');
         $otp1 = $this->user->getOtpUri();
         self::assertIsString($otp1);
-        self::assertStringStartsWith('otpauth://totp/', $otp1, '6 digits TOTP using SHA1 valid 30s');
+        self::assertStringStartsWith('otpauth://totp/', $otp1, 'TOTP provisionning URI was generated and stored');
 
-        $this->user->createOtpSecret('felix.lan', 40, 'sha256', 8);
+        $this->user->createOtpSecret('felix.lan');
         $otp2 = $this->user->getOtpUri();
         self::assertIsString($otp2);
-        self::assertStringStartsWith('otpauth://totp/', $otp2, '8 digits TOTP using SHA256 valid 40s');
-        self::assertNotSame($otp1, $otp2, 'user OTP URI must have been changed');
+        self::assertNotSame($otp1, $otp2, 'TOTP provisionning URI was changed');
 
         $this->user->setOtp(true);
         self::assertTrue($this->user->isOtp());

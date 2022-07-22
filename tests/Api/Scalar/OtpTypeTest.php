@@ -21,13 +21,12 @@ final class OtpTypeTest extends AbstractStringBasedType
     public function providerValues(): iterable
     {
         return [
-            ['', '', false],
-            ['3', '3', false],
-            ['1234', '1234', true],
+            ['', '', false], // Empty
+            ['1234', '1234', false], // Too short
             ['949358', '949358', true],
             [null, null, false],
             [' ', ' ', false],
-            ['123456789', '123456789', false],
+            ['123456789', '123456789', false], // Too long
         ];
     }
 }

@@ -68,17 +68,14 @@ trait HasOtp
      * Generate and store a new OTP secret.
      *
      * @param string $issuer identify the service that provided the OTP (application or host name)
-     * @param int $period number of seconds an OTP will be valid
-     * @param string $digest digest algorithm: sha1 or sha256, but Google Authenticator only works with sha1
-     * @param int $digits length of the OTP numeric code
      *
      * @API\Exclude
      */
-    public function createOtpSecret(string $issuer, int $period = 30, string $digest = 'sha1', int $digits = 6): void
+    public function createOtpSecret(string $issuer): void
     {
         $this->revokeOtpSecret();
 
-        $totp = OTPHP\TOTP::create(null, $period, $digest, $digits);
+        $totp = OTPHP\TOTP::create(null);
         $label = $this->getLogin();
         if (!$label) {
             throw new Exception('User must have a login to initialize OTP');

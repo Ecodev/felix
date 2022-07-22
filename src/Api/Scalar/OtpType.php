@@ -16,6 +16,6 @@ class OtpType extends AbstractStringBasedType
      */
     protected function isValid(?string $value): bool
     {
-        return is_string($value) && preg_match('/^\d{4,8}+$/', $value);
+        return is_string($value) && preg_match('/^\d{6}+$/', $value);
     }
 }

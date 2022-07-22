@@ -28,7 +28,7 @@ interface HasOtp
     /**
      * Generate and store a new OTP secret.
      */
-    public function createOtpSecret(string $issuer, int $period = 30, string $digest = 'sha1', int $digits = 6): void;
+    public function createOtpSecret(string $issuer): void;
 
     /**
      * Revoke the existing OTP secret.
