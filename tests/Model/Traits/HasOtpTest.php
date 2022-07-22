@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace EcodevTests\Felix\Model\Traits;
 
 use Ecodev\Felix\Model\Traits\HasOtp;
+use OTPHP\Factory;
 use PHPUnit\Framework\TestCase;
 
 final class HasOtpTest extends TestCase
@@ -53,5 +54,20 @@ final class HasOtpTest extends TestCase
 
         self::assertFalse($this->user->isOtp());
         self::assertNull($this->user->getOtpUri());
+    }
+
+    public function testVerifySecret(): void
+    {
+        $this->user->setOtp(false);
+        self::assertFalse($this->user->verifyOtp('123456'), 'Cannot verify OTP with 2FA disabled');
+
+        $this->user->createOtpSecret('felix.lan');
+        $this->user->setOtp(true);
+
+        self::assertFalse($this->user->verifyOtp('123456'), 'Wrong OTP given');
+
+        $otp = Factory::loadFromProvisioningUri($this->user->getOtpUri());
+
+        self::assertTrue($this->user->verifyOtp($otp->now()), 'Correct OTP given');
     }
 }

@@ -15,11 +15,9 @@ use OTPHP;
 trait HasOtp
 {
     /**
-     * @var bool
-     *
      * @ORM\Column(type="boolean", options={"default" = 0})
      */
-    private $otp = false;
+    private bool $otp = false;
 
     /**
      * @API\Exclude
@@ -41,7 +39,7 @@ trait HasOtp
      */
     public function setOtp(bool $otp): void
     {
-        if ($otp === true && !empty($this->otpUri)) {
+        if ($otp && empty($this->otpUri)) {
             throw new Exception('Cannot enable OTP without a secret');
         }
 
