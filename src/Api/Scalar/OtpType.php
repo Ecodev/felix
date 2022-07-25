@@ -4,18 +4,15 @@ declare(strict_types=1);
 
 namespace Ecodev\Felix\Api\Scalar;
 
-class OtpType extends AbstractStringBasedType
+use GraphQL\Type\Definition\IntType;
+
+class OtpType extends IntType
 {
     /**
      * @var string
      */
-    public $description = 'One time passcode composed of only digits';
+    public $description = 'One time code composed of up to 6 digits';
 
-    /**
-     * Validate an OTP.
-     */
-    protected function isValid(?string $value): bool
-    {
-        return is_string($value) && preg_match('/^\d{6}+$/', $value);
-    }
+    public const MIN_INT = 0;
+    public const MAX_INT = 999999;
 }
