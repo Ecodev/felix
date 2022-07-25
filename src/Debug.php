@@ -19,7 +19,7 @@ final class Debug
         if (is_array($data) && !$data) {
             $result .= '[]';
         } elseif (is_array($data)) {
-            $needKey = array_keys($data) !== range(0, count($data) - 1);
+            $needKey = !array_is_list($data);
             $result .= '[' . PHP_EOL;
             foreach ($data as $key => $value) {
                 $result .= str_repeat(' ', 4 * ($level + 1));
