@@ -57,6 +57,7 @@
         "laminas/laminas-view": "^2.20",
         "mezzio/mezzio-session": "^1.6",
         "moneyphp/money": "^4.0",
+        "spomky-labs/otphp": "^11.0",
         "symfony/cache": "^5.4 || ^6.0"
     },
     "require-dev": {
