@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Ecodev\Felix\Repository;
 
-use Cake\Chronos\Chronos;
 use Ecodev\Felix\Model\User;
 use Laminas\Log\Logger;
 
@@ -73,6 +72,4 @@ interface LogRepository
      * @return int the count deleted logs
      */
     public function deleteOldLogs(): int;
-
-    public function getLoginDate(User $user, bool $first): ?Chronos;
 }

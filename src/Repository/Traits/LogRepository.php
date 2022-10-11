@@ -8,7 +8,6 @@ use Cake\Chronos\Chronos;
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
-use Ecodev\Felix\Model\User;
 use Ecodev\Felix\Repository\LogRepository as LogRepositoryInterface;
 use Laminas\Log\Logger;
 
@@ -84,7 +83,7 @@ trait LogRepository
             ->setParameter('ip', $ip)
             ->orderBy('id', 'DESC');
 
-        $events = $select->execute()->fetchFirstColumn();
+        $events = $select->executeQuery()->fetchFirstColumn();
 
         // Goes from present to past and count failure, until the last time we succeeded logging in
         $failureCount = 0;
@@ -112,31 +111,20 @@ trait LogRepository
             ->andWhere('log.priority != :priority OR message IN (:message)')
             ->setParameter('priority', Logger::INFO)
             ->setParameter('message', [
+                LogRepositoryInterface::LOGIN,
                 LogRepositoryInterface::LOGIN_FAILED,
+                LogRepositoryInterface::UPDATE_PASSWORD,
                 LogRepositoryInterface::REQUEST_PASSWORD_RESET,
+                LogRepositoryInterface::UPDATE_PASSWORD_FAILED,
                 LogRepositoryInterface::REGISTER,
+                LogRepositoryInterface::REGISTER_CONFIRM,
             ], Connection::PARAM_STR_ARRAY)
-            ->andWhere('log.creation_date < DATE_SUB(NOW(), INTERVAL 1 MONTH)');
+            ->andWhere('log.creation_date < DATE_SUB(NOW(), INTERVAL 2 MONTH)');
 
         $connection->executeStatement('LOCK TABLES `log` WRITE;');
-        $count = $query->execute();
+        $count = $query->executeStatement();
         $connection->executeStatement('UNLOCK TABLES;');
 
         return $count;
-    }
-
-    public function getLoginDate(User $user, bool $first): ?Chronos
-    {
-        $qb = $this->createQueryBuilder('log')
-            ->select('log.creationDate')
-            ->andWhere('log.creator = :user')
-            ->andWhere('log.message = :message')
-            ->setParameter('user', $user)
-            ->setParameter('message', LogRepositoryInterface::LOGIN)
-            ->addOrderBy('log.creationDate', $first ? 'ASC' : 'DESC');
-
-        $result = $qb->getQuery()->setMaxResults(1)->getOneOrNullResult();
-
-        return $result['creationDate'] ?? null;
     }
 }
