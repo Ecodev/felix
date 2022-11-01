@@ -98,7 +98,7 @@ trait LogRepository
     }
 
     /**
-     * Delete log entries which are errors/warnings and older than one month
+     * Delete log entries which are errors/warnings and older than two months
      * We always keep Logger::INFO level because we use it for statistics.
      *
      * @return int the count deleted logs
