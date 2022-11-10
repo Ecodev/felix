@@ -43,7 +43,6 @@ trait Log
      * The statistics data.
      *
      * @API\Exclude
-     *
      * @ORM\Column(type="json", options={"default" = "[]"})
      */
     private array $extra = [];

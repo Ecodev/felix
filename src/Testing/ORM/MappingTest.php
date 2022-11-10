@@ -29,6 +29,7 @@ class MappingTest extends TestCase
 
     /**
      * @runInSeparateProcess
+     *
      * @preserveGlobalState disabled
      */
     public function testMappingIsSync(): void

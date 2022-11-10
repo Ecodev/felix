@@ -16,14 +16,12 @@ trait HasPassword
 {
     /**
      * @API\Exclude
-     *
      * @ORM\Column(type="string", length=255)
      */
     private string $password = '';
 
     /**
      * @API\Exclude
-     *
      * @ORM\Column(type="string", length=32, nullable=true, unique=true)
      */
     private ?string $token = null;
@@ -32,7 +30,6 @@ trait HasPassword
      * The time when user asked to reset password.
      *
      * @API\Exclude
-     *
      * @ORM\Column(type="datetime", nullable=true)
      */
     private ?Chronos $tokenCreationDate = null;

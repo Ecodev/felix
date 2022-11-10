@@ -74,7 +74,9 @@ final class MailerTest extends TestCase
         $transport->send($message);
 
         // After transport, message has current cursor on end of list
+        // @phpstan-ignore-next-line
         self::assertFalse($message->getFrom()->current());
+        // @phpstan-ignore-next-line
         self::assertFalse($message->getTo()->current());
     }
 

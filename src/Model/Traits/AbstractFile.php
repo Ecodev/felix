@@ -28,7 +28,6 @@ trait AbstractFile
 
     /**
      * @API\Exclude
-     *
      * @ORM\Column(type="string", length=190, options={"default" = ""})
      */
     private string $filename = '';

@@ -90,14 +90,15 @@ abstract class AbstractDatabase
 
     private static function getDatabaseName(): string
     {
+        /** @var array<string,int|string> $dbConfig */
         $dbConfig = _em()->getConnection()->getParams();
 
-        // @phpstan-ignore-next-line
         return $dbConfig['dbname'];
     }
 
     protected static function getMysqlArgs(): string
     {
+        /** @var array<string,int|string> $dbConfig */
         $dbConfig = _em()->getConnection()->getParams();
 
         $host = $dbConfig['host'] ?? 'localhost';
@@ -107,7 +108,6 @@ abstract class AbstractDatabase
         $port = $dbConfig['port'] ?? null;
 
         if ($port) {
-            /** @phpstan-ignore-next-line */
             $port = "--protocol tcp --port=$port";
         } else {
             $port = '--protocol socket';
@@ -116,7 +116,6 @@ abstract class AbstractDatabase
         // It's possible to have no password at all
         $password = $password ? '-p' . $password : '';
 
-        // @phpstan-ignore-next-line
         return "--user=$username $password --host=$host $port $database";
     }
 
