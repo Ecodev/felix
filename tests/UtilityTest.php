@@ -22,18 +22,19 @@ final class UtilityTest extends TestCase
 
     public function testEntityIdToModel(): void
     {
+        $fakeEntity = new stdClass();
         $input = [
             3 => new stdClass(),
             4 => 1,
             'model' => new User(),
-            'entity' => new class() extends EntityID {
-                public function __construct()
+            'entity' => new class($fakeEntity) extends EntityID {
+                public function __construct(private readonly object $fakeEntity)
                 {
                 }
 
-                public function getEntity(): string
+                public function getEntity(): object
                 {
-                    return 'real entity';
+                    return $this->fakeEntity;
                 }
             },
         ];
@@ -41,7 +42,7 @@ final class UtilityTest extends TestCase
         $actual = Utility::entityIdToModel($input);
 
         $expected = $input;
-        $expected['entity'] = 'real entity';
+        $expected['entity'] = $fakeEntity;
 
         self::assertSame($expected, $actual, 'keys and non model values should be preserved');
         self::assertNull(Utility::entityIdToModel(null));

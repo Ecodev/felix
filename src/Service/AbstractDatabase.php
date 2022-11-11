@@ -90,7 +90,7 @@ abstract class AbstractDatabase
 
     private static function getDatabaseName(): string
     {
-        /** @var array<string,int|string> $dbConfig */
+        /** @var array<string,string> $dbConfig */
         $dbConfig = _em()->getConnection()->getParams();
 
         return $dbConfig['dbname'];

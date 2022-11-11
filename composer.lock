@@ -1176,23 +1176,23 @@
         },
         {
             "name": "ecodev/graphql-doctrine",
-            "version": "7.2.3",
+            "version": "7.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Ecodev/graphql-doctrine.git",
-                "reference": "ec51aedb5776582e5b4c7023a5854ce5a93e9b0c"
+                "reference": "10f5e31e3039fda9884297de50da9e581f0ab3bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Ecodev/graphql-doctrine/zipball/ec51aedb5776582e5b4c7023a5854ce5a93e9b0c",
-                "reference": "ec51aedb5776582e5b4c7023a5854ce5a93e9b0c",
+                "url": "https://api.github.com/repos/Ecodev/graphql-doctrine/zipball/10f5e31e3039fda9884297de50da9e581f0ab3bc",
+                "reference": "10f5e31e3039fda9884297de50da9e581f0ab3bc",
                 "shasum": ""
             },
             "require": {
-                "doctrine/orm": "^2.11",
-                "doctrine/persistence": "^1.3 || ^2.0",
+                "doctrine/orm": "^2.13",
+                "doctrine/persistence": "^2.0",
                 "php": "^8.1",
-                "psr/container": "^1.1",
+                "psr/container": "^1.1 || ^2.0",
                 "webonyx/graphql-php": "^14.11"
             },
             "require-dev": {
@@ -1221,9 +1221,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Ecodev/graphql-doctrine/issues",
-                "source": "https://github.com/Ecodev/graphql-doctrine/tree/7.2.3"
+                "source": "https://github.com/Ecodev/graphql-doctrine/tree/7.2.4"
             },
-            "time": "2022-02-21T13:49:45+00:00"
+            "time": "2022-11-10T17:56:30+00:00"
         },
         {
             "name": "friendsofphp/proxy-manager-lts",
