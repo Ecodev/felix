@@ -46,9 +46,9 @@
         "cakephp/chronos": "^2.3",
         "doctrine/dbal": "^3.5",
         "doctrine/migrations": "^3.5",
-        "ecodev/graphql-doctrine": "^7.2",
+        "ecodev/graphql-doctrine": "^7.3",
         "imagine/imagine": "^1.3",
-        "laminas/laminas-diactoros": "^2.20",
+        "laminas/laminas-diactoros": "^2.21",
         "laminas/laminas-log": "^2.15",
         "laminas/laminas-mail": "^2.19",
         "laminas/laminas-permissions-acl": "^2.12",
@@ -57,7 +57,7 @@
         "laminas/laminas-view": "^2.25",
         "mezzio/mezzio-session": "^1.11",
         "moneyphp/money": "^4.0",
-        "spomky-labs/otphp": "^11.0",
+        "spomky-labs/otphp": "^11.1",
         "symfony/cache": "^5.4 || ^6.0"
     },
     "require-dev": {

@@ -81,9 +81,9 @@ abstract class AbstractDatabase
         echo "closing connection to DB\n";
         _em()->getConnection()->close();
 
-        self::executeLocalCommand(PHP_BINARY . ' ./vendor/bin/doctrine orm:schema-tool:drop --ansi --full-database --force');
+        self::executeLocalCommand(PHP_BINARY . ' ./bin/doctrine orm:schema-tool:drop --ansi --full-database --force');
         self::executeLocalCommand("gunzip -c \"$dumpFile\" | sed  's/ALTER DATABASE `[^`]*`/ALTER DATABASE `$database`/g' | mysql $mysqlArgs");
-        self::executeLocalCommand(PHP_BINARY . ' ./vendor/bin/doctrine-migrations migrations:migrate --ansi --no-interaction');
+        self::executeLocalCommand(PHP_BINARY . ' ./bin/doctrine migrations:migrate --ansi --no-interaction');
         static::loadTriggers();
         static::loadTestUsers();
     }
@@ -155,8 +155,8 @@ abstract class AbstractDatabase
      */
     public static function loadTestData(): void
     {
-        self::executeLocalCommand(PHP_BINARY . ' ./vendor/bin/doctrine orm:schema-tool:drop --ansi --full-database --force');
-        self::executeLocalCommand(PHP_BINARY . ' ./vendor/bin/doctrine-migrations migrations:migrate --ansi --no-interaction');
+        self::executeLocalCommand(PHP_BINARY . ' ./bin/doctrine orm:schema-tool:drop --ansi --full-database --force');
+        self::executeLocalCommand(PHP_BINARY . ' ./bin/doctrine migrations:migrate --ansi --no-interaction');
         static::loadTriggers();
         static::loadTestUsers();
         self::importFile('tests/data/fixture.sql');
