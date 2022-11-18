@@ -171,6 +171,16 @@ final class SearchOperatorTypeTest extends OperatorType
                     ['name' => 'filter1', 'value' => '%foo%'],
                 ],
             ],
+            'combined diacritical marks are normalized' => [
+                User::class,
+                // This is a special "é" that is combination of letter "e" and the diacritic "◌́". It can be produced by macOS.
+                html_entity_decode('e&#769;'),
+                0,
+                '(a.name LIKE :filter1 OR a.email LIKE :filter1)',
+                [
+                    ['name' => 'filter1', 'value' => '%é%'], // This is a totally normal "é"
+                ],
+            ],
         ];
     }
 

@@ -11,6 +11,7 @@ use Ecodev\Felix\Api\Exception;
 use GraphQL\Doctrine\Definition\Operator\AbstractOperator;
 use GraphQL\Doctrine\Factory\UniqueNameFactory;
 use GraphQL\Type\Definition\LeafType;
+use Normalizer;
 
 abstract class SearchOperatorType extends AbstractOperator
 {
@@ -149,6 +150,9 @@ abstract class SearchOperatorType extends AbstractOperator
      */
     private function parseWords(string $term): array
     {
+        /** @var string $term */
+        $term = Normalizer::normalize($term);
+
         // Drop empty quote
         $term = str_replace('""', '', $term);
 
