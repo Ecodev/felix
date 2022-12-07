@@ -25,7 +25,9 @@ abstract class Utility
     /**
      * Replace EntityID model and don't touch other values.
      *
-     * @param array $data mix of objects and scalar values
+     * @param ?array $data mix of objects and scalar values
+     *
+     * @return ($data is null ? null : array)
      */
     public static function entityIdToModel(?array $data): ?array
     {
@@ -47,7 +49,9 @@ abstract class Utility
      *
      * Support both AbstractModel and EntityID.
      *
-     * @param array $data mix of objects and scalar values
+     * @param ?array $data mix of objects and scalar values
+     *
+     * @return ($data is null ? null : array)
      */
     public static function modelToId(?array $data): ?array
     {

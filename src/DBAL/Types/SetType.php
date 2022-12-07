@@ -22,7 +22,10 @@ abstract class SetType extends Type
         return $sql;
     }
 
-    public function convertToPHPValue($value, AbstractPlatform $platform): ?array
+    /**
+     * @return ($value is null ? null : array)
+     */
+    public function convertToPHPValue(mixed $value, AbstractPlatform $platform): ?array
     {
         if ($value === null) {
             return null;
@@ -37,7 +40,10 @@ abstract class SetType extends Type
         return $values;
     }
 
-    public function convertToDatabaseValue($values, AbstractPlatform $platform): ?string
+    /**
+     * @return ($values is null ? null : string)
+     */
+    public function convertToDatabaseValue(mixed $values, AbstractPlatform $platform): ?string
     {
         if ($values === null) {
             return null;

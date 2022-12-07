@@ -39,6 +39,9 @@ final class DebugAcl extends \Laminas\Permissions\Acl\Acl
      */
     private array $privilegesByResource = [];
 
+    /**
+     * @return ($assert is null ? null : AssertionInterface)
+     */
     private function wrapAssertion(?AssertionInterface $assert, bool $isAllow): ?AssertionInterface
     {
         if (!$assert) {

@@ -28,7 +28,7 @@ final class LocalizedType extends JsonType
     /**
      * @param null|string $value
      */
-    public function convertToPHPValue($value, AbstractPlatform $platform): array
+    public function convertToPHPValue(mixed $value, AbstractPlatform $platform): array
     {
         if ($value === null || $value === '') {
             return [];
@@ -43,7 +43,7 @@ final class LocalizedType extends JsonType
         return $val;
     }
 
-    public function convertToDatabaseValue($value, AbstractPlatform $platform): string
+    public function convertToDatabaseValue(mixed $value, AbstractPlatform $platform): string
     {
         if (!is_array($value)) {
             throw ConversionException::conversionFailedSerialization($value, 'json', 'value must be a PHP array');

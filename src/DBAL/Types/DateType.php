@@ -13,7 +13,7 @@ final class DateType extends \Doctrine\DBAL\Types\DateType
     /**
      * @param null|DateTimeInterface|int|string $value
      */
-    public function convertToPHPValue($value, AbstractPlatform $platform)
+    public function convertToPHPValue(mixed $value, AbstractPlatform $platform)
     {
         if ($value === null || $value instanceof Date) {
             return $value;

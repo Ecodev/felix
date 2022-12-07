@@ -22,7 +22,7 @@ abstract class EnumType extends Type
         return $sql;
     }
 
-    public function convertToPHPValue($value, AbstractPlatform $platform)
+    public function convertToPHPValue(mixed $value, AbstractPlatform $platform)
     {
         if ($value === null || '' === $value) {
             return null;
@@ -35,7 +35,7 @@ abstract class EnumType extends Type
         return (string) $value;
     }
 
-    public function convertToDatabaseValue($value, AbstractPlatform $platform)
+    public function convertToDatabaseValue(mixed $value, AbstractPlatform $platform)
     {
         if ($value === null || '' === $value) {
             return null;

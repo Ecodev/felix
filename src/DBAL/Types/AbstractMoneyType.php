@@ -21,7 +21,7 @@ abstract class AbstractMoneyType extends IntegerType
     /**
      * @param null|float|int|string $value
      */
-    public function convertToPHPValue($value, AbstractPlatform $platform): ?Money
+    public function convertToPHPValue(mixed $value, AbstractPlatform $platform): ?Money
     {
         if ($value === null) {
             return $value;
@@ -32,7 +32,7 @@ abstract class AbstractMoneyType extends IntegerType
         return $val;
     }
 
-    public function convertToDatabaseValue($value, AbstractPlatform $platform)
+    public function convertToDatabaseValue(mixed $value, AbstractPlatform $platform)
     {
         if ($value instanceof Money) {
             return $value->getAmount();

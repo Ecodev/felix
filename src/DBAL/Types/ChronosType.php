@@ -14,7 +14,7 @@ final class ChronosType extends DateTimeType
     /**
      * @param null|DateTimeInterface|int|string $value
      */
-    public function convertToPHPValue($value, AbstractPlatform $platform)
+    public function convertToPHPValue(mixed $value, AbstractPlatform $platform)
     {
         if ($value === null || $value instanceof Chronos) {
             return $value;
