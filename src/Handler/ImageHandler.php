@@ -56,7 +56,11 @@ final class ImageHandler extends AbstractHandler
             $type = 'image/svg+xml';
         }
 
-        $response = new Response($resource, 200, ['content-type' => $type, 'content-length' => $size]);
+        $response = new Response($resource, 200, [
+            'content-type' => $type,
+            'content-length' => $size,
+            'cache-control' => 'max-age=' . (6 * 60 * 60), // 6 hours cache
+        ]);
 
         return $response;
     }

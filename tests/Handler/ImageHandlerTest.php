@@ -48,6 +48,7 @@ class ImageHandlerTest extends TestCase
 
         self::assertSame('image/jpeg', $response->getHeaderLine('content-type'));
         self::assertSame('16', $response->getHeaderLine('content-length'));
+        self::assertSame('max-age=21600', $response->getHeaderLine('cache-control'));
     }
 
     public function testWillServeWebpIfAccepted(): void
@@ -71,6 +72,7 @@ class ImageHandlerTest extends TestCase
 
         self::assertSame('image/webp', $response->getHeaderLine('content-type'));
         self::assertSame('15', $response->getHeaderLine('content-length'));
+        self::assertSame('max-age=21600', $response->getHeaderLine('cache-control'));
     }
 
     private function handle(ObjectRepository $repository, ImageResizer $imageResizer, ServerRequestInterface $request): ResponseInterface
