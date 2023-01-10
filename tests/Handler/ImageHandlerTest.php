@@ -75,6 +75,35 @@ class ImageHandlerTest extends TestCase
         self::assertSame('max-age=21600', $response->getHeaderLine('cache-control'));
     }
 
+    public function testWillErrorIfImageNotFoundInDatabase(): void
+    {
+        $repository = $this->createRepositoryMock(null);
+        $imageResizer = $this->createMock(ImageResizer::class);
+        $request = new ServerRequest();
+
+        $response = $this->handle($repository, $imageResizer, $request);
+        $this->assertError(['error' => 'Image 0 not found in database'], $response);
+    }
+
+    public function testWillErrorIfImageNotFoundOnDisk(): void
+    {
+        $image = $this->createImageMock('vfs://felix/totally-non-existing-path');
+        $repository = $this->createRepositoryMock($image);
+        $imageResizer = $this->createMock(ImageResizer::class);
+        $request = new ServerRequest();
+
+        $response = $this->handle($repository, $imageResizer, $request);
+        $this->assertError(['error' => 'Image for image 0 not found on disk, or not readable'], $response);
+    }
+
+    private function assertError(array $expected, ResponseInterface $response): void
+    {
+        self::assertSame('application/json', $response->getHeaderLine('content-type'));
+        self::assertSame('', $response->getHeaderLine('content-length'));
+        self::assertSame('', $response->getHeaderLine('cache-control'));
+        self::assertSame($expected, json_decode($response->getBody()->getContents(), true));
+    }
+
     private function handle(ObjectRepository $repository, ImageResizer $imageResizer, ServerRequestInterface $request): ResponseInterface
     {
         $handler = new ImageHandler($repository, $imageResizer);
@@ -82,15 +111,15 @@ class ImageHandlerTest extends TestCase
         return $handler->handle($request);
     }
 
-    private function createImageMock(): Image
+    private function createImageMock(string $path = 'vfs://felix/image.png'): Image
     {
         $image = $this->createMock(Image::class);
-        $image->expects(self::once())->method('getPath')->willReturn('vfs://felix/image.png');
+        $image->expects(self::once())->method('getPath')->willReturn($path);
 
         return $image;
     }
 
-    private function createRepositoryMock(Image $image): ObjectRepository
+    private function createRepositoryMock(?Image $image): ObjectRepository
     {
         $repository = $this->createMock(ObjectRepository::class);
         $repository->expects(self::once())->method('find')->willReturn($image);
