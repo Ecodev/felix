@@ -21,7 +21,7 @@ class FileChecker
     /**
      * Print the result.
      *
-     * @param array $config must be $table => $basePath
+     * @param array<string, string> $config must be $table => $basePath
      */
     public function check(array $config): void
     {
@@ -42,6 +42,9 @@ Unneeded files on disk: ' . count($unneededFiles) . '
 ';
     }
 
+    /**
+     * @param array<string, string> $config
+     */
     private function fetchFromDb(array $config): array
     {
         $queries = [];
@@ -55,6 +58,9 @@ Unneeded files on disk: ' . count($unneededFiles) . '
         return $this->connection->executeQuery($query)->fetchFirstColumn();
     }
 
+    /**
+     * @param array<string, string> $config
+     */
     private function readDisk(array $config): array
     {
         $files = [];
@@ -76,7 +82,7 @@ Unneeded files on disk: ' . count($unneededFiles) . '
     }
 
     /**
-     * Print a list of files if non empty.
+     * Print a list of files if non-empty.
      */
     private function printFiles(string $title, array $files): void
     {
