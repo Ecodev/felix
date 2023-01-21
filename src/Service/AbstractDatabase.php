@@ -96,7 +96,7 @@ abstract class AbstractDatabase
         return $dbConfig['dbname'];
     }
 
-    protected static function getMysqlArgs(): string
+    private static function getMysqlArgs(): string
     {
         /** @var array<string,int|string> $dbConfig */
         $dbConfig = _em()->getConnection()->getParams();
