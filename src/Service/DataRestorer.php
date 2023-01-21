@@ -98,16 +98,18 @@ class DataRestorer
 
         $this->restoreQueries[] = 'SET FOREIGN_KEY_CHECKS = 0;';
 
-        foreach ($tableSelects as $t => $query) {
-            $fileName = 'restore-' . $t . '.csv';
-            [$count, $columnNames] = $this->exportQueryToCsv($query, $fileName);
+        foreach ($tableSelects as $t => $queries) {
+            foreach ($queries as $i => $query) {
+                $fileName = 'restore-' . $t . '-' . $i . '.csv';
+                [$count, $columnNames] = $this->exportQueryToCsv($query, $fileName);
 
-            if ($count) {
-                $columns = implode(', ', array_map(fn ($name) => $this->connection->quoteIdentifier($name), $columnNames));
-                $this->restoreQueries[] = <<<STRING
-                    LOAD DATA LOCAL INFILE '$fileName' INTO TABLE `$t` FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"' ESCAPED BY '"' IGNORE 1 LINES ($columns);
-                    STRING;
-                echo $count . ' records exported in ' . $fileName . PHP_EOL;
+                if ($count) {
+                    $columns = implode(', ', array_map(fn ($name) => $this->connection->quoteIdentifier($name), $columnNames));
+                    $this->restoreQueries[] = <<<STRING
+                        LOAD DATA LOCAL INFILE '$fileName' INTO TABLE `$t` FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"' ESCAPED BY '"' IGNORE 1 LINES ($columns);
+                        STRING;
+                    echo $count . ' records exported in ' . $fileName . PHP_EOL;
+                }
             }
         }
 
@@ -146,14 +148,14 @@ class DataRestorer
     }
 
     /**
-     * @return array<string, string>
+     * @return array<string, array<string>>
      */
     private function getTablesToRestore(): array
     {
         $tableSelects = [];
 
         // Query to export the main deleted records
-        $tableSelects[$this->tableToRestore] = "SELECT * FROM `$this->backupDatabase`.`$this->tableToRestore` WHERE id IN (" . implode(',', $this->idsToRestore) . ')';
+        $tableSelects[$this->tableToRestore][] = "SELECT * FROM `$this->backupDatabase`.`$this->tableToRestore` WHERE id IN (" . implode(',', $this->idsToRestore) . ')';
 
         // Queries to export the records in other tables that were deleted via the CASCADE FK constraint
         $foreignKeysQuery = <<<EOH
@@ -165,7 +167,7 @@ class DataRestorer
         $foreignKeys = $this->connection->fetchAllAssociative($foreignKeysQuery);
 
         foreach ($foreignKeys as $foreignKey) {
-            $tableSelects[$foreignKey['TABLE_NAME']] = "SELECT * FROM `$this->backupDatabase`.`${foreignKey['TABLE_NAME']}` WHERE ${foreignKey['COLUMN_NAME']} IN (" . implode(',', $this->idsToRestore) . ')';
+            $tableSelects[$foreignKey['TABLE_NAME']][] = "SELECT * FROM `$this->backupDatabase`.`${foreignKey['TABLE_NAME']}` WHERE ${foreignKey['COLUMN_NAME']} IN (" . implode(',', $this->idsToRestore) . ')';
         }
 
         return $tableSelects;
