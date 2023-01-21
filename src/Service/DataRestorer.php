@@ -3,22 +3,22 @@
 namespace Application\Utility;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\ORM\Mapping\NamingStrategy;
 
 class DataRestorer
 {
     private const NULL_TOKEN = 'MY_SECRET_NULL_TOKEN';
 
-    private readonly Connection $connection;
-
     private array $restoreQueries = [];
 
     public function __construct(
+        private readonly Connection $connection,
+        private readonly NamingStrategy $namingStrategy,
         private readonly string $backupDatabase,
         private readonly string $tableToRestore,
-        private readonly array $idsToRestore
+        private readonly array $idsToRestore,
     )
     {
-        $this->connection = _em()->getConnection();
     }
 
     /**
@@ -129,7 +129,7 @@ class DataRestorer
                     // N-N relationship between 2 objects of the same type (ex: `document_document`)
                     $primaryKey = ($m[1] === 'source') ? 'target' . $m[2] : 'source' . $m[2];
                 } elseif (preg_match('/^([^_]+)_[^_]+$/', $foreignKey['TABLE_NAME'], $m)) {
-                    $primaryKey = 'id' . ucfirst($m[1]);
+                    $primaryKey = $this->namingStrategy->joinKeyColumnName($m[1]);
                 } else {
                     $primaryKey = 'id';
                 }
