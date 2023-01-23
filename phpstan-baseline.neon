@@ -1,0 +1,6 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Property Ecodev\\\\Felix\\\\Service\\\\DataRestorer\\:\\:\\$allRelationTables \\(array\\<string, array\\{table1\\: class\\-string, table2\\: class\\-string\\}\\>\\) does not accept array\\<int\\|string, array\\<string, mixed\\>\\>\\.$#"
+			count: 1
+			path: src/Service/DataRestorer.php

@@ -14,6 +14,11 @@ class DataRestorer
 
     private array $restoreQueries = [];
 
+    /**
+     * @var array<string, array{table1: class-string, table2: class-string}>
+     */
+    private array $allRelationTables = [];
+
     public function __construct(
         private readonly Connection $connection,
         private readonly NamingStrategy $namingStrategy,
@@ -41,6 +46,7 @@ class DataRestorer
     public function generateQueriesToRestoreDeletedData(): void
     {
         $this->restoreQueries = [];
+        $this->fetchAllRelationTables();
 
         $this->restoreTableData();
         $this->restoreRelations();
@@ -151,38 +157,64 @@ class DataRestorer
         $this->restoreQueries[] = 'SET FOREIGN_KEY_CHECKS = 1;';
     }
 
+    private function fetchAllRelationTables(): void
+    {
+        $this->allRelationTables = $this->connection->fetchAllAssociativeIndexed(
+            <<<SQL
+                SELECT 
+                    CONCAT(t1.TABLE_NAME, '_', t2.TABLE_NAME) AS relation, 
+                    t1.TABLE_NAME AS table1,
+                    t2.TABLE_NAME AS table2
+                FROM information_schema.TABLES AS t1
+                CROSS JOIN information_schema.TABLES AS t2
+                WHERE t1.TABLE_SCHEMA = '$this->databaseToRestore' AND t2.TABLE_SCHEMA = '$this->databaseToRestore'
+                HAVING relation IN (SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA = '$this->databaseToRestore')
+                SQL
+        );
+    }
+
     private function restoreRelations(): void
     {
         // Generate UPDATE queries to recover the values that were erased by the SET NULL FK constraint
         /** @var array<array<string, string>> $foreignKeys */
         $foreignKeys = $this->connection->fetchAllAssociative(
-            "SELECT * FROM information_schema.KEY_COLUMN_USAGE WHERE CONSTRAINT_SCHEMA='$this->databaseToRestore' AND REFERENCED_TABLE_NAME='$this->tableToRestore';"
+            "SELECT * FROM information_schema.KEY_COLUMN_USAGE WHERE CONSTRAINT_SCHEMA = '$this->databaseToRestore' AND REFERENCED_TABLE_NAME = '$this->tableToRestore';"
         );
 
         foreach ($foreignKeys as $foreignKey) {
             foreach ($this->idsToRestore as $id) {
-                if (preg_match('/^(source|target)(.+)$/', $foreignKey['COLUMN_NAME'], $m)) {
-                    // N-N relationship between 2 objects of the same type (ex: `document_document`)
-                    $primaryKey = ($m[1] === 'source') ? 'target' . $m[2] : 'source' . $m[2];
-                } elseif (preg_match('/^([^_]+)_[^_]+$/', $foreignKey['TABLE_NAME'], $m)) {
-                    /** @var class-string $className */
-                    $className = $m[1];
-                    $primaryKey = $this->namingStrategy->joinKeyColumnName($className);
-                } else {
-                    $primaryKey = 'id';
-                }
-                $query = <<<EOH
-                        SELECT CONCAT("UPDATE IGNORE `${foreignKey['TABLE_NAME']}` SET ${foreignKey['COLUMN_NAME']}=$id WHERE ${primaryKey} IN (",GROUP_CONCAT(DISTINCT ${primaryKey} SEPARATOR ','),");")
-                        FROM `${foreignKey['TABLE_NAME']}`
-                        WHERE ${foreignKey['COLUMN_NAME']}=$id
-                        GROUP BY ${foreignKey['COLUMN_NAME']};
-                    EOH;
+                $tableName = $foreignKey['TABLE_NAME'];
+                $columnName = $foreignKey['COLUMN_NAME'];
+                $primaryKey = $this->gePrimaryKey($tableName, $columnName);
+
+                $query = <<<SQL
+                    SELECT CONCAT("UPDATE IGNORE `$tableName` SET `$columnName` = $id WHERE `$primaryKey` IN (",GROUP_CONCAT(DISTINCT $primaryKey SEPARATOR ','),");")
+                    FROM `$tableName`
+                    WHERE $columnName = $id
+                    GROUP BY $columnName;
+                    SQL;
                 $result = $this->connection->fetchOne($query);
                 if ($result) {
                     $this->restoreQueries[] = $result;
                 }
             }
         }
+    }
+
+    private function gePrimaryKey(string $tableName, string $columnName): string
+    {
+        $relation = $this->allRelationTables[$tableName] ?? null;
+        if ($relation) {
+            if (preg_match('/^(source|target)(.+)$/', $columnName, $m)) {
+                // N-N relationship between 2 objects of the same type (ex: `document_document`)
+                return ($m[1] === 'source') ? 'target' . $m[2] : 'source' . $m[2];
+            }
+
+            // normal N-N relationship
+            return $this->namingStrategy->joinKeyColumnName($relation['table1']);
+        }
+
+        return 'id';
     }
 
     /**
