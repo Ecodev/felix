@@ -35,7 +35,7 @@ final class UrlTypeTest extends AbstractStringBasedType
             ['http://aa.com', 'http://aa.com', true],
             ['http://www.example', 'http://www.example', true], // this is indeed valid because `example` could be a TLD
             ['https://example.com:4200/subscribe', 'https://example.com:4200/subscribe', true],
-            ['https://example-.com', 'https://example-.com', true], // this is not conform to rfc1738, but we tolerate it for simplicity sake
+            ['https://example-.com', 'https://example-.com', true], // this is not conform to rfc1738, but we tolerate it for simplicity’s sake
 
             ['www.example.com', 'www.example.com', false],
             ['example.com', 'example.com', false],
@@ -45,7 +45,7 @@ final class UrlTypeTest extends AbstractStringBasedType
             ['www.t.co', 'www.t.co', false],
             ['file:///C:/folder/file.pdf', 'file:///C:/folder/file.pdf', false],
 
-            ['', '', false],
+            ['', '', true],
             [null, null, false],
             [' ', ' ', false],
         ];
