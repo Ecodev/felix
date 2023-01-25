@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ecodev\Felix\Model\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
+use GraphQL\Doctrine\Annotation as API;
 
 /**
  * Trait for all objects with an URL.
