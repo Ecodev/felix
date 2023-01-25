@@ -18,6 +18,8 @@ trait HasUrl
 
     /**
      * Set url.
+     *
+     * @API\Input(type="Url")
      */
     public function setUrl(string $url): void
     {
@@ -26,6 +28,8 @@ trait HasUrl
 
     /**
      * Get url.
+     *
+     * @API\Field(type="Url")
      */
     public function getUrl(): string
     {
