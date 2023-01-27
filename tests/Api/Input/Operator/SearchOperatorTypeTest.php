@@ -181,6 +181,24 @@ final class SearchOperatorTypeTest extends OperatorType
                     ['name' => 'filter1', 'value' => '%é%'], // This is a totally normal "é"
                 ],
             ],
+            'confusing punctuation marks are ignored, according to https://unicode-table.com/en/sets/punctuation-marks' => [
+                User::class,
+                'a\'.a।a։a。a۔a⳹a܁a።a᙮a᠃a⳾a꓿a꘎a꛳a࠽a᭟a,a،a、a՝a߸a፣a᠈a꓾a꘍a꛵a᭞a⁇a⁉a⁈a‽a❗a‼a⸘a?a;a¿a؟a՞a܆a፧a⳺a⳻a꘏a꛷a𑅃a꫱a!a¡a߹a᥄a·a𐎟a𐏐a𒑰a፡a a𐤟a࠰a—a–a‒a‐a⁃a﹣a－a֊a᠆a;a·a؛a፤a꛶a․a:a፥a꛴a᭝a…a︙aຯa«a‹a»a›a„a‚a“a‟a‘a‛a”a’a"a',
+                0,
+                '(a.name LIKE :filter1 OR a.email LIKE :filter1)',
+                [
+                    ['name' => 'filter1', 'value' => '%a%'],
+                ],
+            ],
+            'confusing punctuation can still be used if quoted' => [
+                User::class,
+                '"’\'"',
+                0,
+                '(a.name LIKE :filter1 OR a.email LIKE :filter1)',
+                [
+                    ['name' => 'filter1', 'value' => '%’\'%'],
+                ],
+            ],
         ];
     }
 

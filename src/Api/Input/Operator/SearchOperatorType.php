@@ -15,6 +15,14 @@ use Normalizer;
 
 abstract class SearchOperatorType extends AbstractOperator
 {
+    private const PUNCTUATIONS = [
+        '.', '।', '։', '。', '۔', '⳹', '܁', '።', '᙮', '᠃', '⳾', '꓿', '꘎', '꛳', '࠽', '᭟', ',', '،', '、', '՝', '߸', '፣',
+        '᠈', '꓾', '꘍', '꛵', '᭞', '⁇', '⁉', '⁈', '‽', '❗', '‼', '⸘', '?', ';', '¿', '؟', '՞', '܆', '፧', '⳺', '⳻', '꘏',
+        '꛷', '𑅃', '꫱', '!', '¡', '߹', '᥄', '·', '𐎟', '𐏐', '𒑰', '፡', ' ', '𐤟', '࠰', '—', '–', '‒', '‐', '⁃', '﹣', '－',
+        '֊', '᠆', ';', '·', '؛', '፤', '꛶', '․', ':', '፥', '꛴', '᭝', '…', '︙', 'ຯ', '«', '‹', '»', '›', '„', '‚', '“',
+        '‟', '‘', '‛', '”', '’', '"', "'",
+    ];
+
     protected function getConfiguration(LeafType $leafType): array
     {
         return [
@@ -160,9 +168,10 @@ abstract class SearchOperatorType extends AbstractOperator
         preg_match_all('~"([^"]*)"~', $term, $m);
         $exactTerms = $m[1];
         $termWithoutExact = str_replace($m[0], ' ', $term);
+        $termWithoutExactWithoutPunctuations = str_replace(self::PUNCTUATIONS, ' ', $termWithoutExact);
 
         // Split words by any whitespace
-        $words = preg_split('/[[:space:]]+/', $termWithoutExact, -1, PREG_SPLIT_NO_EMPTY) ?: [];
+        $words = preg_split('/[[:space:]]+/', $termWithoutExactWithoutPunctuations, -1, PREG_SPLIT_NO_EMPTY) ?: [];
 
         // Combine both list
         if ($exactTerms) {
