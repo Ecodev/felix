@@ -8,21 +8,13 @@ use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Ecodev\Felix\Api\Exception;
+use Ecodev\Felix\Format;
 use GraphQL\Doctrine\Definition\Operator\AbstractOperator;
 use GraphQL\Doctrine\Factory\UniqueNameFactory;
 use GraphQL\Type\Definition\LeafType;
-use Normalizer;
 
 abstract class SearchOperatorType extends AbstractOperator
 {
-    private const PUNCTUATIONS = [
-        '.', '।', '։', '。', '۔', '⳹', '܁', '።', '᙮', '᠃', '⳾', '꓿', '꘎', '꛳', '࠽', '᭟', ',', '،', '、', '՝', '߸', '፣',
-        '᠈', '꓾', '꘍', '꛵', '᭞', '⁇', '⁉', '⁈', '‽', '❗', '‼', '⸘', '?', ';', '¿', '؟', '՞', '܆', '፧', '⳺', '⳻', '꘏',
-        '꛷', '𑅃', '꫱', '!', '¡', '߹', '᥄', '·', '𐎟', '𐏐', '𒑰', '፡', ' ', '𐤟', '࠰', '—', '–', '‒', '‐', '⁃', '﹣', '－',
-        '֊', '᠆', ';', '·', '؛', '፤', '꛶', '․', ':', '፥', '꛴', '᭝', '…', '︙', 'ຯ', '«', '‹', '»', '›', '„', '‚', '“',
-        '‟', '‘', '‛', '”', '’', '"', "'",
-    ];
-
     protected function getConfiguration(LeafType $leafType): array
     {
         return [
@@ -41,7 +33,7 @@ abstract class SearchOperatorType extends AbstractOperator
             return null;
         }
 
-        $words = $this->parseWords($args['value']);
+        $words = Format::splitSearchTerms($args['value']);
         if (!$words) {
             return null;
         }
@@ -149,38 +141,5 @@ abstract class SearchOperatorType extends AbstractOperator
         }
 
         return implode(' AND ', $wordWheres);
-    }
-
-    /**
-     * Parse the term to extract a list of words and quoted terms.
-     *
-     * @return string[]
-     */
-    private function parseWords(string $term): array
-    {
-        /** @var string $term */
-        $term = Normalizer::normalize($term);
-
-        // Drop empty quote
-        $term = str_replace('""', '', $term);
-
-        // Extract exact terms that are quoted
-        preg_match_all('~"([^"]*)"~', $term, $m);
-        $exactTerms = $m[1];
-        $termWithoutExact = str_replace($m[0], ' ', $term);
-        $termWithoutExactWithoutPunctuations = str_replace(self::PUNCTUATIONS, ' ', $termWithoutExact);
-
-        // Split words by any whitespace
-        $words = preg_split('/[[:space:]]+/', $termWithoutExactWithoutPunctuations, -1, PREG_SPLIT_NO_EMPTY) ?: [];
-
-        // Combine both list
-        if ($exactTerms) {
-            array_push($words, ...$exactTerms);
-        }
-
-        // Drop duplicates
-        $words = array_unique($words);
-
-        return $words;
     }
 }
