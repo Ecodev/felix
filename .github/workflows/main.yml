@@ -115,9 +115,6 @@ jobs:
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
           restore-keys: ${{ runner.os }}-composer-
 
-      - name: Remove lock for newer PHP
-        run: rm composer.lock && composer require symfony/cache
-
       - name: Install dependencies
         run: composer install
 
