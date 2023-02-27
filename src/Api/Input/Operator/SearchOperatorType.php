@@ -129,7 +129,7 @@ abstract class SearchOperatorType extends AbstractOperator
     /**
      * Return a DQL condition to search each of the words in any of the fields.
      */
-    private function buildSearchDqlCondition(UniqueNameFactory $uniqueNameFactory, ClassMetadata $metadata, QueryBuilder $queryBuilder, array $fields, array $words): string
+    final protected function buildSearchDqlCondition(UniqueNameFactory $uniqueNameFactory, ClassMetadata $metadata, QueryBuilder $queryBuilder, array $fields, array $words): string
     {
         if (!$fields) {
             throw new Exception('Cannot find fields to search on for entity ' . $metadata->name);
