@@ -13,6 +13,7 @@ use EcodevTests\Felix\Blog\Model\User;
 use EcodevTests\Felix\Traits\TestWithTypes;
 use GraphQL\Doctrine\Factory\UniqueNameFactory;
 use GraphQL\Type\Definition\Type;
+use ReflectionClass;
 
 final class SearchOperatorTypeTest extends OperatorType
 {
@@ -224,5 +225,33 @@ final class SearchOperatorTypeTest extends OperatorType
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Cannot find fields to search on for entity EcodevTests\Felix\Blog\Model\User');
         $operator->getDqlCondition($unique, $metadata, $qb, $alias, 'non-used-field-name', ['value' => 'foo']);
+    }
+
+    public function testSearchCanWrapFieldsWithCustomDqlFunction(): void
+    {
+        $operator = new class($this->types, Type::string()) extends SearchOperatorType {
+            protected function getSearchableFieldsWhitelist(ClassMetadata $metadata): array
+            {
+                return ['name'];
+            }
+
+            protected function getSearchableJoinedEntities(): array
+            {
+                return [];
+            }
+
+            protected function fieldToDql(ReflectionClass $className, string $fieldName, string $fieldAlias): string
+            {
+                return "MY_DQL_FUNCTION($fieldAlias)";
+            }
+        };
+
+        $metadata = $this->entityManager->getClassMetadata(User::class);
+        $unique = new UniqueNameFactory();
+        $alias = 'a';
+        $qb = $this->entityManager->getRepository(User::class)->createQueryBuilder($alias);
+        $actual = $operator->getDqlCondition($unique, $metadata, $qb, $alias, 'non-used-field-name', ['value' => 'foo']);
+
+        self::assertSame('(MY_DQL_FUNCTION(a.name) LIKE :filter1)', $actual);
     }
 }

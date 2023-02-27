@@ -12,6 +12,7 @@ use Ecodev\Felix\Format;
 use GraphQL\Doctrine\Definition\Operator\AbstractOperator;
 use GraphQL\Doctrine\Factory\UniqueNameFactory;
 use GraphQL\Type\Definition\LeafType;
+use ReflectionClass;
 
 abstract class SearchOperatorType extends AbstractOperator
 {
@@ -58,11 +59,19 @@ abstract class SearchOperatorType extends AbstractOperator
                 $fieldName = $mapping['fieldName'];
                 $field = $alias . '.' . $fieldName;
 
-                $fields[] = $field;
+                $fields[] = $this->fieldToDql($metadata->getReflectionClass(), $fieldName, $field);
             }
         }
 
         return $fields;
+    }
+
+    /**
+     * Optionally wrap the `$fieldAlias` in a custom DQL function. Typically useful to search correctly in i18n fields.
+     */
+    protected function fieldToDql(ReflectionClass $className, string $fieldName, string $fieldAlias): string
+    {
+        return $fieldAlias;
     }
 
     /**
@@ -128,7 +137,7 @@ abstract class SearchOperatorType extends AbstractOperator
 
         $wordWheres = [];
 
-        foreach ($words as $i => $word) {
+        foreach ($words as $word) {
             $parameterName = $uniqueNameFactory->createParameterName();
 
             $fieldWheres = [];
