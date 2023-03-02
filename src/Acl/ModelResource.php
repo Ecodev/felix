@@ -24,7 +24,7 @@ final class ModelResource extends GenericResource
      * Sets the Resource identifier.
      *
      * @param string $class must be a model class name
-     * @param Model $instance the instance itself
+     * @param ?Model $instance the instance itself
      */
     public function __construct(
         string $class,
