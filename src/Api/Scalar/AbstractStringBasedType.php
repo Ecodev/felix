@@ -43,18 +43,18 @@ abstract class AbstractStringBasedType extends ScalarType
     /**
      * Parses an externally provided literal value to use as an input (e.g. in Query AST).
      */
-    public function parseLiteral(Node $ast, ?array $variables = null): ?string
+    public function parseLiteral(Node $valueNode, ?array $variables = null): ?string
     {
         // Note: throwing GraphQL\Error\Error vs \UnexpectedValueException to benefit from GraphQL
         // error location in query:
-        if (!($ast instanceof StringValueNode)) {
-            throw new Error('Query error: Can only parse strings got: ' . $ast->kind, $ast);
+        if (!($valueNode instanceof StringValueNode)) {
+            throw new Error('Query error: Can only parse strings got: ' . $valueNode->kind, $valueNode);
         }
 
-        if (!$this->isValid($ast->value)) {
-            throw new Error('Query error: Not a valid ' . $this->name, $ast);
+        if (!$this->isValid($valueNode->value)) {
+            throw new Error('Query error: Not a valid ' . $this->name, $valueNode);
         }
 
-        return $ast->value;
+        return $valueNode->value;
     }
 }

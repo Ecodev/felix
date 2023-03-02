@@ -24,7 +24,7 @@ abstract class AbstractMoneyType extends IntegerType
     public function convertToPHPValue(mixed $value, AbstractPlatform $platform): ?Money
     {
         if ($value === null) {
-            return $value;
+            return null;
         }
 
         $val = $this->createMoney((string) $value);
@@ -32,20 +32,20 @@ abstract class AbstractMoneyType extends IntegerType
         return $val;
     }
 
-    public function convertToDatabaseValue(mixed $value, AbstractPlatform $platform)
+    public function convertToDatabaseValue(mixed $value, AbstractPlatform $platform): ?string
     {
         if ($value instanceof Money) {
             return $value->getAmount();
         }
 
         if ($value === null) {
-            return $value;
+            return null;
         }
 
         throw new InvalidArgumentException('Cannot convert to dababase value: ' . var_export($value, true));
     }
 
-    public function requiresSQLCommentHint(AbstractPlatform $platform)
+    public function requiresSQLCommentHint(AbstractPlatform $platform): bool
     {
         return true;
     }

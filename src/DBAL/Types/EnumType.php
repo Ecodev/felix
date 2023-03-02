@@ -15,14 +15,14 @@ abstract class EnumType extends Type
     public function getSqlDeclaration(array $fieldDeclaration, AbstractPlatform $platform): string
     {
         $possibleValues = $this->getPossibleValues();
-        $quotedPossibleValues = implode(', ', array_map(fn ($str) => "'" . (string) $str . "'", $possibleValues));
+        $quotedPossibleValues = implode(', ', array_map(fn (string $str) => "'" . $str . "'", $possibleValues));
 
         $sql = 'ENUM(' . $quotedPossibleValues . ')';
 
         return $sql;
     }
 
-    public function convertToPHPValue(mixed $value, AbstractPlatform $platform)
+    public function convertToPHPValue(mixed $value, AbstractPlatform $platform): ?string
     {
         if ($value === null || '' === $value) {
             return null;
@@ -35,7 +35,7 @@ abstract class EnumType extends Type
         return (string) $value;
     }
 
-    public function convertToDatabaseValue(mixed $value, AbstractPlatform $platform)
+    public function convertToDatabaseValue(mixed $value, AbstractPlatform $platform): ?string
     {
         if ($value === null || '' === $value) {
             return null;
@@ -71,12 +71,12 @@ abstract class EnumType extends Type
         return $typeName;
     }
 
-    public function requiresSQLCommentHint(AbstractPlatform $platform)
+    public function requiresSQLCommentHint(AbstractPlatform $platform): bool
     {
         return true;
     }
 
-    public function getMappedDatabaseTypes(AbstractPlatform $platform)
+    public function getMappedDatabaseTypes(AbstractPlatform $platform): array
     {
         return ['enum'];
     }

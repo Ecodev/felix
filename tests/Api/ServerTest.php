@@ -21,7 +21,7 @@ class ServerTest extends TestCase
     {
         $schema = new Schema(['query' => new ObjectType(['name' => 'Query'])]);
         $server = new Server($schema, false);
-        $request = new ServerRequest(body: new CallbackStream(fn () => $body), method: 'POST');
+        $request = new ServerRequest(method: 'POST', body: new CallbackStream(fn () => $body));
         $request = $request->withHeader('content-type', 'application/json');
 
         $result = $server->execute($request);

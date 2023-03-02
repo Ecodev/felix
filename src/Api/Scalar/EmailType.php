@@ -45,12 +45,12 @@ final class EmailType extends AbstractStringBasedType
         return parent::parseValue($value);
     }
 
-    public function parseLiteral(Node $ast, ?array $variables = null): ?string
+    public function parseLiteral(Node $valueNode, ?array $variables = null): ?string
     {
-        if ($ast instanceof StringValueNode && $ast->value === '') {
+        if ($valueNode instanceof StringValueNode && $valueNode->value === '') {
             return null;
         }
 
-        return parent::parseLiteral($ast, $variables);
+        return parent::parseLiteral($valueNode, $variables);
     }
 }

@@ -9,7 +9,7 @@ use Exception;
 /**
  * Class to generate BVR reference number and encoding lines.
  *
- * Typically usage would one of the following:
+ * Typically, usage would one of the following:
  *
  * ```php
  * <?php
@@ -53,7 +53,7 @@ final class Bvr
         if (!preg_match('~^\d{6}$~', $bankAccount)) {
             throw new Exception('Invalid bank account. It must be exactly 6 digits, but got: `' . $bankAccount . '`');
         }
-        $value = $bankAccount . self::pad($customId, 20);
+        $value = $bankAccount . self::pad($customId);
 
         return $value . self::modulo10($value);
     }
@@ -94,9 +94,9 @@ final class Bvr
         return false;
     }
 
-    private static function pad(string $string, int $length): string
+    private static function pad(string $string): string
     {
-        return str_pad($string, $length, '0', STR_PAD_LEFT);
+        return str_pad($string, 20, '0', STR_PAD_LEFT);
     }
 
     /**

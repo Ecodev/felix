@@ -21,11 +21,6 @@ use Laminas\Mime\Part as MimePart;
  */
 class Mailer
 {
-    /**
-     * @var false|resource
-     */
-    private $lock;
-
     public function __construct(
         private readonly EntityManager $entityManager,
         private readonly MessageRepository $messageRepository,
@@ -75,7 +70,7 @@ class Mailer
         }
 
         $recipient = $message->getRecipient();
-        $recipientName = $recipient ? $recipient->getName() : null;
+        $recipientName = $recipient?->getName();
         if ($email) {
             $mailMessage->addTo($email, $recipientName);
             $this->transport->send($mailMessage);
@@ -135,12 +130,12 @@ class Mailer
     {
         $lockFile = 'data/tmp/mailer.lock';
         touch($lockFile);
-        $this->lock = fopen($lockFile, 'r+b');
-        if ($this->lock === false) {
+        $lock = fopen($lockFile, 'r+b');
+        if ($lock === false) {
             throw new Exception('Could not read lock file. This is not normal and might be a permission issue');
         }
 
-        if (!flock($this->lock, LOCK_EX | LOCK_NB)) {
+        if (!flock($lock, LOCK_EX | LOCK_NB)) {
             $message = LogRepository::MAILER_LOCKED;
             _log()->info($message);
 

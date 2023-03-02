@@ -61,11 +61,8 @@ final class FilteredFieldResolverTest extends TestCase
 
     /**
      * @dataProvider providerLoad
-     *
-     * @param mixed $value
-     * @param mixed $expected
      */
-    public function testLoad($value, $expected): void
+    public function testLoad(mixed $value, mixed $expected): void
     {
         $model = new class($value) {
             public function __construct(private mixed $value)

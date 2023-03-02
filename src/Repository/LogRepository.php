@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace Ecodev\Felix\Repository;
 
-use Ecodev\Felix\Model\User;
-use Laminas\Log\Logger;
-
 interface LogRepository
 {
     /**
@@ -45,7 +42,7 @@ interface LogRepository
     public const REGISTER_CONFIRM = 'confirm registration';
 
     /**
-     * Log message to be used when trying to send email but it's already running.
+     * Log message to be used when trying to send email, but it's already running.
      */
     public const MAILER_LOCKED = 'Unable to obtain lock for mailer, try again later.';
 

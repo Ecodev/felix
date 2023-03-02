@@ -41,13 +41,11 @@ function _log(): LoggerInterface
 /**
  * Export variables omitting array keys that are strictly numeric.
  *
- * By default will output result
- *
- * @param mixed $data
+ * By default, it will output result
  *
  * @return string string representation of variable
  */
-function ve($data, bool $return = false): string
+function ve(mixed $data, bool $return = false): string
 {
     return Debug::export($data, $return);
 }

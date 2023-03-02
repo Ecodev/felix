@@ -6,7 +6,6 @@ namespace Ecodev\Felix\Model\Traits;
 
 use Cake\Chronos\Chronos;
 use Doctrine\ORM\Mapping as ORM;
-use Exception;
 use GraphQL\Doctrine\Annotation as API;
 
 /**
@@ -48,9 +47,6 @@ trait HasPassword
         $this->revokeToken();
 
         $password = password_hash($password, PASSWORD_DEFAULT);
-        if (!is_string($password)) {
-            throw new Exception('Could not hash password');
-        }
 
         $this->password = $password;
     }

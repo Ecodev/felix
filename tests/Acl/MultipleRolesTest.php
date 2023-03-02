@@ -19,7 +19,7 @@ class MultipleRolesTest extends TestCase
         self::assertSame(['writer'], $roles->getRoles(), 'must be added');
         self::assertTrue($roles->has('writer'), 'must be existing');
         self::assertFalse($roles->has('foo'), 'must not be existing');
-        self::assertTrue($roles->has('foo', 'writer', ), 'at least one of them');
+        self::assertTrue($roles->has('foo', 'writer'), 'at least one of them');
         self::assertFalse($roles->has('foo', 'bar'), 'none of of them');
         self::assertFalse($roles->has());
         self::assertSame('[writer]', (string) $roles);

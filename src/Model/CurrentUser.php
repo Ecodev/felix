@@ -12,7 +12,7 @@ final class CurrentUser
     private static ?User $currentUser = null;
 
     /**
-     * Set currently logged in user.
+     * Set currently logged-in user.
      */
     public static function set(?User $user): void
     {

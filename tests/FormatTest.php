@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace EcodevTests\Felix;
 
 use Ecodev\Felix\Format;
+use Money\Money;
 use PHPUnit\Framework\TestCase;
 
 final class FormatTest extends TestCase
@@ -64,5 +65,10 @@ final class FormatTest extends TestCase
             '"’\'"',
             ['’\''],
         ];
+    }
+
+    public function testMoney(): void
+    {
+        self::assertSame('12.34', Format::money(Money::CHF(1234)));
     }
 }

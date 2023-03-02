@@ -33,7 +33,7 @@ final class ForwardSQLLogger extends DebugStack implements SQLLogger
 
         // Here we cannot inject the logger via DI, or it would be created too early and
         // break unit tests by creating two parallel connection to DB and thus timeout
-        // when a tests's transaction is pending but a log is trying to be written on the other connection
+        // when a test's transaction is pending but a log is trying to be written on the other connection
         _log()->debug($query['sql'], $extra);
     }
 }

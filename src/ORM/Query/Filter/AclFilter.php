@@ -91,7 +91,7 @@ final class AclFilter extends SQLFilter
         $result = '';
         if ($repository instanceof LimitedAccessSubQuery) {
             $subQuery = $this->getSubQuery($targetEntity->name, $repository);
-            $result = $this->buildSql($targetTableAlias, 'id', $subQuery);
+            $result = $this->buildSql($targetTableAlias, $subQuery);
         }
 
         return $result;
@@ -116,13 +116,13 @@ final class AclFilter extends SQLFilter
         $this->subQueriesCache = [];
     }
 
-    private function buildSql(string $targetTableAlias, string $field, string $subQuery): string
+    private function buildSql(string $targetTableAlias, string $subQuery): string
     {
         if (!$subQuery) {
             return '';
         }
 
-        return $targetTableAlias . '.' . $field . ' IN (' . $subQuery . ')';
+        return $targetTableAlias . '.id IN (' . $subQuery . ')';
     }
 
     private function getSubQuery(string $class, LimitedAccessSubQuery $repository): string

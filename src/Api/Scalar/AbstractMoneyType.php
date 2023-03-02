@@ -57,13 +57,13 @@ abstract class AbstractMoneyType extends ScalarType
     /**
      * Parses an externally provided literal value to use as an input (e.g. in Query AST).
      */
-    public function parseLiteral(Node $ast, ?array $variables = null): Money
+    public function parseLiteral(Node $valueNode, ?array $variables = null): Money
     {
-        if ($ast instanceof StringValueNode || $ast instanceof IntValueNode || $ast instanceof FloatValueNode) {
-            return $this->parseValue($ast->value);
+        if ($valueNode instanceof StringValueNode || $valueNode instanceof IntValueNode || $valueNode instanceof FloatValueNode) {
+            return $this->parseValue($valueNode->value);
         }
 
-        throw new Error('Query error: Can only parse strings got: ' . $ast->kind, $ast);
+        throw new Error('Query error: Can only parse strings got: ' . $valueNode->kind, $valueNode);
     }
 
     private function isValid(mixed $value): bool

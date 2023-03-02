@@ -15,7 +15,7 @@ class MariaDbQuotingConnection extends Connection
      *
      * @param null|int|string|Type $type
      */
-    public function quote(mixed $value, $type = ParameterType::STRING)
+    public function quote(mixed $value, $type = ParameterType::STRING): string
     {
         $quoted = "'" . str_replace(["'", "\n"], ["\\'", '\\n'], (string) $value) . "'";
 

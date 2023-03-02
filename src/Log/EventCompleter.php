@@ -55,8 +55,8 @@ class EventCompleter implements ProcessorInterface
         $request = $this->removeSensitiveData($request);
 
         $envData = [
-            'creator_id' => $user ? $user->getId() : null,
-            'login' => $user ? $user->getLogin() : null,
+            'creator_id' => $user?->getId(),
+            'login' => $user?->getLogin(),
             'url' => $url,
             'referer' => $referer,
             'request' => json_encode($request, JSON_PRETTY_PRINT),
@@ -81,7 +81,7 @@ class EventCompleter implements ProcessorInterface
     }
 
     /**
-     * Returns the backtrace excluding the most recent calls to this function so we only get the interesting parts.
+     * Returns the backtrace excluding the most recent calls to this function, so we only get the interesting parts.
      */
     private function getStacktrace(): string
     {

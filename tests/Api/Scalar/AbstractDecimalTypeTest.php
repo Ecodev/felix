@@ -20,7 +20,7 @@ final class AbstractDecimalTypeTest extends TestCase
 
             public function __construct(private readonly int $decimal, private readonly ?string $minimum, private readonly ?string $maximum)
             {
-                parent::__construct([]);
+                parent::__construct();
             }
 
             protected function getScale(): int
@@ -42,10 +42,8 @@ final class AbstractDecimalTypeTest extends TestCase
 
     /**
      * @dataProvider providerInputs
-     *
-     * @param null|float|int|string $input
      */
-    public function testSerialize(int $decimal, ?string $minimum, ?string $maximum, $input, ?string $expected): void
+    public function testSerialize(int $decimal, ?string $minimum, ?string $maximum, null|float|int|string $input, ?string $expected): void
     {
         $type = $this->createType($decimal, $minimum, $maximum);
         $actual = $type->serialize($input);
@@ -54,10 +52,8 @@ final class AbstractDecimalTypeTest extends TestCase
 
     /**
      * @dataProvider providerInputs
-     *
-     * @param null|float|int|string $input
      */
-    public function testParseValue(int $decimal, ?string $minimum, ?string $maximum, $input, ?string $expected): void
+    public function testParseValue(int $decimal, ?string $minimum, ?string $maximum, null|float|int|string $input, ?string $expected): void
     {
         $type = $this->createType($decimal, $minimum, $maximum);
 
@@ -72,10 +68,8 @@ final class AbstractDecimalTypeTest extends TestCase
 
     /**
      * @dataProvider providerInputs
-     *
-     * @param null|float|int|string $input
      */
-    public function testParseLiteral(int $decimal, ?string $minimum, ?string $maximum, $input, ?string $expected): void
+    public function testParseLiteral(int $decimal, ?string $minimum, ?string $maximum, null|float|int|string $input, ?string $expected): void
     {
         $type = $this->createType($decimal, $minimum, $maximum);
 

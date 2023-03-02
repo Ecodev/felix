@@ -48,14 +48,14 @@ final class DateType extends ScalarType
     /**
      * Parses an externally provided literal value to use as an input (e.g. in Query AST).
      */
-    public function parseLiteral(Node $ast, ?array $variables = null): Date
+    public function parseLiteral(Node $valueNode, ?array $variables = null): Date
     {
         // Note: throwing GraphQL\Error\Error vs \UnexpectedValueException to benefit from GraphQL
         // error location in query:
-        if (!($ast instanceof StringValueNode)) {
-            throw new Error('Query error: Can only parse strings got: ' . $ast->kind, $ast);
+        if (!($valueNode instanceof StringValueNode)) {
+            throw new Error('Query error: Can only parse strings got: ' . $valueNode->kind, $valueNode);
         }
 
-        return $this->parseValue($ast->value);
+        return $this->parseValue($valueNode->value);
     }
 }

@@ -41,20 +41,20 @@ abstract class SetType extends Type
     }
 
     /**
-     * @return ($values is null ? null : string)
+     * @return ($value is null ? null : string)
      */
-    public function convertToDatabaseValue(mixed $values, AbstractPlatform $platform): ?string
+    public function convertToDatabaseValue(mixed $value, AbstractPlatform $platform): ?string
     {
-        if ($values === null) {
+        if ($value === null) {
             return null;
         }
 
-        $value = is_array($values) ? implode(',', $values) : null;
-        if (!$this->isValid($values)) {
-            throw new InvalidArgumentException("Invalid '" . $value . "' value to be stored in database for set " . $this->getName());
+        $result = is_array($value) ? implode(',', $value) : null;
+        if (!$this->isValid($value)) {
+            throw new InvalidArgumentException("Invalid '" . $result . "' value to be stored in database for set " . $this->getName());
         }
 
-        return $value;
+        return $result;
     }
 
     private function isValid(mixed $values): bool
@@ -96,12 +96,12 @@ abstract class SetType extends Type
         return $typeName;
     }
 
-    public function requiresSQLCommentHint(AbstractPlatform $platform)
+    public function requiresSQLCommentHint(AbstractPlatform $platform): bool
     {
         return true;
     }
 
-    public function getMappedDatabaseTypes(AbstractPlatform $platform)
+    public function getMappedDatabaseTypes(AbstractPlatform $platform): array
     {
         return ['set'];
     }

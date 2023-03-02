@@ -17,7 +17,7 @@ use Exception;
 abstract class AbstractDatabase
 {
     /**
-     * This is lazy architecture and we should instead convert the whole class
+     * This is lazy architecture, and we should instead convert the whole class
      * into instantiable service with configuration in constructor, and default
      * factory that get the PHP version from config.
      */
@@ -134,8 +134,8 @@ abstract class AbstractDatabase
      */
     final public static function executeLocalCommand(string $command): void
     {
-        // This allow to specify an application environnement even for commands that are not ours, such as Doctrine one.
-        // Thus this allow us to correctly load test data in a separate test database for OKpilot.
+        // This allows to specify an application environnement even for commands that are not ours, such as Doctrine one.
+        // Thus, this allows us to correctly load test data in a separate test database for OKpilot.
         if (defined('APPLICATION_ENV')) {
             $env = 'APPLICATION_ENV=' . APPLICATION_ENV;
         } else {

@@ -13,7 +13,7 @@ final class ModelResourceTest extends TestCase
 {
     public function testConstructorVariants(): void
     {
-        // Constructor with pre-loaded model
+        // Constructor with preloaded model
         $user = new User();
         $resource = new ModelResource(User::class, $user);
         self::assertSame($user, $resource->getInstance(), 'should be able to get back model');

@@ -59,7 +59,7 @@ class Server
             $request = $request->withParsedBody($parsedBody);
         }
 
-        // Affect it to global request so it is available for log purpose in case of error
+        // Affect it to global request, so it is available for log purpose in case of error
         $_REQUEST = $request->getParsedBody();
 
         // Set current session as the only context we will ever need
@@ -90,7 +90,7 @@ class Server
         $previous = $exception->getPrevious();
         if ($previous instanceof DriverException && $previous->getSQLState() === '45000' && $previous->getPrevious() && $previous->getPrevious()->getPrevious()) {
             $message = $previous->getPrevious()->getPrevious()->getMessage();
-            $userMessage = (string) preg_replace('~SQLSTATE\[45000\]: <<Unknown error>>: \d+ ~', '', $message, -1, $count);
+            $userMessage = (string) preg_replace('~SQLSTATE\[45000]: <<Unknown error>>: \d+ ~', '', $message, -1, $count);
             if ($count === 1) {
                 $exception = new Exception($userMessage, 0, $exception);
             }

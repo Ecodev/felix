@@ -13,7 +13,7 @@ use Laminas\Validator\EmailAddress;
  */
 class DeliverableEmail extends EmailAddress
 {
-    public function isValid($value)
+    public function isValid($value): bool
     {
         // This regexp should be kep in sync with the original one in Natural
         if (!preg_match('/^[a-zA-Z0-9.!#$%&\'*+\/=?^_`{|}~-]+@[^@ ]+\.[^@]+$/u', $value)) {

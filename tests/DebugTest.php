@@ -11,10 +11,8 @@ class DebugTest extends TestCase
 {
     /**
      * @dataProvider providerExport
-     *
-     * @param mixed $data
      */
-    public function testExport($data, string $expected): void
+    public function testExport(mixed $data, string $expected): void
     {
         $actual = Debug::export($data, true);
         self::assertEquals($expected, $actual);

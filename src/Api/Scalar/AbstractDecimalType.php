@@ -87,18 +87,18 @@ abstract class AbstractDecimalType extends ScalarType
     /**
      * Parses an externally provided literal value to use as an input (e.g. in Query AST).
      */
-    public function parseLiteral(Node $ast, ?array $variables = null): string
+    public function parseLiteral(Node $valueNode, ?array $variables = null): string
     {
         // Note: throwing GraphQL\Error\Error vs \UnexpectedValueException to benefit from GraphQL
         // error location in query:
 
-        if (!($ast instanceof StringValueNode || $ast instanceof IntValueNode || $ast instanceof FloatValueNode)) {
-            throw new Error('Query error: Can only parse strings got: ' . $ast->kind, $ast);
+        if (!($valueNode instanceof StringValueNode || $valueNode instanceof IntValueNode || $valueNode instanceof FloatValueNode)) {
+            throw new Error('Query error: Can only parse strings got: ' . $valueNode->kind, $valueNode);
         }
 
-        $parsedValue = (string) $ast->value;
+        $parsedValue = (string) $valueNode->value;
         if (!$this->isValid($parsedValue)) {
-            throw new Error('Query error: Not a valid ' . $this->name, $ast);
+            throw new Error('Query error: Not a valid ' . $this->name, $valueNode);
         }
 
         return $parsedValue;
