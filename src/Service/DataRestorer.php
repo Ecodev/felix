@@ -189,7 +189,7 @@ class DataRestorer
 
                 $query = <<<SQL
                     SELECT CONCAT("UPDATE IGNORE `$tableName` SET `$columnName` = $id WHERE `$primaryKey` IN (",GROUP_CONCAT(DISTINCT $primaryKey SEPARATOR ','),");")
-                    FROM `$tableName`
+                    FROM `$this->databaseToRestore`.`$tableName`
                     WHERE $columnName = $id
                     GROUP BY $columnName;
                     SQL;
