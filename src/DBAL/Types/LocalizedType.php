@@ -7,6 +7,7 @@ namespace Ecodev\Felix\DBAL\Types;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\ConversionException;
 use Doctrine\DBAL\Types\JsonType;
+use JsonException;
 
 /**
  * Type specialized to store localized data as JSON.
@@ -53,7 +54,10 @@ final class LocalizedType extends JsonType
             return '';
         }
 
-        // @phpstan-ignore-next-line
-        return parent::convertToDatabaseValue($value, $platform);
+        try {
+            return json_encode($value, JSON_THROW_ON_ERROR | JSON_PRESERVE_ZERO_FRACTION | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        } catch (JsonException $e) {
+            throw ConversionException::conversionFailedSerialization($value, 'json', $e->getMessage(), $e);
+        }
     }
 }

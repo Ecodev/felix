@@ -51,4 +51,15 @@ class LocalizedTypeTest extends TestCase
         $this->expectExceptionMessage("Could not convert database value to 'json' as an error was triggered by the unserialization: 'value in DB is not a JSON encoded associative array'");
         $this->type->convertToPHPValue('"foo"', $this->platform);
     }
+
+    public function testMustAlwaysStoreUnescaped(): void
+    {
+        $original = ['fr' => 'aéa/a💕a'];
+
+        $actualDB = $this->type->convertToDatabaseValue($original, $this->platform);
+        self::assertSame('{"fr":"aéa/a💕a"}', $actualDB, 'unicode and slashes should not be escaped');
+
+        $actualPHP = $this->type->convertToPHPValue($actualDB, $this->platform);
+        self::assertSame($original, $actualPHP, 'can be re-converted back to the exact same original');
+    }
 }
