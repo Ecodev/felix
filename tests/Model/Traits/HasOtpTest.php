@@ -33,12 +33,12 @@ final class HasOtpTest extends TestCase
         $this->user->createOtpSecret('felix.lan');
         $otp1 = $this->user->getOtpUri();
         self::assertIsString($otp1);
-        self::assertStringStartsWith('otpauth://totp/', $otp1, 'TOTP provisionning URI was generated and stored');
+        self::assertStringStartsWith('otpauth://totp/', $otp1, 'TOTP provisioning URI was generated and stored');
 
         $this->user->createOtpSecret('felix.lan');
         $otp2 = $this->user->getOtpUri();
         self::assertIsString($otp2);
-        self::assertNotSame($otp1, $otp2, 'TOTP provisionning URI was changed');
+        self::assertNotSame($otp1, $otp2, 'TOTP provisioning URI was changed');
 
         $this->user->setOtp(true);
         self::assertTrue($this->user->isOtp());

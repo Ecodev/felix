@@ -19,7 +19,7 @@ abstract class AbstractStringBasedType extends TestCase
     /**
      * @dataProvider providerValues
      */
-    public function testSerialize(?string $input, ?string $expected, bool $isValid): void
+    public function testSerialize(?string $input, ?string $expected): void
     {
         $type = $this->createType();
         $actual = $type->serialize($input);

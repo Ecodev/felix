@@ -49,7 +49,7 @@ trait HasOtp
     }
 
     /**
-     * Returns the OTP provisionning URI (to display QR code).
+     * Returns the OTP provisioning URI (to display QR code).
      */
     #[API\Exclude]
     public function getOtpUri(): ?string
@@ -67,7 +67,7 @@ trait HasOtp
     {
         $this->revokeOtpSecret();
 
-        $totp = OTPHP\TOTP::create(null);
+        $totp = OTPHP\TOTP::create();
         $label = $this->getLogin();
         if (!$label) {
             throw new Exception('User must have a login to initialize OTP');

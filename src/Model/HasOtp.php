@@ -21,7 +21,7 @@ interface HasOtp
     public function isOtp(): bool;
 
     /**
-     * Returns the OTP provisionning URI (to display QR code).
+     * Returns the OTP provisioning URI (to display QR code).
      */
     public function getOtpUri(): ?string;
 

@@ -12,7 +12,7 @@ use ReflectionClass;
 
 abstract class SetType extends Type
 {
-    public function getSqlDeclaration(array $fieldDeclaration, AbstractPlatform $platform): string
+    public function getSqlDeclaration(array $column, AbstractPlatform $platform): string
     {
         $possibleValues = $this->getPossibleValues();
         $quotedPossibleValues = implode(', ', array_map(fn ($str) => "'" . $str . "'", $possibleValues));

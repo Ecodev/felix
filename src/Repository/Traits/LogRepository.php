@@ -19,7 +19,7 @@ trait LogRepository
     abstract protected function getEntityManager();
 
     /**
-     * Creates a new QueryBuilder instance that is prepopulated for this entity name.
+     * Creates a new QueryBuilder instance that is pre-populated for this entity name.
      *
      * @param string $alias
      * @param null|string $indexBy the index for the from
@@ -41,7 +41,7 @@ trait LogRepository
     }
 
     /**
-     * Returns whether the current IP often failed to login.
+     * Returns whether the current IP often failed to log in.
      */
     public function loginFailedOften(): bool
     {

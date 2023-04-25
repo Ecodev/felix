@@ -52,7 +52,7 @@ interface LogRepository
     public function log(array $event): void;
 
     /**
-     * Returns whether the current IP often failed to login.
+     * Returns whether the current IP often failed to log in.
      */
     public function loginFailedOften(): bool;
 

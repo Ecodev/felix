@@ -43,7 +43,7 @@ final class AbstractDecimalTypeTest extends TestCase
     /**
      * @dataProvider providerInputs
      */
-    public function testSerialize(int $decimal, ?string $minimum, ?string $maximum, null|float|int|string $input, ?string $expected): void
+    public function testSerialize(int $decimal, ?string $minimum, ?string $maximum, null|float|int|string $input): void
     {
         $type = $this->createType($decimal, $minimum, $maximum);
         $actual = $type->serialize($input);

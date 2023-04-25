@@ -42,7 +42,7 @@ abstract class AbstractMoneyType extends IntegerType
             return null;
         }
 
-        throw new InvalidArgumentException('Cannot convert to dababase value: ' . var_export($value, true));
+        throw new InvalidArgumentException('Cannot convert to database value: ' . var_export($value, true));
     }
 
     public function requiresSQLCommentHint(AbstractPlatform $platform): bool
