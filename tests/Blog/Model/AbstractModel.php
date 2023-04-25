@@ -10,16 +10,13 @@ use Ecodev\Felix\Model\Model;
 
 /**
  * Base class for all objects stored in database.
- *
- * @ORM\MappedSuperclass
  */
+#[ORM\MappedSuperclass]
 abstract class AbstractModel implements HasOwner, Model
 {
-    /**
-     * @ORM\Column(type="integer", options={"unsigned" = true})
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
+    #[ORM\Column(type: 'integer', options: ['unsigned' => true])]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
     protected ?int $id = null;
 
     private ?User $owner = null;

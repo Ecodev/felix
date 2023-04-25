@@ -6,7 +6,7 @@ namespace Ecodev\Felix\Model\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
 use Exception;
-use GraphQL\Doctrine\Annotation as API;
+use GraphQL\Doctrine\Attribute as API;
 use OTPHP;
 
 /**
@@ -14,15 +14,11 @@ use OTPHP;
  */
 trait HasOtp
 {
-    /**
-     * @ORM\Column(type="boolean", options={"default" = 0})
-     */
+    #[ORM\Column(type: 'boolean', options: ['default' => 0])]
     private bool $otp = false;
 
-    /**
-     * @API\Exclude
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[API\Exclude]
     private ?string $otpUri = null;
 
     /**
@@ -33,9 +29,8 @@ trait HasOtp
     /**
      * Enable 2FA for the user
      * This should be only enabled after otpUri has been generated, stored and verified.
-     *
-     * @API\Exclude
      */
+    #[API\Exclude]
     public function setOtp(bool $otp): void
     {
         if ($otp && empty($this->otpUri)) {
@@ -55,9 +50,8 @@ trait HasOtp
 
     /**
      * Returns the OTP provisionning URI (to display QR code).
-     *
-     * @API\Exclude
      */
+    #[API\Exclude]
     public function getOtpUri(): ?string
     {
         return $this->otpUri;
@@ -67,9 +61,8 @@ trait HasOtp
      * Generate and store a new OTP secret.
      *
      * @param string $issuer identify the service that provided the OTP (application or host name)
-     *
-     * @API\Exclude
      */
+    #[API\Exclude]
     public function createOtpSecret(string $issuer): void
     {
         $this->revokeOtpSecret();
@@ -87,9 +80,8 @@ trait HasOtp
     /**
      * Revoke the existing OTP secret
      * This will also disable 2FA.
-     *
-     * @API\Exclude
      */
+    #[API\Exclude]
     public function revokeOtpSecret(): void
     {
         $this->otp = false;
@@ -98,9 +90,8 @@ trait HasOtp
 
     /**
      * Verify an OTP received from the user.
-     *
-     * @API\Exclude
      */
+    #[API\Exclude]
     public function verifyOtp(string $received): bool
     {
         if (empty($this->otpUri)) {

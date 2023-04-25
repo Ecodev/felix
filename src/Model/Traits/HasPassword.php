@@ -6,31 +6,26 @@ namespace Ecodev\Felix\Model\Traits;
 
 use Cake\Chronos\Chronos;
 use Doctrine\ORM\Mapping as ORM;
-use GraphQL\Doctrine\Annotation as API;
+use GraphQL\Doctrine\Attribute as API;
 
 /**
  * Trait for a user with a password and password reset capabilities.
  */
 trait HasPassword
 {
-    /**
-     * @API\Exclude
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
+    #[API\Exclude]
     private string $password = '';
 
-    /**
-     * @API\Exclude
-     * @ORM\Column(type="string", length=32, nullable=true, unique=true)
-     */
+    #[ORM\Column(type: 'string', length: 32, nullable: true, unique: true)]
+    #[API\Exclude]
     private ?string $token = null;
 
     /**
      * The time when user asked to reset password.
-     *
-     * @API\Exclude
-     * @ORM\Column(type="datetime", nullable=true)
      */
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    #[API\Exclude]
     private ?Chronos $tokenCreationDate = null;
 
     /**
@@ -53,9 +48,8 @@ trait HasPassword
 
     /**
      * Returns the hashed password.
-     *
-     * @API\Exclude
      */
+    #[API\Exclude]
     public function getPassword(): string
     {
         return $this->password;
@@ -83,9 +77,8 @@ trait HasPassword
 
     /**
      * Check if token is valid.
-     *
-     * @API\Exclude
      */
+    #[API\Exclude]
     public function isTokenValid(): bool
     {
         if (!$this->tokenCreationDate) {

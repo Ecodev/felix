@@ -20,7 +20,7 @@ trait TestWithEntityManager
     public function setUp(): void
     {
         // Create the entity manager
-        $config = ORMSetup::createAnnotationMetadataConfiguration([__DIR__ . '/Blog/Model'], true);
+        $config = ORMSetup::createAttributeMetadataConfiguration([__DIR__ . '/Blog/Model'], true);
         $config->addCustomNumericFunction('native_in', NativeIn::class);
         $config->setNamingStrategy(new UnderscoreNamingStrategy(CASE_LOWER, true));
 

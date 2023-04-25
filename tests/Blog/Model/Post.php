@@ -8,23 +8,16 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * A blog post with title and body.
- *
- * @ORM\Entity(repositoryClass="EcodevTests\Felix\Blog\Repository\PostRepository")
  */
+#[ORM\Entity(repositoryClass: 'EcodevTests\Felix\Blog\Repository\PostRepository')]
 final class Post extends AbstractModel
 {
-    /**
-     * @ORM\Column(type="string", length=50, options={"default" = ""})
-     */
+    #[ORM\Column(type: 'string', length: 50, options: ['default' => ''])]
     private string $title = '';
 
-    /**
-     * @ORM\Column(type="text")
-     */
+    #[ORM\Column(type: 'text')]
     private string $body = '';
 
-    /**
-     * @ORM\ManyToOne(targetEntity="EcodevTests\Felix\Blog\Model\User", inversedBy="posts")
-     */
+    #[ORM\ManyToOne(targetEntity: 'EcodevTests\Felix\Blog\Model\User', inversedBy: 'posts')]
     private User $user;
 }

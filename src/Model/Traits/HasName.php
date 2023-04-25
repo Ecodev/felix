@@ -11,9 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 trait HasName
 {
-    /**
-     * @ORM\Column(type="string", length=191)
-     */
+    #[ORM\Column(type: 'string', length: 191)]
     private string $name = '';
 
     /**

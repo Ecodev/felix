@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ecodev\Felix\Model;
 
 use Cake\Chronos\Chronos;
+use GraphQL\Doctrine\Attribute as API;
 
 interface Message extends Model
 {
@@ -20,9 +21,8 @@ interface Message extends Model
 
     /**
      * Set sent time.
-     *
-     * @API\Exclude
      */
+    #[Api\Exclude]
     public function setDateSent(?Chronos $dateSent): void;
 
     /**

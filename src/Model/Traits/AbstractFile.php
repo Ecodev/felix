@@ -6,7 +6,7 @@ namespace Ecodev\Felix\Model\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
 use Exception;
-use GraphQL\Doctrine\Annotation as API;
+use GraphQL\Doctrine\Attribute as API;
 use Psr\Http\Message\UploadedFileInterface;
 
 /**
@@ -26,15 +26,11 @@ trait AbstractFile
      */
     abstract protected function getAcceptedMimeTypes(): array;
 
-    /**
-     * @API\Exclude
-     * @ORM\Column(type="string", length=190, options={"default" = ""})
-     */
+    #[ORM\Column(type: 'string', length: 190, options: ['default' => ''])]
+    #[API\Exclude]
     private string $filename = '';
 
-    /**
-     * @ORM\Column(type="string", length=255, options={"default" = ""})
-     */
+    #[ORM\Column(type: 'string', length: 255, options: ['default' => ''])]
     private string $mime = '';
 
     /**
@@ -55,9 +51,8 @@ trait AbstractFile
 
     /**
      * Set filename (without path).
-     *
-     * @API\Exclude
      */
+    #[API\Exclude]
     public function setFilename(string $filename): void
     {
         $this->filename = $filename;
@@ -65,9 +60,8 @@ trait AbstractFile
 
     /**
      * Get filename (without path).
-     *
-     * @API\Exclude
      */
+    #[API\Exclude]
     public function getFilename(): string
     {
         return $this->filename;
@@ -83,9 +77,8 @@ trait AbstractFile
 
     /**
      * Get absolute path to file on disk.
-     *
-     * @API\Exclude
      */
+    #[API\Exclude]
     public function getPath(): string
     {
         return realpath('.') . '/' . $this->getBasePath() . $this->getFilename();
@@ -95,9 +88,8 @@ trait AbstractFile
      * Automatically called by Doctrine when the object is deleted
      * Is called after database update because we can have issues on remove operation (like integrity test)
      * and it's preferable to keep a related file on drive before removing it definitely.
-     *
-     * @ORM\PostRemove
      */
+    #[ORM\PostRemove]
     public function deleteFile(): void
     {
         $path = $this->getPath();

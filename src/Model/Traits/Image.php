@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Ecodev\Felix\Model\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
-use GraphQL\Doctrine\Annotation as API;
+use GraphQL\Doctrine\Attribute as API;
 use Imagine\Filter\Basic\Autorotate;
 use Imagine\Image\ImagineInterface;
 use Psr\Http\Message\UploadedFileInterface;
@@ -38,14 +38,10 @@ trait Image
         ];
     }
 
-    /**
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Column(type: 'integer')]
     private int $width = 0;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Column(type: 'integer')]
     private int $height = 0;
 
     /**
@@ -58,9 +54,8 @@ trait Image
 
     /**
      * Set image width.
-     *
-     * @API\Exclude
      */
+    #[API\Exclude]
     public function setWidth(int $width): void
     {
         $this->width = $width;
@@ -76,9 +71,8 @@ trait Image
 
     /**
      * Set image height.
-     *
-     * @API\Exclude
      */
+    #[API\Exclude]
     public function setHeight(int $height): void
     {
         $this->height = $height;

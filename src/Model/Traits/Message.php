@@ -6,43 +6,32 @@ namespace Ecodev\Felix\Model\Traits;
 
 use Cake\Chronos\Chronos;
 use Doctrine\ORM\Mapping as ORM;
-use GraphQL\Doctrine\Annotation as API;
+use GraphQL\Doctrine\Attribute as API;
 
 /**
  * A message sent to a user.
  */
 trait Message
 {
-    /**
-     * @ORM\Column(type="string", length=191)
-     */
+    #[ORM\Column(type: 'string', length: 191)]
     private string $email = '';
 
-    /**
-     * @ORM\Column(type="MessageType")
-     */
+    #[ORM\Column(type: 'MessageType')]
     private string $type;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
+    #[ORM\Column(type: 'datetime', nullable: true)]
     private ?Chronos $dateSent = null;
 
-    /**
-     * @ORM\Column(type="string", length=255, options={"default" = ""})
-     */
+    #[ORM\Column(type: 'string', length: 255, options: ['default' => ''])]
     private string $subject = '';
 
-    /**
-     * @ORM\Column(type="text", length=65535, options={"default" = ""})
-     */
+    #[ORM\Column(type: 'text', length: 65535, options: ['default' => ''])]
     private string $body = '';
 
     /**
      * Set type.
-     *
-     * @API\Input(type="MessageType")
      */
+    #[API\Input(type: 'MessageType')]
     public function setType(string $type): void
     {
         $this->type = $type;
@@ -50,9 +39,8 @@ trait Message
 
     /**
      * Get type.
-     *
-     * @API\Field(type="MessageType")
      */
+    #[API\Field(type: 'MessageType')]
     public function getType(): string
     {
         return $this->type;
@@ -88,9 +76,8 @@ trait Message
 
     /**
      * Set sent time.
-     *
-     * @API\Exclude
      */
+    #[API\Exclude]
     public function setDateSent(?Chronos $dateSent): void
     {
         $this->dateSent = $dateSent;

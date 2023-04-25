@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Ecodev\Felix\Model\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
-use GraphQL\Doctrine\Annotation as API;
+use GraphQL\Doctrine\Attribute as API;
 
 /**
  * Log.
@@ -14,37 +14,26 @@ trait Log
 {
     use HasUrl;
 
-    /**
-     * @ORM\Column(type="smallint")
-     */
+    #[ORM\Column(type: 'smallint')]
     private int $priority;
 
-    /**
-     * @ORM\Column(type="string", length=5000, nullable=false)
-     */
+    #[ORM\Column(type: 'string', length: 5000, nullable: false)]
     private string $message = '';
 
-    /**
-     * @ORM\Column(type="string", length=500, nullable=false)
-     */
+    #[ORM\Column(type: 'string', length: 500, nullable: false)]
     private string $referer = '';
 
-    /**
-     * @ORM\Column(type="string", length=1000, nullable=false)
-     */
+    #[ORM\Column(type: 'string', length: 1000, nullable: false)]
     private string $request = '';
 
-    /**
-     * @ORM\Column(type="string", length=40, nullable=false)
-     */
+    #[ORM\Column(type: 'string', length: 40, nullable: false)]
     private string $ip = '';
 
     /**
      * The statistics data.
-     *
-     * @API\Exclude
-     * @ORM\Column(type="json", options={"default" = "[]"})
      */
+    #[ORM\Column(type: 'json', options: ['default' => '[]'])]
+    #[API\Exclude]
     private array $extra = [];
 
     /**
@@ -127,17 +116,13 @@ trait Log
         return $this->ip;
     }
 
-    /**
-     * @API\Exclude
-     */
+    #[API\Exclude]
     public function getExtra(): array
     {
         return $this->extra;
     }
 
-    /**
-     * @API\Exclude
-     */
+    #[API\Exclude]
     public function setExtra(array $extra): void
     {
         $this->extra = $extra;
