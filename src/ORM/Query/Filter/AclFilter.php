@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Ecodev\Felix\ORM\Query\Filter;
 
-use Doctrine\Common\Cache\ClearableCache;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Query\Filter\SQLFilter;
 use Ecodev\Felix\Model\User;
@@ -105,10 +104,7 @@ final class AclFilter extends SQLFilter
         $this->user = $user;
         $this->resetCache();
 
-        $cache = _em()->getConfiguration()->getQueryCacheImpl();
-        if ($cache instanceof ClearableCache) {
-            $cache->deleteAll();
-        }
+        _em()->getConfiguration()->getQueryCache()?->clear();
     }
 
     private function resetCache(): void
