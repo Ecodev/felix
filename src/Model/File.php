@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Ecodev\Felix\Model;
 
+use Psr\Http\Message\UploadedFileInterface;
+
 interface File
 {
     /**
@@ -20,4 +22,9 @@ interface File
      * Set filename (without path).
      */
     public function setFilename(string $filename): void;
+
+    /**
+     * Set the file.
+     */
+    public function setFile(UploadedFileInterface $file): void;
 }

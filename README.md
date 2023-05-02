@@ -26,4 +26,4 @@ specific purpose. It is not meant to be generic.
 If code is becoming too complex to adapt to all use-cases, then we should instead
 consider implementing it in the application itself instead ot this library.
 
-![Felix](logo.svg)
+![Felix](./tests/data/images/logo.svg)

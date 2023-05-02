@@ -20,7 +20,7 @@ class ImageResizer
     }
 
     /**
-     * Resize image as JPG or WEBP and return the path to the resized version.
+     * Resize image as JPG or WebP and return the path to the resized version.
      */
     public function resize(Image $image, int $maxHeight, bool $useWebp): string
     {
@@ -44,7 +44,7 @@ class ImageResizer
     }
 
     /**
-     * Assumes the image is WEBP, converts it to JPG, and return path to JPG version.
+     * Assumes the image is WebP, converts it to JPG, and return path to JPG version.
      */
     public function webpToJpg(Image $image): string
     {

@@ -111,7 +111,7 @@ trait AbstractFile
     /**
      * Delete file and throw exception if MIME type is invalid.
      */
-    private function validateMimeType(): void
+    final protected function validateMimeType(): void
     {
         $path = $this->getPath();
         $mime = mime_content_type($path);

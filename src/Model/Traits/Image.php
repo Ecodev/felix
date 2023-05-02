@@ -7,6 +7,7 @@ namespace Ecodev\Felix\Model\Traits;
 use Doctrine\ORM\Mapping as ORM;
 use GraphQL\Doctrine\Attribute as API;
 use Imagine\Filter\Basic\Autorotate;
+use Imagine\Image\Box;
 use Imagine\Image\ImagineInterface;
 use Psr\Http\Message\UploadedFileInterface;
 
@@ -99,14 +100,42 @@ trait Image
         $imagine = $container->get(ImagineInterface::class);
         $image = $imagine->open($path);
 
-        // Auto-rotate image if EXIF says it's rotated, but only JPG, otherwise it might deteriorate other format (SVG)
-        if ($this->getMime() === 'image/jpeg') {
-            $autorotate = new Autorotate();
-            $autorotate->apply($image);
-            $image->save($path);
-        }
-
         $size = $image->getSize();
+        $maxSize = 3500; // Maximum size ever of an image is a bit less than 4K
+        $tooBig = $size->getWidth() > $maxSize || $size->getHeight() > $maxSize;
+
+        // Pretty much only SVG is better than WebP
+        $worseThanWebp = in_array($this->getMime(), [
+            'image/bmp',
+            'image/x-ms-bmp',
+            'image/gif',
+            'image/jpeg',
+            'image/pjpeg',
+            'image/png', // We lose animation, even though WebP supports it, but we assume we never use animated PNG anyway
+        ], true);
+
+        if ($tooBig || $worseThanWebp) {
+            // Auto-rotate image if EXIF says it's rotated, but only JPG, otherwise it might deteriorate other format (SVG)
+            if ($this->getMime() === 'image/jpeg') {
+                $autorotate = new Autorotate();
+                $autorotate->apply($image);
+            }
+
+            $image = $image->thumbnail(new Box($maxSize, $maxSize));
+            $size = $image->getSize();
+
+            // Replace extension
+            if ($worseThanWebp) {
+                $this->setFilename(preg_replace('~((\\.[^.]+)?$)~', '', $this->getFilename()) . '.webp');
+                $newPath = $this->getPath();
+                $image->save($newPath);
+                unlink($path);
+            } else {
+                $image->save($path);
+            }
+
+            $this->validateMimeType();
+        }
 
         $this->setWidth($size->getWidth());
         $this->setHeight($size->getHeight());
