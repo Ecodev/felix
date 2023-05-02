@@ -26,17 +26,17 @@ class ImageResizerTest extends TestCase
         };
 
         $imagineImage = $this->createMock(ImageInterface::class);
-        $imagineImage->expects(self::any())->method('thumbnail')->willReturnSelf();
+        $imagineImage->expects(self::atMost(1))->method('thumbnail')->willReturnSelf();
 
         $imagine = $this->createMock(ImagineInterface::class);
-        $imagine->expects(self::any())->method('open')->willReturn($imagineImage);
+        $imagine->expects(self::atMost(1))->method('open')->willReturn($imagineImage);
 
         $resizer = new ImageResizer($imagine);
         $image = $this->createMock(Image::class);
         $image->expects(self::once())->method('getPath')->willReturn('/felix/image.' . $extension);
-        $image->expects(self::any())->method('getFilename')->willReturn('image.' . $extension);
+        $image->expects(self::atMost(1))->method('getFilename')->willReturn('image.' . $extension);
         $image->expects(self::atMost(1))->method('getHeight')->willReturn(200);
-        $image->expects(self::any())->method('getMime')->willReturn($mime);
+        $image->expects(self::atMost(1))->method('getMime')->willReturn($mime);
 
         $actual = $resizer->resize($image, $wantedHeight, $useWebp);
         self::assertStringEndsWith($expected, $actual);
@@ -68,5 +68,21 @@ class ImageResizerTest extends TestCase
             'tiff bigger' => ['tiff', 300, false, 'data/cache/images/image-200.jpg'],
             'tiff bigger webp' => ['tiff', 300, true, 'data/cache/images/image-200.webp'],
         ];
+    }
+
+    public function testWebpToJpg(): void
+    {
+        $imagineImage = $this->createMock(ImageInterface::class);
+
+        $imagine = $this->createMock(ImagineInterface::class);
+        $imagine->expects(self::once())->method('open')->willReturn($imagineImage);
+
+        $imageResizer = new ImageResizer($imagine);
+        $image = $this->createMock(Image::class);
+        $image->expects(self::once())->method('getPath')->willReturn('/felix/image.webp');
+        $image->expects(self::once())->method('getFilename')->willReturn('image.webp');
+
+        $actual = $imageResizer->webpToJpg($image);
+        self::assertStringEndsWith('data/cache/images/image.jpg', $actual);
     }
 }

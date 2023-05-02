@@ -35,12 +35,15 @@ final class ImageHandler extends AbstractHandler
             return $this->createError("Image for image $id not found on disk, or not readable");
         }
 
+        $isWebp = $image->getMime() === 'image/webp';
+        $accept = $request->getHeaderLine('accept');
+        $acceptWebp = str_contains($accept, 'image/webp');
+
         $maxHeight = (int) $request->getAttribute('maxHeight');
         if ($maxHeight) {
-            $accept = $request->getHeaderLine('accept');
-            $useWebp = str_contains($accept, 'image/webp');
-
-            $path = $this->imageResizer->resize($image, $maxHeight, $useWebp);
+            $path = $this->imageResizer->resize($image, $maxHeight, $acceptWebp);
+        } elseif ($isWebp && !$acceptWebp) {
+            $path = $this->imageResizer->webpToJpg($image);
         }
 
         $resource = fopen($path, 'rb');

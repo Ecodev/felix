@@ -30,9 +30,8 @@ class ImageResizer
 
         $maxHeight = min($maxHeight, $image->getHeight());
 
-        $basename = pathinfo($image->getFilename(), PATHINFO_FILENAME);
         $extension = $useWebp ? '.webp' : '.jpg';
-        $path = realpath('.') . '/' . self::CACHE_IMAGE_PATH . $basename . '-' . $maxHeight . $extension;
+        $path = $this->getCachePath($image, '-' . $maxHeight . $extension);
 
         if (file_exists($path)) {
             return $path;
@@ -42,5 +41,29 @@ class ImageResizer
         $image->thumbnail(new Box(1_000_000, $maxHeight))->save($path);
 
         return $path;
+    }
+
+    /**
+     * Assumes the image is WEBP, converts it to JPG, and return path to JPG version.
+     */
+    public function webpToJpg(Image $image): string
+    {
+        $path = $this->getCachePath($image, '.jpg');
+
+        if (file_exists($path)) {
+            return $path;
+        }
+
+        $image = $this->imagine->open($image->getPath());
+        $image->save($path);
+
+        return $path;
+    }
+
+    private function getCachePath(Image $image, string $suffix): string
+    {
+        $basename = pathinfo($image->getFilename(), PATHINFO_FILENAME);
+
+        return realpath('.') . '/' . self::CACHE_IMAGE_PATH . $basename . $suffix;
     }
 }

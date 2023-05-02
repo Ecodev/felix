@@ -8,6 +8,7 @@ use Doctrine\Persistence\ObjectRepository;
 use Ecodev\Felix\Handler\ImageHandler;
 use Ecodev\Felix\Model\Image;
 use Ecodev\Felix\Service\ImageResizer;
+use Exception;
 use Laminas\Diactoros\ServerRequest;
 use org\bovigo\vfs\vfsStream;
 use PHPUnit\Framework\TestCase;
@@ -28,7 +29,7 @@ class ImageHandlerTest extends TestCase
         vfsStream::setup('felix', null, $virtualFileSystem);
     }
 
-    public function testWillServeJpgByDefault(): void
+    public function testWillServeThumbnailJpgByDefault(): void
     {
         $image = $this->createImageMock();
         $repository = $this->createRepositoryMock($image);
@@ -51,7 +52,7 @@ class ImageHandlerTest extends TestCase
         self::assertSame('max-age=21600', $response->getHeaderLine('cache-control'));
     }
 
-    public function testWillServeWebpIfAccepted(): void
+    public function testWillServeThumbnailWebpIfAccepted(): void
     {
         $image = $this->createImageMock();
         $repository = $this->createRepositoryMock($image);
@@ -72,6 +73,46 @@ class ImageHandlerTest extends TestCase
 
         self::assertSame('image/webp', $response->getHeaderLine('content-type'));
         self::assertSame('15', $response->getHeaderLine('content-length'));
+        self::assertSame('max-age=21600', $response->getHeaderLine('cache-control'));
+    }
+
+    public function testWillServeOriginalWebpIfAccepted(): void
+    {
+        $image = $this->createImageMock('vfs://felix/image-100.webp');
+        $repository = $this->createRepositoryMock($image);
+
+        $imageResizer = $this->createMock(ImageResizer::class);
+
+        // A request specifically accepting webp images
+        $request = new ServerRequest();
+        $request = $request
+            ->withHeader('accept', 'text/html, image/webp, */*;q=0.8');
+
+        $response = $this->handle($repository, $imageResizer, $request);
+
+        self::assertSame('image/webp', $response->getHeaderLine('content-type'));
+        self::assertSame('15', $response->getHeaderLine('content-length'));
+        self::assertSame('max-age=21600', $response->getHeaderLine('cache-control'));
+    }
+
+    public function testWillServeOriginalJpgIfWebpNotAccepted(): void
+    {
+        $image = $this->createImageMock('vfs://felix/image-100.webp');
+        $repository = $this->createRepositoryMock($image);
+
+        $imageResizer = $this->createMock(ImageResizer::class);
+        $imageResizer->expects(self::once())
+            ->method('webpToJpg')
+            ->with($image)
+            ->willReturn('vfs://felix/image-100.jpg');
+
+        // A request specifically accepting webp images
+        $request = new ServerRequest();
+
+        $response = $this->handle($repository, $imageResizer, $request);
+
+        self::assertSame('image/jpeg', $response->getHeaderLine('content-type'));
+        self::assertSame('16', $response->getHeaderLine('content-length'));
         self::assertSame('max-age=21600', $response->getHeaderLine('cache-control'));
     }
 
@@ -115,6 +156,13 @@ class ImageHandlerTest extends TestCase
     {
         $image = $this->createMock(Image::class);
         $image->expects(self::once())->method('getPath')->willReturn($path);
+        $image->expects(self::atMost(1))->method('getMime')->willReturn(match ($path) {
+            'vfs://felix/image.png' => 'image/png',
+            'vfs://felix/image-100.jpg' => 'image/jpeg',
+            'vfs://felix/image-100.webp' => 'image/webp',
+            'vfs://felix/totally-non-existing-path' => '',
+            default => throw new Exception('Unsupported :' . $path),
+        });
 
         return $image;
     }
