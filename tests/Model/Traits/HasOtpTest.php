@@ -89,6 +89,12 @@ final class HasOtpTest extends TestCase
 
         $otp = Factory::loadFromProvisioningUri($uri);
         self::assertInstanceOf(TOTPInterface::class, $otp);
-        self::assertTrue($this->user->verifyOtp($otp->now()), 'Correct OTP given');
+
+        // This is very time sensitive, and test might be flaky if the generated OTP is on the last
+        // millisecond of a second, and the verification happens on the first millisecond of the next second.
+        // To limit flakiness, we test with a slightly shorter time period than what is actually allowed.
+        self::assertTrue($this->user->verifyOtp($otp->at(time())), 'Correct OTP given');
+        self::assertTrue($this->user->verifyOtp($otp->at(time() - 27)), 'Even accept correct past OTP, in case of mobile device clock sync failure');
+        self::assertTrue($this->user->verifyOtp($otp->at(time() + 27)), 'Even accept correct future OTP, in case of mobile device clock sync failure');
     }
 }

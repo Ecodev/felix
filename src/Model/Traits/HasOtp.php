@@ -99,6 +99,6 @@ trait HasOtp
         }
         $otp = OTPHP\Factory::loadFromProvisioningUri($this->otpUri);
 
-        return $otp->verify($received);
+        return $otp->verify($received, null, 29);
     }
 }
