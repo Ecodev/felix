@@ -11,8 +11,6 @@ use GraphQL\GraphQL;
 use GraphQL\Server\ServerConfig;
 use GraphQL\Server\StandardServer;
 use GraphQL\Type\Schema;
-use GraphQL\Validator\DocumentValidator;
-use GraphQL\Validator\Rules\DisableIntrospection;
 use Mezzio\Session\SessionMiddleware;
 use Psr\Http\Message\ServerRequestInterface;
 use Throwable;
@@ -27,19 +25,13 @@ class Server
     private readonly ServerConfig $config;
 
     /**
-     * @param bool $debug if true, allows the introspection query, and dumps stacktrace in case of error
+     * @param bool $debug if true, dumps stacktrace in case of error
      */
     public function __construct(Schema $schema, bool $debug, array $rootValue = [])
     {
         GraphQL::setDefaultFieldResolver(new FilteredFieldResolver());
 
         $debugFlag = DebugFlag::INCLUDE_DEBUG_MESSAGE | DebugFlag::INCLUDE_TRACE;
-
-        // Forbid introspection query in production mode, because our API is not meant to be publicly available
-        if (!$debug) {
-            $rule = new DisableIntrospection(DisableIntrospection::ENABLED);
-            DocumentValidator::addRule($rule);
-        }
 
         $this->config = ServerConfig::create([
             'schema' => $schema,
