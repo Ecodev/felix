@@ -22,7 +22,7 @@ interface HasPassword
     /**
      * Generate a new random token to reset password.
      */
-    public function createToken(): string;
+    public function createToken(bool $mobileToken = false): string;
 
     /**
      * Destroy existing token.

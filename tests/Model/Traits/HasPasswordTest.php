@@ -70,14 +70,19 @@ final class HasPasswordTest extends TestCase
         self::assertEquals(32, mb_strlen($token5), 'must be exactly the length of DB field');
         self::assertFalse($this->user->isTokenValid(), 'too old token is invalid');
 
+        $token6 = $this->user->createToken(true);
+        self::assertEquals(6, mb_strlen($token6), 'mobile token must be exactly 6 digits');
+        self::assertTrue($this->user->isTokenValid(), 'brand new mobile token is valid');
+
         $allTokens = [
             $token1,
             $token2,
             $token3,
             $token4,
             $token5,
+            $token6,
         ];
 
-        self::assertCount(5, array_unique($allTokens), 'all tokens must be unique');
+        self::assertCount(6, array_unique($allTokens), 'all tokens must be unique');
     }
 }

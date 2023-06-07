@@ -28,7 +28,10 @@ final class TokenTypeTest extends AbstractStringBasedType
             [str_repeat('a', 32), str_repeat('a', 32), true],
             ['abcdefabcdef01234567890123456789', 'abcdefabcdef01234567890123456789', true],
             ['Abcdefabcdef01234567890123456789', 'Abcdefabcdef01234567890123456789', false],
-
+            ['abcdef', 'abcdef', false],
+            ['123456', '123456', true],
+            ['1234567', '1234567', false],
+            ['12345', '12345', false],
             [null, null, false],
             [' ', ' ', false],
             ['a ', 'a ', false],

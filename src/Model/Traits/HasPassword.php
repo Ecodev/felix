@@ -58,9 +58,9 @@ trait HasPassword
     /**
      * Generate a new random token to reset password.
      */
-    public function createToken(): string
+    public function createToken(bool $mobileToken = false): string
     {
-        $this->token = bin2hex(random_bytes(16));
+        $this->token = $mobileToken ? str_pad((string) random_int(0, 999999), 6, '0', STR_PAD_LEFT) : bin2hex(random_bytes(16));
         $this->tokenCreationDate = new Chronos();
 
         return $this->token;
