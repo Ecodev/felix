@@ -84,4 +84,24 @@ abstract class Utility
 
         return $result;
     }
+
+    /**
+     * Safely quotes an array of values for an SQL statement.
+     *
+     * The values are quoted and then returned as a comma-separated string, so:
+     *
+     * ```php
+     * Utility::quoteArray(['foo bar', 2]); // "'foo bar', '2'"
+     * ```
+     */
+    public static function quoteArray(array $value): string
+    {
+        $connection = _em()->getConnection();
+        $quoted = [];
+        foreach ($value as $v) {
+            $quoted[] = $connection->quote($v);
+        }
+
+        return implode(', ', $quoted);
+    }
 }

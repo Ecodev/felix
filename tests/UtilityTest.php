@@ -7,6 +7,7 @@ namespace EcodevTests\Felix;
 use Ecodev\Felix\Model\Model;
 use Ecodev\Felix\Utility;
 use EcodevTests\Felix\Blog\Model\User;
+use EcodevTests\Felix\Traits\TestWithEntityManager;
 use GraphQL\Doctrine\Definition\EntityID;
 use PHPUnit\Framework\TestCase;
 use stdClass;
@@ -14,6 +15,8 @@ use Throwable;
 
 final class UtilityTest extends TestCase
 {
+    use TestWithEntityManager;
+
     public function testGetShortClassName(): void
     {
         self::assertSame('User', Utility::getShortClassName(new User()));
@@ -122,5 +125,26 @@ final class UtilityTest extends TestCase
         yield [SORT_NUMERIC];
         yield [SORT_STRING];
         yield [SORT_LOCALE_STRING];
+    }
+
+    /**
+     * @dataProvider providerQuoteArray
+     */
+    public function testQuoteArray(array $input, string $expected): void
+    {
+        self::assertSame($expected, Utility::quoteArray($input));
+    }
+
+    public function providerQuoteArray(): iterable
+    {
+        yield [[1, 2], "'1', '2'"];
+        yield [['foo bar', 'baz'], "'foo bar', 'baz'"];
+        yield [[], ''];
+        yield [[''], "''"];
+        yield [[false], ''];
+        yield [[null], ''];
+        yield [[0], "'0'"];
+        yield [[true], "'1'"];
+        yield [[1.23], "'1.23'"];
     }
 }
