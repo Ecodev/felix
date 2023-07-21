@@ -9,6 +9,10 @@ class ConfigProvider
     public function __invoke(): array
     {
         return [
+            'signedQueries' => [
+                'required' => true,
+                'keys' => [],
+            ],
             'dependencies' => [
                 'invokables' => [
                     \Ecodev\Felix\DBAL\Logging\ForwardSQLLogger::class,
@@ -18,6 +22,7 @@ class ConfigProvider
                     \Ecodev\Felix\I18n\Translator::class => \Ecodev\Felix\I18n\NoTranslationFactory::class,
                     \Ecodev\Felix\Log\EventCompleter::class => \Ecodev\Felix\Log\EventCompleterFactory::class,
                     \Ecodev\Felix\Log\Writer\Mail::class => \Ecodev\Felix\Log\Writer\MailFactory::class,
+                    \Ecodev\Felix\Middleware\SignedQueryMiddleware::class => \Ecodev\Felix\Middleware\SignedQueryMiddlewareFactory::class,
                     \Ecodev\Felix\Service\ImageResizer::class => \Ecodev\Felix\Service\ImageResizerFactory::class,
                     \Ecodev\Felix\Service\MessageRenderer::class => \Ecodev\Felix\Service\MessageRendererFactory::class,
                     \Imagine\Image\ImagineInterface::class => \Ecodev\Felix\Service\ImagineFactory::class,
