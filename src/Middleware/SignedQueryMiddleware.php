@@ -50,7 +50,7 @@ final class SignedQueryMiddleware implements MiddlewareInterface
     {
         $autorization = $request->getHeader('authorization')[0] ?? '';
         if (!$autorization) {
-            throw new Exception('Missing `Authorization` HTTP header in signed query');
+            throw new Exception('Missing `Authorization` HTTP header in signed query', 403);
         }
 
         if (preg_match('~^v1\.(?<timestamp>\d{10})\.(?<hash>[0-9a-f]{64})$~', $autorization, $m)) {
@@ -60,7 +60,7 @@ final class SignedQueryMiddleware implements MiddlewareInterface
             $this->verifyTimestamp($timestamp);
             $this->verifyHash($request, $timestamp, $hash);
         } else {
-            throw new Exception('Invalid `Authorization` HTTP header in signed query');
+            throw new Exception('Invalid `Authorization` HTTP header in signed query', 403);
         }
     }
 
@@ -71,7 +71,7 @@ final class SignedQueryMiddleware implements MiddlewareInterface
         $past = $now - $leeway;
         $future = $now + $leeway;
         if ($timestamp < $past || $timestamp > $future) {
-            throw new Exception('Signed query is expired');
+            throw new Exception('Signed query is expired', 403);
         }
     }
 
@@ -87,7 +87,7 @@ final class SignedQueryMiddleware implements MiddlewareInterface
             }
         }
 
-        throw new Exception('Invalid signed query');
+        throw new Exception('Invalid signed query', 403);
     }
 
     private function getOperations(ServerRequestInterface $request): mixed
@@ -105,6 +105,6 @@ final class SignedQueryMiddleware implements MiddlewareInterface
             }
         }
 
-        throw new Exception('Could not find GraphQL operations in request');
+        throw new Exception('Could not find GraphQL operations in request', 403);
     }
 }

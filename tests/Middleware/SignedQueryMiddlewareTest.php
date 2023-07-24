@@ -43,6 +43,7 @@ class SignedQueryMiddlewareTest extends TestCase
     public function testThrowIfNoKeys(): void
     {
         $this->expectExceptionMessage('Signed queries are required, but no keys are configured');
+        $this->expectExceptionCode(0);
         new SignedQueryMiddleware([]);
     }
 
@@ -64,6 +65,7 @@ class SignedQueryMiddlewareTest extends TestCase
 
         if ($expectExceptionMessage) {
             $this->expectExceptionMessage($expectExceptionMessage);
+            $this->expectExceptionCode(403);
         }
 
         $middleware->process($request, $handler);
