@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ecodev\Felix\Middleware;
 
 use Cake\Chronos\Chronos;
+use Ecodev\Felix\Validator\IPRange;
 use Exception;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -30,8 +31,11 @@ use Psr\Http\Server\RequestHandlerInterface;
  */
 final class SignedQueryMiddleware implements MiddlewareInterface
 {
-    public function __construct(private readonly array $keys, private readonly bool $required = true)
-    {
+    public function __construct(
+        private readonly array $keys,
+        private readonly array $allowedIps,
+        private readonly bool $required = true
+    ) {
         if ($this->required && !$this->keys) {
             throw new Exception('Signed queries are required, but no keys are configured');
         }
@@ -50,6 +54,10 @@ final class SignedQueryMiddleware implements MiddlewareInterface
     {
         $autorization = $request->getHeader('authorization')[0] ?? '';
         if (!$autorization) {
+            if ($this->isAllowedIp($request)) {
+                return;
+            }
+
             throw new Exception('Missing `Authorization` HTTP header in signed query', 403);
         }
 
@@ -106,5 +114,22 @@ final class SignedQueryMiddleware implements MiddlewareInterface
         }
 
         throw new Exception('Could not find GraphQL operations in request', 403);
+    }
+
+    private function isAllowedIp(ServerRequestInterface $request): bool
+    {
+        $remoteAddress = $request->getServerParams()['REMOTE_ADDR'] ?? '';
+
+        if (!$remoteAddress || !is_string($remoteAddress)) {
+            return false;
+        }
+
+        foreach ($this->allowedIps as $allowedIp) {
+            if (IPRange::matches($remoteAddress, $allowedIp)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

@@ -18,6 +18,6 @@ class SignedQueryMiddlewareFactory implements FactoryInterface
         $config = $container->get('config');
         $signedQueries = $config['signedQueries'];
 
-        return new SignedQueryMiddleware($signedQueries['keys'], $signedQueries['required']);
+        return new SignedQueryMiddleware($signedQueries['keys'], $signedQueries['allowedIps'], $signedQueries['required']);
     }
 }

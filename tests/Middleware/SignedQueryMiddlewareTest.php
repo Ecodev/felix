@@ -27,9 +27,9 @@ class SignedQueryMiddlewareTest extends TestCase
     /**
      * @dataProvider dataProviderQuery
      */
-    public function testRequiredSignedQuery(array $keys, string $body, null|array $parsedBody, string $signature, string $expectExceptionMessage = ''): void
+    public function testRequiredSignedQuery(array $keys, string $body, null|array $parsedBody, string $signature, string $expectExceptionMessage = '', string $ip = ''): void
     {
-        $this->process($keys, true, $body, $parsedBody, $signature, $expectExceptionMessage);
+        $this->process($keys, true, $ip, $body, $parsedBody, $signature, $expectExceptionMessage);
     }
 
     /**
@@ -37,19 +37,19 @@ class SignedQueryMiddlewareTest extends TestCase
      */
     public function testNonRequiredSignedQuery(array $keys, string $body, null|array $parsedBody, string $signature): void
     {
-        $this->process($keys, false, $body, $parsedBody, $signature, '');
+        $this->process($keys, false, '', $body, $parsedBody, $signature, '');
     }
 
     public function testThrowIfNoKeys(): void
     {
         $this->expectExceptionMessage('Signed queries are required, but no keys are configured');
         $this->expectExceptionCode(0);
-        new SignedQueryMiddleware([]);
+        new SignedQueryMiddleware([], []);
     }
 
-    private function process(array $keys, bool $required, string $body, null|array $parsedBody, string $signature, string $expectExceptionMessage): void
+    private function process(array $keys, bool $required, string $ip, string $body, null|array $parsedBody, string $signature, string $expectExceptionMessage): void
     {
-        $request = new ServerRequest();
+        $request = new ServerRequest(['REMOTE_ADDR' => $ip]);
         $request = $request->withBody(new CallbackStream(fn () => $body))->withParsedBody($parsedBody);
 
         if ($signature) {
@@ -61,7 +61,7 @@ class SignedQueryMiddlewareTest extends TestCase
             ->method('handle')
             ->willReturn(new Response());
 
-        $middleware = new SignedQueryMiddleware($keys, $required);
+        $middleware = new SignedQueryMiddleware($keys, ['1.2.3.4', '2a01:198:603:0::/65'], $required);
 
         if ($expectExceptionMessage) {
             $this->expectExceptionMessage($expectExceptionMessage);
@@ -179,6 +179,24 @@ class SignedQueryMiddlewareTest extends TestCase
             null,
             'v1.1577964600.' . str_repeat('a', 64),
             'Could not find GraphQL operations in request',
+        ];
+
+        yield 'no header, but allowed IPv4' => [
+            [$key1],
+            '{"operationName":"CurrentUser","variables":{},"query":"query CurrentUser { viewer { id }}',
+            null,
+            '',
+            '',
+            '1.2.3.4',
+        ];
+
+        yield 'simple but wrong key will still error even if IP is allowed, because we want to be able to test signature even when allowed' => [
+            [$key2],
+            '{"operationName":"CurrentUser","variables":{},"query":"query CurrentUser { viewer { id }}',
+            null,
+            'v1.1577964600.a4d664cd3d9903e4fecf6f9f671ad953586a7faeb16e67c306fd9f29999dfdd7',
+            'Invalid signed query',
+            '1.2.3.4',
         ];
     }
 }

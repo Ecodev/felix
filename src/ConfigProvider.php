@@ -12,6 +12,7 @@ class ConfigProvider
             'signedQueries' => [
                 'required' => true,
                 'keys' => [],
+                'allowedIps' => [],
             ],
             'dependencies' => [
                 'invokables' => [
