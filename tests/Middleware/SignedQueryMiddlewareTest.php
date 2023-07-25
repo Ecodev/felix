@@ -53,7 +53,7 @@ class SignedQueryMiddlewareTest extends TestCase
         $request = $request->withBody(new CallbackStream(fn () => $body))->withParsedBody($parsedBody);
 
         if ($signature) {
-            $request = $request->withHeader('Authorization', $signature);
+            $request = $request->withHeader('X-Signature', $signature);
         }
 
         $handler = $this->createMock(RequestHandlerInterface::class);
@@ -162,7 +162,7 @@ class SignedQueryMiddlewareTest extends TestCase
             '{"operationName":"CurrentUser","variables":{},"query":"query CurrentUser { viewer { id }}',
             null,
             '',
-            'Missing `Authorization` HTTP header in signed query',
+            'Missing `X-Signature` HTTP header in signed query',
         ];
 
         yield 'invalid header' => [
@@ -170,7 +170,7 @@ class SignedQueryMiddlewareTest extends TestCase
             '{"operationName":"CurrentUser","variables":{},"query":"query CurrentUser { viewer { id }}',
             null,
             'foo',
-            'Invalid `Authorization` HTTP header in signed query',
+            'Invalid `X-Signature` HTTP header in signed query',
         ];
 
         yield 'no graphql operations' => [

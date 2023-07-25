@@ -13,7 +13,7 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 /**
- * Validate that the GraphQL query contains a valid signature in the `Authorization` HTTP header.
+ * Validate that the GraphQL query contains a valid signature in the `X-Signature` HTTP header.
  *
  * The signature payload is the GraphQL operation (or operations in case of batching). That means that the query itself
  * and the variables are signed. But it specifically does **not** include uploaded files.
@@ -52,23 +52,23 @@ final class SignedQueryMiddleware implements MiddlewareInterface
 
     private function verify(ServerRequestInterface $request): void
     {
-        $autorization = $request->getHeader('authorization')[0] ?? '';
-        if (!$autorization) {
+        $signature = $request->getHeader('X-Signature')[0] ?? '';
+        if (!$signature) {
             if ($this->isAllowedIp($request)) {
                 return;
             }
 
-            throw new Exception('Missing `Authorization` HTTP header in signed query', 403);
+            throw new Exception('Missing `X-Signature` HTTP header in signed query', 403);
         }
 
-        if (preg_match('~^v1\.(?<timestamp>\d{10})\.(?<hash>[0-9a-f]{64})$~', $autorization, $m)) {
+        if (preg_match('~^v1\.(?<timestamp>\d{10})\.(?<hash>[0-9a-f]{64})$~', $signature, $m)) {
             $timestamp = $m['timestamp'];
             $hash = $m['hash'];
 
             $this->verifyTimestamp($timestamp);
             $this->verifyHash($request, $timestamp, $hash);
         } else {
-            throw new Exception('Invalid `Authorization` HTTP header in signed query', 403);
+            throw new Exception('Invalid `X-Signature` HTTP header in signed query', 403);
         }
     }
 
