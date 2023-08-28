@@ -60,7 +60,7 @@ trait HasOtp
     /**
      * Generate and store a new OTP secret.
      *
-     * @param string $issuer identify the service that provided the OTP (application or host name)
+     * @param non-empty-string $issuer identify the service that provided the OTP (application or host name)
      */
     #[API\Exclude]
     public function createOtpSecret(string $issuer): void
@@ -90,6 +90,8 @@ trait HasOtp
 
     /**
      * Verify an OTP received from the user.
+     *
+     * @param non-empty-string $received
      */
     #[API\Exclude]
     public function verifyOtp(string $received): bool

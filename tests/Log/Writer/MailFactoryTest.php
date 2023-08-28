@@ -68,7 +68,7 @@ class MailFactoryTest extends TestCase
                 ],
             ],
             'invokables' => [
-                Extras::class,
+                Extras::class => Extras::class,
             ],
             'factories' => [
                 EventCompleter::class => EventCompleterFactory::class,
