@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace EcodevTests\Felix\Api\Scalar;
 
-use Cake\Chronos\Date;
+use Cake\Chronos\ChronosDate;
 use Ecodev\Felix\Api\Scalar\DateType;
 use GraphQL\Language\AST\IntValueNode;
 use GraphQL\Language\AST\StringValueNode;
@@ -28,7 +28,7 @@ final class DateTypeTest extends TestCase
     public function testSerialize(): void
     {
         $type = new DateType();
-        $date = new Date('2010-02-03');
+        $date = new ChronosDate('2010-02-03');
         $actual = $type->serialize($date);
         self::assertSame('2010-02-03', $actual);
     }
@@ -40,7 +40,7 @@ final class DateTypeTest extends TestCase
     {
         $type = new DateType();
         $actual = $type->parseValue($input);
-        self::assertInstanceOf(Date::class, $actual);
+        self::assertInstanceOf(ChronosDate::class, $actual);
         self::assertSame($expected, $actual->format('c'));
     }
 
@@ -53,7 +53,7 @@ final class DateTypeTest extends TestCase
         $ast = new StringValueNode(['value' => $input]);
 
         $actual = $type->parseLiteral($ast);
-        self::assertInstanceOf(Date::class, $actual);
+        self::assertInstanceOf(ChronosDate::class, $actual);
         self::assertSame($expected, $actual->format('c'));
     }
 

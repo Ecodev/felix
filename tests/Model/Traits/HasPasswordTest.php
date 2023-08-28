@@ -64,7 +64,7 @@ final class HasPasswordTest extends TestCase
         $this->user->setPassword('money');
         self::assertFalse($this->user->isTokenValid(), 'after password change token is invalid');
 
-        Chronos::setTestNow((new Chronos())->subDay(1));
+        Chronos::setTestNow((new Chronos())->subDays(1));
         $token5 = $this->user->createToken();
         Chronos::setTestNow(null);
         self::assertEquals(32, mb_strlen($token5), 'must be exactly the length of DB field');

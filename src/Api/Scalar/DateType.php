@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Ecodev\Felix\Api\Scalar;
 
-use Cake\Chronos\Date;
+use Cake\Chronos\ChronosDate;
 use GraphQL\Error\Error;
 use GraphQL\Language\AST\Node;
 use GraphQL\Language\AST\StringValueNode;
@@ -24,7 +24,7 @@ final class DateType extends ScalarType
      */
     public function serialize(mixed $value): mixed
     {
-        if ($value instanceof Date) {
+        if ($value instanceof ChronosDate) {
             return $value->format('Y-m-d');
         }
 
@@ -34,13 +34,13 @@ final class DateType extends ScalarType
     /**
      * Parses an externally provided value (query variable) to use as an input.
      */
-    public function parseValue(mixed $value): Date
+    public function parseValue(mixed $value): ChronosDate
     {
         if (!is_string($value)) {
             throw new UnexpectedValueException('Cannot represent value as Chronos date: ' . Utils::printSafe($value));
         }
 
-        $date = Date::createFromFormat('Y-m-d+', $value);
+        $date = ChronosDate::createFromFormat('Y-m-d+', $value);
 
         return $date;
     }
@@ -48,7 +48,7 @@ final class DateType extends ScalarType
     /**
      * Parses an externally provided literal value to use as an input (e.g. in Query AST).
      */
-    public function parseLiteral(Node $valueNode, ?array $variables = null): Date
+    public function parseLiteral(Node $valueNode, ?array $variables = null): ChronosDate
     {
         // Note: throwing GraphQL\Error\Error vs \UnexpectedValueException to benefit from GraphQL
         // error location in query:
