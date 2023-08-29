@@ -22,11 +22,12 @@ final class MessageRendererTest extends TestCase
         $mailParams = ['fooMail' => 'barMail'];
 
         $viewRenderer = $this->createMock(RendererInterface::class);
-        $viewRenderer->expects(self::exactly(2))
+        $matcher = self::exactly(2);
+        $viewRenderer->expects($matcher)
             ->method('render')
-            ->withConsecutive(
-                [
-                    self::callback(function (ViewModel $viewModel) use ($user) {
+            ->willReturnCallback(function (ViewModel $viewModel) use ($matcher, $user) {
+                $callback = match ($matcher->getInvocationCount()) {
+                    1 => (function () use ($viewModel, $user) {
                         $variables = [
                             'fooMail' => 'barMail',
                             'email' => 'foo@example.com',
@@ -34,12 +35,12 @@ final class MessageRendererTest extends TestCase
                             'serverUrl' => 'https://example.com',
                         ];
 
-                        return $viewModel->getTemplate() === 'my-type'
-                            && $viewModel->getVariables() === $variables;
+                        self::assertSame('my-type', $viewModel->getTemplate());
+                        self::assertSame($variables, $viewModel->getVariables());
+
+                        return 'mocked-rendered-view';
                     }),
-                ],
-                [
-                    self::callback(function (ViewModel $viewModel) use ($user) {
+                    2 => (function () use ($viewModel, $user) {
                         $variables = [
                             'fooLayout' => 'barLayout',
                             'content' => 'mocked-rendered-view',
@@ -49,11 +50,16 @@ final class MessageRendererTest extends TestCase
                             'hostname' => 'example.com',
                         ];
 
-                        return $viewModel->getTemplate() === 'layout'
-                            && $viewModel->getVariables() === $variables;
+                        self::assertSame('layout', $viewModel->getTemplate());
+                        self::assertSame($variables, $viewModel->getVariables());
+
+                        return 'mocked-rendered-layout';
                     }),
-                ]
-            )->willReturnOnConsecutiveCalls('mocked-rendered-view', 'mocked-rendered-layout');
+                    default => fn () => $this->fail()
+                };
+
+                return $callback();
+            });
 
         $messageRenderer = new MessageRenderer($viewRenderer, 'example.com');
 

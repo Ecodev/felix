@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Ecodev\Felix\Repository\Traits;
 
 use Cake\Chronos\Chronos;
-use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\ArrayParameterType;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
 use Ecodev\Felix\Repository\LogRepository as LogRepositoryInterface;
@@ -77,7 +77,7 @@ trait LogRepository
             ->andWhere('priority = :priority')
             ->setParameter('priority', Logger::INFO)
             ->andWhere('message IN (:message)')
-            ->setParameter('message', [$success, $failed], Connection::PARAM_STR_ARRAY)
+            ->setParameter('message', [$success, $failed], ArrayParameterType::STRING)
             ->andWhere('creation_date > DATE_SUB(NOW(), INTERVAL 30 MINUTE)')
             ->andWhere('ip = :ip')
             ->setParameter('ip', $ip)
@@ -118,7 +118,7 @@ trait LogRepository
                 LogRepositoryInterface::UPDATE_PASSWORD_FAILED,
                 LogRepositoryInterface::REGISTER,
                 LogRepositoryInterface::REGISTER_CONFIRM,
-            ], Connection::PARAM_STR_ARRAY)
+            ], ArrayParameterType::STRING)
             ->andWhere('log.creation_date < DATE_SUB(NOW(), INTERVAL 2 MONTH)');
 
         $connection->executeStatement('LOCK TABLES `log` WRITE;');
