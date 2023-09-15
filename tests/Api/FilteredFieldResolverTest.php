@@ -18,7 +18,7 @@ use stdClass;
 
 final class FilteredFieldResolverTest extends TestCase
 {
-    public function providerLoad(): array
+    public static function providerLoad(): array
     {
         $loadableClass = new class() implements Proxy {
             public function __load(): void

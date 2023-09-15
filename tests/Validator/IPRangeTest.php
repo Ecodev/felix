@@ -18,7 +18,7 @@ class IPRangeTest extends TestCase
         self::assertSame($result, IPRange::matches($remoteAddr, $cidr));
     }
 
-    public function IPv4Data(): iterable
+    public static function IPv4Data(): iterable
     {
         return [
             'valid - exact (no mask; /32 equiv)' => [true, '192.168.1.1', '192.168.1.1'],
@@ -37,7 +37,7 @@ class IPRangeTest extends TestCase
         ];
     }
 
-    public function IPv6Data(): iterable
+    public static function IPv6Data(): iterable
     {
         return [
             'valid - ipv4 subnet' => [true, '2a01:198:603:0:396e:4789:8e99:890f', '2a01:198:603:0::/65'],

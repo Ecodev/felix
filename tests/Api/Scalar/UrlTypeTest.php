@@ -18,7 +18,7 @@ final class UrlTypeTest extends AbstractStringBasedType
         return 'Url';
     }
 
-    public function providerValues(): iterable
+    public static function providerValues(): iterable
     {
         return [
 

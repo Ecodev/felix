@@ -12,7 +12,7 @@ class NativeInTest extends TestCase
 {
     use TestWithTypes;
 
-    public function providerNativeIn(): iterable
+    public static function providerNativeIn(): iterable
     {
         yield 'normal with string' => [
             'SELECT u.id FROM EcodevTests\Felix\Blog\Model\User u WHERE ' . NativeIn::dql('u.id', "SELECT '123'"),

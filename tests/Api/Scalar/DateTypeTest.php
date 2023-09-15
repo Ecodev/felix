@@ -66,7 +66,7 @@ final class DateTypeTest extends TestCase
         $type->parseLiteral($ast);
     }
 
-    public function providerValues(): array
+    public static function providerValues(): array
     {
         return [
             'normal' => ['2010-06-09', '2010-06-09T00:00:00+02:00'],

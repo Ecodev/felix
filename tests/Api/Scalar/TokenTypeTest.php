@@ -18,7 +18,7 @@ final class TokenTypeTest extends AbstractStringBasedType
         return 'Token';
     }
 
-    public function providerValues(): iterable
+    public static function providerValues(): iterable
     {
         return [
             ['', '', false],

@@ -8,6 +8,7 @@ use Ecodev\Felix\Model\Model;
 use Ecodev\Felix\Utility;
 use EcodevTests\Felix\Blog\Model\User;
 use EcodevTests\Felix\Traits\TestWithEntityManager;
+use Exception;
 use GraphQL\Doctrine\Definition\EntityID;
 use PHPUnit\Framework\TestCase;
 use stdClass;
@@ -112,6 +113,14 @@ final class UtilityTest extends TestCase
      */
     public function testNativeUniqueWillThrowWithOurTestObject(int $flag): void
     {
+        set_error_handler(
+            function (int $errno, string $message): void {
+                restore_error_handler();
+
+                throw new Exception($message);
+            }
+        );
+
         try {
             $foo = array_unique($this->createArray(), $flag);
         } catch (Throwable $e) {
@@ -119,7 +128,7 @@ final class UtilityTest extends TestCase
         }
     }
 
-    public function providerNativeUniqueWillThrowWithOurTestObject(): iterable
+    public static function providerNativeUniqueWillThrowWithOurTestObject(): iterable
     {
         yield [SORT_REGULAR];
         yield [SORT_NUMERIC];
@@ -135,7 +144,7 @@ final class UtilityTest extends TestCase
         self::assertSame($expected, Utility::quoteArray($input));
     }
 
-    public function providerQuoteArray(): iterable
+    public static function providerQuoteArray(): iterable
     {
         yield [[1, 2], "'1', '2'"];
         yield [['foo bar', 'baz'], "'foo bar', 'baz'"];

@@ -22,7 +22,7 @@ class NoMailTest extends TestCase
         self::assertSame($expected, $actual);
     }
 
-    public function providerFilter(): array
+    public static function providerFilter(): array
     {
         return [
             [[], true],

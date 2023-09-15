@@ -16,7 +16,7 @@ final class AclFilterTest extends TestCase
 {
     use TestWithEntityManager;
 
-    public function providerFilter(): array
+    public static function providerFilter(): array
     {
         return [
             'users are accessible to anonymous' => [
@@ -44,6 +44,8 @@ final class AclFilterTest extends TestCase
 
     /**
      * @dataProvider providerFilter
+     *
+     * @param class-string $class
      */
     public function testFilter(bool $anonymous, string $class, string $expected): void
     {

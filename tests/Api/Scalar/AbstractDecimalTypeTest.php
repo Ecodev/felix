@@ -90,7 +90,7 @@ final class AbstractDecimalTypeTest extends TestCase
         self::assertSame($expected, $actual);
     }
 
-    public function providerInputs(): array
+    public static function providerInputs(): array
     {
         return [
             [3, null, null, null, null],

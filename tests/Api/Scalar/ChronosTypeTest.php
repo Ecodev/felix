@@ -72,7 +72,7 @@ final class ChronosTypeTest extends TestCase
         $type->parseLiteral($ast);
     }
 
-    public function providerValue(): array
+    public static function providerValue(): array
     {
         return [
             'UTC' => ['2018-09-14T22:00:00.000Z', '2018-09-15T00:00:00+02:00'],

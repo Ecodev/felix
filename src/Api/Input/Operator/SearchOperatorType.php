@@ -115,7 +115,6 @@ abstract class SearchOperatorType extends AbstractOperator
     private function searchOnJoinedEntity(UniqueNameFactory $uniqueNameFactory, ClassMetadata $metadata, QueryBuilder $queryBuilder, string $alias, string $fieldName): array
     {
         $association = $metadata->getAssociationMapping($fieldName);
-        /** @var string $targetEntity */
         $targetEntity = $association['targetEntity'];
 
         $joinedMetadata = $queryBuilder->getEntityManager()->getMetadataFactory()->getMetadataFor($targetEntity);

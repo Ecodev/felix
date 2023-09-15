@@ -18,7 +18,7 @@ final class BvrTest extends TestCase
         self::assertSame($expected, $actual);
     }
 
-    public function providerGetReferenceNumber(): array
+    public static function providerGetReferenceNumber(): array
     {
         return [
             ['123456', '', '123456000000000000000000006'],
@@ -53,7 +53,7 @@ final class BvrTest extends TestCase
         self::assertSame($expected, $actual);
     }
 
-    public function providerModulo10(): array
+    public static function providerModulo10(): array
     {
         return [
             ['', 0],
@@ -84,7 +84,7 @@ final class BvrTest extends TestCase
         self::assertSame($expected, $actual);
     }
 
-    public function providerExtractCustomId(): array
+    public static function providerExtractCustomId(): array
     {
         return [
             ['800826000000000000000002016', '00000000000000000201'],
@@ -105,7 +105,7 @@ final class BvrTest extends TestCase
         Bvr::extractCustomId('800826000000000000000002010');
     }
 
-    public function providerIban(): array
+    public static function providerIban(): array
     {
         return [
             ['30-12465-5', false],

@@ -18,7 +18,7 @@ final class NonUniqueEmailTypeTest extends AbstractStringBasedType
         return 'NonUniqueEmail';
     }
 
-    public function providerValues(): iterable
+    public static function providerValues(): iterable
     {
         return [
             ['john@example.com', 'john@example.com', true],

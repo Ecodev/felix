@@ -123,7 +123,7 @@ final class CHFTypeTest extends TestCase
         $type->parseLiteral($ast);
     }
 
-    public function providerValues(): array
+    public static function providerValues(): array
     {
         return [
             ['2', Money::CHF(200)],
@@ -135,7 +135,7 @@ final class CHFTypeTest extends TestCase
         ];
     }
 
-    public function providerIntValues(): array
+    public static function providerIntValues(): array
     {
         return [
             [2, Money::CHF(200)],
@@ -145,7 +145,7 @@ final class CHFTypeTest extends TestCase
         ];
     }
 
-    public function providerInvalidValues(): array
+    public static function providerInvalidValues(): array
     {
         return [
             'non numeric' => ['foo'],

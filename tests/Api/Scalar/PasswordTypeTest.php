@@ -18,7 +18,7 @@ final class PasswordTypeTest extends AbstractStringBasedType
         return 'Password';
     }
 
-    public function providerValues(): iterable
+    public static function providerValues(): iterable
     {
         return [
             ['', '', false],

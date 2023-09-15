@@ -9,8 +9,3 @@ parameters:
 			message: "#^Parameter \\#1 \\$input of method OTPHP\\\\OTPInterface\\:\\:at\\(\\) expects int\\<0, max\\>, int\\<\\-26, max\\> given\\.$#"
 			count: 1
 			path: tests/Model/Traits/HasOtpTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$uri of static method OTPHP\\\\Factory\\:\\:loadFromProvisioningUri\\(\\) expects non\\-empty\\-string, string given\\.$#"
-			count: 1
-			path: tests/Model/Traits/HasOtpTest.php

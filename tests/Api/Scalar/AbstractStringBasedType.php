@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 abstract class AbstractStringBasedType extends TestCase
 {
-    abstract public function providerValues(): iterable;
+    abstract public static function providerValues(): iterable;
 
     abstract public function createType(): \Ecodev\Felix\Api\Scalar\AbstractStringBasedType;
 

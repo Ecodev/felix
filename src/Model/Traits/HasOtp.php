@@ -96,9 +96,10 @@ trait HasOtp
     #[API\Exclude]
     public function verifyOtp(string $received): bool
     {
-        if (empty($this->otpUri)) {
+        if (!$this->otpUri || !$received) {
             return false;
         }
+
         $otp = OTPHP\Factory::loadFromProvisioningUri($this->otpUri);
 
         return $otp->verify($received, null, 29);

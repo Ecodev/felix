@@ -15,6 +15,8 @@ class ImageResizerTest extends TestCase
 {
     /**
      * @dataProvider providerResize
+     *
+     * @param non-empty-string $expected
      */
     public function testResize(string $extension, int $wantedHeight, bool $useWebp, string $expected): void
     {
@@ -42,7 +44,7 @@ class ImageResizerTest extends TestCase
         self::assertStringEndsWith($expected, $actual);
     }
 
-    public function providerResize(): array
+    public static function providerResize(): array
     {
         return [
             'png smaller' => ['png', 100, false, 'data/cache/images/image-100.jpg'],

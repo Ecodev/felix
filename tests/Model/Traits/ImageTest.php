@@ -66,7 +66,7 @@ final class ImageTest extends TestCase
         self::assertStringEndsWith($isSvg ? '.svg' : '.webp', $image->getPath());
     }
 
-    public function providerSetFile(): iterable
+    public static function providerSetFile(): iterable
     {
         yield 'jpg is converted to webp' => ['image.jpg', 400, 400];
         yield 'png is converted to webp' => ['image.png', 400, 300];

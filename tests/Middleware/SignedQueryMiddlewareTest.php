@@ -71,7 +71,7 @@ class SignedQueryMiddlewareTest extends TestCase
         $middleware->process($request, $handler);
     }
 
-    public function dataProviderQuery(): iterable
+    public static function dataProviderQuery(): iterable
     {
         $key1 = 'my-secret-1';
         $key2 = 'my-secret-2';

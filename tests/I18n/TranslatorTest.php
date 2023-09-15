@@ -75,7 +75,7 @@ class TranslatorTest extends TestCase
         self::assertSame($expected, _tr($message, $replacements));
     }
 
-    public function providerTr(): array
+    public static function providerTr(): array
     {
         return [
             [

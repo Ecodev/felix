@@ -18,7 +18,7 @@ final class OtpTypeTest extends AbstractStringBasedType
         return 'Otp';
     }
 
-    public function providerValues(): iterable
+    public static function providerValues(): iterable
     {
         return [
             ['', '', false], // Empty

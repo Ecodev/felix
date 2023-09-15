@@ -23,7 +23,7 @@ abstract class AbstractDatabase
      */
     protected static function getPhp(): string
     {
-        return 'php8.1';
+        return 'php8.2';
     }
 
     /**

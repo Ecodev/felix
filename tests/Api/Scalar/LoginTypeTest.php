@@ -18,7 +18,7 @@ final class LoginTypeTest extends AbstractStringBasedType
         return 'Login';
     }
 
-    public function providerValues(): iterable
+    public static function providerValues(): iterable
     {
         return [
             ['', '', false],

@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 final class FormatTest extends TestCase
 {
-    public function truncateProvider(): array
+    public static function providerTruncate(): array
     {
         return [
             [['abcdef', 100], 'abcdef'],
@@ -22,7 +22,7 @@ final class FormatTest extends TestCase
     }
 
     /**
-     * @dataProvider truncateProvider
+     * @dataProvider providerTruncate
      */
     public function testTruncate(array $args, string $expected): void
     {
@@ -38,7 +38,7 @@ final class FormatTest extends TestCase
         self::assertSame($expected, Format::splitSearchTerms($search));
     }
 
-    public function providerSplitSearchTerms(): iterable
+    public static function providerSplitSearchTerms(): iterable
     {
         yield [null, []];
         yield 'empty term' => ['', []];

@@ -18,7 +18,7 @@ final class ColorTypeTest extends AbstractStringBasedType
         return 'Color';
     }
 
-    public function providerValues(): iterable
+    public static function providerValues(): iterable
     {
         return [
             ['', '', true],

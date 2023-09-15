@@ -83,9 +83,10 @@ final class HasOtpTest extends TestCase
         $this->user->setOtp(true);
 
         self::assertFalse($this->user->verifyOtp('123456'), 'Wrong OTP given');
+        self::assertFalse($this->user->verifyOtp(''), 'Empty OTP given');
 
         $uri = $this->user->getOtpUri();
-        self::assertNotNull($uri);
+        self::assertNotEmpty($uri);
 
         $otp = Factory::loadFromProvisioningUri($uri);
         self::assertInstanceOf(TOTPInterface::class, $otp);

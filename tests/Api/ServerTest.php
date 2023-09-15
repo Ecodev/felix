@@ -30,7 +30,7 @@ class ServerTest extends TestCase
         self::assertSame($expected, $result->jsonSerialize());
     }
 
-    public function providerExecute(): iterable
+    public static function providerExecute(): iterable
     {
         yield 'empty body' => [
             '',
