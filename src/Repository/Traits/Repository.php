@@ -38,7 +38,7 @@ trait Repository
     /**
      * Return native SQL query to get all ID.
      */
-    protected function getAllIdsQuery(): string
+    public function getAllIdsQuery(): string
     {
         $connection = $this->getEntityManager()->getConnection();
         $qb = $connection->createQueryBuilder()
