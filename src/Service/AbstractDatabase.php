@@ -45,10 +45,10 @@ abstract class AbstractDatabase
      */
     final public static function dumpData(string $dumpFile): void
     {
-        $mysqlArgs = self::getMysqlArgs();
+        $mariadbArgs = self::getMariadbArgs();
 
         echo "dumping $dumpFile...\n";
-        $dumpCmd = "mysqldump -v $mysqlArgs | sed 's/DEFINER=[^*]*\\*/\\*/g' | gzip > $dumpFile";
+        $dumpCmd = "mariadb-dump -v $mariadbArgs | LC_CTYPE=C LANG=C sed 's/DEFINER=[^*]*\\*/\\*/g' | gzip > $dumpFile";
         self::executeLocalCommand($dumpCmd);
     }
 
@@ -70,7 +70,7 @@ abstract class AbstractDatabase
      */
     final public static function loadData(string $dumpFile): void
     {
-        $mysqlArgs = self::getMysqlArgs();
+        $mariadbArgs = self::getMariadbArgs();
         $dumpFile = self::absolutePath($dumpFile);
 
         echo "loading dump $dumpFile...\n";
@@ -82,7 +82,7 @@ abstract class AbstractDatabase
         _em()->getConnection()->close();
 
         self::executeLocalCommand(PHP_BINARY . ' ./bin/doctrine orm:schema-tool:drop --ansi --full-database --force');
-        self::executeLocalCommand("gunzip -c \"$dumpFile\" | sed  's/ALTER DATABASE `[^`]*`/ALTER DATABASE `$database`/g' | mysql $mysqlArgs");
+        self::executeLocalCommand("gunzip -c \"$dumpFile\" | LC_CTYPE=C LANG=C sed 's/ALTER DATABASE `[^`]*`/ALTER DATABASE `$database`/g' | mariadb $mariadbArgs");
         self::executeLocalCommand(PHP_BINARY . ' ./bin/doctrine migrations:migrate --ansi --no-interaction');
         static::loadTriggers();
         static::loadTestUsers();
@@ -96,7 +96,7 @@ abstract class AbstractDatabase
         return $dbConfig['dbname'];
     }
 
-    private static function getMysqlArgs(): string
+    private static function getMariadbArgs(): string
     {
         /** @var array<string,int|string> $dbConfig */
         $dbConfig = _em()->getConnection()->getParams();
@@ -181,17 +181,17 @@ abstract class AbstractDatabase
     /**
      * Import a SQL file into DB.
      *
-     * This use mysql command, instead of DBAL methods, to allow to see errors if any, and
+     * This use mariadb command, instead of DBAL methods, to allow to see errors if any, and
      * also because it seems trigger creation do not work with DBAL for some unclear reasons.
      */
     final public static function importFile(string $file): void
     {
         $file = self::absolutePath($file);
-        $mysqlArgs = self::getMysqlArgs();
+        $mariadbArgs = self::getMariadbArgs();
 
         echo 'importing ' . $file . "\n";
 
-        $importCommand = "echo 'SET NAMES utf8mb4;' | cat - $file | mysql $mysqlArgs";
+        $importCommand = "echo 'SET NAMES utf8mb4;' | cat - $file | mariadb $mariadbArgs";
 
         self::executeLocalCommand($importCommand);
     }
