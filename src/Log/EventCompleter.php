@@ -41,17 +41,16 @@ class EventCompleter implements ProcessorInterface
 
         if (PHP_SAPI === 'cli') {
             global $argv;
-            $request = $argv;
             $ip = !empty(getenv('REMOTE_ADDR')) ? getenv('REMOTE_ADDR') : 'script';
             $url = implode(' ', $argv);
             $referer = '';
         } else {
-            $request = $_REQUEST;
             $ip = $_SERVER['REMOTE_ADDR'] ?? '';
             $url = $this->baseUrl . $_SERVER['REQUEST_URI'];
             $referer = $_SERVER['HTTP_REFERER'] ?? '';
         }
 
+        $request = $_REQUEST;
         $request = $this->removeSensitiveData($request);
 
         $envData = [
@@ -71,9 +70,10 @@ class EventCompleter implements ProcessorInterface
      */
     protected function removeSensitiveData(array $request): array
     {
+        unset($request['password']);
         foreach ($request as &$r) {
             if (is_array($r)) {
-                unset($r['variables']['password']);
+                $r = $this->removeSensitiveData($r);
             }
         }
 

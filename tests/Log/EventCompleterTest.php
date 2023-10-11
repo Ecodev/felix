@@ -14,6 +14,7 @@ class EventCompleterTest extends TestCase
     protected function tearDown(): void
     {
         CurrentUser::set(null);
+        $_REQUEST = [];
     }
 
     public function testProcessMinimal(): void
@@ -41,6 +42,16 @@ class EventCompleterTest extends TestCase
 
         CurrentUser::set($user);
         putenv('REMOTE_ADDR=127.0.0.1');
+        $_REQUEST = [
+            'password' => 'sensitive',
+            'variables' => [
+                'other' => [
+                    'password' => 'sensitive',
+                    'foo' => 123,
+                ],
+            ],
+        ];
+
         $completed = new EventCompleter('https://example.com');
         $actual = $completed->process([
             'message' => '',
@@ -48,12 +59,19 @@ class EventCompleterTest extends TestCase
                 'errno' => 1,
             ],
         ]);
+
         self::assertStringContainsString('Stacktrace:', $actual['message']);
         self::assertSame(123, $actual['creator_id']);
         self::assertSame('my login', $actual['login']);
         self::assertIsString($actual['url']);
         self::assertIsString($actual['referer']);
-        self::assertIsString($actual['request']);
+        self::assertSame([
+            'variables' => [
+                'other' => [
+                    'foo' => 123,
+                ],
+            ],
+        ], json_decode($actual['request'], true));
         self::assertSame('127.0.0.1', $actual['ip']);
     }
 }
