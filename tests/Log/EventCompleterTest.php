@@ -47,6 +47,8 @@ class EventCompleterTest extends TestCase
             'variables' => [
                 'other' => [
                     'password' => 'sensitive',
+                    'passwordConfirmation' => 'sensitive',
+                    'npass2' => [123],
                     'foo' => 123,
                 ],
             ],
@@ -66,8 +68,12 @@ class EventCompleterTest extends TestCase
         self::assertIsString($actual['url']);
         self::assertIsString($actual['referer']);
         self::assertSame([
+            'password' => '***REDACTED***',
             'variables' => [
                 'other' => [
+                    'password' => '***REDACTED***',
+                    'passwordConfirmation' => '***REDACTED***',
+                    'npass2' => '***REDACTED***',
                     'foo' => 123,
                 ],
             ],

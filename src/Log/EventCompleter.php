@@ -51,7 +51,7 @@ class EventCompleter implements ProcessorInterface
         }
 
         $request = $_REQUEST;
-        $request = $this->removeSensitiveData($request);
+        $request = $this->redactSensitiveData($request);
 
         $envData = [
             'creator_id' => $user?->getId(),
@@ -66,14 +66,23 @@ class EventCompleter implements ProcessorInterface
     }
 
     /**
-     * Remove password value from GraphQL variables well-known structure.
+     * Redact sensitive values from the entire data structure.
      */
-    protected function removeSensitiveData(array $request): array
+    private function redactSensitiveData(array $request): array
     {
-        unset($request['password']);
-        foreach ($request as &$r) {
-            if (is_array($r)) {
-                $r = $this->removeSensitiveData($r);
+        foreach ($request as $key => &$value) {
+            if (in_array($key, [
+                'password',
+                'passwordConfirmation',
+                'password_rep',
+                'cpass',
+                'npass1',
+                'npass2',
+                'password',
+            ], true)) {
+                $value = '***REDACTED***';
+            } elseif (is_array($value)) {
+                $value = $this->redactSensitiveData($value);
             }
         }
 
