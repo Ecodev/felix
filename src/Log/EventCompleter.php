@@ -27,7 +27,9 @@ class EventCompleter implements ProcessorInterface
         }
 
         // Security hide clear text password
-        unset($event['extra']['password']);
+        if (isset($event['extra'])) {
+            $event['extra'] = $this->redactSensitiveData($event['extra']);
+        }
 
         return $event;
     }

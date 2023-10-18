@@ -59,10 +59,15 @@ class EventCompleterTest extends TestCase
             'message' => '',
             'extra' => [
                 'errno' => 1,
+                'password' => 'sensitive',
             ],
         ]);
 
         self::assertStringContainsString('Stacktrace:', $actual['message']);
+        self::assertSame([
+            'errno' => 1,
+            'password' => '***REDACTED***',
+        ], $actual['extra']);
         self::assertSame(123, $actual['creator_id']);
         self::assertSame('my login', $actual['login']);
         self::assertIsString($actual['url']);
