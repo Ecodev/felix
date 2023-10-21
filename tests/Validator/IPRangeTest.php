@@ -15,7 +15,7 @@ class IPRangeTest extends TestCase
      */
     public function testMatches(bool $result, string $remoteAddr, string $cidr): void
     {
-        self::assertSame($result, IPRange::matches($remoteAddr, $cidr));
+        self::assertSame($result, IPRange::matches($remoteAddr, [$cidr]));
     }
 
     public static function IPv4Data(): iterable
@@ -51,5 +51,10 @@ class IPRangeTest extends TestCase
             'invalid - invalid cidr' => [false, '2a01:198:603:0:396e:4789:8e99:890f', 'unknown'],
             'invalid - empty IP address' => [false, '', '::1'],
         ];
+    }
+
+    public function testMultiplesWillMatchesIfAtLeastOne(): void
+    {
+        self::assertTrue(IPRange::matches('192.168.1.1', ['255.255.255.255', '192.168.1.1']));
     }
 }

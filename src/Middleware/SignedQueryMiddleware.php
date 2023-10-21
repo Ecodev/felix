@@ -124,12 +124,6 @@ final class SignedQueryMiddleware implements MiddlewareInterface
             return false;
         }
 
-        foreach ($this->allowedIps as $allowedIp) {
-            if (IPRange::matches($remoteAddress, $allowedIp)) {
-                return true;
-            }
-        }
-
-        return false;
+        return IPRange::matches($remoteAddress, $this->allowedIps);
     }
 }

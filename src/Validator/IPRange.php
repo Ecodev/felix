@@ -6,7 +6,23 @@ namespace Ecodev\Felix\Validator;
 
 abstract class IPRange
 {
-    final public static function matches(string $ip, string $cidr): bool
+    /**
+     * Whether the given IP address matches at least one of the given CIDR.
+     *
+     * @param string[] $cidrs
+     */
+    final public static function matches(string $ip, array $cidrs): bool
+    {
+        foreach ($cidrs as $cidr) {
+            if (self::matchesOne($ip, $cidr)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private static function matchesOne(string $ip, string $cidr): bool
     {
         if (str_contains($ip, ':')) {
             return self::matchesIPv6($ip, $cidr);
