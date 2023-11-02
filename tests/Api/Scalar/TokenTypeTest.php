@@ -32,7 +32,6 @@ final class TokenTypeTest extends AbstractStringBasedType
             ['123456', '123456', true],
             ['1234567', '1234567', false],
             ['12345', '12345', false],
-            [null, null, false],
             [' ', ' ', false],
             ['a ', 'a ', false],
         ];

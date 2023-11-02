@@ -25,7 +25,6 @@ final class LoginTypeTest extends AbstractStringBasedType
             ['a', 'a', true],
             ['A', 'A', true],
             ['aA123.-_', 'aA123.-_', true],
-            [null, null, false],
             [' ', ' ', false],
             ['a ', 'a ', false],
         ];

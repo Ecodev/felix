@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ecodev\Felix\Api;
 
 use Doctrine\DBAL\Exception\DriverException;
+use GraphQL\Error\ClientAware;
 use GraphQL\Error\DebugFlag;
 use GraphQL\Executor\ExecutionResult;
 use GraphQL\GraphQL;
@@ -99,6 +100,13 @@ class Server
             }
         }
 
-        return $formatter($exception);
+        $result = $formatter($exception);
+
+        if (!$exception instanceof ClientAware || !$exception->isClientSafe()) {
+            $result['extensions'] ??= [];
+            $result['extensions']['category'] = 'internal';
+        }
+
+        return $result;
     }
 }

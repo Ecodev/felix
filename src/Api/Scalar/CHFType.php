@@ -8,10 +8,7 @@ use Money\Money;
 
 final class CHFType extends AbstractMoneyType
 {
-    /**
-     * @var string
-     */
-    public $description = 'A CHF money amount.';
+    public ?string $description = 'A CHF money amount.';
 
     /**
      * @param numeric-string $value

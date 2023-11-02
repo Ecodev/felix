@@ -15,10 +15,7 @@ use UnexpectedValueException;
 
 final class ChronosType extends ScalarType
 {
-    /**
-     * @var string
-     */
-    public $description = 'A date with time and timezone.';
+    public ?string $description = 'A date with time and timezone.';
 
     /**
      * Serializes an internal value to include in a response.

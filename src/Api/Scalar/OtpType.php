@@ -6,10 +6,7 @@ namespace Ecodev\Felix\Api\Scalar;
 
 class OtpType extends AbstractStringBasedType
 {
-    /**
-     * @var string
-     */
-    public $description = 'One time passcode composed of only digits';
+    public ?string $description = 'One time passcode composed of only digits';
 
     /**
      * Validate an OTP.

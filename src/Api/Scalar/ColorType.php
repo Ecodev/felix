@@ -6,10 +6,7 @@ namespace Ecodev\Felix\Api\Scalar;
 
 final class ColorType extends AbstractStringBasedType
 {
-    /**
-     * @var string
-     */
-    public $description = 'A color expressed in hexadecimal CSS notation (eg: `#AA00FF`) or an empty string `""`.';
+    public ?string $description = 'A color expressed in hexadecimal CSS notation (eg: `#AA00FF`) or an empty string `""`.';
 
     /**
      * Validate a color in hexadecimal CSS notation.

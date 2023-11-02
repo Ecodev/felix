@@ -6,15 +6,14 @@ parameters:
     checkMissingIterableValueType: false
     checkGenericClassInNonGenericObjectType: false
     ignoreErrors:
-        - '~^Method Ecodev\\Felix\\Api\\Server\:\:execute\(\) should return array\<GraphQL\\Executor\\ExecutionResult\>\|GraphQL\\Executor\\ExecutionResult but returns array\<GraphQL\\Executor\\ExecutionResult\>\|GraphQL\\Executor\\ExecutionResult\|GraphQL\\Executor\\Promise\\Promise\.$~'
+        - '~^Method Ecodev\\Felix\\Api\\Server\:\:execute\(\) should return array\<GraphQL\\Executor\\ExecutionResult\>\|GraphQL\\Executor\\ExecutionResult but returns array\<int, GraphQL\\Executor\\ExecutionResult\>\|GraphQL\\Executor\\ExecutionResult\|GraphQL\\Executor\\Promise\\Promise\.$~'
         - '~^Cannot call method getInstance\(\) on Laminas\\Permissions\\Acl\\Resource\\ResourceInterface\|null\.$~'
         - '~^Parameter \#1 \$object of static method Ecodev\\Felix\\Utility\:\:getShortClassName\(\) expects class\-string\|object, string given\.$~'
-        - '~^Parameter #1 \$wrappedType of static method GraphQL\\Type\\Definition\\Type\:\:nonNull\(\) expects \(callable\(\)\: mixed\)\|GraphQL\\Type\\Definition\\NullableType, GraphQL\\Type\\Definition\\LeafType given\.$~'
         - '~^Property EcodevTests\\Felix\\Blog\\Model\\.*\:\:\$.* is never read, only written\.$~'
         - '~^Property EcodevTests\\Felix\\Blog\\Model\\.*\:\:\$.* is unused\.$~'
         - '~^Cannot cast mixed to int\.$~'
         - '~^Cannot cast mixed to string\.$~'
-        - '~^Parameter \#1 \$wrappedType of static method GraphQL\\Type\\Definition\\Type\:\:nonNull\(\) expects \(callable\(\)\: mixed\)\|GraphQL\\Type\\Definition\\NullableType, GraphQL\\Type\\Definition\\Type given\.$~'
+        - '~^Parameter \#1 \$type of static method GraphQL\\Type\\Definition\\Type\:\:nonNull\(\) expects~'
 
 includes:
     - phpstan-baseline.neon

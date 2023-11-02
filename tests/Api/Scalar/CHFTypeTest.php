@@ -88,9 +88,9 @@ final class CHFTypeTest extends TestCase
     }
 
     /**
-     * @dataProvider providerIntValues
+     * @dataProvider providerValues
      */
-    public function testParseLiteralAsInt(int $input, Money $expected): void
+    public function testParseLiteralAsInt(string $input, Money $expected): void
     {
         $type = new CHFType();
         $ast = new IntValueNode(['value' => $input]);

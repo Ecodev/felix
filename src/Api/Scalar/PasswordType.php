@@ -6,10 +6,7 @@ namespace Ecodev\Felix\Api\Scalar;
 
 final class PasswordType extends AbstractStringBasedType
 {
-    /**
-     * @var string
-     */
-    public $description = 'A password is a string of at least 12 characters';
+    public ?string $description = 'A password is a string of at least 12 characters';
 
     /**
      * Validate a password.

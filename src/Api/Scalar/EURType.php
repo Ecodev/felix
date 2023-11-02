@@ -8,10 +8,7 @@ use Money\Money;
 
 final class EURType extends AbstractMoneyType
 {
-    /**
-     * @var string
-     */
-    public $description = 'An EUR money amount.';
+    public ?string $description = 'An EUR money amount.';
 
     /**
      * @param numeric-string $value

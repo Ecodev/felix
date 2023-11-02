@@ -16,7 +16,7 @@ final class AbstractDecimalTypeTest extends TestCase
     private function createType(int $decimal, ?string $minimum, ?string $maximum): AbstractDecimalType
     {
         return new class($decimal, $minimum, $maximum) extends AbstractDecimalType {
-            public $name = 'TestDecimal';
+            public string $name = 'TestDecimal';
 
             public function __construct(private readonly int $decimal, private readonly ?string $minimum, private readonly ?string $maximum)
             {
@@ -93,7 +93,6 @@ final class AbstractDecimalTypeTest extends TestCase
     public static function providerInputs(): array
     {
         return [
-            [3, null, null, null, null],
             [3, null, null, '', null],
             [3, null, null, ' ', null],
             [3, null, null, '0', '0'],
@@ -105,23 +104,10 @@ final class AbstractDecimalTypeTest extends TestCase
             [3, null, null, '-0', '-0'],
             [3, null, null, '-0.123', '-0.123'],
             [3, null, null, '-0.1234', null],
-            [3, null, null, 0, '0'],
-            [3, null, null, 2, '2'],
-            [3, null, null, 0.1, '0.1'],
-            [3, null, null, 0.12, '0.12'],
-            [3, null, null, 0.123, '0.123'],
-            [3, null, null, 0.1234, null],
-            [3, null, null, -0, '0'],
-            [3, null, null, -0.123, '-0.123'],
-            [3, null, null, -0.1234, null],
             [0, null, null, '0', '0'],
             [0, null, null, '1', '1'],
             [0, null, null, '1.1', null],
             [0, null, null, '-1', '-1'],
-            [0, null, null, 0, '0'],
-            [0, null, null, 1, '1'],
-            [0, null, null, 1.1, null],
-            [0, null, null, -1, '-1'],
             [2, '0.00', '1.00', '-0.01', null],
             [2, '0.00', '1.00', '0.00', '0.00'],
             [2, '0.00', '1.00', '1.00', '1.00'],

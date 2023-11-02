@@ -45,7 +45,7 @@ abstract class AbstractStringBasedType extends TestCase
     /**
      * @dataProvider providerValues
      */
-    public function testParseLiteral(?string $input, ?string $expected, bool $isValid): void
+    public function testParseLiteral(string $input, ?string $expected, bool $isValid): void
     {
         $type = $this->createType();
         $ast = new StringValueNode(['value' => $input]);
@@ -62,7 +62,7 @@ abstract class AbstractStringBasedType extends TestCase
     public function testParseInvalidNodeWillThrow(): void
     {
         $type = $this->createType();
-        $ast = new IntValueNode(['value' => 123]);
+        $ast = new IntValueNode(['value' => '123']);
 
         $this->expectExceptionMessage('Query error: Can only parse strings got: IntValue');
         $type->parseLiteral($ast);

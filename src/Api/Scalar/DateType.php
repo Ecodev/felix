@@ -14,10 +14,7 @@ use UnexpectedValueException;
 
 final class DateType extends ScalarType
 {
-    /**
-     * @var string
-     */
-    public $description = 'A date without time, nor timezone.';
+    public ?string $description = 'A date without time, nor timezone.';
 
     /**
      * Serializes an internal value to include in a response.

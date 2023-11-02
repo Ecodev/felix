@@ -26,7 +26,6 @@ final class PasswordTypeTest extends AbstractStringBasedType
             ['aA123.-_', 'aA123.-_', false],
             [str_repeat('a', 12), str_repeat('a', 12), true],
             [str_repeat('/.,?><\';[]\\|{}+_)(*&^%$#@!`123', 100), str_repeat('/.,?><\';[]\\|{}+_)(*&^%$#@!`123', 100), true],
-            [null, null, false],
             [' ', ' ', false],
             ['a ', 'a ', false],
         ];

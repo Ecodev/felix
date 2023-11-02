@@ -46,7 +46,6 @@ final class UrlTypeTest extends AbstractStringBasedType
             ['file:///C:/folder/file.pdf', 'file:///C:/folder/file.pdf', false],
 
             ['', '', true],
-            [null, null, false],
             [' ', ' ', false],
         ];
     }

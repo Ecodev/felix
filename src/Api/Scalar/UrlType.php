@@ -6,10 +6,7 @@ namespace Ecodev\Felix\Api\Scalar;
 
 final class UrlType extends AbstractStringBasedType
 {
-    /**
-     * @var string
-     */
-    public $description = 'An absolute web URL that must start with `http` or `https` or be an empty string.';
+    public ?string $description = 'An absolute web URL that must start with `http` or `https` or be an empty string.';
 
     /**
      * Validate an URL.

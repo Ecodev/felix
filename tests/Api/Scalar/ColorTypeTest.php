@@ -28,7 +28,6 @@ final class ColorTypeTest extends AbstractStringBasedType
             ['#01aB9F', '#01aB9F', true],
             ['#ZZZZZZ', '#ZZZZZZ', false],
             ['AABBCC', 'AABBCC', false],
-            [null, null, false],
             [' ', ' ', false],
         ];
     }

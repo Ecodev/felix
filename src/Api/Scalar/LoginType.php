@@ -6,10 +6,7 @@ namespace Ecodev\Felix\Api\Scalar;
 
 class LoginType extends AbstractStringBasedType
 {
-    /**
-     * @var string
-     */
-    public $description = 'A user login is a non-empty string containing only letters, digits, `.`, `_` and `-`.';
+    public ?string $description = 'A user login is a non-empty string containing only letters, digits, `.`, `_` and `-`.';
 
     /**
      * Validate a login.

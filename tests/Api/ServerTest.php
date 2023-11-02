@@ -19,7 +19,7 @@ class ServerTest extends TestCase
      */
     public function testExecute(string $body, array $expected): void
     {
-        $schema = new Schema(['query' => new ObjectType(['name' => 'Query'])]);
+        $schema = new Schema(['query' => new ObjectType(['name' => 'Query', 'fields' => []])]);
         $server = new Server($schema, false);
         $request = new ServerRequest(method: 'POST', body: new CallbackStream(fn () => $body));
         $request = $request->withHeader('content-type', 'application/json');
@@ -38,9 +38,6 @@ class ServerTest extends TestCase
                 'errors' => [
                     [
                         'message' => 'GraphQL Request must include at least one of those two parameters: "query" or "queryId"',
-                        'extensions' => [
-                            'category' => 'request',
-                        ],
                     ],
                 ],
             ],
@@ -52,9 +49,6 @@ class ServerTest extends TestCase
                 'errors' => [
                     [
                         'message' => 'GraphQL Request must include at least one of those two parameters: "query" or "queryId"',
-                        'extensions' => [
-                            'category' => 'request',
-                        ],
                     ],
                 ],
             ],
@@ -66,9 +60,6 @@ class ServerTest extends TestCase
                 'errors' => [
                     [
                         'message' => 'GraphQL Request must include at least one of those two parameters: "query" or "queryId"',
-                        'extensions' => [
-                            'category' => 'request',
-                        ],
                     ],
                 ],
             ],

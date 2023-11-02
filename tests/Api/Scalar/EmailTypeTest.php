@@ -28,7 +28,6 @@ final class EmailTypeTest extends AbstractStringBasedType
             ['root@localhost', 'root@localhost', false],
             ['', null, true],
             ['foo', 'foo', false],
-            [null, null, true],
         ];
     }
 }

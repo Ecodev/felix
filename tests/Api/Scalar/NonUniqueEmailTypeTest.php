@@ -26,7 +26,6 @@ final class NonUniqueEmailTypeTest extends AbstractStringBasedType
             ['john@example.non-existing-tld', 'john@example.non-existing-tld', false],
             ['root@localhost', 'root@localhost', false],
             ['foo', 'foo', false],
-            [null, null, false],
             ['', '', true],
         ];
     }

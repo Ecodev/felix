@@ -60,7 +60,7 @@ final class DateTypeTest extends TestCase
     public function testParseLiteralAsInt(): void
     {
         $type = new DateType();
-        $ast = new IntValueNode(['value' => 123]);
+        $ast = new IntValueNode(['value' => '123']);
 
         $this->expectExceptionMessage('Query error: Can only parse strings got: IntValue');
         $type->parseLiteral($ast);

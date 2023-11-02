@@ -124,15 +124,24 @@ abstract class AbstractServer extends TestCase
     private function removeTrace(array $result): array
     {
         if (array_key_exists('errors', $result)) {
-            foreach ($result['errors'] as &$error) {
-                unset($error['trace']);
-            }
+            $result = $this->removeTraceOneResult($result);
         } else {
-            foreach ($result as $r) {
-                if (array_key_exists('errors', $r)) {
-                    foreach ($r['errors'] as &$error) {
-                        unset($error['trace']);
-                    }
+            foreach ($result as &$r) {
+                $r = $this->removeTraceOneResult($r);
+            }
+        }
+
+        return $result;
+    }
+
+    private function removeTraceOneResult(array $result): array
+    {
+        if (array_key_exists('errors', $result)) {
+            foreach ($result['errors'] as &$error) {
+                unset($error['extensions']['file'], $error['extensions']['line'], $error['extensions']['trace']);
+
+                if (!$error['extensions']) {
+                    unset($error['extensions']);
                 }
             }
         }

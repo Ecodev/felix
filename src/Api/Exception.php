@@ -11,11 +11,6 @@ use GraphQL\Error\ClientAware;
  */
 class Exception extends \Exception implements ClientAware
 {
-    public function getCategory(): string
-    {
-        return 'Permissions';
-    }
-
     public function isClientSafe(): bool
     {
         return true;
