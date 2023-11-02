@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Ecodev\Felix\Api;
 
 use Doctrine\DBAL\Exception\DriverException;
-use GraphQL\Error\ClientAware;
 use GraphQL\Error\DebugFlag;
+use GraphQL\Error\UserError;
 use GraphQL\Executor\ExecutionResult;
 use GraphQL\GraphQL;
 use GraphQL\Server\ServerConfig;
@@ -102,9 +102,16 @@ class Server
 
         $result = $formatter($exception);
 
-        if (!$exception instanceof ClientAware || !$exception->isClientSafe()) {
-            $result['extensions'] ??= [];
-            $result['extensions']['category'] = 'internal';
+        // Invalid variable that end-user might have crafted via the URL
+        $isInvalidVariables = preg_match('~^Variable \".*\" got invalid value ~', $exception->getMessage());
+        $isFelixException = $exception->getPrevious() instanceof Exception;
+        if ($isFelixException || $isInvalidVariables) {
+            $result['extensions']['showSnack'] = true;
+        }
+
+        // Not found object
+        if ($exception->getPrevious() instanceof UserError && preg_match('~^Entity not found for class `~', $exception->getMessage())) {
+            $result['extensions']['objectNotFound'] = true;
         }
 
         return $result;
