@@ -28,7 +28,6 @@ class PaginationTypeFactory implements AbstractFactoryInterface
 
     public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null): PaginationType
     {
-        /** @var null|class-string $class */
         $class = $this->getClass($requestedName);
         if (!$class) {
             throw new Exception('Cannot create a PaginationType for a name not matching a model: ' . $requestedName);
@@ -41,6 +40,9 @@ class PaginationTypeFactory implements AbstractFactoryInterface
         return $type;
     }
 
+    /**
+     * @return null|class-string
+     */
     private function getClass(string $requestedName): ?string
     {
         if (!preg_match(self::PATTERN, $requestedName, $m)) {
