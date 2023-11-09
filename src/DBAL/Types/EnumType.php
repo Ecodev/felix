@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ecodev\Felix\DBAL\Types;
 
+use BackedEnum;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;
 use Exception;
@@ -12,17 +13,19 @@ use ReflectionClass;
 
 abstract class EnumType extends Type
 {
+    final public function getQuotedPossibleValues(): string
+    {
+        return implode(', ', array_map(fn (string $str) => "'" . $str . "'", $this->getPossibleValues()));
+    }
+
     public function getSqlDeclaration(array $column, AbstractPlatform $platform): string
     {
-        $possibleValues = $this->getPossibleValues();
-        $quotedPossibleValues = implode(', ', array_map(fn (string $str) => "'" . $str . "'", $possibleValues));
-
-        $sql = 'ENUM(' . $quotedPossibleValues . ')';
+        $sql = 'ENUM(' . $this->getQuotedPossibleValues() . ')';
 
         return $sql;
     }
 
-    public function convertToPHPValue(mixed $value, AbstractPlatform $platform): ?string
+    public function convertToPHPValue(mixed $value, AbstractPlatform $platform): null|string|BackedEnum
     {
         if ($value === null || '' === $value) {
             return null;

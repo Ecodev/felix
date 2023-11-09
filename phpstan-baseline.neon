@@ -1,9 +1,29 @@
 parameters:
 	ignoreErrors:
 		-
+			message: "#^Cannot call method getDescription\\(\\) on mixed\\.$#"
+			count: 1
+			path: src/Api/Enum/PhpEnumType.php
+
+		-
+			message: "#^Method Ecodev\\\\Felix\\\\DBAL\\\\Types\\\\PhpEnumType\\:\\:convertToDatabaseValue\\(\\) should return string\\|null but returns int\\|string\\.$#"
+			count: 1
+			path: src/DBAL/Types/PhpEnumType.php
+
+		-
+			message: "#^Method Ecodev\\\\Felix\\\\DBAL\\\\Types\\\\PhpEnumType\\:\\:getPossibleValues\\(\\) should return array\\<string\\> but returns array\\<int\\|string\\>\\.$#"
+			count: 1
+			path: src/DBAL/Types/PhpEnumType.php
+
+		-
 			message: "#^Property Ecodev\\\\Felix\\\\Service\\\\DataRestorer\\:\\:\\$allRelationTables \\(array\\<string, array\\{table1\\: class\\-string, table2\\: class\\-string\\}\\>\\) does not accept array\\<int\\|string, array\\<string, mixed\\>\\>\\.$#"
 			count: 1
 			path: src/Service/DataRestorer.php
+
+		-
+			message: "#^Parameter \\#1 \\$value of method Ecodev\\\\Felix\\\\DBAL\\\\Types\\\\PhpEnumType\\:\\:convertToPHPValue\\(\\) expects string\\|null, int given\\.$#"
+			count: 1
+			path: tests/DBAL/Types/PhpEnumTypeTest.php
 
 		-
 			message: "#^Parameter \\#1 \\$input of method OTPHP\\\\OTPInterface\\:\\:at\\(\\) expects int\\<0, max\\>, int\\<\\-26, max\\> given\\.$#"
