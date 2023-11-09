@@ -32,6 +32,18 @@ class ConfigProvider
                     \Laminas\View\Renderer\RendererInterface::class => \Ecodev\Felix\Service\RendererFactory::class,
                 ],
             ],
+            'doctrine' => [
+                'event_manager' => [
+                    'orm_default' => [
+                        'listeners' => [
+                            [
+                                'events' => [\Doctrine\ORM\Tools\ToolEvents::postGenerateSchema],
+                                'listener' => \Ecodev\Felix\Service\EnumAutoMigrator::class,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
         ];
     }
 }
