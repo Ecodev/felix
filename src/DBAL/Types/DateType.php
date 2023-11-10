@@ -11,7 +11,7 @@ use Doctrine\DBAL\Platforms\AbstractPlatform;
 final class DateType extends \Doctrine\DBAL\Types\DateType
 {
     /**
-     * @param null|DateTimeInterface|int|string $value
+     * @param null|ChronosDate|DateTimeInterface|string $value
      */
     public function convertToPHPValue(mixed $value, AbstractPlatform $platform): ?ChronosDate
     {
