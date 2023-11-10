@@ -43,7 +43,7 @@
         "ext-fileinfo": "*",
         "ext-json": "*",
         "ext-pdo": "*",
-        "cakephp/chronos": "^2.4",
+        "cakephp/chronos": "^3.0",
         "doctrine/dbal": "^3.6",
         "doctrine/migrations": "^3.6",
         "ecodev/graphql-doctrine": "^9.0",
