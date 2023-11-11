@@ -10,6 +10,7 @@ use Laminas\Diactoros\CallbackStream;
 use Laminas\Diactoros\Response;
 use Laminas\Diactoros\ServerRequest;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 class SignedQueryMiddlewareTest extends TestCase
@@ -59,7 +60,11 @@ class SignedQueryMiddlewareTest extends TestCase
         $handler = $this->createMock(RequestHandlerInterface::class);
         $handler->expects($expectExceptionMessage ? self::never() : self::once())
             ->method('handle')
-            ->willReturn(new Response());
+            ->willReturnCallback(function (ServerRequestInterface $incomingRequest) use ($body) {
+                self::assertSame($body, $incomingRequest->getBody()->getContents(), 'the original body content is still available for next middlewares');
+
+                return new Response();
+            });
 
         $middleware = new SignedQueryMiddleware($keys, ['1.2.3.4', '2a01:198:603:0::/65'], $required);
 

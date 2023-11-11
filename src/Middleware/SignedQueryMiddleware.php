@@ -7,6 +7,7 @@ namespace Ecodev\Felix\Middleware;
 use Cake\Chronos\Chronos;
 use Ecodev\Felix\Validator\IPRange;
 use Exception;
+use Laminas\Diactoros\CallbackStream;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -44,18 +45,18 @@ final class SignedQueryMiddleware implements MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         if ($this->required) {
-            $this->verify($request);
+            $request = $this->verify($request);
         }
 
         return $handler->handle($request);
     }
 
-    private function verify(ServerRequestInterface $request): void
+    private function verify(ServerRequestInterface $request): ServerRequestInterface
     {
         $signature = $request->getHeader('X-Signature')[0] ?? '';
         if (!$signature) {
             if ($this->isAllowedIp($request)) {
-                return;
+                return $request;
             }
 
             throw new Exception('Missing `X-Signature` HTTP header in signed query', 403);
@@ -66,10 +67,11 @@ final class SignedQueryMiddleware implements MiddlewareInterface
             $hash = $m['hash'];
 
             $this->verifyTimestamp($timestamp);
-            $this->verifyHash($request, $timestamp, $hash);
-        } else {
-            throw new Exception('Invalid `X-Signature` HTTP header in signed query', 403);
+
+            return $this->verifyHash($request, $timestamp, $hash);
         }
+
+        throw new Exception('Invalid `X-Signature` HTTP header in signed query', 403);
     }
 
     private function verifyTimestamp(string $timestamp): void
@@ -83,33 +85,45 @@ final class SignedQueryMiddleware implements MiddlewareInterface
         }
     }
 
-    private function verifyHash(ServerRequestInterface $request, string $timestamp, string $hash): void
+    private function verifyHash(ServerRequestInterface $request, string $timestamp, string $hash): ServerRequestInterface
     {
-        $operations = $this->getOperations($request);
+        ['request' => $request, 'operations' => $operations] = $this->getOperations($request);
         $payload = $timestamp . $operations;
 
         foreach ($this->keys as $key) {
             $computedHash = hash_hmac('sha256', $payload, $key);
             if ($hash === $computedHash) {
-                return;
+                return $request;
             }
         }
 
         throw new Exception('Invalid signed query', 403);
     }
 
-    private function getOperations(ServerRequestInterface $request): mixed
+    /**
+     * @return array{request: ServerRequestInterface, operations: string}
+     */
+    private function getOperations(ServerRequestInterface $request): array
     {
         $contents = $request->getBody()->getContents();
+
         if ($contents) {
-            return $contents;
+            return [
+                // Pseudo-rewind the request, even if non-rewindable, so the next
+                // middleware still accesses the stream from the beginning
+                'request' => $request->withBody(new CallbackStream(fn () => $contents)),
+                'operations' => $contents,
+            ];
         }
 
         $parsedBody = $request->getParsedBody();
         if (is_array($parsedBody)) {
             $operations = $parsedBody['operations'] ?? null;
             if ($operations) {
-                return $operations;
+                return [
+                    'request' => $request,
+                    'operations' => $operations,
+                ];
             }
         }
 
