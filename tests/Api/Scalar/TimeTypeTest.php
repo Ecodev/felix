@@ -17,12 +17,26 @@ final class TimeTypeTest extends TestCase
         $type = new TimeType();
         $time = new ChronosTime('14:30:25');
         $actual = $type->serialize($time);
-        self::assertSame('14:30:25.000000', $actual);
+        self::assertSame('14h30', $actual);
 
         // Test serialize with microseconds
         $time = new ChronosTime('23:59:59.1254');
         $actual = $type->serialize($time);
-        self::assertSame('23:59:59.001254', $actual);
+        self::assertSame('23h59', $actual);
+    }
+
+    /**
+     * @dataProvider providerValues
+     */
+    public function testParseValue(string $input, ?string $expected): void
+    {
+        $type = new TimeType();
+        $actual = $type->parseValue($input);
+        if ($actual) {
+            $actual = $actual->__toString();
+        }
+
+        self::assertSame($expected, $actual);
     }
 
     /**
@@ -34,8 +48,11 @@ final class TimeTypeTest extends TestCase
         $ast = new StringValueNode(['value' => $input]);
 
         $actual = $type->parseLiteral($ast);
-        self::assertInstanceOf(ChronosTime::class, $actual);
-        self::assertSame($expected, $actual->format('H:i:s.u'));
+        if ($actual) {
+            $actual = $actual->__toString();
+        }
+
+        self::assertSame($expected, $actual);
     }
 
     public function testParseLiteralAsInt(): void
@@ -50,8 +67,14 @@ final class TimeTypeTest extends TestCase
     public static function providerValues(): array
     {
         return [
-            'normal timr' => ['14:30:25', '14:30:25.000000'],
-            'time with milliseconds' => ['23:45:13.300', '23:45:13.000300'],
+            'empty string' => ['', null],
+            'normal time' => ['14:30', '14:30:00'],
+            'alternative separator' => ['14h30', '14:30:00'],
+            'only hour' => ['14h', '14:00:00'],
+            'only hour alternative' => ['14:', '14:00:00'],
+            'even shorter' => ['9', '09:00:00'],
+            'spaces are fines' => ['  14h00  ', '14:00:00'],
+            'a bit weird, but why not' => ['  14h6  ', '14:06:00'],
         ];
     }
 }

@@ -14,7 +14,7 @@ use UnexpectedValueException;
 
 final class TimeType extends ScalarType
 {
-    public ?string $description = 'A time of the day (local time, no timezone).';
+    public ?string $description = 'A time of the day including only hour and minutes (local time, no timezone). Accepted formats are "14h35", "14:35" or "14h".';
 
     /**
      * Serializes an internal value to include in a response.
@@ -22,7 +22,7 @@ final class TimeType extends ScalarType
     public function serialize(mixed $value): mixed
     {
         if ($value instanceof ChronosTime) {
-            return $value->format('H:i:s.u');
+            return $value->format('H\hi');
         }
 
         return $value;
@@ -41,6 +41,11 @@ final class TimeType extends ScalarType
             return null;
         }
 
+        if (!preg_match('~^(?<hour>\d{1,2})(([h:]$)|([h:](?<minute>\d{1,2}))?$)~', trim($value), $m)) {
+            throw new UnexpectedValueException('Invalid format  Chronos time. Expected "14h35", "14:35" or "14h", but got: ' . Utils::printSafe($value));
+        }
+
+        $value = $m['hour'] . ':' . ($m['minute'] ?? '00');
         $time = new ChronosTime($value);
 
         return $time;
