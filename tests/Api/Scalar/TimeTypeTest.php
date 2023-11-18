@@ -17,12 +17,12 @@ final class TimeTypeTest extends TestCase
         $type = new TimeType();
         $time = new ChronosTime('14:30:25');
         $actual = $type->serialize($time);
-        self::assertSame('14h30', $actual);
+        self::assertSame('14:30', $actual);
 
         // Test serialize with microseconds
         $time = new ChronosTime('23:59:59.1254');
         $actual = $type->serialize($time);
-        self::assertSame('23h59', $actual);
+        self::assertSame('23:59', $actual);
     }
 
     /**

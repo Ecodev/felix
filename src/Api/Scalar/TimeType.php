@@ -22,7 +22,7 @@ final class TimeType extends ScalarType
     public function serialize(mixed $value): mixed
     {
         if ($value instanceof ChronosTime) {
-            return $value->format('H\hi');
+            return $value->format('H:i');
         }
 
         return $value;
