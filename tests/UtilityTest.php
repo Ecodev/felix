@@ -56,19 +56,22 @@ final class UtilityTest extends TestCase
     public function testModelToId(): void
     {
         $input = [
-            'entity' => new class() implements Model {
+            3 => new stdClass(),
+            'model' => new class() implements Model {
                 public function getId(): ?int
                 {
                     return 123456;
                 }
             },
             4 => 1,
+            'entityId' => new EntityID(_em(), User::class, '456'),
         ];
 
         $actual = Utility::modelToId($input);
 
         $expected = $input;
-        $expected['entity'] = 123456;
+        $expected['model'] = 123456;
+        $expected['entityId'] = '456';
 
         self::assertSame($expected, $actual, 'models must be replaced by their ids, other values should be preserved');
     }
