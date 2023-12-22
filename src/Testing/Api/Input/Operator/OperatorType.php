@@ -44,7 +44,7 @@ class OperatorType extends TestCase
      * @param class-string $entity
      * @param null|int[] $ids
      *
-     * @return null|EntityID[]
+     * @return ($ids is null ? null : EntityID[])
      */
     protected function idsToEntityIds(string $entity, ?array $ids): ?array
     {
