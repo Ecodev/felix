@@ -23,12 +23,14 @@ final class Plural
         }
 
         $plural = $name . 's';
-        $plural = preg_replace('/ys$/', 'ies', $plural);
-        if ($plural === null) {
-            throw new Exception('Error while making plural');
-        }
 
-        $plural = preg_replace('/ss$/', 'ses', $plural);
+        $replacements = [
+            '/ys$/' => 'ies',
+            '/ss$/' => 'ses',
+            '/xs$/' => 'xes',
+        ];
+
+        $plural = preg_replace(array_keys($replacements), $replacements, $plural);
         if ($plural === null) {
             throw new Exception('Error while making plural');
         }

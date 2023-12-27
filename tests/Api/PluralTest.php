@@ -127,7 +127,7 @@ class PluralTest extends TestCase
         yield ['RiskClassification', 'RiskClassifications'];
         yield ['RiskFrequency', 'RiskFrequencies'];
         yield ['RiskLevel', 'RiskLevels'];
-        yield ['RiskMatrix', 'RiskMatrixs'];
+        yield ['RiskMatrix', 'RiskMatrixes'];
         yield ['RiskSeverity', 'RiskSeverities'];
         yield ['Rite', 'Rites'];
         yield ['RoleContextInterface', 'RoleContextInterfaces'];
