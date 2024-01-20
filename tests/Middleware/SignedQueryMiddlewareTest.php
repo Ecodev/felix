@@ -203,5 +203,32 @@ class SignedQueryMiddlewareTest extends TestCase
             'Invalid signed query',
             '1.2.3.4',
         ];
+
+        yield 'no header, even GoogleBot is rejected, because GoogleBot should not forge new requests but only (re)play existing ones' => [
+            [$key1],
+            '{"operationName":"CurrentUser","variables":{},"query":"query CurrentUser { viewer { id }}',
+            null,
+            '',
+            'Missing `X-Signature` HTTP header in signed query',
+            '66.249.70.134',
+        ];
+
+        yield 'too much in the past, but GoogleBot is allowed to replay old requests' => [
+            [$key1],
+            '{"operationName":"CurrentUser","variables":{},"query":"query CurrentUser { viewer { id }}',
+            null,
+            'v1.1577951099.20177a7face4e05a75c4b2e41bc97a8225f420f5b7bb1709dd5499821dba0807',
+            '',
+            '66.249.70.134',
+        ];
+
+        yield 'too much in the past and invalid signature, even GoogleBot is rejected, because GoogleBot should not modify queries and their signatures' => [
+            [$key1],
+            '{"operationName":"CurrentUser","variables":{},"query":"query CurrentUser { viewer { id }}',
+            null,
+            'v1.1577951099' . str_repeat('a', 64),
+            'Invalid `X-Signature` HTTP header in signed query',
+            '66.249.70.134',
+        ];
     }
 }
