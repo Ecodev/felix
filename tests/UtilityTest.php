@@ -159,4 +159,23 @@ final class UtilityTest extends TestCase
         yield [[true], "'1'"];
         yield [[1.23], "'1.23'"];
     }
+
+    public function getCookieDomainProvider(): iterable
+    {
+        yield ['', null];
+        yield ['localhost', null];
+        yield ['example.com', '.example.com'];
+        yield ['www.example.com', '.example.com'];
+        yield ['example.com:123', '.example.com'];
+        yield ['www.example.com:123', '.example.com'];
+    }
+
+    /**
+     * @dataProvider getCookieDomainProvider
+     */
+    public function testGetCookieDomain(string $input, ?string $expected): void
+    {
+        $actual = Utility::getCookieDomain($input);
+        self::assertSame($expected, $actual);
+    }
 }

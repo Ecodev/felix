@@ -104,4 +104,24 @@ abstract class Utility
 
         return implode(', ', $quoted);
     }
+
+    /**
+     * Return the domain to be used for cookie.
+     *
+     * We look for domain name to build the string ".mydomain.com" to specify
+     * that cookies (session) are available on all subdomains.
+     *
+     * This will not work for domain without TLD such as "localhost", because
+     * RFC specify the domain string must contain two "." characters.
+     */
+    public static function getCookieDomain(string $input): ?string
+    {
+        if ($input && preg_match('/([^.]+\.[^.:]+)(:\d+)?$/', $input, $match)) {
+            $cookieDomain = '.' . $match[1];
+        } else {
+            $cookieDomain = null;
+        }
+
+        return $cookieDomain;
+    }
 }
