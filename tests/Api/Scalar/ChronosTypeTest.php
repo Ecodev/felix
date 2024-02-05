@@ -6,6 +6,7 @@ namespace EcodevTests\Felix\Api\Scalar;
 
 use Cake\Chronos\Chronos;
 use Ecodev\Felix\Api\Scalar\ChronosType;
+use GraphQL\Error\Error;
 use GraphQL\Language\AST\IntValueNode;
 use GraphQL\Language\AST\StringValueNode;
 use PHPUnit\Framework\TestCase;
@@ -68,8 +69,18 @@ final class ChronosTypeTest extends TestCase
         $type = new ChronosType();
         $ast = new IntValueNode(['value' => '123']);
 
+        $this->expectException(Error::class);
         $this->expectExceptionMessage('Query error: Can only parse strings got: IntValue');
         $type->parseLiteral($ast);
+    }
+
+    public function testParseValueAsInt(): void
+    {
+        $type = new ChronosType();
+
+        $this->expectException(Error::class);
+        $this->expectExceptionMessage('Cannot represent value as Chronos date: 123');
+        $type->parseValue(123);
     }
 
     public static function providerValues(): array

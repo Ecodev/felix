@@ -12,7 +12,6 @@ use GraphQL\Language\AST\StringValueNode;
 use GraphQL\Type\Definition\ScalarType;
 use GraphQL\Utils\Utils;
 use Money\Money;
-use UnexpectedValueException;
 
 abstract class AbstractMoneyType extends ScalarType
 {
@@ -40,7 +39,7 @@ abstract class AbstractMoneyType extends ScalarType
     public function parseValue(mixed $value): Money
     {
         if (!is_scalar($value)) {
-            throw new UnexpectedValueException('Cannot represent value as Money: ' . Utils::printSafe($value));
+            throw new Error('Cannot represent value as Money: ' . Utils::printSafe($value));
         }
 
         $value = (string) $value;

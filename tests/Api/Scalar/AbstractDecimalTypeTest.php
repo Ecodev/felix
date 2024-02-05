@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace EcodevTests\Felix\Api\Scalar;
 
 use Ecodev\Felix\Api\Scalar\AbstractDecimalType;
+use GraphQL\Error\Error;
 use GraphQL\Language\AST\FloatValueNode;
 use GraphQL\Language\AST\IntValueNode;
+use GraphQL\Language\AST\NullValueNode;
 use GraphQL\Language\AST\StringValueNode;
 use GraphQL\Utils\Utils;
 use PHPUnit\Framework\TestCase;
@@ -58,6 +60,7 @@ final class AbstractDecimalTypeTest extends TestCase
         $type = $this->createType($decimal, $minimum, $maximum);
 
         if ($expected === null) {
+            $this->expectException(Error::class);
             $this->expectExceptionMessage('Query error: Not a valid TestDecimal' . ': ' . Utils::printSafe($input));
         }
 
@@ -82,12 +85,25 @@ final class AbstractDecimalTypeTest extends TestCase
         }
 
         if ($expected === null) {
+            $this->expectException(Error::class);
             $this->expectExceptionMessage('Query error: Not a valid TestDecimal');
         }
 
         $actual = $type->parseLiteral($ast);
 
         self::assertSame($expected, $actual);
+    }
+
+    public function testParseLiteralThrowIfInvalidNodeType(): void
+    {
+        $type = $this->createType(3, null, null);
+
+        $ast = new NullValueNode([]);
+
+        $this->expectException(Error::class);
+        $this->expectExceptionMessage('Query error: Can only parse strings got: NullValue');
+
+        $type->parseLiteral($ast);
     }
 
     public static function providerInputs(): array

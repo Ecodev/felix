@@ -11,6 +11,7 @@ use GraphQL\Language\AST\IntValueNode;
 use GraphQL\Language\AST\StringValueNode;
 use Money\Money;
 use PHPUnit\Framework\TestCase;
+use stdClass;
 
 final class CHFTypeTest extends TestCase
 {
@@ -108,7 +109,17 @@ final class CHFTypeTest extends TestCase
         $type = new CHFType();
 
         $this->expectException(Error::class);
+        $this->expectExceptionMessage('Query error: Not a valid Money: ');
         $type->parseValue($invalidValue);
+    }
+
+    public function testParseValueThrowsWithInvalidValueASD(): void
+    {
+        $type = new CHFType();
+
+        $this->expectException(Error::class);
+        $this->expectExceptionMessage('Cannot represent value as Money: instance of stdClass');
+        $type->parseValue(new stdClass());
     }
 
     /**
@@ -120,6 +131,7 @@ final class CHFTypeTest extends TestCase
         $ast = new StringValueNode(['value' => $invalidValue]);
 
         $this->expectException(Error::class);
+        $this->expectExceptionMessage('Query error: Not a valid Money: ');
         $type->parseLiteral($ast);
     }
 

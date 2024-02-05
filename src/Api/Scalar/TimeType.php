@@ -10,7 +10,6 @@ use GraphQL\Language\AST\Node;
 use GraphQL\Language\AST\StringValueNode;
 use GraphQL\Type\Definition\ScalarType;
 use GraphQL\Utils\Utils;
-use UnexpectedValueException;
 
 final class TimeType extends ScalarType
 {
@@ -34,7 +33,7 @@ final class TimeType extends ScalarType
     public function parseValue(mixed $value): ?ChronosTime
     {
         if (!is_string($value)) {
-            throw new UnexpectedValueException('Cannot represent value as Chronos time: ' . Utils::printSafe($value));
+            throw new Error('Cannot represent value as ChronosTime: ' . Utils::printSafe($value));
         }
 
         if ($value === '') {
@@ -42,7 +41,7 @@ final class TimeType extends ScalarType
         }
 
         if (!preg_match('~^(?<hour>\d{1,2})(([h:]$)|([h:](?<minute>\d{1,2}))?$)~', trim($value), $m)) {
-            throw new UnexpectedValueException('Invalid format  Chronos time. Expected "14h35", "14:35" or "14h", but got: ' . Utils::printSafe($value));
+            throw new Error('Invalid format for ChronosTime. Expected "14h35", "14:35" or "14h", but got: ' . Utils::printSafe($value));
         }
 
         $value = $m['hour'] . ':' . ($m['minute'] ?? '00');

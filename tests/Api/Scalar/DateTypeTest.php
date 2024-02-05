@@ -6,6 +6,7 @@ namespace EcodevTests\Felix\Api\Scalar;
 
 use Cake\Chronos\ChronosDate;
 use Ecodev\Felix\Api\Scalar\DateType;
+use GraphQL\Error\Error;
 use GraphQL\Language\AST\IntValueNode;
 use GraphQL\Language\AST\StringValueNode;
 use PHPUnit\Framework\TestCase;
@@ -62,6 +63,7 @@ final class DateTypeTest extends TestCase
         $type = new DateType();
         $ast = new IntValueNode(['value' => '123']);
 
+        $this->expectException(Error::class);
         $this->expectExceptionMessage('Query error: Can only parse strings got: IntValue');
         $type->parseLiteral($ast);
     }

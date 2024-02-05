@@ -6,6 +6,7 @@ namespace EcodevTests\Felix\Api\Scalar;
 
 use Cake\Chronos\ChronosTime;
 use Ecodev\Felix\Api\Scalar\TimeType;
+use GraphQL\Error\Error;
 use GraphQL\Language\AST\IntValueNode;
 use GraphQL\Language\AST\StringValueNode;
 use PHPUnit\Framework\TestCase;
@@ -60,8 +61,27 @@ final class TimeTypeTest extends TestCase
         $type = new TimeType();
         $ast = new IntValueNode(['value' => '123']);
 
+        $this->expectException(Error::class);
         $this->expectExceptionMessage('Query error: Can only parse strings got: IntValue');
         $type->parseLiteral($ast);
+    }
+
+    public function testParseValueAsInt(): void
+    {
+        $type = new TimeType();
+
+        $this->expectException(Error::class);
+        $this->expectExceptionMessage('Cannot represent value as ChronosTime: 123');
+        $type->parseValue(123);
+    }
+
+    public function testParseValueInvalidFormat(): void
+    {
+        $type = new TimeType();
+
+        $this->expectException(Error::class);
+        $this->expectExceptionMessage('Invalid format for ChronosTime. Expected "14h35", "14:35" or "14h", but got: "123"');
+        $type->parseValue('123');
     }
 
     public static function providerValues(): array

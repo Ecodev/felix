@@ -10,7 +10,6 @@ use GraphQL\Language\AST\Node;
 use GraphQL\Language\AST\StringValueNode;
 use GraphQL\Type\Definition\ScalarType;
 use GraphQL\Utils\Utils;
-use UnexpectedValueException;
 
 final class DateType extends ScalarType
 {
@@ -34,7 +33,7 @@ final class DateType extends ScalarType
     public function parseValue(mixed $value): ChronosDate
     {
         if (!is_string($value)) {
-            throw new UnexpectedValueException('Cannot represent value as Chronos date: ' . Utils::printSafe($value));
+            throw new Error('Cannot represent value as Chronos date: ' . Utils::printSafe($value));
         }
 
         $date = ChronosDate::createFromFormat('Y-m-d+', $value);

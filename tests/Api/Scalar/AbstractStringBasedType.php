@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace EcodevTests\Felix\Api\Scalar;
 
+use GraphQL\Error\Error;
 use GraphQL\Language\AST\IntValueNode;
 use GraphQL\Language\AST\StringValueNode;
 use PHPUnit\Framework\TestCase;
@@ -34,6 +35,7 @@ abstract class AbstractStringBasedType extends TestCase
         $type = $this->createType();
 
         if (!$isValid) {
+            $this->expectException(Error::class);
             $this->expectExceptionMessage('Query error: Not a valid ' . $this->getTypeName());
         }
 
@@ -51,6 +53,7 @@ abstract class AbstractStringBasedType extends TestCase
         $ast = new StringValueNode(['value' => $input]);
 
         if (!$isValid) {
+            $this->expectException(Error::class);
             $this->expectExceptionMessage('Query error: Not a valid ' . $this->getTypeName());
         }
 
@@ -64,6 +67,7 @@ abstract class AbstractStringBasedType extends TestCase
         $type = $this->createType();
         $ast = new IntValueNode(['value' => '123']);
 
+        $this->expectException(Error::class);
         $this->expectExceptionMessage('Query error: Can only parse strings got: IntValue');
         $type->parseLiteral($ast);
     }
