@@ -178,12 +178,20 @@ class SignedQueryMiddlewareTest extends TestCase
             'Invalid `X-Signature` HTTP header in signed query',
         ];
 
-        yield 'no graphql operations' => [
+        yield 'no graphql operations with invalid signature is rejected' => [
             [$key1],
             '',
             null,
             'v1.1577964600.' . str_repeat('a', 64),
-            'Could not find GraphQL operations in request',
+            'Invalid signed query',
+        ];
+
+        yield 'no graphql operations with correct signature is OK (but will be rejected later by GraphQL own validation mechanism)' => [
+            [$key1],
+            '',
+            null,
+            'v1.1577964600.ff8a9f2bc8090207b824d88251ed8e9d39434607d86e0f0b2837c597d6642c26', //,. str_repeat('a', 64),
+            '',
         ];
 
         yield 'no header, but allowed IPv4' => [

@@ -118,17 +118,11 @@ final class SignedQueryMiddleware implements MiddlewareInterface
         }
 
         $parsedBody = $request->getParsedBody();
-        if (is_array($parsedBody)) {
-            $operations = $parsedBody['operations'] ?? null;
-            if ($operations) {
-                return [
-                    'request' => $request,
-                    'operations' => $operations,
-                ];
-            }
-        }
 
-        throw new Exception('Could not find GraphQL operations in request', 403);
+        return [
+            'request' => $request,
+            'operations' => $parsedBody['operations'] ?? '',
+        ];
     }
 
     private function isAllowedIp(ServerRequestInterface $request): bool
