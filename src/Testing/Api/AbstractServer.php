@@ -140,7 +140,7 @@ abstract class AbstractServer extends TestCase
             foreach ($result['errors'] as &$error) {
                 unset($error['extensions']['file'], $error['extensions']['line'], $error['extensions']['trace']);
 
-                if (!$error['extensions']) {
+                if (array_key_exists('extensions', $error) && !$error['extensions']) {
                     unset($error['extensions']);
                 }
             }
