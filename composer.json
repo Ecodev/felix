@@ -43,6 +43,7 @@
         "ext-fileinfo": "*",
         "ext-json": "*",
         "ext-pdo": "*",
+        "ext-readline": "*",
         "cakephp/chronos": "^3.0.3",
         "doctrine/dbal": "^3.6",
         "doctrine/migrations": "^3.6",

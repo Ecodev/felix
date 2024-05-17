@@ -73,6 +73,8 @@ abstract class AbstractDatabase
         $mariadbArgs = self::getMariadbArgs();
         $dumpFile = self::absolutePath($dumpFile);
 
+        self::confirm('DROP the entire database `' . self::getDatabaseName() . "` and load dump $dumpFile ?");
+
         echo "loading dump $dumpFile...\n";
         $database = self::getDatabaseName();
 
@@ -88,7 +90,7 @@ abstract class AbstractDatabase
         static::loadTestUsers();
     }
 
-    private static function getDatabaseName(): string
+    protected static function getDatabaseName(): string
     {
         /** @var array<string,string> $dbConfig */
         $dbConfig = _em()->getConnection()->getParams();
@@ -155,6 +157,8 @@ abstract class AbstractDatabase
      */
     public static function loadTestData(): void
     {
+        self::confirm('DROP the entire database `' . self::getDatabaseName() . '` and load test data ?');
+
         self::executeLocalCommand(PHP_BINARY . ' ./bin/doctrine orm:schema-tool:drop --ansi --full-database --force');
         self::executeLocalCommand(PHP_BINARY . ' ./bin/doctrine migrations:migrate --ansi --no-interaction');
         static::loadTriggers();
@@ -208,5 +212,37 @@ abstract class AbstractDatabase
         }
 
         return $absolutePath;
+    }
+
+    /**
+     * Ask confirmation to user (y/n), unless if we are really sure that we are in local development,
+     * or if command argument `--no-interaction` is given.
+     *
+     * If the user does not confirm, the program will exist immediately.
+     */
+    public static function confirm(string $question): void
+    {
+        global $argv;
+        $path = getcwd() ?: '';
+        if (preg_match('~^/sistes/[^/]+\.lan$~', $path) || in_array('--no-interaction', $argv, true)) {
+            return;
+        }
+
+        echo <<<STRING
+
+            ⚠️    ⚠️    ⚠️    ⚠️    ⚠️    ⚠️    ⚠️    ⚠️    ⚠️    ⚠️    ⚠️    ⚠️ 
+
+            It looks like this is a\033[01;31m PRODUCTION SITE\033[0m: $path
+
+            $question (y)es (n)o
+
+            ⚠️    ⚠️    ⚠️    ⚠️    ⚠️    ⚠️    ⚠️    ⚠️    ⚠️    ⚠️    ⚠️    ⚠️ 
+
+            STRING;
+
+        $confirm = readline() ?: '';
+        if (!preg_match('/^y(es)?$/', $confirm)) {
+            exit();
+        }
     }
 }
