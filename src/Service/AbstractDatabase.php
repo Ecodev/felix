@@ -218,7 +218,7 @@ abstract class AbstractDatabase
      * Ask confirmation to user (y/n), unless if we are really sure that we are in local development,
      * or if command argument `--no-interaction` is given.
      *
-     * If the user does not confirm, the program will exist immediately.
+     * If the user does not confirm, the program will exit immediately.
      */
     public static function confirm(string $question): void
     {
@@ -242,7 +242,7 @@ abstract class AbstractDatabase
 
         $confirm = readline() ?: '';
         if (!preg_match('/^y(es)?$/', $confirm)) {
-            exit();
+            exit(1);
         }
     }
 }
