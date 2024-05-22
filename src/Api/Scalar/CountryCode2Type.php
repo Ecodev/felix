@@ -14,7 +14,7 @@ class CountryCode2Type extends AbstractStringBasedType
         'AD', // Andorra
         'AE', // United Arab Emirates
         'AF', // Afghanistan
-        'AG', // Antigua and Barbuda
+        'AG', // Antigua & Barbuda
         'AI', // Anguilla
         'AL', // Albania
         'AM', // Armenia
@@ -27,7 +27,7 @@ class CountryCode2Type extends AbstractStringBasedType
         'AW', // Aruba
         'AX', // Åland Islands
         'AZ', // Azerbaijan
-        'BA', // Bosnia and Herzegovina
+        'BA', // Bosnia & Herzegovina
         'BB', // Barbados
         'BD', // Bangladesh
         'BE', // Belgium
@@ -36,11 +36,11 @@ class CountryCode2Type extends AbstractStringBasedType
         'BH', // Bahrain
         'BI', // Burundi
         'BJ', // Benin
-        'BL', // Saint Barthélemy
+        'BL', // St. Barthélemy
         'BM', // Bermuda
-        'BN', // Brunei Darussalam
-        'BO', // Bolivia (Plurinational State of)
-        'BQ', // Bonaire, Sint Eustatius and Saba
+        'BN', // Brunei
+        'BO', // Bolivia
+        'BQ', // Caribbean Netherlands
         'BR', // Brazil
         'BS', // Bahamas
         'BT', // Bhutan
@@ -50,11 +50,11 @@ class CountryCode2Type extends AbstractStringBasedType
         'BZ', // Belize
         'CA', // Canada
         'CC', // Cocos (Keeling) Islands
-        'CD', // Congo (Democratic Republic of the)
+        'CD', // Congo - Kinshasa
         'CF', // Central African Republic
-        'CG', // Congo
+        'CG', // Congo - Brazzaville
         'CH', // Switzerland
-        'CI', // Côte d'Ivoire
+        'CI', // Côte d’Ivoire
         'CK', // Cook Islands
         'CL', // Chile
         'CM', // Cameroon
@@ -62,11 +62,11 @@ class CountryCode2Type extends AbstractStringBasedType
         'CO', // Colombia
         'CR', // Costa Rica
         'CU', // Cuba
-        'CV', // Cabo Verde
+        'CV', // Cape Verde
         'CW', // Curaçao
         'CX', // Christmas Island
         'CY', // Cyprus
-        'CZ', // Czech Republic
+        'CZ', // Czechia
         'DE', // Germany
         'DJ', // Djibouti
         'DK', // Denmark
@@ -82,12 +82,12 @@ class CountryCode2Type extends AbstractStringBasedType
         'ET', // Ethiopia
         'FI', // Finland
         'FJ', // Fiji
-        'FK', // Falkland Islands (Malvinas)
-        'FM', // Micronesia (Federated States of)
+        'FK', // Falkland Islands
+        'FM', // Micronesia
         'FO', // Faroe Islands
         'FR', // France
         'GA', // Gabon
-        'GB', // United Kingdom of Great Britain and Northern Ireland
+        'GB', // United Kingdom
         'GD', // Grenada
         'GE', // Georgia
         'GF', // French Guiana
@@ -100,13 +100,13 @@ class CountryCode2Type extends AbstractStringBasedType
         'GP', // Guadeloupe
         'GQ', // Equatorial Guinea
         'GR', // Greece
-        'GS', // South Georgia and the South Sandwich Islands
+        'GS', // South Georgia & South Sandwich Islands
         'GT', // Guatemala
         'GU', // Guam
         'GW', // Guinea-Bissau
         'GY', // Guyana
-        'HK', // Hong Kong
-        'HM', // Heard Island and McDonald Islands
+        'HK', // Hong Kong SAR China
+        'HM', // Heard & McDonald Islands
         'HN', // Honduras
         'HR', // Croatia
         'HT', // Haiti
@@ -118,7 +118,7 @@ class CountryCode2Type extends AbstractStringBasedType
         'IN', // India
         'IO', // British Indian Ocean Territory
         'IQ', // Iraq
-        'IR', // Iran (Islamic Republic of)
+        'IR', // Iran
         'IS', // Iceland
         'IT', // Italy
         'JE', // Jersey
@@ -130,15 +130,15 @@ class CountryCode2Type extends AbstractStringBasedType
         'KH', // Cambodia
         'KI', // Kiribati
         'KM', // Comoros
-        'KN', // Saint Kitts and Nevis
-        'KP', // Korea (Democratic People's Republic of)
-        'KR', // Korea (Republic of)
+        'KN', // St. Kitts & Nevis
+        'KP', // North Korea
+        'KR', // South Korea
         'KW', // Kuwait
         'KY', // Cayman Islands
         'KZ', // Kazakhstan
-        'LA', // Lao People's Democratic Republic
+        'LA', // Laos
         'LB', // Lebanon
-        'LC', // Saint Lucia
+        'LC', // St. Lucia
         'LI', // Liechtenstein
         'LK', // Sri Lanka
         'LR', // Liberia
@@ -149,16 +149,16 @@ class CountryCode2Type extends AbstractStringBasedType
         'LY', // Libya
         'MA', // Morocco
         'MC', // Monaco
-        'MD', // Moldova (Republic of)
+        'MD', // Moldova
         'ME', // Montenegro
-        'MF', // Saint Martin (French part)
+        'MF', // St. Martin
         'MG', // Madagascar
         'MH', // Marshall Islands
         'MK', // North Macedonia
         'ML', // Mali
-        'MM', // Myanmar
+        'MM', // Myanmar (Burma)
         'MN', // Mongolia
-        'MO', // Macao
+        'MO', // Macao SAR China
         'MP', // Northern Mariana Islands
         'MQ', // Martinique
         'MR', // Mauritania
@@ -190,8 +190,76 @@ class CountryCode2Type extends AbstractStringBasedType
         'PH', // Philippines
         'PK', // Pakistan
         'PL', // Poland
-        'PM', // Saint Pierre and Miquelon
-        'PN', // Pitcairn
+        'PM', // St. Pierre & Miquelon
+        'PN', // Pitcairn Islands
+        'PR', // Puerto Rico
+        'PS', // Palestinian Territories
+        'PT', // Portugal
+        'PW', // Palau
+        'PY', // Paraguay
+        'QA', // Qatar
+        'RE', // Réunion
+        'RO', // Romania
+        'RS', // Serbia
+        'RU', // Russia
+        'RW', // Rwanda
+        'SA', // Saudi Arabia
+        'SB', // Solomon Islands
+        'SC', // Seychelles
+        'SD', // Sudan
+        'SE', // Sweden
+        'SG', // Singapore
+        'SH', // St. Helena
+        'SI', // Slovenia
+        'SJ', // Svalbard & Jan Mayen
+        'SK', // Slovakia
+        'SL', // Sierra Leone
+        'SM', // San Marino
+        'SN', // Senegal
+        'SO', // Somalia
+        'SR', // Suriname
+        'SS', // South Sudan
+        'ST', // São Tomé & Príncipe
+        'SV', // El Salvador
+        'SX', // Sint Maarten
+        'SY', // Syria
+        'SZ', // Eswatini
+        'TC', // Turks & Caicos Islands
+        'TD', // Chad
+        'TF', // French Southern Territories
+        'TG', // Togo
+        'TH', // Thailand
+        'TJ', // Tajikistan
+        'TK', // Tokelau
+        'TL', // Timor-Leste
+        'TM', // Turkmenistan
+        'TN', // Tunisia
+        'TO', // Tonga
+        'TR', // Türkiye
+        'TT', // Trinidad & Tobago
+        'TV', // Tuvalu
+        'TW', // Taiwan
+        'TZ', // Tanzania
+        'UA', // Ukraine
+        'UG', // Uganda
+        'UM', // U.S. Outlying Islands
+        'US', // United States
+        'UY', // Uruguay
+        'UZ', // Uzbekistan
+        'VA', // Vatican City
+        'VC', // St. Vincent & Grenadines
+        'VE', // Venezuela
+        'VG', // British Virgin Islands
+        'VI', // U.S. Virgin Islands
+        'VN', // Vietnam
+        'VU', // Vanuatu
+        'WF', // Wallis & Futuna
+        'WS', // Samoa
+        'YE', // Yemen
+        'YT', // Mayotte
+        'ZA', // South Africa
+        'ZM', // Zambia
+        'ZW', // Zimbabwe
     ];
 
     /**
