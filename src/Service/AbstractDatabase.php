@@ -224,7 +224,7 @@ abstract class AbstractDatabase
     {
         global $argv;
         $path = getcwd() ?: '';
-        if (preg_match('~^/sites/[^/]+\.lan$~', $path) || in_array('--no-interaction', $argv, true)) {
+        if (str_ends_with($path, '.lan') || in_array('--no-interaction', $argv, true)) {
             return;
         }
 
