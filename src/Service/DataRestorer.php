@@ -238,7 +238,7 @@ class DataRestorer
         $foreignKeys = $this->connection->fetchAllAssociative($foreignKeysQuery);
 
         foreach ($foreignKeys as $foreignKey) {
-            $tableSelects[$foreignKey['TABLE_NAME']][] = "SELECT * FROM `$this->databaseToRestore`.`${foreignKey['TABLE_NAME']}` WHERE ${foreignKey['COLUMN_NAME']} IN (" . implode(',', $this->idsToRestore) . ')';
+            $tableSelects[$foreignKey['TABLE_NAME']][] = "SELECT * FROM `$this->databaseToRestore`.`{$foreignKey['TABLE_NAME']}` WHERE {$foreignKey['COLUMN_NAME']} IN (" . implode(',', $this->idsToRestore) . ')';
         }
 
         return $tableSelects;
