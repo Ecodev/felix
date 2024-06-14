@@ -10,24 +10,31 @@ use Ecodev\Felix\Api\Output\AclResourceConfigurationType;
 use GraphQL\Type\Definition\EnumType;
 use GraphQL\Type\Definition\Type;
 
+/**
+ * @phpstan-import-type PermissiveFieldsConfig from FieldInterface
+ */
 abstract class AclConfiguration
 {
-    public static function build(Acl $acl, EnumType $roleType): array
+    /**
+     * Return the single field configuration, including its name.
+     *
+     * @return PermissiveFieldsConfig
+     */
+    public static function build(Acl $acl, EnumType $roleType): iterable
     {
-        return
-            [
-                'name' => 'aclConfiguration',
-                'type' => Type::nonNull(Type::listOf(Type::nonNull(_types()->get(AclResourceConfigurationType::class)))),
-                'description' => 'User friendly configuration of the ACL',
-                'args' => [
-                    'roles' => Type::nonNull(Type::listOf(Type::nonNull($roleType))),
-                ],
-                'resolve' => function ($root, array $args) use ($acl): array {
-                    $roles = $args['roles'];
-                    $result = $acl->show(new MultipleRoles($roles));
+        yield 'aclConfiguration' => fn () => [
+            'name' => 'aclConfiguration',
+            'type' => Type::nonNull(Type::listOf(Type::nonNull(_types()->get(AclResourceConfigurationType::class)))),
+            'description' => 'User friendly configuration of the ACL',
+            'args' => [
+                'roles' => Type::nonNull(Type::listOf(Type::nonNull($roleType))),
+            ],
+            'resolve' => function ($root, array $args) use ($acl): array {
+                $roles = $args['roles'];
+                $result = $acl->show(new MultipleRoles($roles));
 
-                    return $result;
-                },
-            ];
+                return $result;
+            },
+        ];
     }
 }

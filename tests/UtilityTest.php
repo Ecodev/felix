@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace EcodevTests\Felix;
 
+use ArrayIterator;
 use Ecodev\Felix\Model\Model;
 use Ecodev\Felix\Utility;
 use EcodevTests\Felix\Blog\Model\User;
@@ -177,5 +178,28 @@ final class UtilityTest extends TestCase
     {
         $actual = Utility::getCookieDomain($input);
         self::assertSame($expected, $actual);
+    }
+
+    public function testConcat(): void
+    {
+        $iterable = new ArrayIterator([1 => 'one', 'a' => 'overridden', 'c' => 'c']);
+        $actual = Utility::concat(['a' => 'a', 2 => 'two'], $iterable);
+
+        self::assertSame([
+            'a' => 'overridden',
+            2 => 'two',
+            1 => 'one',
+            'c' => 'c',
+        ], iterator_to_array($actual));
+    }
+
+    public function testFilterByKeys(): void
+    {
+        $things = new ArrayIterator(['a' => 'a', 'b' => 'b', 'c' => 'c']);
+
+        self::assertSame(['a' => 'a'], iterator_to_array(Utility::filterByKeys($things, 'a')));
+        self::assertSame(['a' => 'a', 'c' => 'c'], iterator_to_array(Utility::filterByKeys($things, 'c', 'a')));
+        self::assertSame([], iterator_to_array(Utility::filterByKeys($things, 'unknown-key')));
+        self::assertSame([], iterator_to_array(Utility::filterByKeys($things)));
     }
 }

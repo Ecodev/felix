@@ -8,7 +8,7 @@ use Ecodev\Felix\Model\Model;
 use GraphQL\Doctrine\Definition\EntityID;
 use ReflectionClass;
 
-abstract class Utility
+final class Utility
 {
     /**
      * Returns the short class name of any object, eg: Application\Model\Calendar => Calendar.
@@ -123,5 +123,29 @@ abstract class Utility
         }
 
         return $cookieDomain;
+    }
+
+    /**
+     * Concatenate all given iterables into a new iterator that yields key/value pairs exactly as if we iterated through each iterable sequentially.
+     */
+    public static function concat(iterable ...$iterables): iterable
+    {
+        foreach ($iterables as $iterable) {
+            foreach ($iterable as $k => $v) {
+                yield $k => $v;
+            }
+        }
+    }
+
+    /**
+     * Return a new iterable with only key/value pairs that match the given keys.
+     */
+    public static function filterByKeys(iterable $things, string ...$keyToKeep): iterable
+    {
+        foreach ($things as $k => $v) {
+            if (in_array($k, $keyToKeep, true)) {
+                yield $k => $v;
+            }
+        }
     }
 }
