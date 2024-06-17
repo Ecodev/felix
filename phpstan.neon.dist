@@ -3,8 +3,6 @@ parameters:
     paths:
         - src/
         - tests/
-    checkMissingIterableValueType: false
-    checkGenericClassInNonGenericObjectType: false
     ignoreErrors:
         - '~^Method Ecodev\\Felix\\Api\\Server\:\:execute\(\) should return array\<GraphQL\\Executor\\ExecutionResult\>\|GraphQL\\Executor\\ExecutionResult but returns array\<int, GraphQL\\Executor\\ExecutionResult\>\|GraphQL\\Executor\\ExecutionResult\|GraphQL\\Executor\\Promise\\Promise\.$~'
         - '~^Cannot call method getInstance\(\) on Laminas\\Permissions\\Acl\\Resource\\ResourceInterface\|null\.$~'
@@ -14,6 +12,10 @@ parameters:
         - '~^Cannot cast mixed to int\.$~'
         - '~^Cannot cast mixed to string\.$~'
         - '~^Parameter \#1 \$type of static method GraphQL\\Type\\Definition\\Type\:\:nonNull\(\) expects~'
+        -
+            identifier: missingType.iterableValue
+        -
+            identifier: missingType.generics
 
 includes:
     - phpstan-baseline.neon
