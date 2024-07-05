@@ -17,16 +17,16 @@ trait Log
     #[ORM\Column(type: 'smallint')]
     private int $priority;
 
-    #[ORM\Column(type: 'string', length: 5000, nullable: false)]
+    #[ORM\Column(type: 'string', length: 5000)]
     private string $message = '';
 
-    #[ORM\Column(type: 'string', length: 500, nullable: false)]
+    #[ORM\Column(type: 'string', length: 500)]
     private string $referer = '';
 
-    #[ORM\Column(type: 'string', length: 1000, nullable: false)]
+    #[ORM\Column(type: 'string', length: 1000)]
     private string $request = '';
 
-    #[ORM\Column(type: 'string', length: 40, nullable: false)]
+    #[ORM\Column(type: 'string', length: 40)]
     private string $ip = '';
 
     /**
