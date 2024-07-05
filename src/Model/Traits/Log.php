@@ -20,13 +20,13 @@ trait Log
     #[ORM\Column(type: 'string', length: 5000)]
     private string $message = '';
 
-    #[ORM\Column(type: 'string', length: 500)]
+    #[ORM\Column(type: 'string', length: 500, options: ['default' => ''])]
     private string $referer = '';
 
-    #[ORM\Column(type: 'string', length: 1000)]
+    #[ORM\Column(type: 'string', length: 1000, options: ['default' => ''])]
     private string $request = '';
 
-    #[ORM\Column(type: 'string', length: 40)]
+    #[ORM\Column(type: 'string', length: 40, options: ['default' => ''])]
     private string $ip = '';
 
     /**

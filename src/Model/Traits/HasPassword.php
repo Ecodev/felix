@@ -13,7 +13,7 @@ use GraphQL\Doctrine\Attribute as API;
  */
 trait HasPassword
 {
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255, options: ['default' => ''])]
     #[API\Exclude]
     private string $password = '';
 

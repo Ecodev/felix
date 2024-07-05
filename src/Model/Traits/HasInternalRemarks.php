@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 trait HasInternalRemarks
 {
-    #[ORM\Column(type: 'text', length: 65535)]
+    #[ORM\Column(type: 'text', length: 65535, options: ['default' => ''])]
     private string $internalRemarks = '';
 
     /**
