@@ -34,16 +34,55 @@ class PhpEnumTypeTest extends TestCase
     public function testEnum(): void
     {
         self::assertSame("ENUM('value1', 'value2')", $this->type->getSqlDeclaration(['foo'], $this->platform));
-
-        // Should always return string
-        self::assertSame(TestEnum::key1, $this->type->convertToPHPValue('value1', $this->platform));
-
-        // Should support null values or empty string
-        self::assertNull($this->type->convertToPHPValue(null, $this->platform));
-        self::assertNull($this->type->convertToPHPValue('', $this->platform));
-        self::assertNull($this->type->convertToDatabaseValue(null, $this->platform));
-
         self::assertTrue($this->type->requiresSQLCommentHint($this->platform));
+    }
+
+    /**
+     * @dataProvider providerConvertToPHPValue
+     */
+    public function testConvertToPHPValue(?string $input, ?TestEnum $expected): void
+    {
+        self::assertSame($expected, $this->type->convertToPHPValue($input, $this->platform));
+    }
+
+    public function providerConvertToPHPValue(): iterable
+    {
+        yield ['value1', TestEnum::key1];
+        yield [null, null];
+        yield ['', null];
+    }
+
+    /**
+     * @dataProvider  providerConvertToDatabaseValue
+     */
+    public function testConvertToDatabaseValue(mixed $input, ?string $expected): void
+    {
+        self::assertSame($expected, $this->type->convertToDatabaseValue($input, $this->platform));
+    }
+
+    public function providerConvertToDatabaseValue(): iterable
+    {
+        yield [null, null];
+        yield [TestEnum::key1, 'value1'];
+        yield ['value1', 'value1'];
+    }
+
+    /**
+     * @dataProvider  providerInvalidConvertToDatabaseValue
+     */
+    public function testInvalidConvertToDatabaseValue(mixed $input): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        $this->type->convertToDatabaseValue($input, $this->platform);
+    }
+
+    public function providerInvalidConvertToDatabaseValue(): iterable
+    {
+        yield ['foo'];
+        yield ['key1'];
+        yield [OtherTestEnum::key1];
+        yield [0];
     }
 
     public function testConvertToPHPValueThrowsWithInvalidValue(): void
@@ -53,31 +92,10 @@ class PhpEnumTypeTest extends TestCase
         $this->type->convertToPHPValue('foo', $this->platform);
     }
 
-    public function testConvertToDatabaseValueThrowsWithInvalidValue(): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-
-        $this->type->convertToDatabaseValue('foo', $this->platform);
-    }
-
-    public function testConvertToDatabaseValueThrowsWithInvalidEnum(): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-
-        $this->type->convertToDatabaseValue(OtherTestEnum::key1, $this->platform);
-    }
-
     public function testConvertToPHPValueThrowsWithZero(): void
     {
         $this->expectException(InvalidArgumentException::class);
 
         $this->type->convertToPHPValue(0, $this->platform);
-    }
-
-    public function testConvertToDatabaseValueThrowsWithZero(): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-
-        $this->type->convertToDatabaseValue(0, $this->platform);
     }
 }

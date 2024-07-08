@@ -48,6 +48,10 @@ abstract class PhpEnumType extends EnumType
             return null;
         }
 
+        if (is_string($value) && $this->getEnumType()::tryFrom($value)) {
+            return $value;
+        }
+
         if (!is_object($value) || !is_a($value, $this->getEnumType())) {
             throw new InvalidArgumentException("Invalid '" . Utils::printSafe($value) . "' value to be stored in database for enum " . $this->getName());
         }
