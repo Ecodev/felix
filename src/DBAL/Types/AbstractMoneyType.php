@@ -4,14 +4,25 @@ declare(strict_types=1);
 
 namespace Ecodev\Felix\DBAL\Types;
 
+use Doctrine\DBAL\ParameterType;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Types\IntegerType;
+use Doctrine\DBAL\Types\Type;
 use InvalidArgumentException;
 use Money\Money;
 
-abstract class AbstractMoneyType extends IntegerType
+abstract class AbstractMoneyType extends Type
 {
     abstract protected function createMoney(string $value): Money;
+
+    public function getSQLDeclaration(array $column, AbstractPlatform $platform): string
+    {
+        return $platform->getIntegerTypeDeclarationSQL($column);
+    }
+
+    public function getBindingType(): ParameterType
+    {
+        return ParameterType::INTEGER;
+    }
 
     public function getName(): string
     {
@@ -43,10 +54,5 @@ abstract class AbstractMoneyType extends IntegerType
         }
 
         throw new InvalidArgumentException('Cannot convert to database value: ' . var_export($value, true));
-    }
-
-    public function requiresSQLCommentHint(AbstractPlatform $platform): bool
-    {
-        return true;
     }
 }

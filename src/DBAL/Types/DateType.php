@@ -6,10 +6,17 @@ namespace Ecodev\Felix\DBAL\Types;
 
 use Cake\Chronos\ChronosDate;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Types\ConversionException;
+use Doctrine\DBAL\Types\Exception\InvalidFormat;
+use Doctrine\DBAL\Types\Exception\InvalidType;
+use Doctrine\DBAL\Types\Type;
 
-final class DateType extends \Doctrine\DBAL\Types\DateType
+final class DateType extends Type
 {
+    public function getSQLDeclaration(array $column, AbstractPlatform $platform): string
+    {
+        return $platform->getDateTypeDeclarationSQL($column);
+    }
+
     /**
      * @return ($value is null ? null : string)
      */
@@ -23,7 +30,7 @@ final class DateType extends \Doctrine\DBAL\Types\DateType
             return $value->format($platform->getDateFormatString());
         }
 
-        throw ConversionException::conversionFailedInvalidType($value, $this->getName(), ['null', 'ChronosDate']);
+        throw InvalidType::new($value, self::class, ['null', 'ChronosDate']);
     }
 
     /**
@@ -36,9 +43,9 @@ final class DateType extends \Doctrine\DBAL\Types\DateType
         }
 
         if (!is_string($value)) {
-            throw ConversionException::conversionFailedFormat(
-                $value,
-                $this->getName(),
+            throw InvalidFormat::new(
+                (string) $value,
+                self::class,
                 $platform->getDateFormatString(),
             );
         }

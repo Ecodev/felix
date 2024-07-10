@@ -16,7 +16,7 @@ class ConfigProvider
             ],
             'dependencies' => [
                 'invokables' => [
-                    DBAL\Logging\ForwardSQLLogger::class,
+                    DBAL\Logging\Middleware::class,
                     Log\Formatter\Extras::class,
                 ],
                 'factories' => [

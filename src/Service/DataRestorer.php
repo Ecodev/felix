@@ -211,7 +211,7 @@ class DataRestorer
             }
 
             // normal N-N relationship
-            return $this->namingStrategy->joinKeyColumnName($relation['table1']);
+            return $this->namingStrategy->joinKeyColumnName($relation['table1'], null);
         }
 
         return 'id';

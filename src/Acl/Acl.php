@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Ecodev\Felix\Acl;
 
-use Doctrine\Common\Util\ClassUtils;
+use Doctrine\ORM\Proxy\DefaultProxyClassNameResolver;
 use Ecodev\Felix\Model\CurrentUser;
 use Ecodev\Felix\Model\Model;
 use Exception;
@@ -110,7 +110,7 @@ class Acl extends \Laminas\Permissions\Acl\Acl
      */
     public function isCurrentUserAllowed(Model|string $modelOrResource, string $privilege): bool
     {
-        $resource = is_string($modelOrResource) ? $modelOrResource : new ModelResource($this->getClass($modelOrResource), $modelOrResource);
+        $resource = is_string($modelOrResource) ? $modelOrResource : new ModelResource(DefaultProxyClassNameResolver::getClass($modelOrResource), $modelOrResource);
         $role = $this->getCurrentRole();
         $this->reasons = [];
 
@@ -132,11 +132,6 @@ class Acl extends \Laminas\Permissions\Acl\Acl
         $this->reasons[] = $reason;
 
         return false;
-    }
-
-    private function getClass(Model $resource): string
-    {
-        return ClassUtils::getRealClass($resource::class);
     }
 
     private function getCurrentRole(): MultipleRoles|string
