@@ -55,8 +55,8 @@ abstract class SearchOperatorType extends AbstractOperator
         // Find most textual fields for the entity
         $fields = [];
         foreach ($metadata->fieldMappings as $mapping) {
-            if (in_array($mapping['fieldName'], $whitelistedFields, true)) {
-                $fieldName = $mapping['fieldName'];
+            if (in_array($mapping->fieldName, $whitelistedFields, true)) {
+                $fieldName = $mapping->fieldName;
                 $field = $alias . '.' . $fieldName;
 
                 $fields[] = $this->fieldToDql($metadata->getReflectionClass(), $fieldName, $field);
@@ -115,7 +115,7 @@ abstract class SearchOperatorType extends AbstractOperator
     private function searchOnJoinedEntity(UniqueNameFactory $uniqueNameFactory, ClassMetadata $metadata, QueryBuilder $queryBuilder, string $alias, string $fieldName): array
     {
         $association = $metadata->getAssociationMapping($fieldName);
-        $targetEntity = $association['targetEntity'];
+        $targetEntity = $association->targetEntity;
 
         $joinedMetadata = $queryBuilder->getEntityManager()->getMetadataFactory()->getMetadataFor($targetEntity);
         $joinedAlias = $uniqueNameFactory->createAliasName($targetEntity);

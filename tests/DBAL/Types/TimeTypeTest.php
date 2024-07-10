@@ -7,7 +7,8 @@ namespace EcodevTests\Felix\DBAL\Types;
 use Cake\Chronos\ChronosTime;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Platforms\MySQLPlatform;
-use Doctrine\DBAL\Types\ConversionException;
+use Doctrine\DBAL\Types\Exception\InvalidFormat;
+use Doctrine\DBAL\Types\Exception\InvalidType;
 use Ecodev\Felix\DBAL\Types\TimeType;
 use PHPUnit\Framework\TestCase;
 
@@ -25,8 +26,7 @@ class TimeTypeTest extends TestCase
 
     public function testConvertToDatabaseValue(): void
     {
-        self::assertSame('TIME', $this->type->getSqlDeclaration(['foo'], $this->platform));
-        self::assertFalse($this->type->requiresSQLCommentHint($this->platform));
+        self::assertSame('TIME', $this->type->getSqlDeclaration(['foo' => 'bar'], $this->platform));
 
         $actual = $this->type->convertToDatabaseValue(new ChronosTime('09:33'), $this->platform);
         self::assertSame('09:33:00', $actual, 'support Chronos');
@@ -49,14 +49,14 @@ class TimeTypeTest extends TestCase
 
     public function testConvertToPHPValueThrowsWithInvalidValue(): void
     {
-        $this->expectException(ConversionException::class);
+        $this->expectException(InvalidFormat::class);
 
         $this->type->convertToPHPValue(123, $this->platform);
     }
 
     public function testConvertToDatabaseValueThrowsWithInvalidValue(): void
     {
-        $this->expectException(ConversionException::class);
+        $this->expectException(InvalidType::class);
 
         $this->type->convertToDatabaseValue(123, $this->platform);
     }

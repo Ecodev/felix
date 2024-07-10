@@ -30,7 +30,7 @@ final class EnumTypeTest extends TestCase
 
     public function testEnum(): void
     {
-        self::assertSame("ENUM('value1', 'value2')", $this->type->getSqlDeclaration(['foo'], $this->platform));
+        self::assertSame("ENUM('value1', 'value2')", $this->type->getSqlDeclaration(['foo' => 'bar'], $this->platform));
 
         // Should always return string
         self::assertSame('value1', $this->type->convertToPHPValue('value1', $this->platform));
@@ -40,8 +40,6 @@ final class EnumTypeTest extends TestCase
         self::assertNull($this->type->convertToPHPValue('', $this->platform));
         self::assertNull($this->type->convertToDatabaseValue(null, $this->platform));
         self::assertNull($this->type->convertToDatabaseValue('', $this->platform));
-
-        self::assertTrue($this->type->requiresSQLCommentHint($this->platform));
     }
 
     public function testConvertToPHPValueThrowsWithInvalidValue(): void
