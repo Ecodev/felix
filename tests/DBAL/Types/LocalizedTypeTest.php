@@ -31,7 +31,7 @@ class LocalizedTypeTest extends TestCase
     public function testConvertToDatabaseValue(): void
     {
         self::assertSame('{"fr":"foo"}', $this->type->convertToDatabaseValue(['fr' => 'foo'], $this->platform));
-        self::assertSame('', $this->type->convertToDatabaseValue([], $this->platform), 'micro-optimization of an empty array into an empty string to save two bytes');
+        self::assertSame('{}', $this->type->convertToDatabaseValue([], $this->platform), 'empty should still be valid JSON');
     }
 
     public function testConvertToDatabaseValueWillThrowIfNull(): void

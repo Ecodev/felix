@@ -15,9 +15,7 @@ use JsonException;
  * PHP values are expected to be an array of localized values indexed by language. The array
  * might be empty, but it can never be null or empty string.
  *
- * For convenience of DB operation the DB value might be null or an empty string, in which case
- * the PHP value will be an empty array. This allows for easy INSERT/UPDATE, and save two bytes
- * in case of empty array.
+ * DB values are constrained by the database, so they must always be valid JSON, such as the minimal data `{}`.
  */
 final class LocalizedType extends JsonType
 {
@@ -51,7 +49,7 @@ final class LocalizedType extends JsonType
         }
 
         if (!$value) {
-            return '';
+            return '{}';
         }
 
         try {
