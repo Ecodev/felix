@@ -32,7 +32,7 @@ trait Log
     /**
      * The statistics data.
      */
-    #[ORM\Column(type: 'json', options: ['default' => '[]'])]
+    #[ORM\Column(type: 'json', options: ['default' => '{}'])]
     #[API\Exclude]
     private array $extra = [];
 
