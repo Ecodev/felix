@@ -22,7 +22,7 @@ interface Message extends Model
     /**
      * Set sent time.
      */
-    #[Api\Exclude]
+    #[API\Exclude]
     public function setDateSent(?Chronos $dateSent): void;
 
     /**

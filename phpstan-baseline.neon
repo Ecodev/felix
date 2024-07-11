@@ -11,7 +11,7 @@ parameters:
 			path: src/DBAL/Types/PhpEnumType.php
 
 		-
-			message: "#^Method Ecodev\\\\Felix\\\\DBAL\\\\Types\\\\PhpEnumType\\:\\:getPossibleValues\\(\\) should return array\\<string\\> but returns array\\<int\\|string\\>\\.$#"
+			message: "#^Method Ecodev\\\\Felix\\\\DBAL\\\\Types\\\\PhpEnumType\\:\\:getPossibleValues\\(\\) should return array\\<string\\> but returns array\\<int, int\\|string\\>\\.$#"
 			count: 1
 			path: src/DBAL/Types/PhpEnumType.php
 

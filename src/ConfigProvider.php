@@ -16,20 +16,20 @@ class ConfigProvider
             ],
             'dependencies' => [
                 'invokables' => [
-                    \Ecodev\Felix\DBAL\Logging\ForwardSQLLogger::class,
-                    \Ecodev\Felix\Log\Formatter\Extras::class,
+                    DBAL\Logging\ForwardSQLLogger::class,
+                    Log\Formatter\Extras::class,
                 ],
                 'factories' => [
-                    \Ecodev\Felix\I18n\Translator::class => \Ecodev\Felix\I18n\NoTranslationFactory::class,
-                    \Ecodev\Felix\Log\EventCompleter::class => \Ecodev\Felix\Log\EventCompleterFactory::class,
-                    \Ecodev\Felix\Log\Writer\Mail::class => \Ecodev\Felix\Log\Writer\MailFactory::class,
-                    \Ecodev\Felix\Middleware\SignedQueryMiddleware::class => \Ecodev\Felix\Middleware\SignedQueryMiddlewareFactory::class,
-                    \Ecodev\Felix\Service\ImageResizer::class => \Ecodev\Felix\Service\ImageResizerFactory::class,
-                    \Ecodev\Felix\Service\MessageRenderer::class => \Ecodev\Felix\Service\MessageRendererFactory::class,
-                    \Imagine\Image\ImagineInterface::class => \Ecodev\Felix\Service\ImagineFactory::class,
-                    \Laminas\Log\LoggerInterface::class => \Ecodev\Felix\Log\LoggerFactory::class,
-                    \Laminas\Mail\Transport\TransportInterface::class => \Ecodev\Felix\Service\TransportFactory::class,
-                    \Laminas\View\Renderer\RendererInterface::class => \Ecodev\Felix\Service\RendererFactory::class,
+                    I18n\Translator::class => I18n\NoTranslationFactory::class,
+                    Log\EventCompleter::class => Log\EventCompleterFactory::class,
+                    Log\Writer\Mail::class => Log\Writer\MailFactory::class,
+                    Middleware\SignedQueryMiddleware::class => Middleware\SignedQueryMiddlewareFactory::class,
+                    Service\ImageResizer::class => Service\ImageResizerFactory::class,
+                    Service\MessageRenderer::class => Service\MessageRendererFactory::class,
+                    \Imagine\Image\ImagineInterface::class => Service\ImagineFactory::class,
+                    \Laminas\Log\LoggerInterface::class => Log\LoggerFactory::class,
+                    \Laminas\Mail\Transport\TransportInterface::class => Service\TransportFactory::class,
+                    \Laminas\View\Renderer\RendererInterface::class => Service\RendererFactory::class,
                 ],
             ],
             'doctrine' => [
@@ -38,7 +38,7 @@ class ConfigProvider
                         'listeners' => [
                             [
                                 'events' => [\Doctrine\ORM\Tools\ToolEvents::postGenerateSchema],
-                                'listener' => \Ecodev\Felix\Service\EnumAutoMigrator::class,
+                                'listener' => Service\EnumAutoMigrator::class,
                             ],
                         ],
                     ],
