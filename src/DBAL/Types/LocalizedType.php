@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Ecodev\Felix\DBAL\Types;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Types\ConversionException;
+use Doctrine\DBAL\Types\Exception\SerializationFailed;
+use Doctrine\DBAL\Types\Exception\ValueNotConvertible;
 use Doctrine\DBAL\Types\JsonType;
 use JsonException;
 
@@ -36,7 +37,7 @@ final class LocalizedType extends JsonType
         $val = parent::convertToPHPValue($value, $platform);
 
         if (!is_array($val)) {
-            throw ConversionException::conversionFailedUnserialization('json', 'value in DB is not a JSON encoded associative array');
+            throw ValueNotConvertible::new($value, 'json', 'value in DB is not a JSON encoded associative array');
         }
 
         return $val;
@@ -45,7 +46,7 @@ final class LocalizedType extends JsonType
     public function convertToDatabaseValue(mixed $value, AbstractPlatform $platform): string
     {
         if (!is_array($value)) {
-            throw ConversionException::conversionFailedSerialization($value, 'json', 'value must be a PHP array');
+            throw SerializationFailed::new($value, 'json', 'value must be a PHP array');
         }
 
         if (!$value) {
@@ -55,7 +56,7 @@ final class LocalizedType extends JsonType
         try {
             return json_encode($value, JSON_THROW_ON_ERROR | JSON_PRESERVE_ZERO_FRACTION | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
         } catch (JsonException $e) {
-            throw ConversionException::conversionFailedSerialization($value, 'json', $e->getMessage(), $e);
+            throw SerializationFailed::new($value, 'json', $e->getMessage(), $e);
         }
     }
 }

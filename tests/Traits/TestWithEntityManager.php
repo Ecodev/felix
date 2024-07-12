@@ -23,11 +23,12 @@ trait TestWithEntityManager
         // Create the entity manager
         $config = ORMSetup::createAttributeMetadataConfiguration([__DIR__ . '/Blog/Model'], true);
         $config->addCustomNumericFunction('native_in', NativeIn::class);
-        $config->setNamingStrategy(new UnderscoreNamingStrategy(CASE_LOWER, true));
+        $config->setNamingStrategy(new UnderscoreNamingStrategy(CASE_LOWER));
 
         $connection = DriverManager::getConnection([
             'wrapperClass' => MariaDbQuotingConnection::class,
-            'url' => 'sqlite:///:memory:',
+            'driver' => 'sqlite3',
+            'memory' => true,
         ]);
 
         $this->entityManager = new EntityManager($connection, $config);

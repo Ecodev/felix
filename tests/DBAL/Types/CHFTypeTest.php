@@ -26,7 +26,7 @@ final class CHFTypeTest extends TestCase
 
     public function testMoney(): void
     {
-        self::assertSame('INT', $this->type->getSqlDeclaration(['foo'], $this->platform));
+        self::assertSame('INT', $this->type->getSqlDeclaration(['foo' => 'bar'], $this->platform));
 
         // Should always return string
         $actualPhp = $this->type->convertToPHPValue(100, $this->platform);
@@ -36,8 +36,6 @@ final class CHFTypeTest extends TestCase
         // Should support null values
         self::assertNull($this->type->convertToPHPValue(null, $this->platform));
         self::assertNull($this->type->convertToDatabaseValue(null, $this->platform));
-
-        self::assertTrue($this->type->requiresSQLCommentHint($this->platform));
     }
 
     public function testConvertToPHPValueThrowsWithInvalidValue(): void
