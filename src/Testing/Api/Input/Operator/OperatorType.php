@@ -39,6 +39,24 @@ class OperatorType extends TestCase
     }
 
     /**
+     * Parse an ID into an EntityID.
+     *
+     * @param class-string $entity
+     *
+     * @return ($id is null ? null : EntityID)
+     */
+    protected function idToEntityId(string $entity, ?int $id): ?EntityID
+    {
+        if ($id === null) {
+            return null;
+        }
+
+        $type = _types()->getId($entity);
+
+        return $type->parseValue($id);
+    }
+
+    /**
      * Parse an array of ID into an array of EntityID.
      *
      * @param class-string $entity
@@ -48,13 +66,13 @@ class OperatorType extends TestCase
      */
     protected function idsToEntityIds(string $entity, ?array $ids): ?array
     {
-        $type = _types()->getId($entity);
-        $parsed = null;
-        if ($ids !== null) {
-            $parsed = [];
-            foreach ($ids as $id) {
-                $parsed[] = $type->parseValue($id);
-            }
+        if ($ids === null) {
+            return null;
+        }
+
+        $parsed = [];
+        foreach ($ids as $id) {
+            $parsed[] = $this->idToEntityId($entity, $id);
         }
 
         return $parsed;
