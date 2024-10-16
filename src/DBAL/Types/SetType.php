@@ -96,11 +96,6 @@ abstract class SetType extends Type
         return $typeName;
     }
 
-    public function requiresSQLCommentHint(AbstractPlatform $platform): bool
-    {
-        return true;
-    }
-
     public function getMappedDatabaseTypes(AbstractPlatform $platform): array
     {
         return ['set'];

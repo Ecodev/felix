@@ -6,10 +6,17 @@ namespace Ecodev\Felix\DBAL\Types;
 
 use Cake\Chronos\ChronosTime;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Types\ConversionException;
+use Doctrine\DBAL\Types\Exception\InvalidFormat;
+use Doctrine\DBAL\Types\Exception\InvalidType;
+use Doctrine\DBAL\Types\Type;
 
-final class TimeType extends \Doctrine\DBAL\Types\TimeType
+final class TimeType extends Type
 {
+    public function getSQLDeclaration(array $column, AbstractPlatform $platform): string
+    {
+        return $platform->getTimeTypeDeclarationSQL($column);
+    }
+
     /**
      * @return ($value is null ? null : string)
      */
@@ -23,7 +30,7 @@ final class TimeType extends \Doctrine\DBAL\Types\TimeType
             return $value->format($platform->getTimeFormatString());
         }
 
-        throw ConversionException::conversionFailedInvalidType($value, $this->getName(), ['null', 'ChronosTime']);
+        throw InvalidType::new($value, self::class, ['null', 'ChronosTime']);
     }
 
     /**
@@ -36,9 +43,9 @@ final class TimeType extends \Doctrine\DBAL\Types\TimeType
         }
 
         if (!is_string($value)) {
-            throw ConversionException::conversionFailedFormat(
-                $value,
-                $this->getName(),
+            throw InvalidFormat::new(
+                (string) $value,
+                self::class,
                 $platform->getTimeFormatString(),
             );
         }

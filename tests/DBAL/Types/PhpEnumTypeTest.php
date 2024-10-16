@@ -33,8 +33,7 @@ class PhpEnumTypeTest extends TestCase
 
     public function testEnum(): void
     {
-        self::assertSame("ENUM('value1', 'value2')", $this->type->getSqlDeclaration(['foo'], $this->platform));
-        self::assertTrue($this->type->requiresSQLCommentHint($this->platform));
+        self::assertSame("ENUM('value1', 'value2')", $this->type->getSqlDeclaration(['foo' => 'bar'], $this->platform));
     }
 
     /**
