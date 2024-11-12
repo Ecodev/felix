@@ -28,6 +28,7 @@ trait Image
     protected function getAcceptedMimeTypes(): array
     {
         return [
+            'image/avif',
             'image/bmp',
             'image/x-ms-bmp',
             'image/gif',
@@ -106,6 +107,7 @@ trait Image
 
         // Pretty much only SVG is better than WebP
         $worseThanWebp = in_array($this->getMime(), [
+            'image/avif',
             'image/bmp',
             'image/x-ms-bmp',
             'image/gif',
