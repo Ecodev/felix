@@ -32,6 +32,8 @@ trait Image
             'image/bmp',
             'image/x-ms-bmp',
             'image/gif',
+            'image/heic',
+            'image/heif',
             'image/jpeg',
             'image/pjpeg',
             'image/png',
@@ -111,6 +113,8 @@ trait Image
             'image/bmp',
             'image/x-ms-bmp',
             'image/gif',
+            'image/heic',
+            'image/heif',
             'image/jpeg',
             'image/pjpeg',
             'image/png', // We lose animation, even though WebP supports it, but we assume we never use animated PNG anyway

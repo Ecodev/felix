@@ -71,6 +71,7 @@ final class ImageTest extends TestCase
         yield 'jpg is converted to webp' => ['image.jpg', 400, 400];
         yield 'png is converted to webp' => ['image.png', 400, 300];
         yield 'avif is converted to webp' => ['image.avif', 400, 299];
+        yield 'heif is converted to webp' => ['image.heif', 1440, 960];
         yield 'svg is untouched' => ['logo.svg', 445, 488, true];
         yield 'webp is untouched' => ['image.webp', 400, 400];
         yield 'huge jpg is resized to webp' => ['huge.jpg', 3500, 19];
