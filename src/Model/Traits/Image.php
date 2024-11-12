@@ -108,16 +108,10 @@ trait Image
         $tooBig = $size->getWidth() > $maxSize || $size->getHeight() > $maxSize;
 
         // Pretty much only SVG is better than WebP
-        $worseThanWebp = in_array($this->getMime(), [
-            'image/avif',
-            'image/bmp',
-            'image/x-ms-bmp',
-            'image/gif',
-            'image/heic',
-            'image/heif',
-            'image/jpeg',
-            'image/pjpeg',
-            'image/png', // We lose animation, even though WebP supports it, but we assume we never use animated PNG anyway
+        // We lose PNG animation, even though WebP supports it, but we assume we never use animated PNG anyway
+        $worseThanWebp = !in_array($this->getMime(), [
+            'image/webp',
+            'image/svg+xml',
         ], true);
 
         if ($tooBig || $worseThanWebp) {
