@@ -145,6 +145,11 @@ final class SignedQueryMiddleware implements MiddlewareInterface
         }
 
         // Source is https://developers.google.com/search/apis/ipranges/googlebot.json
+        // Use this one-line command to fetch new list:
+        //
+        // ```bash
+        // php -r 'echo PHP_EOL . implode(PHP_EOL, array_map(fn (array $r) => chr(39) . ($r["ipv6Prefix"] ?? $r["ipv4Prefix"]) . chr(39) . ",", json_decode(file_get_contents("https://developers.google.com/search/apis/ipranges/googlebot.json"), true)["prefixes"])) . PHP_EOL;'
+        // ```
         $googleBotIps = [
             '2001:4860:4801:10::/64',
             '2001:4860:4801:11::/64',
