@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Ecodev\Felix\Api\Output;
 
+use Ecodev\Felix\Model\Model;
 use GraphQL\Type\Definition\ObjectType;
-use ReflectionClass;
 
 final class PaginationType extends ObjectType
 {
@@ -14,16 +14,14 @@ final class PaginationType extends ObjectType
      *
      * @param class-string $class
      */
-    public function __construct(string $class, array $extraFields)
+    public function __construct(string $class, string $name, array $extraFields)
     {
-        $c = new ReflectionClass($class);
-        $s = $c->getShortName();
-        $name = $s . 'Pagination';
-
         $config = [
             'name' => $name,
             'description' => 'Describe available pages',
             'fields' => function () use ($class, $extraFields): array {
+                $itemType = is_a($class, Model::class, true) ? _types()->getOutput($class) : _types()->get($class);
+
                 $fields = [
                     'offset' => [
                         'type' => self::int(),
@@ -42,7 +40,7 @@ final class PaginationType extends ObjectType
                         'description' => 'The length of the total number of items that are being paginated',
                     ],
                     'items' => [
-                        'type' => self::nonNull(self::listOf(self::nonNull(_types()->getOutput($class)))),
+                        'type' => self::nonNull(self::listOf(self::nonNull($itemType))),
                         'description' => 'Paginated items',
                     ],
                 ];

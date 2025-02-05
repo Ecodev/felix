@@ -6,14 +6,15 @@ namespace Ecodev\Felix\Api\Output;
 
 use Ecodev\Felix\Model\Model;
 use Exception;
+use GraphQL\Type\Definition\ObjectType;
 use Laminas\ServiceManager\Factory\AbstractFactoryInterface;
 use Psr\Container\ContainerInterface;
 
 /**
- * Create a Pagination type for the entity extracted from name.
+ * Create a Pagination type for a Doctrine entity or an ObjectType extracted from name.
  *
- * For example, if given "ActionPagination", it will create a Pagination
- * type for the Action entity.
+ * For example, if given "ActionPagination", it will create a Pagination type for the Action entity.
+ * Alternatively, if given "ReportRowPagination", it will create a Pagination type for the custom `OutputType` of `ReportRowType`.
  */
 class PaginationTypeFactory implements AbstractFactoryInterface
 {
@@ -23,7 +24,7 @@ class PaginationTypeFactory implements AbstractFactoryInterface
     {
         $class = $this->getClass($requestedName);
 
-        return $class && is_a($class, Model::class, true);
+        return $class && (is_a($class, Model::class, true) || is_a($class, ObjectType::class, true));
     }
 
     public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null): PaginationType
@@ -35,7 +36,7 @@ class PaginationTypeFactory implements AbstractFactoryInterface
 
         $extraFields = $this->getExtraFields($class);
 
-        $type = new PaginationType($class, $extraFields);
+        $type = new PaginationType($class, $requestedName, $extraFields);
 
         return $type;
     }
@@ -52,6 +53,7 @@ class PaginationTypeFactory implements AbstractFactoryInterface
         $possibilities = [
             'Application\Model\\' . $m[1],
             'Application\Model\Relation\\' . $m[1],
+            'Application\Api\Output\\' . $m[1] . 'Type',
         ];
 
         foreach ($possibilities as $class) {
