@@ -31,7 +31,7 @@ final class SetTypeTest extends TestCase
 
     public function testSet(): void
     {
-        self::assertSame("SET('value1', 'value2')", $this->type->getSqlDeclaration(['foo'], $this->platform));
+        self::assertSame("SET('value1', 'value2')", $this->type->getSqlDeclaration(['foo' => 'bar'], $this->platform));
 
         // Should always return string
         self::assertSame(['value1', 'value2'], $this->type->convertToPHPValue('value1,value2', $this->platform));
@@ -41,8 +41,6 @@ final class SetTypeTest extends TestCase
         self::assertSame([], $this->type->convertToPHPValue('', $this->platform));
         self::assertNull($this->type->convertToDatabaseValue(null, $this->platform));
         self::assertSame('', $this->type->convertToDatabaseValue([], $this->platform));
-
-        self::assertTrue($this->type->requiresSQLCommentHint($this->platform));
     }
 
     public function testConvertToPHPValueThrowsWithInvalidValue(): void

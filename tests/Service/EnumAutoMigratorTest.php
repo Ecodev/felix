@@ -59,6 +59,8 @@ class EnumAutoMigratorTest extends TestCase
 
         $enumAutoMigrator->postGenerateSchema($event);
 
+        // TODO HOW TO HAVE STILL AUTO-MANAGER ENUMS ?
+
         self::assertNull($col1->getComment());
         self::assertSame('(FelixEnum:59be1fe78104fed1c6b2e6aada4faf62)', $col2->getComment());
         self::assertSame($col2->getComment(), $col3->getComment(), 'different enum that happen to have same definition have same hash, because it makes no difference for DB');

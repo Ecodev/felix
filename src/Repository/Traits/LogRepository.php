@@ -19,14 +19,9 @@ trait LogRepository
     abstract protected function getEntityManager();
 
     /**
-     * Creates a new QueryBuilder instance that is pre-populated for this entity name.
-     *
-     * @param string $alias
-     * @param null|string $indexBy the index for the from
-     *
-     * @return QueryBuilder
+     * Creates a new QueryBuilder instance that is prepopulated for this entity name.
      */
-    abstract public function createQueryBuilder($alias, $indexBy = null);
+    abstract public function createQueryBuilder(string $alias, string|null $indexBy = null): QueryBuilder;
 
     /**
      * This should NOT be called directly, instead use `_log()` to log stuff.
