@@ -238,5 +238,32 @@ class SignedQueryMiddlewareTest extends TestCase
             'Invalid `X-Signature` HTTP header in signed query',
             '66.249.70.134',
         ];
+
+        yield 'no header, BingBot is allowed, because BingBot does not seem to include our custom header in his request' => [
+            [$key1],
+            '{"operationName":"CurrentUser","variables":{},"query":"query CurrentUser { viewer { id }}',
+            null,
+            '',
+            '',
+            '40.77.188.165',
+        ];
+
+        yield 'too much in the past, even BingBot is rejected, because BingBot should not have any header at all' => [
+            [$key1],
+            '{"operationName":"CurrentUser","variables":{},"query":"query CurrentUser { viewer { id }}',
+            null,
+            'v1.1577951099.20177a7face4e05a75c4b2e41bc97a8225f420f5b7bb1709dd5499821dba0807',
+            'Signed query is expired',
+            '40.77.188.165',
+        ];
+
+        yield 'too much in the past and invalid signature, even BingBot is rejected, because BingBot should not have any header at all' => [
+            [$key1],
+            '{"operationName":"CurrentUser","variables":{},"query":"query CurrentUser { viewer { id }}',
+            null,
+            'v1.1577951099' . str_repeat('a', 64),
+            'Invalid `X-Signature` HTTP header in signed query',
+            '40.77.188.165',
+        ];
     }
 }
