@@ -85,6 +85,19 @@ trait AbstractFile
     }
 
     /**
+     * Automatically called by Doctrine before the object is deleted.
+     *
+     * Without this, the record would not exist anymore in DB when we try to
+     * get the file path in `deleteFile()`. And then we could not delete the
+     * file on disk after the record deletion.
+     */
+    #[ORM\PreRemove]
+    public function triggerLazyLoading(): void
+    {
+        $this->getPath();
+    }
+
+    /**
      * Automatically called by Doctrine when the object is deleted
      * Is called after database update because we can have issues on remove operation (like integrity test)
      * and it's preferable to keep a related file on drive before removing it definitely.
