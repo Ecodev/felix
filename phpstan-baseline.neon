@@ -775,12 +775,6 @@ parameters:
 			path: tests/Model/Traits/ImageTest.php
 
 		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertIsCallable\(\) with array\{Ecodev\\Felix\\Service\\EnumAutoMigrator, ''postGenerateSchema''\} and ''must have method…'' will always evaluate to true\.$#'
-			identifier: staticMethod.alreadyNarrowedType
-			count: 1
-			path: tests/Service/EnumAutoMigratorTest.php
-
-		-
 			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Imagine\\\\Image\\\\ImageInterface'' and Imagine\\Image\\ImageInterface will always evaluate to true\.$#'
 			identifier: staticMethod.alreadyNarrowedType
 			count: 1
