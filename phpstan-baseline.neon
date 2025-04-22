@@ -6,11 +6,6 @@ parameters:
 			path: src/Api/Enum/PhpEnumType.php
 
 		-
-			message: "#^Parameter \\#1 \\$className of method Ecodev\\\\Felix\\\\Api\\\\Input\\\\Operator\\\\SearchOperatorType\\:\\:fieldToDql\\(\\) expects ReflectionClass, ReflectionClass\\<object\\>\\|null given\\.$#"
-			count: 1
-			path: src/Api/Input/Operator/SearchOperatorType.php
-
-		-
 			message: "#^Method Ecodev\\\\Felix\\\\DBAL\\\\Types\\\\PhpEnumType\\:\\:convertToDatabaseValue\\(\\) should return string\\|null but returns int\\|string\\.$#"
 			count: 1
 			path: src/DBAL/Types/PhpEnumType.php
