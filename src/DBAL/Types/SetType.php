@@ -83,7 +83,7 @@ abstract class SetType extends Type
     /**
      * Returns the type name based on actual class name and possible values.
      */
-    public function getName(): string
+    private function getName(): string
     {
         $class = new ReflectionClass($this);
         $shortClassName = $class->getShortName();

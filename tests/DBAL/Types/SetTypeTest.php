@@ -9,7 +9,6 @@ use Doctrine\DBAL\Platforms\MySQLPlatform;
 use Ecodev\Felix\DBAL\Types\SetType;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use ReflectionClass;
 
 final class SetTypeTest extends TestCase
 {
@@ -19,13 +18,7 @@ final class SetTypeTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->type = new class() extends SetType {
-            protected function getPossibleValues(): array
-            {
-                return ['value1', 'value2'];
-            }
-        };
-
+        $this->type = new ExampleSet();
         $this->platform = new MySQLPlatform();
     }
 
@@ -46,6 +39,7 @@ final class SetTypeTest extends TestCase
     public function testConvertToPHPValueThrowsWithInvalidValue(): void
     {
         $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage("Invalid 'foo' value fetched from database for set ExampleSet");
 
         $this->type->convertToPHPValue('foo', $this->platform);
     }
@@ -53,6 +47,7 @@ final class SetTypeTest extends TestCase
     public function testConvertToDatabaseValueThrowsWithInvalidValue(): void
     {
         $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage("Invalid 'foo' value to be stored in database for set ExampleSet");
 
         $this->type->convertToDatabaseValue(['foo'], $this->platform);
     }
@@ -60,6 +55,7 @@ final class SetTypeTest extends TestCase
     public function testConvertToDatabaseValueThrowsWithInvalidType(): void
     {
         $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage("Invalid '' value to be stored in database for set ExampleSet");
 
         $this->type->convertToDatabaseValue('foo', $this->platform);
     }
@@ -67,6 +63,7 @@ final class SetTypeTest extends TestCase
     public function testConvertToPHPValueThrowsWithZero(): void
     {
         $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage("Invalid '0' value fetched from database for set ExampleSet");
 
         $this->type->convertToPHPValue(0, $this->platform);
     }
@@ -74,15 +71,8 @@ final class SetTypeTest extends TestCase
     public function testConvertToDatabaseValueThrowsWithZero(): void
     {
         $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage("Invalid '' value to be stored in database for set ExampleSet");
 
         $this->type->convertToDatabaseValue(0, $this->platform);
-    }
-
-    public function testNameDependsOnValues(): void
-    {
-        $class = new ReflectionClass($this->type);
-        $shortClassName = $class->getShortName();
-
-        self::assertSame($shortClassName, $this->type->getName());
     }
 }

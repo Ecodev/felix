@@ -18,13 +18,7 @@ final class EnumTypeTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->type = new class() extends EnumType {
-            protected function getPossibleValues(): array
-            {
-                return ['value1', 'value2'];
-            }
-        };
-
+        $this->type = new ExampleEnum();
         $this->platform = new MySQLPlatform();
     }
 
@@ -45,6 +39,7 @@ final class EnumTypeTest extends TestCase
     public function testConvertToPHPValueThrowsWithInvalidValue(): void
     {
         $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage("Invalid 'foo' value fetched from database for enum ExampleEnum");
 
         $this->type->convertToPHPValue('foo', $this->platform);
     }
@@ -52,6 +47,7 @@ final class EnumTypeTest extends TestCase
     public function testConvertToDatabaseValueThrowsWithInvalidValue(): void
     {
         $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage("Invalid 'foo' value to be stored in database for enum ExampleEnum");
 
         $this->type->convertToDatabaseValue('foo', $this->platform);
     }
@@ -59,6 +55,7 @@ final class EnumTypeTest extends TestCase
     public function testConvertToPHPValueThrowsWithZero(): void
     {
         $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage("Invalid '0' value fetched from database for enum ExampleEnum");
 
         $this->type->convertToPHPValue(0, $this->platform);
     }
@@ -66,6 +63,7 @@ final class EnumTypeTest extends TestCase
     public function testConvertToDatabaseValueThrowsWithZero(): void
     {
         $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage("Invalid '0' value to be stored in database for enum ExampleEnum");
 
         $this->type->convertToDatabaseValue(0, $this->platform);
     }

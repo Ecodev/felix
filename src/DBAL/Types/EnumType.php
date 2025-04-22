@@ -61,7 +61,7 @@ abstract class EnumType extends Type
     /**
      * Returns the type name based on actual class name.
      */
-    public function getName(): string
+    private function getName(): string
     {
         $class = new ReflectionClass($this);
         $shortClassName = $class->getShortName();
