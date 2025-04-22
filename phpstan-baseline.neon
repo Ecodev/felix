@@ -1,36 +1,835 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Cannot call method getDescription\\(\\) on mixed\\.$#"
+			message: '#^Property Ecodev\\Felix\\Acl\\DebugAcl\:\:\$privileges \(array\<string\|null\>\) does not accept array\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/Acl/DebugAcl.php
+
+		-
+			message: '#^Property Ecodev\\Felix\\Acl\\DebugAcl\:\:\$privilegesByResource \(array\<string, array\<string\>\>\) does not accept array\<string, array\<mixed\>\>\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/Acl/DebugAcl.php
+
+		-
+			message: '#^Cannot call method getDescription\(\) on mixed\.$#'
+			identifier: method.nonObject
 			count: 1
 			path: src/Api/Enum/PhpEnumType.php
 
 		-
-			message: "#^Method Ecodev\\\\Felix\\\\DBAL\\\\Types\\\\PhpEnumType\\:\\:convertToDatabaseValue\\(\\) should return string\\|null but returns int\\|string\\.$#"
+			message: '#^Method Ecodev\\Felix\\Api\\Enum\\PhpEnumType\:\:extractDescription\(\) should return string\|null but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Api/Enum/PhpEnumType.php
+
+		-
+			message: '#^Parameter \#1 \$roles of class Ecodev\\Felix\\Acl\\MultipleRoles constructor expects array\<string\>, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Api/Field/AclConfiguration.php
+
+		-
+			message: '#^Binary operation "\." between ''%%'' and mixed results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: src/Api/Input/Operator/SearchOperatorType.php
+
+		-
+			message: '#^Binary operation "\." between mixed and '' LIKE \:'' results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: src/Api/Input/Operator/SearchOperatorType.php
+
+		-
+			message: '#^Method Ecodev\\Felix\\Api\\Input\\Operator\\SearchOperatorType\:\:searchOnJoinedEntity\(\) should return array\<string\> but returns array\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Api/Input/Operator/SearchOperatorType.php
+
+		-
+			message: '#^Parameter \#1 \$term of static method Ecodev\\Felix\\Format\:\:splitSearchTerms\(\) expects string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Api/Input/Operator/SearchOperatorType.php
+
+		-
+			message: '#^Parameter \#1 \$num1 of function bccomp expects numeric\-string, string given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Api/Scalar/AbstractDecimalType.php
+
+		-
+			message: '#^Parameter \#2 \$num2 of function bccomp expects numeric\-string, string given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Api/Scalar/AbstractDecimalType.php
+
+		-
+			message: '#^Parameter \#1 \$num1 of function bcmul expects numeric\-string, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Api/Scalar/AbstractMoneyType.php
+
+		-
+			message: '#^Cannot access offset ''extensions'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: src/Api/Server.php
+
+		-
+			message: '#^Cannot access offset ''objectNotFound'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Api/Server.php
+
+		-
+			message: '#^Cannot access offset ''showSnack'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Api/Server.php
+
+		-
+			message: '#^Method Ecodev\\Felix\\Api\\Server\:\:handleError\(\) should return array but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Api/Server.php
+
+		-
+			message: '#^Parameter \#1 \$exception of method Ecodev\\Felix\\Api\\Server\:\:handleError\(\) expects Throwable, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Api/Server.php
+
+		-
+			message: '#^Binary operation "\." between ''Invalid \\'''' and mixed results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 2
+			path: src/DBAL/Types/EnumType.php
+
+		-
+			message: '#^Call to function is_string\(\) with non\-empty\-string will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
 			count: 1
 			path: src/DBAL/Types/PhpEnumType.php
 
 		-
-			message: "#^Method Ecodev\\\\Felix\\\\DBAL\\\\Types\\\\PhpEnumType\\:\\:getPossibleValues\\(\\) should return array\\<string\\> but returns array\\<int, int\\|string\\>\\.$#"
+			message: '#^Method Ecodev\\Felix\\DBAL\\Types\\PhpEnumType\:\:convertToDatabaseValue\(\) should return string\|null but returns int\|string\.$#'
+			identifier: return.type
 			count: 1
 			path: src/DBAL/Types/PhpEnumType.php
 
 		-
-			message: "#^Cannot access offset 'operations' on array\\|object\\.$#"
+			message: '#^Method Ecodev\\Felix\\DBAL\\Types\\PhpEnumType\:\:getPossibleValues\(\) should return array\<string\> but returns list\<int\|string\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/DBAL/Types/PhpEnumType.php
+
+		-
+			message: '#^Binary operation "\." between ''Invalid \\'''' and mixed results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: src/DBAL/Types/SetType.php
+
+		-
+			message: '#^PHPDoc tag @var with type array is not subtype of native type list\<string\>\|false\|null\.$#'
+			identifier: varTag.nativeType
+			count: 1
+			path: src/DBAL/Types/SetType.php
+
+		-
+			message: '#^Binary operation "\." between string and mixed results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: src/Log/EventCompleter.php
+
+		-
+			message: '#^Binary operation "\.\=" between mixed and non\-falsy\-string results in an error\.$#'
+			identifier: assignOp.invalid
+			count: 1
+			path: src/Log/EventCompleter.php
+
+		-
+			message: '#^Cannot access offset ''errno'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Log/EventCompleter.php
+
+		-
+			message: '#^Parameter \#1 \$request of method Ecodev\\Felix\\Log\\EventCompleter\:\:redactSensitiveData\(\) expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Log/EventCompleter.php
+
+		-
+			message: '#^Parameter \#2 \$array of function implode expects array\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Log/EventCompleter.php
+
+		-
+			message: '#^Binary operation "\." between ''https\://'' and mixed results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: src/Log/EventCompleterFactory.php
+
+		-
+			message: '#^Cannot access offset ''exception'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Log/Filter/NoMail.php
+
+		-
+			message: '#^Binary operation "\." between ''Errors on '' and mixed results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: src/Log/Writer/MailFactory.php
+
+		-
+			message: '#^Cannot access offset ''emails'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Log/Writer/MailFactory.php
+
+		-
+			message: '#^Cannot access offset ''from'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Log/Writer/MailFactory.php
+
+		-
+			message: '#^Parameter \#1 \$emailOrAddressList of method Laminas\\Mail\\Message\:\:setFrom\(\) expects array\|Laminas\\Mail\\Address\\AddressInterface\|string\|Traversable, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Log/Writer/MailFactory.php
+
+		-
+			message: '#^Parameter \#1 \$emailOrAddressOrList of method Laminas\\Mail\\Message\:\:addTo\(\) expects array\|Laminas\\Mail\\Address\\AddressInterface\|string\|Traversable, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Log/Writer/MailFactory.php
+
+		-
+			message: '#^Cannot access offset ''operations'' on array\|object\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
 			count: 1
 			path: src/Middleware/SignedQueryMiddleware.php
 
 		-
-			message: "#^Property Ecodev\\\\Felix\\\\Service\\\\DataRestorer\\:\\:\\$allRelationTables \\(array\\<string, array\\{table1\\: class\\-string, table2\\: class\\-string\\}\\>\\) does not accept array\\<int\\|string, array\\<string, mixed\\>\\>\\.$#"
+			message: '#^Method Ecodev\\Felix\\Middleware\\SignedQueryMiddleware\:\:getOperations\(\) should return array\{request\: Psr\\Http\\Message\\ServerRequestInterface, operations\: string\} but returns array\{request\: Psr\\Http\\Message\\ServerRequestInterface, operations\: mixed\}\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Middleware/SignedQueryMiddleware.php
+
+		-
+			message: '#^Parameter \#2 \$cidrs of static method Ecodev\\Felix\\Validator\\IPRange\:\:matches\(\) expects array\<string\>, array given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Middleware/SignedQueryMiddleware.php
+
+		-
+			message: '#^Parameter \#3 \$key of function hash_hmac expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Middleware/SignedQueryMiddleware.php
+
+		-
+			message: '#^Cannot access offset ''allowedIps'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Middleware/SignedQueryMiddlewareFactory.php
+
+		-
+			message: '#^Cannot access offset ''keys'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Middleware/SignedQueryMiddlewareFactory.php
+
+		-
+			message: '#^Cannot access offset ''required'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Middleware/SignedQueryMiddlewareFactory.php
+
+		-
+			message: '#^Parameter \#1 \$keys of class Ecodev\\Felix\\Middleware\\SignedQueryMiddleware constructor expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Middleware/SignedQueryMiddlewareFactory.php
+
+		-
+			message: '#^Parameter \#2 \$allowedIps of class Ecodev\\Felix\\Middleware\\SignedQueryMiddleware constructor expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Middleware/SignedQueryMiddlewareFactory.php
+
+		-
+			message: '#^Parameter \#3 \$required of class Ecodev\\Felix\\Middleware\\SignedQueryMiddleware constructor expects bool, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Middleware/SignedQueryMiddlewareFactory.php
+
+		-
+			message: '#^Trait Ecodev\\Felix\\Model\\Traits\\HasDescription is used zero times and is not analysed\.$#'
+			identifier: trait.unused
+			count: 1
+			path: src/Model/Traits/HasDescription.php
+
+		-
+			message: '#^Trait Ecodev\\Felix\\Model\\Traits\\HasInternalRemarks is used zero times and is not analysed\.$#'
+			identifier: trait.unused
+			count: 1
+			path: src/Model/Traits/HasInternalRemarks.php
+
+		-
+			message: '#^Trait Ecodev\\Felix\\Model\\Traits\\HasName is used zero times and is not analysed\.$#'
+			identifier: trait.unused
+			count: 1
+			path: src/Model/Traits/HasName.php
+
+		-
+			message: '#^Trait Ecodev\\Felix\\Model\\Traits\\HasUrl is used zero times and is not analysed\.$#'
+			identifier: trait.unused
+			count: 1
+			path: src/Model/Traits/HasUrl.php
+
+		-
+			message: '#^Trait Ecodev\\Felix\\Model\\Traits\\Log is used zero times and is not analysed\.$#'
+			identifier: trait.unused
+			count: 1
+			path: src/Model/Traits/Log.php
+
+		-
+			message: '#^Trait Ecodev\\Felix\\Model\\Traits\\Message is used zero times and is not analysed\.$#'
+			identifier: trait.unused
+			count: 1
+			path: src/Model/Traits/Message.php
+
+		-
+			message: '#^Method Ecodev\\Felix\\ORM\\Query\\Filter\\AclFilter\:\:getSubQuery\(\) should return string but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/ORM/Query/Filter/AclFilter.php
+
+		-
+			message: '#^Trait Ecodev\\Felix\\Repository\\Traits\\LogRepository is used zero times and is not analysed\.$#'
+			identifier: trait.unused
+			count: 1
+			path: src/Repository/Traits/LogRepository.php
+
+		-
+			message: '#^Trait Ecodev\\Felix\\Repository\\Traits\\MessageRepository is used zero times and is not analysed\.$#'
+			identifier: trait.unused
+			count: 1
+			path: src/Repository/Traits/MessageRepository.php
+
+		-
+			message: '#^Trait Ecodev\\Felix\\Repository\\Traits\\Repository is used zero times and is not analysed\.$#'
+			identifier: trait.unused
+			count: 1
+			path: src/Repository/Traits/Repository.php
+
+		-
+			message: '#^Binary operation "\." between ''APPLICATION_ENV\='' and mixed results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: src/Service/AbstractDatabase.php
+
+		-
+			message: '#^Parameter \#2 \$haystack of function in_array expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Service/AbstractDatabase.php
+
+		-
+			message: '#^Cannot access an offset on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
 			count: 1
 			path: src/Service/DataRestorer.php
 
 		-
-			message: "#^Parameter \\#1 \\$value of method Ecodev\\\\Felix\\\\DBAL\\\\Types\\\\PhpEnumType\\:\\:convertToPHPValue\\(\\) expects string\\|null, int given\\.$#"
+			message: '#^Parameter \#2 \$fields of function fputcsv expects array\<int\|string, bool\|float\|int\|string\|null\>, array given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Service/DataRestorer.php
+
+		-
+			message: '#^Part \$id \(mixed\) of encapsed string cannot be cast to string\.$#'
+			identifier: encapsedStringPart.nonString
+			count: 2
+			path: src/Service/DataRestorer.php
+
+		-
+			message: '#^Property Ecodev\\Felix\\Service\\DataRestorer\:\:\$allRelationTables \(array\<string, array\{table1\: class\-string, table2\: class\-string\}\>\) does not accept array\<array\<string, mixed\>\>\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/Service/DataRestorer.php
+
+		-
+			message: '#^Parameter \#1 \$arg of function escapeshellarg expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Service/FileChecker.php
+
+		-
+			message: '#^Parameter \#1 \$variables of class Laminas\\View\\Model\\ViewModel constructor expects array\<string, mixed\>\|ArrayAccess\<string, mixed\>\|Traversable\<string, mixed\>\|null, array given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Service/MessageRenderer.php
+
+		-
+			message: '#^Parameter \#2 \$hostname of class Ecodev\\Felix\\Service\\MessageRenderer constructor expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Service/MessageRendererFactory.php
+
+		-
+			message: '#^Parameter \#1 \$options of class Laminas\\Mail\\Transport\\SmtpOptions constructor expects iterable\<string, string\>\|Laminas\\Stdlib\\AbstractOptions\<string\>\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Service/TransportFactory.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertIsArray\(\) with array\<array\{resource\: string, privileges\: array\<int, array\{privilege\: string\|null, allowed\: bool, allowIf\: array\<string\>, denyIf\: array\<string\>\}\>\}\> will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: src/Testing/Acl/AbstractAcl.php
+
+		-
+			message: '#^Parameter \#1 \$role of method Ecodev\\Felix\\Acl\\Acl\:\:show\(\) expects Ecodev\\Felix\\Acl\\MultipleRoles\|string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Testing/Acl/AbstractAcl.php
+
+		-
+			message: '#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\.$#'
+			identifier: foreach.nonIterable
+			count: 1
+			path: src/Testing/Api/AbstractServer.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertTrue\(\) with true and ''schema passes…'' will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: src/Testing/Api/AbstractServer.php
+
+		-
+			message: '#^Cannot access offset ''extensions'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 3
+			path: src/Testing/Api/AbstractServer.php
+
+		-
+			message: '#^Cannot access offset ''file'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Testing/Api/AbstractServer.php
+
+		-
+			message: '#^Cannot access offset ''line'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Testing/Api/AbstractServer.php
+
+		-
+			message: '#^Cannot access offset ''trace'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Testing/Api/AbstractServer.php
+
+		-
+			message: '#^Cannot access offset 0 on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: src/Testing/Api/AbstractServer.php
+
+		-
+			message: '#^Parameter \#1 \$array of function array_unshift expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Testing/Api/AbstractServer.php
+
+		-
+			message: '#^Parameter \#1 \$data of method Laminas\\Diactoros\\ServerRequest\:\:withParsedBody\(\) expects array\|object\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Testing/Api/AbstractServer.php
+
+		-
+			message: '#^Parameter \#1 \$result of method Ecodev\\Felix\\Testing\\Api\\AbstractServer\:\:removeTraceOneResult\(\) expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Testing/Api/AbstractServer.php
+
+		-
+			message: '#^Parameter \#2 \$array of function array_key_exists expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Testing/Api/AbstractServer.php
+
+		-
+			message: '#^Parameter \#1 \$value of method Doctrine\\DBAL\\Connection\:\:quote\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Utility.php
+
+		-
+			message: '#^Cannot call method get\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 4
+			path: src/functions.php
+
+		-
+			message: '#^Cannot call method translate\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/functions.php
+
+		-
+			message: '#^Function _em\(\) should return Doctrine\\ORM\\EntityManager but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/functions.php
+
+		-
+			message: '#^Function _log\(\) should return Laminas\\Log\\LoggerInterface but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/functions.php
+
+		-
+			message: '#^Function _tr\(\) should return string but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/functions.php
+
+		-
+			message: '#^Function _types\(\) should return GraphQL\\Doctrine\\Types but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/functions.php
+
+		-
+			message: '#^Parameter \#1 \$str of function strtr expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/functions.php
+
+		-
+			message: '#^Cannot access offset ''config'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: tests/Acl/Assertion/AllTest.php
+
+		-
+			message: '#^Cannot access offset ''services'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: tests/Acl/Assertion/AllTest.php
+
+		-
+			message: '#^Parameter \#1 \$config of class Laminas\\ServiceManager\\ServiceManager constructor expects array\{abstract_factories\?\: array\<class\-string\<Laminas\\ServiceManager\\Factory\\AbstractFactoryInterface\>\|Laminas\\ServiceManager\\Factory\\AbstractFactoryInterface\>, aliases\?\: array\<string, string\>, delegators\?\: array\<string, array\<\(callable\(Psr\\Container\\ContainerInterface, string, callable\(\)\: object, array\<mixed\>\|null\)\: object\)\|class\-string\<Laminas\\ServiceManager\\Factory\\DelegatorFactoryInterface\>\>\>, factories\?\: mixed, initializers\?\: array\<\(callable\(Psr\\Container\\ContainerInterface, object\)\: void\)\|class\-string\<Laminas\\ServiceManager\\Initializer\\InitializerInterface\>\>, invokables\?\: array\<string, string\>, lazy_services\?\: array\{class_map\?\: array\<string, class\-string\>, proxies_namespace\?\: non\-empty\-string, proxies_target_dir\?\: non\-empty\-string, write_proxy_files\?\: bool\}, services\?\: array\<string, array\<mixed\>\|object\>, \.\.\.\}, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/Acl/Assertion/AllTest.php
+
+		-
+			message: '#^Cannot access offset ''config'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: tests/Acl/Assertion/OneTest.php
+
+		-
+			message: '#^Cannot access offset ''services'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: tests/Acl/Assertion/OneTest.php
+
+		-
+			message: '#^Parameter \#1 \$config of class Laminas\\ServiceManager\\ServiceManager constructor expects array\{abstract_factories\?\: array\<class\-string\<Laminas\\ServiceManager\\Factory\\AbstractFactoryInterface\>\|Laminas\\ServiceManager\\Factory\\AbstractFactoryInterface\>, aliases\?\: array\<string, string\>, delegators\?\: array\<string, array\<\(callable\(Psr\\Container\\ContainerInterface, string, callable\(\)\: object, array\<mixed\>\|null\)\: object\)\|class\-string\<Laminas\\ServiceManager\\Factory\\DelegatorFactoryInterface\>\>\>, factories\?\: mixed, initializers\?\: array\<\(callable\(Psr\\Container\\ContainerInterface, object\)\: void\)\|class\-string\<Laminas\\ServiceManager\\Initializer\\InitializerInterface\>\>, invokables\?\: array\<string, string\>, lazy_services\?\: array\{class_map\?\: array\<string, class\-string\>, proxies_namespace\?\: non\-empty\-string, proxies_target_dir\?\: non\-empty\-string, write_proxy_files\?\: bool\}, services\?\: array\<string, array\<mixed\>\|object\>, \.\.\.\}, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/Acl/Assertion/OneTest.php
+
+		-
+			message: '#^Cannot access offset ''config'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: tests/Acl/DebugAclTest.php
+
+		-
+			message: '#^Cannot access offset ''services'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: tests/Acl/DebugAclTest.php
+
+		-
+			message: '#^Parameter \#1 \$config of class Laminas\\ServiceManager\\ServiceManager constructor expects array\{abstract_factories\?\: array\<class\-string\<Laminas\\ServiceManager\\Factory\\AbstractFactoryInterface\>\|Laminas\\ServiceManager\\Factory\\AbstractFactoryInterface\>, aliases\?\: array\<string, string\>, delegators\?\: array\<string, array\<\(callable\(Psr\\Container\\ContainerInterface, string, callable\(\)\: object, array\<mixed\>\|null\)\: object\)\|class\-string\<Laminas\\ServiceManager\\Factory\\DelegatorFactoryInterface\>\>\>, factories\?\: mixed, initializers\?\: array\<\(callable\(Psr\\Container\\ContainerInterface, object\)\: void\)\|class\-string\<Laminas\\ServiceManager\\Initializer\\InitializerInterface\>\>, invokables\?\: array\<string, string\>, lazy_services\?\: array\{class_map\?\: array\<string, class\-string\>, proxies_namespace\?\: non\-empty\-string, proxies_target_dir\?\: non\-empty\-string, write_proxy_files\?\: bool\}, services\?\: array\<string, array\<mixed\>\|object\>, \.\.\.\}, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/Acl/DebugAclTest.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Money\\\\Money'' and Money\\Money will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 6
+			path: tests/Api/Scalar/CHFTypeTest.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Cake\\\\Chronos\\\\ChronosDate'' and Cake\\Chronos\\ChronosDate will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 2
+			path: tests/Api/Scalar/DateTypeTest.php
+
+		-
+			message: '#^Cannot access offset ''config'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: tests/Api/ServerTest.php
+
+		-
+			message: '#^Cannot access offset ''services'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: tests/Api/ServerTest.php
+
+		-
+			message: '#^Parameter \#1 \$config of class Laminas\\ServiceManager\\ServiceManager constructor expects array\{abstract_factories\?\: array\<class\-string\<Laminas\\ServiceManager\\Factory\\AbstractFactoryInterface\>\|Laminas\\ServiceManager\\Factory\\AbstractFactoryInterface\>, aliases\?\: array\<string, string\>, delegators\?\: array\<string, array\<\(callable\(Psr\\Container\\ContainerInterface, string, callable\(\)\: object, array\<mixed\>\|null\)\: object\)\|class\-string\<Laminas\\ServiceManager\\Factory\\DelegatorFactoryInterface\>\>\>, factories\?\: mixed, initializers\?\: array\<\(callable\(Psr\\Container\\ContainerInterface, object\)\: void\)\|class\-string\<Laminas\\ServiceManager\\Initializer\\InitializerInterface\>\>, invokables\?\: array\<string, string\>, lazy_services\?\: array\{class_map\?\: array\<string, class\-string\>, proxies_namespace\?\: non\-empty\-string, proxies_target_dir\?\: non\-empty\-string, write_proxy_files\?\: bool\}, services\?\: array\<string, array\<mixed\>\|object\>, \.\.\.\}, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/Api/ServerTest.php
+
+		-
+			message: '#^Method EcodevTests\\Felix\\Blog\\Model\\User\:\:getLogin\(\) never returns null so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: tests/Blog/Model/User.php
+
+		-
+			message: '#^Property EcodevTests\\Felix\\Blog\\Model\\User\:\:\$email \(string\|null\) is never assigned string so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: tests/Blog/Model/User.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertIsArray\(\) with array will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: tests/ConfigProviderTest.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Cake\\\\Chronos\\\\Chronos'' and Cake\\Chronos\\Chronos will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 3
+			path: tests/DBAL/Types/ChronosTypeTest.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertNull\(\) with null and ''support null values'' will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 2
+			path: tests/DBAL/Types/ChronosTypeTest.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Cake\\\\Chronos\\\\ChronosDate'' and Cake\\Chronos\\ChronosDate will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 2
+			path: tests/DBAL/Types/DateTypeTest.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertNull\(\) with null and ''support null values'' will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 2
+			path: tests/DBAL/Types/DateTypeTest.php
+
+		-
+			message: '#^Parameter \#1 \$value of method Ecodev\\Felix\\DBAL\\Types\\PhpEnumType\:\:convertToPHPValue\(\) expects string\|null, int given\.$#'
+			identifier: argument.type
 			count: 1
 			path: tests/DBAL/Types/PhpEnumTypeTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$input of method OTPHP\\\\OTPInterface\\:\\:at\\(\\) expects int\\<0, max\\>, int\\<\\-26, max\\> given\\.$#"
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertNull\(\) with null will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 2
+			path: tests/DBAL/Types/SetTypeTest.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Cake\\\\Chronos\\\\ChronosTime'' and Cake\\Chronos\\ChronosTime will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 2
+			path: tests/DBAL/Types/TimeTypeTest.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertNull\(\) with null and ''support null values'' will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 2
+			path: tests/DBAL/Types/TimeTypeTest.php
+
+		-
+			message: '#^Parameter \#1 \$string of static method Ecodev\\Felix\\Format\:\:truncate\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/FormatTest.php
+
+		-
+			message: '#^Cannot access offset ''config'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: tests/I18n/TranslatorTest.php
+
+		-
+			message: '#^Cannot access offset ''services'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: tests/I18n/TranslatorTest.php
+
+		-
+			message: '#^Parameter \#1 \$config of class Laminas\\ServiceManager\\ServiceManager constructor expects array\{abstract_factories\?\: array\<class\-string\<Laminas\\ServiceManager\\Factory\\AbstractFactoryInterface\>\|Laminas\\ServiceManager\\Factory\\AbstractFactoryInterface\>, aliases\?\: array\<string, string\>, delegators\?\: array\<string, array\<\(callable\(Psr\\Container\\ContainerInterface, string, callable\(\)\: object, array\<mixed\>\|null\)\: object\)\|class\-string\<Laminas\\ServiceManager\\Factory\\DelegatorFactoryInterface\>\>\>, factories\?\: mixed, initializers\?\: array\<\(callable\(Psr\\Container\\ContainerInterface, object\)\: void\)\|class\-string\<Laminas\\ServiceManager\\Initializer\\InitializerInterface\>\>, invokables\?\: array\<string, string\>, lazy_services\?\: array\{class_map\?\: array\<string, class\-string\>, proxies_namespace\?\: non\-empty\-string, proxies_target_dir\?\: non\-empty\-string, write_proxy_files\?\: bool\}, services\?\: array\<string, array\<mixed\>\|object\>, \.\.\.\}, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/I18n/TranslatorTest.php
+
+		-
+			message: '#^Parameter \#2 \$replacements of function _tr expects array\<string, float\|int\|string\|null\>, array given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/I18n/TranslatorTest.php
+
+		-
+			message: '#^Parameter \#1 \$json of function json_decode expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/Log/EventCompleterTest.php
+
+		-
+			message: '#^Parameter \#2 \$haystack of static method PHPUnit\\Framework\\Assert\:\:assertStringContainsString\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/Log/EventCompleterTest.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Laminas\\\\Log\\\\Logger'' and Laminas\\Log\\Logger will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 2
+			path: tests/Log/LoggerFactoryTest.php
+
+		-
+			message: '#^Cannot call method getBody\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: tests/Log/Writer/MailFactoryTest.php
+
+		-
+			message: '#^Cannot call method getLastMessage\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 4
+			path: tests/Log/Writer/MailFactoryTest.php
+
+		-
+			message: '#^Cannot call method getTo\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: tests/Log/Writer/MailFactoryTest.php
+
+		-
+			message: '#^Cannot call method has\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: tests/Log/Writer/MailFactoryTest.php
+
+		-
+			message: '#^Parameter \#1 \$writer of method EcodevTests\\Felix\\Log\\Writer\\MailFactoryTest\:\:writeOne\(\) expects Laminas\\Log\\Writer\\WriterInterface, mixed given\.$#'
+			identifier: argument.type
+			count: 3
+			path: tests/Log/Writer/MailFactoryTest.php
+
+		-
+			message: '#^Parameter \#2 \$haystack of static method PHPUnit\\Framework\\Assert\:\:assertStringContainsString\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 2
+			path: tests/Log/Writer/MailFactoryTest.php
+
+		-
+			message: '#^Method Ecodev\\Felix\\Model\\HasOtp@anonymous/tests/Model/Traits/HasOtpTest\.php\:18\:\:getLogin\(\) never returns null so it can be removed from the return type\.$#'
+			identifier: return.unusedType
 			count: 1
 			path: tests/Model/Traits/HasOtpTest.php
+
+		-
+			message: '#^Method Ecodev\\Felix\\Model\\HasOtp@anonymous/tests/Model/Traits/HasOtpTest\.php\:55\:\:getLogin\(\) never returns string so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: tests/Model/Traits/HasOtpTest.php
+
+		-
+			message: '#^Parameter \#1 \$input of method OTPHP\\OTPInterface\:\:at\(\) expects int\<0, max\>, int\<\-26, max\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/Model/Traits/HasOtpTest.php
+
+		-
+			message: '#^Cannot access offset ''config'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: tests/Model/Traits/ImageTest.php
+
+		-
+			message: '#^Cannot access offset ''services'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: tests/Model/Traits/ImageTest.php
+
+		-
+			message: '#^Cannot call method get\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: tests/Model/Traits/ImageTest.php
+
+		-
+			message: '#^Parameter \#1 \$config of class Laminas\\ServiceManager\\ServiceManager constructor expects array\{abstract_factories\?\: array\<class\-string\<Laminas\\ServiceManager\\Factory\\AbstractFactoryInterface\>\|Laminas\\ServiceManager\\Factory\\AbstractFactoryInterface\>, aliases\?\: array\<string, string\>, delegators\?\: array\<string, array\<\(callable\(Psr\\Container\\ContainerInterface, string, callable\(\)\: object, array\<mixed\>\|null\)\: object\)\|class\-string\<Laminas\\ServiceManager\\Factory\\DelegatorFactoryInterface\>\>\>, factories\?\: mixed, initializers\?\: array\<\(callable\(Psr\\Container\\ContainerInterface, object\)\: void\)\|class\-string\<Laminas\\ServiceManager\\Initializer\\InitializerInterface\>\>, invokables\?\: array\<string, string\>, lazy_services\?\: array\{class_map\?\: array\<string, class\-string\>, proxies_namespace\?\: non\-empty\-string, proxies_target_dir\?\: non\-empty\-string, write_proxy_files\?\: bool\}, services\?\: array\<string, array\<mixed\>\|object\>, \.\.\.\}, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/Model/Traits/ImageTest.php
+
+		-
+			message: '#^Parameter \#2 \$to of function copy expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/Model/Traits/ImageTest.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertIsCallable\(\) with array\{Ecodev\\Felix\\Service\\EnumAutoMigrator, ''postGenerateSchema''\} and ''must have method…'' will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: tests/Service/EnumAutoMigratorTest.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Imagine\\\\Image\\\\ImageInterface'' and Imagine\\Image\\ImageInterface will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: tests/Service/ImagineFactoryTest.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Imagine\\\\Image\\\\ImagineInterface'' and Imagine\\Image\\ImagineInterface will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: tests/Service/ImagineFactoryTest.php
+
+		-
+			message: '#^PHPDoc tag @var with type Doctrine\\ORM\\EntityManager is not subtype of native type PHPUnit\\Framework\\MockObject\\MockObject\.$#'
+			identifier: varTag.nativeType
+			count: 1
+			path: tests/Service/MailerTest.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertNull\(\) with null will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: tests/UtilityTest.php
+
+		-
+			message: '#^Method Ecodev\\Felix\\Model\\Model@anonymous/tests/UtilityTest\.php\:61\:\:getId\(\) never returns null so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: tests/UtilityTest.php
