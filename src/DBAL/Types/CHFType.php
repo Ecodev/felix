@@ -8,11 +8,6 @@ use Money\Money;
 
 final class CHFType extends AbstractMoneyType
 {
-    public function getName(): string
-    {
-        return 'CHF';
-    }
-
     /**
      * @param numeric-string $value
      */

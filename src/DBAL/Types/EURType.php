@@ -8,11 +8,6 @@ use Money\Money;
 
 final class EURType extends AbstractMoneyType
 {
-    public function getName(): string
-    {
-        return 'EUR';
-    }
-
     /**
      * @param numeric-string $value
      */

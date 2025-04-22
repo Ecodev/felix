@@ -20,11 +20,6 @@ use JsonException;
  */
 final class LocalizedType extends JsonType
 {
-    public function getName(): string
-    {
-        return 'localized';
-    }
-
     /**
      * @param null|string $value
      */

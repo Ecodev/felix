@@ -24,11 +24,6 @@ abstract class AbstractMoneyType extends Type
         return ParameterType::INTEGER;
     }
 
-    public function getName(): string
-    {
-        return 'Money';
-    }
-
     /**
      * @param null|float|int|string $value
      */
