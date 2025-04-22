@@ -36,7 +36,9 @@ class MappingTest extends TestCase
     {
         $em = _em();
         $validator = new SchemaValidator($em);
+        $updates = $validator->getUpdateSchemaList();
+        $updates = array_filter($updates, fn (string $a) => $a !== 'DROP TABLE doctrine_migration_versions');
 
-        self::assertTrue($validator->schemaInSyncWithMetadata(), 'database should be in sync with mapping');
+        self::assertSame([], $updates, 'database should be in sync with mapping');
     }
 }
