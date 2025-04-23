@@ -163,6 +163,12 @@ parameters:
 			path: src/Log/Filter/NoMail.php
 
 		-
+			message: '#^Cannot call method log\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/Log/Writer/Db.php
+
+		-
 			message: '#^Binary operation "\." between ''Errors on '' and mixed results in an error\.$#'
 			identifier: binaryOp.invalid
 			count: 1
@@ -449,12 +455,6 @@ parameters:
 			identifier: argument.type
 			count: 1
 			path: src/Testing/Api/AbstractServer.php
-
-		-
-			message: '#^Parameter \#1 \$value of method Doctrine\\DBAL\\Connection\:\:quote\(\) expects string, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Utility.php
 
 		-
 			message: '#^Cannot call method get\(\) on mixed\.$#'
@@ -801,5 +801,11 @@ parameters:
 		-
 			message: '#^Method Ecodev\\Felix\\Model\\Model@anonymous/tests/UtilityTest\.php\:61\:\:getId\(\) never returns null so it can be removed from the return type\.$#'
 			identifier: return.unusedType
+			count: 1
+			path: tests/UtilityTest.php
+
+		-
+			message: '#^Parameter \#1 \$values of static method Ecodev\\Felix\\Utility\:\:quoteArray\(\) expects array\<bool\|float\|int\|string\|null\>, array given\.$#'
+			identifier: argument.type
 			count: 1
 			path: tests/UtilityTest.php

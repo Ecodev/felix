@@ -27,7 +27,7 @@ class DbTest extends TestCase
             ->with($event)
             ->willReturn($completedEvent);
 
-        $writer = new Db($logRepository, $eventCompleter);
+        $writer = new Db(fn () => $logRepository, $eventCompleter);
         $writer->write($event);
     }
 }
