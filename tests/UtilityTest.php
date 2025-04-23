@@ -154,8 +154,8 @@ final class UtilityTest extends TestCase
         yield [['foo bar', 'baz'], "'foo bar', 'baz'"];
         yield [[], ''];
         yield [[''], "''"];
-        yield [[false], ''];
-        yield [[null], ''];
+        yield [[false], "''"];
+        yield [[null], "''"];
         yield [[0], "'0'"];
         yield [[true], "'1'"];
         yield [[1.23], "'1.23'"];

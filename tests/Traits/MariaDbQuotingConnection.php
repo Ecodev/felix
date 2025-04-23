@@ -11,13 +11,9 @@ class MariaDbQuotingConnection extends Connection
     /**
      * This replicate MariaDB quoting but without a real connection to DB for ease of testing.
      */
-    public function quote(mixed $value): string
+    public function quote(string $value): string
     {
-        if (in_array($value, [false, null], true)) {
-            return '';
-        }
-
-        $quoted = "'" . str_replace(["'", "\n"], ["\\'", '\\n'], (string) $value) . "'";
+        $quoted = "'" . str_replace(["'", "\n"], ["\\'", '\\n'], $value) . "'";
 
         return $quoted;
     }

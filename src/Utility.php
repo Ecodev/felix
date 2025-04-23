@@ -93,13 +93,15 @@ final class Utility
      * ```php
      * Utility::quoteArray(['foo bar', 2]); // "'foo bar', '2'"
      * ```
+     *
+     * @param array<null|scalar> $values
      */
-    public static function quoteArray(array $value): string
+    public static function quoteArray(array $values): string
     {
         $connection = _em()->getConnection();
         $quoted = [];
-        foreach ($value as $v) {
-            $quoted[] = $connection->quote($v);
+        foreach ($values as $value) {
+            $quoted[] = $connection->quote((string) $value);
         }
 
         return implode(', ', $quoted);
