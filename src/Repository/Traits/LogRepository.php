@@ -9,8 +9,8 @@ use Doctrine\DBAL\ArrayParameterType;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
 use Ecodev\Felix\Repository\LogRepository as LogRepositoryInterface;
+use Monolog\Level;
 use Monolog\LogRecord;
-use Psr\Log\LogLevel;
 
 trait LogRepository
 {
@@ -78,8 +78,8 @@ trait LogRepository
         $select = $this->getEntityManager()->getConnection()->createQueryBuilder()
             ->select('message')
             ->from('log')
-            ->andWhere('priority = :priority')
-            ->setParameter('priority', LogLevel::INFO)
+            ->andWhere('level = :level')
+            ->setParameter('level', Level::Info->value)
             ->andWhere('message IN (:message)')
             ->setParameter('message', [$success, $failed], ArrayParameterType::STRING)
             ->andWhere('creation_date > DATE_SUB(NOW(), INTERVAL 30 MINUTE)')
@@ -112,8 +112,8 @@ trait LogRepository
         $connection = $this->getEntityManager()->getConnection();
         $query = $connection->createQueryBuilder()
             ->delete('log')
-            ->andWhere('log.priority != :priority OR message IN (:message)')
-            ->setParameter('priority', LogLevel::INFO)
+            ->andWhere('log.level != :level OR message IN (:message)')
+            ->setParameter('level', Level::Info->value)
             ->setParameter('message', [
                 LogRepositoryInterface::LOGIN,
                 LogRepositoryInterface::LOGIN_FAILED,

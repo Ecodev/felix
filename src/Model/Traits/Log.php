@@ -15,7 +15,7 @@ trait Log
     use HasUrl;
 
     #[ORM\Column(type: 'smallint')]
-    private int $priority;
+    private int $level;
 
     #[ORM\Column(type: 'string', length: 5000)]
     private string $message = '';
@@ -36,20 +36,14 @@ trait Log
     #[API\Exclude]
     private array $context = [];
 
-    /**
-     * Set priority.
-     */
-    public function setPriority(int $priority): void
+    public function setLevel(int $level): void
     {
-        $this->priority = $priority;
+        $this->level = $level;
     }
 
-    /**
-     * Get priority.
-     */
-    public function getPriority(): int
+    public function getLevel(): int
     {
-        return $this->priority;
+        return $this->level;
     }
 
     /**
