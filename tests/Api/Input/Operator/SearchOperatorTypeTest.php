@@ -68,14 +68,14 @@ final class SearchOperatorTypeTest extends OperatorType
                 User::class,
                 '',
                 0,
-                null,
+                '',
                 [],
             ],
             'only whitespace is dropped' => [
                 User::class,
                 '    ',
                 0,
-                null,
+                '',
                 [],
             ],
             'quoted whitespace is kept' => [
@@ -91,14 +91,14 @@ final class SearchOperatorTypeTest extends OperatorType
                 User::class,
                 '""',
                 0,
-                null,
+                '',
                 [],
             ],
             'mixed empty term' => [
                 User::class,
                 '   ""  ""  ',
                 0,
-                null,
+                '',
                 [],
             ],
             'search predefined fields' => [

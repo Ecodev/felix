@@ -50,16 +50,16 @@
         "ecodev/graphql-doctrine": "dev-doctrine3",
         "imagine/imagine": "^1.5",
         "laminas/laminas-diactoros": "^3.5",
-        "laminas/laminas-log": "^2.17",
-        "laminas/laminas-mail": "^2.25",
         "laminas/laminas-permissions-acl": "^2.17",
         "laminas/laminas-servicemanager": "^3.23",
         "laminas/laminas-validator": "^2.64",
         "laminas/laminas-view": "^2.36",
         "mezzio/mezzio-session": "^1.16",
         "moneyphp/money": "^4.7",
+        "monolog/monolog": "^3.9",
         "spomky-labs/otphp": "^11.3",
-        "symfony/cache": "^5.4 || ^6.4"
+        "symfony/cache": "^5.4 || ^6.4",
+        "symfony/mailer": "^7.2"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "@stable",

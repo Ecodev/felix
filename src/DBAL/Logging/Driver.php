@@ -6,11 +6,12 @@ namespace Ecodev\Felix\DBAL\Logging;
 
 use Doctrine\DBAL\Driver as DriverInterface;
 use Doctrine\DBAL\Driver\Middleware\AbstractDriverMiddleware;
+use Ecodev\Felix\Log\Handler\DbHandler;
 use SensitiveParameter;
 
 final class Driver extends AbstractDriverMiddleware
 {
-    public function __construct(DriverInterface $driver)
+    public function __construct(DriverInterface $driver, private readonly DbHandler $dbHandler)
     {
         parent::__construct($driver);
     }
@@ -19,7 +20,11 @@ final class Driver extends AbstractDriverMiddleware
     {
         _log()->debug('Connecting to DB', $this->maskPassword($params));
 
-        return new Connection(parent::connect($params));
+        $connection = new Connection(parent::connect($params));
+
+        $this->dbHandler->enable();
+
+        return $connection;
     }
 
     /**

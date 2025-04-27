@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Ecodev\Felix\Repository;
 
+use Monolog\LogRecord;
+
 interface LogRepository
 {
     /**
@@ -49,7 +51,7 @@ interface LogRepository
     /**
      * This should NOT be called directly, instead use `_log()` to log stuff.
      */
-    public function log(array $event): void;
+    public function log(LogRecord $record): void;
 
     /**
      * Returns whether the current IP often failed to log in.
@@ -64,7 +66,7 @@ interface LogRepository
 
     /**
      * Delete log entries which are errors/warnings and older than one month
-     * We always keep Logger::INFO level because we use it for statistics.
+     * We always keep LogLevel::INFO level because we use it for statistics.
      *
      * @return int the count deleted logs
      */

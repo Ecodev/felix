@@ -6,7 +6,7 @@ use Doctrine\ORM\EntityManager;
 use Ecodev\Felix\Debug;
 use Ecodev\Felix\I18n\Translator;
 use GraphQL\Doctrine\Types;
-use Laminas\Log\LoggerInterface;
+use Psr\Log\LoggerInterface;
 
 /**
  * Returns the type registry.

@@ -10,11 +10,9 @@ use Ecodev\Felix\Model\Message;
 use Ecodev\Felix\Repository\LogRepository;
 use Ecodev\Felix\Repository\MessageRepository;
 use Exception;
-use Laminas\Mail;
-use Laminas\Mail\Transport\TransportInterface;
-use Laminas\Mime\Message as MimeMessage;
-use Laminas\Mime\Mime;
-use Laminas\Mime\Part as MimePart;
+use Symfony\Component\Mailer\Transport\TransportInterface;
+use Symfony\Component\Mime\Address;
+use Symfony\Component\Mime\Email;
 
 /**
  * Service to send a message as an email.
@@ -60,7 +58,7 @@ class Mailer
      */
     public function sendMessage(Message $message): void
     {
-        $mailMessage = $this->modelMessageToMailMessage($message);
+        $mailMessage = $this->messageToEmail($message);
 
         $email = $message->getEmail();
         $overriddenBy = '';
@@ -70,9 +68,9 @@ class Mailer
         }
 
         $recipient = $message->getRecipient();
-        $recipientName = $recipient?->getName();
+        $recipientName = $recipient?->getName() ?: '';
         if ($email) {
-            $mailMessage->addTo($email, $recipientName);
+            $mailMessage->addTo(new Address($email, $recipientName));
             $this->transport->send($mailMessage);
         }
 
@@ -80,32 +78,23 @@ class Mailer
         $this->entityManager->flush();
 
         $addressList = $mailMessage->getFrom();
-        $addressList->rewind();
-        echo 'email from ' . $addressList->current()->getEmail() . ' sent to: ' . $message->getEmail() . "\t" . $overriddenBy . "\t" . $message->getSubject() . PHP_EOL;
+        if ($addressList) {
+            echo 'email from ' . $addressList[0]->getAddress() . ' sent to: ' . $message->getEmail() . "\t" . $overriddenBy . "\t" . $message->getSubject() . PHP_EOL;
+        }
     }
 
     /**
-     * Convert our model message to a mail message.
+     * Convert our model message to an email.
      */
-    protected function modelMessageToMailMessage(Message $modelMessage): Mail\Message
+    protected function messageToEmail(Message $message): Email
     {
-        // set Mime type html
-        $htmlPart = new MimePart($modelMessage->getBody());
-        $htmlPart->type = Mime::TYPE_HTML;
-        $htmlPart->charset = 'UTF-8';
-        $htmlPart->encoding = Mime::ENCODING_BASE64;
+        $email = new Email();
+        $email->subject($message->getSubject());
+        $email->html($message->getBody());
 
-        $body = new MimeMessage();
-        $body->setParts([$htmlPart]);
+        $email->from(new Address($this->fromEmail, $this->fromName));
 
-        $mailMessage = new Mail\Message();
-        $mailMessage->setEncoding('UTF-8');
-        $mailMessage->setSubject($modelMessage->getSubject());
-        $mailMessage->setBody($body);
-
-        $mailMessage->setFrom($this->fromEmail, $this->fromName);
-
-        return $mailMessage;
+        return $email;
     }
 
     /**

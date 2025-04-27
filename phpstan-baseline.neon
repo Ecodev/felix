@@ -103,6 +103,12 @@ parameters:
 			path: src/Api/Server.php
 
 		-
+			message: '#^Parameter \#1 \$dbHandler of class Ecodev\\Felix\\DBAL\\Logging\\Middleware constructor expects Ecodev\\Felix\\Log\\Handler\\DbHandler, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/DBAL/Logging/MiddlewareFactory.php
+
+		-
 			message: '#^Binary operation "\." between ''Invalid \\'''' and mixed results in an error\.$#'
 			identifier: binaryOp.invalid
 			count: 2
@@ -121,82 +127,70 @@ parameters:
 			path: src/DBAL/Types/SetType.php
 
 		-
-			message: '#^Binary operation "\." between string and mixed results in an error\.$#'
-			identifier: binaryOp.invalid
+			message: '#^Property Ecodev\\Felix\\Log\\Handler\\DbHandler\:\:\$logRepository \(Ecodev\\Felix\\Repository\\LogRepository\) does not accept mixed\.$#'
+			identifier: assign.propertyType
 			count: 1
-			path: src/Log/EventCompleter.php
+			path: src/Log/Handler/DbHandler.php
 
 		-
-			message: '#^Binary operation "\.\=" between mixed and non\-falsy\-string results in an error\.$#'
-			identifier: assignOp.invalid
+			message: '#^Class Application\\Model\\Log not found\.$#'
+			identifier: class.notFound
 			count: 1
-			path: src/Log/EventCompleter.php
+			path: src/Log/Handler/DbHandlerFactory.php
 
 		-
-			message: '#^Cannot access offset ''errno'' on mixed\.$#'
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 1
-			path: src/Log/EventCompleter.php
-
-		-
-			message: '#^Parameter \#1 \$request of method Ecodev\\Felix\\Log\\EventCompleter\:\:redactSensitiveData\(\) expects array, mixed given\.$#'
+			message: '#^Parameter \#1 \$logRepositoryGetter of class Ecodev\\Felix\\Log\\Handler\\DbHandler constructor expects Closure\(\)\: Ecodev\\Felix\\Repository\\LogRepository, Closure\(\)\: Doctrine\\ORM\\EntityRepository\<Application\\Model\\Log\> given\.$#'
 			identifier: argument.type
 			count: 1
-			path: src/Log/EventCompleter.php
-
-		-
-			message: '#^Parameter \#2 \$array of function implode expects array\|null, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Log/EventCompleter.php
-
-		-
-			message: '#^Binary operation "\." between ''https\://'' and mixed results in an error\.$#'
-			identifier: binaryOp.invalid
-			count: 1
-			path: src/Log/EventCompleterFactory.php
-
-		-
-			message: '#^Cannot access offset ''exception'' on mixed\.$#'
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 1
-			path: src/Log/Filter/NoMail.php
-
-		-
-			message: '#^Cannot call method log\(\) on mixed\.$#'
-			identifier: method.nonObject
-			count: 1
-			path: src/Log/Writer/Db.php
-
-		-
-			message: '#^Binary operation "\." between ''Errors on '' and mixed results in an error\.$#'
-			identifier: binaryOp.invalid
-			count: 1
-			path: src/Log/Writer/MailFactory.php
+			path: src/Log/Handler/DbHandlerFactory.php
 
 		-
 			message: '#^Cannot access offset ''emails'' on mixed\.$#'
 			identifier: offsetAccess.nonOffsetAccessible
 			count: 1
-			path: src/Log/Writer/MailFactory.php
+			path: src/Log/Handler/MailerHandlerFactory.php
 
 		-
 			message: '#^Cannot access offset ''from'' on mixed\.$#'
 			identifier: offsetAccess.nonOffsetAccessible
 			count: 1
-			path: src/Log/Writer/MailFactory.php
+			path: src/Log/Handler/MailerHandlerFactory.php
 
 		-
-			message: '#^Parameter \#1 \$emailOrAddressList of method Laminas\\Mail\\Message\:\:setFrom\(\) expects array\|Laminas\\Mail\\Address\\AddressInterface\|string\|Traversable, mixed given\.$#'
+			message: '#^Parameter \#1 \.\.\.\$addresses of method Symfony\\Component\\Mime\\Email\:\:addFrom\(\) expects string\|Symfony\\Component\\Mime\\Address, mixed given\.$#'
 			identifier: argument.type
 			count: 1
-			path: src/Log/Writer/MailFactory.php
+			path: src/Log/Handler/MailerHandlerFactory.php
 
 		-
-			message: '#^Parameter \#1 \$emailOrAddressOrList of method Laminas\\Mail\\Message\:\:addTo\(\) expects array\|Laminas\\Mail\\Address\\AddressInterface\|string\|Traversable, mixed given\.$#'
+			message: '#^Parameter \#1 \.\.\.\$addresses of method Symfony\\Component\\Mime\\Email\:\:addTo\(\) expects string\|Symfony\\Component\\Mime\\Address, mixed given\.$#'
 			identifier: argument.type
 			count: 1
-			path: src/Log/Writer/MailFactory.php
+			path: src/Log/Handler/MailerHandlerFactory.php
+
+		-
+			message: '#^Part \$hostname \(mixed\) of encapsed string cannot be cast to string\.$#'
+			identifier: encapsedStringPart.nonString
+			count: 1
+			path: src/Log/Handler/MailerHandlerFactory.php
+
+		-
+			message: '#^Binary operation "\." between string and mixed results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: src/Log/RecordCompleter.php
+
+		-
+			message: '#^Parameter \#2 \$array of function implode expects array\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Log/RecordCompleter.php
+
+		-
+			message: '#^Binary operation "\." between ''https\://'' and mixed results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: src/Log/RecordCompleterFactory.php
 
 		-
 			message: '#^Cannot access offset ''operations'' on array\|object\.$#'
@@ -373,7 +367,49 @@ parameters:
 			path: src/Service/MessageRendererFactory.php
 
 		-
-			message: '#^Parameter \#1 \$options of class Laminas\\Mail\\Transport\\SmtpOptions constructor expects iterable\<string, string\>\|Laminas\\Stdlib\\AbstractOptions\<string\>\|null, mixed given\.$#'
+			message: '#^Cannot access offset ''host'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Service/TransportFactory.php
+
+		-
+			message: '#^Cannot access offset ''password'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Service/TransportFactory.php
+
+		-
+			message: '#^Cannot access offset ''port'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Service/TransportFactory.php
+
+		-
+			message: '#^Cannot access offset ''user'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Service/TransportFactory.php
+
+		-
+			message: '#^Parameter \#1 \$host of static method Ecodev\\Felix\\Service\\TransportFactory\:\:dsn\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Service/TransportFactory.php
+
+		-
+			message: '#^Parameter \#2 \$port of static method Ecodev\\Felix\\Service\\TransportFactory\:\:dsn\(\) expects int, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Service/TransportFactory.php
+
+		-
+			message: '#^Parameter \#3 \$user of static method Ecodev\\Felix\\Service\\TransportFactory\:\:dsn\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Service/TransportFactory.php
+
+		-
+			message: '#^Parameter \#4 \$password of static method Ecodev\\Felix\\Service\\TransportFactory\:\:dsn\(\) expects string, mixed given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Service/TransportFactory.php
@@ -475,7 +511,7 @@ parameters:
 			path: src/functions.php
 
 		-
-			message: '#^Function _log\(\) should return Laminas\\Log\\LoggerInterface but returns mixed\.$#'
+			message: '#^Function _log\(\) should return Psr\\Log\\LoggerInterface but returns mixed\.$#'
 			identifier: return.type
 			count: 1
 			path: src/functions.php
@@ -679,52 +715,10 @@ parameters:
 			path: tests/Log/EventCompleterTest.php
 
 		-
-			message: '#^Parameter \#2 \$haystack of static method PHPUnit\\Framework\\Assert\:\:assertStringContainsString\(\) expects string, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/Log/EventCompleterTest.php
-
-		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Laminas\\\\Log\\\\Logger'' and Laminas\\Log\\Logger will always evaluate to true\.$#'
-			identifier: staticMethod.alreadyNarrowedType
-			count: 2
-			path: tests/Log/LoggerFactoryTest.php
-
-		-
-			message: '#^Cannot call method getBody\(\) on mixed\.$#'
-			identifier: method.nonObject
-			count: 2
-			path: tests/Log/Writer/MailFactoryTest.php
-
-		-
-			message: '#^Cannot call method getLastMessage\(\) on mixed\.$#'
-			identifier: method.nonObject
-			count: 4
-			path: tests/Log/Writer/MailFactoryTest.php
-
-		-
-			message: '#^Cannot call method getTo\(\) on mixed\.$#'
-			identifier: method.nonObject
-			count: 1
-			path: tests/Log/Writer/MailFactoryTest.php
-
-		-
-			message: '#^Cannot call method has\(\) on mixed\.$#'
-			identifier: method.nonObject
-			count: 1
-			path: tests/Log/Writer/MailFactoryTest.php
-
-		-
-			message: '#^Parameter \#1 \$writer of method EcodevTests\\Felix\\Log\\Writer\\MailFactoryTest\:\:writeOne\(\) expects Laminas\\Log\\Writer\\WriterInterface, mixed given\.$#'
-			identifier: argument.type
-			count: 3
-			path: tests/Log/Writer/MailFactoryTest.php
-
-		-
-			message: '#^Parameter \#2 \$haystack of static method PHPUnit\\Framework\\Assert\:\:assertStringContainsString\(\) expects string, mixed given\.$#'
+			message: '#^Parameter \#2 \$haystack of static method PHPUnit\\Framework\\Assert\:\:assertStringContainsString\(\) expects string, resource\|string\|null given\.$#'
 			identifier: argument.type
 			count: 2
-			path: tests/Log/Writer/MailFactoryTest.php
+			path: tests/Log/Handler/MailerFactoryTest.php
 
 		-
 			message: '#^Method Ecodev\\Felix\\Model\\HasOtp@anonymous/tests/Model/Traits/HasOtpTest\.php\:18\:\:getLogin\(\) never returns null so it can be removed from the return type\.$#'

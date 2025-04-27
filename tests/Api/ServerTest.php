@@ -16,8 +16,8 @@ use Laminas\ConfigAggregator\ArrayProvider;
 use Laminas\ConfigAggregator\ConfigAggregator;
 use Laminas\Diactoros\CallbackStream;
 use Laminas\Diactoros\ServerRequest;
-use Laminas\Log\LoggerInterface;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
 
 class ServerTest extends TestCase
 {
@@ -75,9 +75,9 @@ class ServerTest extends TestCase
         ])]);
 
         if ($expectedLog) {
-            $this->logger->expects(self::once())->method('err')->with($expectedLog);
+            $this->logger->expects(self::once())->method('error')->with($expectedLog);
         } else {
-            $this->logger->expects(self::never())->method('err');
+            $this->logger->expects(self::never())->method('error');
         }
 
         $server = new Server($schema, false);

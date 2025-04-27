@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace EcodevTests\Felix\Log;
 
-use Ecodev\Felix\Log\EventCompleter;
+use DateTimeImmutable;
+use Ecodev\Felix\Log\RecordCompleter;
 use Ecodev\Felix\Model\CurrentUser;
 use Ecodev\Felix\Model\User;
+use Monolog\Level;
+use Monolog\LogRecord;
 use PHPUnit\Framework\TestCase;
 
 class EventCompleterTest extends TestCase
@@ -19,10 +22,19 @@ class EventCompleterTest extends TestCase
 
     public function testProcessMinimal(): void
     {
-        $completed = new EventCompleter('https://example.com');
-        $actual = $completed->process([]);
+        $completed = new RecordCompleter('https://example.com');
+        $completedRecord = $completed->__invoke(
+            new LogRecord(
+                new DateTimeImmutable(),
+                '',
+                Level::Error,
+                'some message',
+            )
+        );
+        $actual = $completedRecord->extra;
+
         self::assertNull($actual['creator_id']);
-        self::assertNull($actual['login']);
+        self::assertSame('<anonymous>', $actual['login']);
         self::assertIsString($actual['url']);
         self::assertIsString($actual['referer']);
         self::assertIsString($actual['request']);
@@ -31,7 +43,7 @@ class EventCompleterTest extends TestCase
 
     public function testProcess(): void
     {
-        $user = self::createMock(User::class);
+        $user = $this->createMock(User::class);
         $user->expects(self::once())
             ->method('getId')
             ->willReturn(123);
@@ -48,26 +60,30 @@ class EventCompleterTest extends TestCase
                 'other' => [
                     'password' => 'sensitive',
                     'passwordConfirmation' => 'sensitive',
-                    'npass2' => [123],
                     'foo' => 123,
                 ],
             ],
         ];
 
-        $completed = new EventCompleter('https://example.com');
-        $actual = $completed->process([
-            'message' => '',
-            'extra' => [
-                'errno' => 1,
-                'password' => 'sensitive',
-            ],
-        ]);
+        $completed = new RecordCompleter('https://example.com');
+        $completedRecord = $completed->__invoke(
+            new LogRecord(
+                new DateTimeImmutable(),
+                '',
+                Level::Error,
+                'some message',
+                [
+                    'errno' => 1,
+                    'password' => 'sensitive',
+                ]
+            )
+        );
+        $actual = $completedRecord->extra;
 
-        self::assertStringContainsString('Stacktrace:', $actual['message']);
         self::assertSame([
             'errno' => 1,
             'password' => '***REDACTED***',
-        ], $actual['extra']);
+        ], $completedRecord->context);
         self::assertSame(123, $actual['creator_id']);
         self::assertSame('my login', $actual['login']);
         self::assertIsString($actual['url']);
@@ -78,7 +94,6 @@ class EventCompleterTest extends TestCase
                 'other' => [
                     'password' => '***REDACTED***',
                     'passwordConfirmation' => '***REDACTED***',
-                    'npass2' => '***REDACTED***',
                     'foo' => 123,
                 ],
             ],

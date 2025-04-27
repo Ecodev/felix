@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace EcodevTests\Felix\Log;
 
+use Ecodev\Felix\Log\Handler\DbHandler;
+use Ecodev\Felix\Log\Handler\MailerHandler;
 use Ecodev\Felix\Log\LoggerFactory;
-use Ecodev\Felix\Log\Writer\Db;
-use Ecodev\Felix\Log\Writer\Mail;
-use Laminas\Log\Logger;
 use Laminas\ServiceManager\ServiceManager;
+use Monolog\Logger;
 use PHPUnit\Framework\TestCase;
 
 class LoggerFactoryTest extends TestCase
@@ -20,38 +20,36 @@ class LoggerFactoryTest extends TestCase
 
     protected function tearDown(): void
     {
-        Logger::unregisterErrorHandler();
-        Logger::unregisterExceptionHandler();
         shell_exec('rm -rf logs/');
     }
 
-    public function testWithMailWriter(): void
+    public function testWithMailHandler(): void
     {
         $container = new ServiceManager([
             'factories' => [
-                Db::class => fn () => self::createMock(Db::class),
-                Mail::class => fn () => self::createMock(Mail::class),
+                DbHandler::class => fn () => $this->createMock(DbHandler::class),
+                MailerHandler::class => fn () => $this->createMock(MailerHandler::class),
             ],
         ]);
 
         $factory = new LoggerFactory();
         $actual = $factory($container, '');
         self::assertInstanceOf(Logger::class, $actual);
-        self::assertCount(3, $actual->getWriters());
+        self::assertCount(3, $actual->getHandlers());
     }
 
-    public function testWithoutMailWriter(): void
+    public function testWithoutMailHandler(): void
     {
         $container = new ServiceManager([
             'factories' => [
-                Db::class => fn () => self::createMock(Db::class),
-                Mail::class => fn () => null,
+                DbHandler::class => fn () => $this->createMock(DbHandler::class),
+                MailerHandler::class => fn () => null,
             ],
         ]);
 
         $factory = new LoggerFactory();
         $actual = $factory($container, '');
         self::assertInstanceOf(Logger::class, $actual);
-        self::assertCount(2, $actual->getWriters());
+        self::assertCount(2, $actual->getHandlers());
     }
 }

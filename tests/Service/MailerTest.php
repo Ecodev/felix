@@ -10,9 +10,7 @@ use Ecodev\Felix\Model\Message;
 use Ecodev\Felix\Model\User;
 use Ecodev\Felix\Repository\MessageRepository;
 use Ecodev\Felix\Service\Mailer;
-use Laminas\Mail;
-use Laminas\Mail\Address;
-use Laminas\Mail\Transport\TransportInterface;
+use EcodevTests\Felix\Log\InMemoryTransport;
 use PHPUnit\Framework\TestCase;
 
 final class MailerTest extends TestCase
@@ -21,7 +19,7 @@ final class MailerTest extends TestCase
     {
         /** @var EntityManager $entityManager */
         $entityManager = $this->createMock(EntityManager::class);
-        $transport = $this->createMockTransport();
+        $transport = new InMemoryTransport();
 
         $messageRepository = new class() implements MessageRepository {
             public function getAllMessageToSend(): array
@@ -41,43 +39,6 @@ final class MailerTest extends TestCase
         );
 
         return $mailer;
-    }
-
-    private function createMockTransport(): TransportInterface
-    {
-        return new class() implements TransportInterface {
-            public function send(Mail\Message $message): void
-            {
-                // Purposefully place current cursor at the end of list
-                foreach ($message->getFrom() as $a) {
-                    $a->getEmail();
-                }
-
-                foreach ($message->getTo() as $a) {
-                    $a->getEmail();
-                }
-            }
-        };
-    }
-
-    public function testMockTransportHasCursorAtEndOfList(): void
-    {
-        $message = new Mail\Message();
-        $message->setFrom('alice@exampl.com');
-        $message->setTo('bob@exampl.com');
-
-        // New message has current cursor on first element
-        self::assertInstanceOf(Address::class, $message->getFrom()->current());
-        self::assertInstanceOf(Address::class, $message->getTo()->current());
-
-        $transport = $this->createMockTransport();
-        $transport->send($message);
-
-        // After transport, message has current cursor on end of list
-        // @phpstan-ignore-next-line
-        self::assertFalse($message->getFrom()->current());
-        // @phpstan-ignore-next-line
-        self::assertFalse($message->getTo()->current());
     }
 
     public function testSendMessage(): void

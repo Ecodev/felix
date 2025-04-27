@@ -1,0 +1,460 @@
+[2025-04-25T15:30:13.938618+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":18} []
+[2025-04-25T15:30:13.986586+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":18} []
+[2025-04-25T15:30:49.861729+09:00] app.DEBUG: _____________________________________ [] []
+[2025-04-25T15:30:49.861882+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":19} []
+[2025-04-25T15:40:57.861792+09:00] app.DEBUG: _____________________________________ [] []
+[2025-04-25T15:40:57.862163+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":20} []
+[2025-04-25T15:45:31.784283+09:00] app.DEBUG: _____________________________________ [] []
+[2025-04-25T15:45:31.784645+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":34} []
+[2025-04-25T15:45:41.139117+09:00] app.DEBUG: _____________________________________ [] []
+[2025-04-25T15:45:41.139342+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":34} []
+[2025-04-25T15:45:55.126254+09:00] app.DEBUG: _____________________________________ [] []
+[2025-04-25T15:45:55.126470+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":34} []
+[2025-04-25T15:45:55.182856+09:00] app.DEBUG: _____________________________________ [] []
+[2025-04-25T15:45:55.183048+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":34} []
+[2025-04-25T15:46:45.117896+09:00] app.DEBUG: _____________________________________ [] []
+[2025-04-25T15:46:45.119133+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":37} []
+[2025-04-25T15:48:46.402775+09:00] app.DEBUG: _____________________________________ [] []
+[2025-04-25T15:48:46.406545+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":39} []
+[2025-04-25T15:59:18.267362+09:00] app.DEBUG: _____________________________________ [] []
+[2025-04-25T15:59:18.325247+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":52} []
+[2025-04-25T15:59:33.587808+09:00] app.DEBUG: _____________________________________ [] []
+[2025-04-25T15:59:33.634548+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":52} []
+[2025-04-25T15:59:43.732857+09:00] app.DEBUG: _____________________________________ [] []
+[2025-04-25T15:59:43.784671+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":52} []
+[2025-04-25T16:01:13.540191+09:00] app.DEBUG: _____________________________________ ["asd"] []
+[2025-04-25T16:01:13.588313+09:00] app.WARNING: E_WARNING: Undefined variable $a ["asd"] []
+[2025-04-25T16:01:25.143930+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:01:25.191582+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":52} ["asd"]
+[2025-04-25T16:02:04.569210+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:02:04.618682+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":52} ["asd"]
+[2025-04-25T16:04:43.377704+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:04:43.423804+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":52} ["asd"]
+[2025-04-25T16:14:59.134396+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:14:59.180234+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":54} ["asd"]
+[2025-04-25T16:15:10.111702+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:15:10.156525+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":54} ["asd"]
+[2025-04-25T16:15:28.720179+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:15:28.764647+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":54} ["asd"]
+[2025-04-25T16:15:35.335281+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:15:35.380571+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":54} ["asd"]
+[2025-04-25T16:16:07.952348+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:16:07.997646+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":54} ["asd"]
+[2025-04-25T16:16:08.094963+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:16:08.139455+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":54} ["asd"]
+[2025-04-25T16:16:17.128494+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:16:17.173494+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":54} ["asd"]
+[2025-04-25T16:16:40.623330+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:16:40.667481+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":54} ["asd"]
+[2025-04-25T16:16:53.078345+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:16:53.124677+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":65} ["asd"]
+[2025-04-25T16:17:06.064735+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:17:06.115259+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":65} ["asd"]
+[2025-04-25T16:17:22.863496+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:17:22.908567+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":65} ["asd"]
+[2025-04-25T16:17:22.951758+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 67 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:67)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T16:24:09.898779+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:24:09.943748+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T16:24:09.987123+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T16:24:56.662009+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:24:56.708585+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T16:24:56.752861+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T16:26:34.277409+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:26:34.330674+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T16:26:34.374820+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T16:27:11.458271+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:27:11.505738+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T16:27:11.548987+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T16:33:06.508699+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:33:06.555995+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T16:33:06.600203+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T16:33:06.738622+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:33:06.785029+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T16:33:06.830647+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T16:33:06.967485+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:33:07.016048+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T16:33:07.062269+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T16:37:27.814595+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:37:27.860962+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T16:37:27.907206+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T16:37:28.125753+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:37:28.173974+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T16:37:28.218651+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T16:37:34.393743+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:37:34.439538+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T16:37:34.483242+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T16:37:34.598400+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:37:34.643794+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T16:37:34.690000+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T16:40:00.408903+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:40:00.454742+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T16:40:00.498397+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T16:40:00.600482+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:40:00.646419+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T16:40:00.692995+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T16:40:11.310046+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:40:11.354454+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T16:40:11.398026+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T16:40:21.755359+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:40:21.805543+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T16:40:21.849249+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T16:40:21.961805+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:40:22.006811+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T16:40:22.052316+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T16:48:04.396627+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:48:04.441596+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T16:48:04.485300+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T16:48:29.955896+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:48:30.005169+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T16:48:30.049173+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T16:53:23.830225+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:53:23.876115+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T16:53:23.924643+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T16:53:24.046874+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:53:24.093258+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T16:53:24.138248+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T16:53:24.254185+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:53:24.300176+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T16:53:24.343688+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T16:53:39.916199+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:53:39.961934+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T16:53:40.006142+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T16:53:45.675065+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:53:45.720556+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T16:53:45.765817+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T16:55:11.490414+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:55:11.536806+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T16:55:11.580806+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T16:55:26.874023+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:55:26.940904+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T16:55:26.988767+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T16:55:28.489195+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:55:28.535873+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T16:55:28.580691+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T16:55:28.699656+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:55:28.746940+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T16:55:28.792180+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T16:55:28.903757+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:55:28.950884+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T16:55:28.993627+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T16:55:32.360959+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:55:32.405744+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T16:55:32.448988+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T16:55:43.116285+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:55:43.163926+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T16:55:43.208640+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T16:55:43.313642+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:55:43.359801+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T16:55:43.407285+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T16:56:00.298837+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T16:56:00.343799+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T16:56:00.386881+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T17:02:51.427640+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T17:02:51.473502+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T17:02:51.517780+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T17:05:05.663831+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T17:05:05.709722+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T17:05:05.753646+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T17:08:00.031926+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T17:08:00.077544+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T17:08:00.121399+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T17:08:07.813641+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T17:08:07.862495+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T17:08:07.906337+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T17:08:08.025923+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T17:08:08.070753+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T17:08:08.114857+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T17:09:19.309693+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T17:09:19.355532+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T17:09:19.400205+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T17:11:39.841714+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T17:11:39.888261+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T17:11:39.932216+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T17:11:40.062981+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T17:11:40.110540+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T17:11:40.156399+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T17:11:49.883638+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T17:11:49.931053+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T17:11:49.975109+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T17:11:54.631865+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T17:11:54.680734+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T17:11:54.724167+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T17:12:01.457665+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T17:12:01.506017+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T17:12:01.551047+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T17:12:06.694005+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T17:12:06.739992+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T17:12:06.782599+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T17:12:47.737709+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T17:12:47.784310+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T17:12:47.830297+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T17:12:49.546160+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T17:12:49.595714+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T17:12:49.640976+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T17:18:22.407964+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T17:18:22.458093+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T17:18:22.502433+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T17:18:22.617860+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T17:18:22.670278+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T17:18:22.715470+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T17:18:22.838477+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T17:18:22.888890+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T17:18:22.933347+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T17:21:47.771422+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T17:21:47.816494+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T17:21:47.861210+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T17:22:53.338754+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T17:22:53.386798+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T17:22:53.430104+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T17:24:33.563526+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T17:24:33.608968+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T17:24:33.654230+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T17:27:11.395873+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T17:27:11.441454+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T17:27:11.485254+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T17:27:46.979746+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T17:27:47.025555+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T17:27:47.071605+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T17:28:15.525711+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T17:28:15.572212+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T17:28:15.617267+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T17:28:23.285885+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T17:28:23.333163+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T17:28:23.378338+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T17:28:29.459449+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T17:28:29.504590+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T17:28:29.549613+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T17:28:41.085011+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T17:28:41.131995+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T17:28:41.177431+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T17:31:00.725294+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T17:31:00.770803+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T17:31:00.815523+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T17:32:05.087260+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T17:32:05.133650+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T17:32:05.176837+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T17:32:07.088886+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T17:32:07.133688+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T17:32:07.176624+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T17:34:39.604440+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T17:34:39.651247+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T17:34:39.696882+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T17:34:47.995620+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T17:34:48.040707+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T17:34:48.084184+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T17:36:29.896396+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T17:36:29.941861+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T17:36:29.985159+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T17:36:33.483929+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T17:36:33.528365+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T17:36:33.572139+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T17:37:59.168183+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T17:37:59.216950+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T17:37:59.261143+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]
+[2025-04-25T17:38:09.179833+09:00] app.DEBUG: _____________________________________ [] ["asd"]
+[2025-04-25T17:38:09.224448+09:00] app.WARNING: E_WARNING: Undefined variable $a {"code":2,"message":"Undefined variable $a","file":"/sites/felix/t.php","line":50} ["asd"]
+[2025-04-25T17:38:09.268669+09:00] app.ERROR: Uncaught Exception Exception: "asd" at /sites/felix/t.php line 52 {"exception":"[object] (Exception(code: 0): asd at /sites/felix/t.php:52)
+[stacktrace]
+#0 {main}
+"} ["asd"]

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Ecodev\Felix\Api;
 
-use Ecodev\Felix\Log\Filter\NoMailLogging;
+use Ecodev\Felix\Log\Handler\NoMailLogging;
 
 /**
  * Exception that will show its message to end-user even on production server, but

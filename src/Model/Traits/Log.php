@@ -30,11 +30,11 @@ trait Log
     private string $ip = '';
 
     /**
-     * The statistics data.
+     * The data submitted when calling `_log()->info()`.
      */
     #[ORM\Column(type: 'json', options: ['default' => '{}'])]
     #[API\Exclude]
-    private array $extra = [];
+    private array $context = [];
 
     /**
      * Set priority.
@@ -116,15 +116,18 @@ trait Log
         return $this->ip;
     }
 
+    /**
+     * The data submitted when calling `_log()->info()`.
+     */
     #[API\Exclude]
-    public function getExtra(): array
+    public function getContext(): array
     {
-        return $this->extra;
+        return $this->context;
     }
 
     #[API\Exclude]
-    public function setExtra(array $extra): void
+    public function setContext(array $context): void
     {
-        $this->extra = $extra;
+        $this->context = $context;
     }
 }

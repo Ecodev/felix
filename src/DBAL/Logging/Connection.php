@@ -16,6 +16,11 @@ final class Connection extends AbstractConnectionMiddleware
         parent::__construct($connection);
     }
 
+    public function __destruct()
+    {
+        _log()->debug('Disconnecting');
+    }
+
     public function prepare(string $sql): DriverStatement
     {
         return new Statement(parent::prepare($sql), $sql);

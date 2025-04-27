@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Ecodev\Felix\Log;
 
-use Ecodev\Felix\Log\Writer\Db;
-use Ecodev\Felix\Log\Writer\Mail;
-use Laminas\Log\Logger;
-use Laminas\Log\Writer\Stream;
+use Ecodev\Felix\Log\Handler\DbHandler;
+use Ecodev\Felix\Log\Handler\MailerHandler;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Monolog\ErrorHandler;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 use Psr\Container\ContainerInterface;
+use Psr\Log\LoggerInterface;
 
 final class LoggerFactory implements FactoryInterface
 {
@@ -18,31 +20,28 @@ final class LoggerFactory implements FactoryInterface
     /**
      * @param string $requestedName
      */
-    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null): Logger
+    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null): LoggerInterface
     {
         if (!$this->logger) {
-            $this->logger = new Logger();
+            $this->logger = new Logger('app');
 
             // Log to file
-            $fileWriter = new Stream('logs/all.log');
-            $this->logger->addWriter($fileWriter);
+            $this->logger->pushHandler(new StreamHandler('logs/all.log'));
 
             // Log to DB
-            /** @var Db $dbWriter */
-            $dbWriter = $container->get(Db::class);
-            $dbWriter->addFilter(Logger::INFO);
-            $this->logger->addWriter($dbWriter);
+            /** @var DbHandler $dbHandler */
+            $dbHandler = $container->get(DbHandler::class);
+            $this->logger->pushHandler($dbHandler);
 
             // Maybe log to emails
-            /** @var null|Mail $mailWriter */
-            $mailWriter = $container->get(Mail::class);
-            if ($mailWriter) {
-                $this->logger->addWriter($mailWriter);
+            /** @var null|MailerHandler $mailHandler */
+            $mailHandler = $container->get(MailerHandler::class);
+            if ($mailHandler) {
+                $this->logger->pushHandler($mailHandler);
             }
 
-            // Register to log all kind of PHP errors
-            Logger::registerErrorHandler($this->logger, true);
-            Logger::registerFatalErrorShutdownFunction($this->logger);
+            // Register to log all kinds of PHP errors
+            ErrorHandler::register($this->logger);
         }
 
         return $this->logger;

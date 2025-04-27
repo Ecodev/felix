@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace Ecodev\Felix\Service;
 
-use Laminas\Mail\Transport\InMemory;
-use Laminas\Mail\Transport\Smtp;
-use Laminas\Mail\Transport\SmtpOptions;
-use Laminas\Mail\Transport\TransportInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Psr\Container\ContainerInterface;
+use Symfony\Component\Mailer\Transport;
+use Symfony\Component\Mailer\Transport\TransportInterface;
 
 final class TransportFactory implements FactoryInterface
 {
@@ -26,13 +24,30 @@ final class TransportFactory implements FactoryInterface
         // Setup SMTP transport, or a mock one
         $configSmtp = $config['smtp'] ?? null;
         if ($configSmtp) {
-            $transport = new Smtp();
-            $options = new SmtpOptions($config['smtp']);
-            $transport->setOptions($options);
+            $dsn = self::dsn(
+                $configSmtp['host'],
+                $configSmtp['port'],
+                $configSmtp['user'],
+                $configSmtp['password'],
+            );
         } else {
-            $transport = new InMemory();
+            $dsn = 'null://null';
         }
 
+        $transport = Transport::fromDsn($dsn);
+
         return $transport;
+    }
+
+    public static function dsn(string $host, int $port, string $user, string $password, ?bool $isTls = null): string
+    {
+        if ($isTls === null) {
+            $isTls = $port !== 25;
+        }
+
+        $scheme = $isTls ? 'smtp' : 'smtps';
+        $credentials = $user && $password ? "$user:$password@" : '';
+
+        return "$scheme://$credentials$host:$port";
     }
 }

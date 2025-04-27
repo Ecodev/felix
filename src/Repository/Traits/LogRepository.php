@@ -9,7 +9,8 @@ use Doctrine\DBAL\ArrayParameterType;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
 use Ecodev\Felix\Repository\LogRepository as LogRepositoryInterface;
-use Laminas\Log\Logger;
+use Monolog\LogRecord;
+use Psr\Log\LogLevel;
 
 trait LogRepository
 {
@@ -26,13 +27,21 @@ trait LogRepository
     /**
      * This should NOT be called directly, instead use `_log()` to log stuff.
      */
-    public function log(array $event): void
+    public function log(LogRecord $record): void
     {
-        $event['creation_date'] = Chronos::instance($event['timestamp'])->toDateTimeString();
-        $event['extra'] = json_encode($event['extra'], JSON_THROW_ON_ERROR);
-        unset($event['timestamp'], $event['priorityName'], $event['login']);
+        $data = [
+            'level' => $record->level->value,
+            'message' => $record->message,
+            'creation_date' => Chronos::instance($record->datetime)->toDateTimeString(),
+            'creator_id' => $record->extra['creator_id'] ?? null,
+            'url' => $record->extra['url'] ?? '',
+            'referer' => $record->extra['referer'] ?? '',
+            'request' => $record->extra['request'] ?? '',
+            'ip' => $record->extra['ip'] ?? '',
+            'context' => json_encode($record->context, JSON_THROW_ON_ERROR),
+        ];
 
-        $this->getEntityManager()->getConnection()->insert('log', $event);
+        $this->getEntityManager()->getConnection()->insert('log', $data);
     }
 
     /**
@@ -70,7 +79,7 @@ trait LogRepository
             ->select('message')
             ->from('log')
             ->andWhere('priority = :priority')
-            ->setParameter('priority', Logger::INFO)
+            ->setParameter('priority', LogLevel::INFO)
             ->andWhere('message IN (:message)')
             ->setParameter('message', [$success, $failed], ArrayParameterType::STRING)
             ->andWhere('creation_date > DATE_SUB(NOW(), INTERVAL 30 MINUTE)')
@@ -94,7 +103,7 @@ trait LogRepository
 
     /**
      * Delete log entries which are errors/warnings and older than two months
-     * We always keep Logger::INFO level because we use it for statistics.
+     * We always keep LogLevel::INFO level because we use it for statistics.
      *
      * @return int the count deleted logs
      */
@@ -104,7 +113,7 @@ trait LogRepository
         $query = $connection->createQueryBuilder()
             ->delete('log')
             ->andWhere('log.priority != :priority OR message IN (:message)')
-            ->setParameter('priority', Logger::INFO)
+            ->setParameter('priority', LogLevel::INFO)
             ->setParameter('message', [
                 LogRepositoryInterface::LOGIN,
                 LogRepositoryInterface::LOGIN_FAILED,
