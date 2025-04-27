@@ -23,31 +23,39 @@ final class TransportFactory implements FactoryInterface
 
         // Setup SMTP transport, or a mock one
         $configSmtp = $config['smtp'] ?? null;
-        if ($configSmtp) {
-            $dsn = self::dsn(
-                $configSmtp['host'],
-                $configSmtp['port'],
-                $configSmtp['user'],
-                $configSmtp['password'],
-            );
-        } else {
-            $dsn = 'null://null';
-        }
+        $dsn = self::dsn($configSmtp);
 
         $transport = Transport::fromDsn($dsn);
 
         return $transport;
     }
 
-    public static function dsn(string $host, int $port, string $user, string $password, ?bool $isTls = null): string
+    /**
+     * Return a DSN for Symfony Mailer from given parameters. If input is empty, then it will default to a DSN for a NullTransport.
+     *
+     * @param null|array{host?: string, port?: int, user?: ?string, password?: ?string, connection_config?: array{username?: ?string, password?: ?string}}|string $configSmtp
+     */
+    public static function dsn(null|array|string $configSmtp): string
     {
-        if ($isTls === null) {
-            $isTls = $port !== 25;
+        if (!$configSmtp) {
+            return 'null://null';
         }
 
-        $scheme = $isTls ? 'smtp' : 'smtps';
+        if (is_string($configSmtp)) {
+            return $configSmtp;
+        }
+
+        $host = $configSmtp['host'] ?? '';
+        $port = $configSmtp['port'] ?? null ?: 587;
+        $user = $configSmtp['user'] ?? $configSmtp['connection_config']['username'] ?? '';
+        $password = $configSmtp['password'] ?? $configSmtp['connection_config']['password'] ?? '';
+
+        if (!$host) {
+            return 'null://null';
+        }
+
         $credentials = $user && $password ? "$user:$password@" : '';
 
-        return "$scheme://$credentials$host:$port";
+        return "smtp://$credentials$host:$port";
     }
 }

@@ -367,49 +367,7 @@ parameters:
 			path: src/Service/MessageRendererFactory.php
 
 		-
-			message: '#^Cannot access offset ''host'' on mixed\.$#'
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 1
-			path: src/Service/TransportFactory.php
-
-		-
-			message: '#^Cannot access offset ''password'' on mixed\.$#'
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 1
-			path: src/Service/TransportFactory.php
-
-		-
-			message: '#^Cannot access offset ''port'' on mixed\.$#'
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 1
-			path: src/Service/TransportFactory.php
-
-		-
-			message: '#^Cannot access offset ''user'' on mixed\.$#'
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 1
-			path: src/Service/TransportFactory.php
-
-		-
-			message: '#^Parameter \#1 \$host of static method Ecodev\\Felix\\Service\\TransportFactory\:\:dsn\(\) expects string, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Service/TransportFactory.php
-
-		-
-			message: '#^Parameter \#2 \$port of static method Ecodev\\Felix\\Service\\TransportFactory\:\:dsn\(\) expects int, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Service/TransportFactory.php
-
-		-
-			message: '#^Parameter \#3 \$user of static method Ecodev\\Felix\\Service\\TransportFactory\:\:dsn\(\) expects string, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Service/TransportFactory.php
-
-		-
-			message: '#^Parameter \#4 \$password of static method Ecodev\\Felix\\Service\\TransportFactory\:\:dsn\(\) expects string, mixed given\.$#'
+			message: '#^Parameter \#1 \$configSmtp of static method Ecodev\\Felix\\Service\\TransportFactory\:\:dsn\(\) expects array\{host\?\: string, port\?\: int, user\?\: string\|null, password\?\: string\|null, connection_config\?\: array\{username\?\: string\|null, password\?\: string\|null\}\}\|string\|null, mixed given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Service/TransportFactory.php
@@ -785,6 +743,12 @@ parameters:
 			identifier: varTag.nativeType
 			count: 1
 			path: tests/Service/MailerTest.php
+
+		-
+			message: '#^Parameter \#1 \$configSmtp of static method Ecodev\\Felix\\Service\\TransportFactory\:\:dsn\(\) expects array\{host\?\: string, port\?\: int, user\?\: string\|null, password\?\: string\|null, connection_config\?\: array\{username\?\: string\|null, password\?\: string\|null\}\}\|string\|null, array\|string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/Service/TransportFactoryTest.php
 
 		-
 			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertNull\(\) with null will always evaluate to true\.$#'
