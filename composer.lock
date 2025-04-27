@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4a9ad39d493ba4b2b79c6250eadba192",
+    "content-hash": "3dc69a89f057c9764078f68f524f1613",
     "packages": [
         {
             "name": "cakephp/chronos",
@@ -986,16 +986,16 @@
         },
         {
             "name": "ecodev/graphql-doctrine",
-            "version": "dev-doctrine3",
+            "version": "11.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Ecodev/graphql-doctrine.git",
-                "reference": "8cd6fefd7f079256a39e686afa2543d184c2baae"
+                "reference": "9ce071d70edb37b0119c12c1c8c1d1e8cf58c3b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Ecodev/graphql-doctrine/zipball/8cd6fefd7f079256a39e686afa2543d184c2baae",
-                "reference": "8cd6fefd7f079256a39e686afa2543d184c2baae",
+                "url": "https://api.github.com/repos/Ecodev/graphql-doctrine/zipball/9ce071d70edb37b0119c12c1c8c1d1e8cf58c3b2",
+                "reference": "9ce071d70edb37b0119c12c1c8c1d1e8cf58c3b2",
                 "shasum": ""
             },
             "require": {
@@ -1030,9 +1030,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Ecodev/graphql-doctrine/issues",
-                "source": "https://github.com/Ecodev/graphql-doctrine/tree/doctrine3"
+                "source": "https://github.com/Ecodev/graphql-doctrine/tree/11.0.0"
             },
-            "time": "2025-04-22T03:32:41+00:00"
+            "time": "2025-04-24T09:22:42+00:00"
         },
         {
             "name": "egulias/email-validator",
@@ -7831,7 +7831,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "ecodev/graphql-doctrine": 20,
         "friendsofphp/php-cs-fixer": 0,
         "laminas/laminas-config-aggregator": 0,
         "laminas/laminas-i18n": 0,

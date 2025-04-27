@@ -47,7 +47,7 @@
         "cakephp/chronos": "^3.1",
         "doctrine/dbal": "^4.2",
         "doctrine/migrations": "^3.9",
-        "ecodev/graphql-doctrine": "dev-doctrine3",
+        "ecodev/graphql-doctrine": "^11.0",
         "imagine/imagine": "^1.5",
         "laminas/laminas-diactoros": "^3.5",
         "laminas/laminas-permissions-acl": "^2.17",
