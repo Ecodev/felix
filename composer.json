@@ -58,7 +58,7 @@
         "moneyphp/money": "^4.7",
         "monolog/monolog": "^3.9",
         "spomky-labs/otphp": "^11.3",
-        "symfony/cache": "^5.4 || ^6.4",
+        "symfony/cache": "^7.2",
         "symfony/mailer": "^7.2"
     },
     "require-dev": {
