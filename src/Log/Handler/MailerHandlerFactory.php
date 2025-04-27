@@ -29,7 +29,7 @@ final class MailerHandlerFactory implements FactoryInterface
         $emailFrom = $config['email']['from'];
 
         $email = new Email();
-        $email->subject("Logs on $hostname %level_name%: %extra.login%: %message%");
+        $email->subject("%level_name% on $hostname: %extra.login%: %message%");
         $email->addFrom(...(array) $emailFrom);
         $email->addTo(...(array) $emailsTo);
 

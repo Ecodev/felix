@@ -676,7 +676,7 @@ parameters:
 			message: '#^Parameter \#2 \$haystack of static method PHPUnit\\Framework\\Assert\:\:assertStringContainsString\(\) expects string, resource\|string\|null given\.$#'
 			identifier: argument.type
 			count: 2
-			path: tests/Log/Handler/MailerFactoryTest.php
+			path: tests/Log/Handler/MailerHandlerFactoryTest.php
 
 		-
 			message: '#^Method Ecodev\\Felix\\Model\\HasOtp@anonymous/tests/Model/Traits/HasOtpTest\.php\:18\:\:getLogin\(\) never returns null so it can be removed from the return type\.$#'
