@@ -20,7 +20,7 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\Mailer\Transport\TransportInterface;
 use Throwable;
 
-class MailerFactoryTest extends TestCase
+class MailerHandlerFactoryTest extends TestCase
 {
     public function testReturnNullIfNoEmailsConfiguredAtAll(): void
     {
