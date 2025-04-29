@@ -14,6 +14,15 @@ class ConfigProvider
                 'keys' => [],
                 'allowedIps' => [],
             ],
+            'logSql' => false,
+            'doctrine' => [
+                'configuration' => [
+                    'orm_default' => [
+                        // Log all SQL queries from Doctrine (to logs/all.log)
+                        'middlewares' => [DBAL\Logging\Middleware::class],
+                    ],
+                ],
+            ],
             'dependencies' => [
                 'invokables' => [
                 ],

@@ -15,8 +15,12 @@ class MiddlewareFactory implements FactoryInterface
      */
     public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null): Middleware
     {
+        /** @var array $config */
+        $config = $container->get('config');
+        $logSql = $config['logSql'];
+
         $dbHandler = $container->get(DbHandler::class);
 
-        return new Middleware($dbHandler);
+        return new Middleware($dbHandler, $logSql);
     }
 }

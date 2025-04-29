@@ -109,6 +109,12 @@ parameters:
 			path: src/DBAL/Logging/MiddlewareFactory.php
 
 		-
+			message: '#^Parameter \#2 \$logSql of class Ecodev\\Felix\\DBAL\\Logging\\Middleware constructor expects bool, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/DBAL/Logging/MiddlewareFactory.php
+
+		-
 			message: '#^Binary operation "\." between ''Invalid \\'''' and mixed results in an error\.$#'
 			identifier: binaryOp.invalid
 			count: 2

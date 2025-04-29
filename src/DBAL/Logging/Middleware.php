@@ -13,12 +13,14 @@ use Ecodev\Felix\Log\Handler\DbHandler;
  */
 final class Middleware implements MiddlewareInterface
 {
-    public function __construct(private readonly DbHandler $dbHandler)
-    {
+    public function __construct(
+        private readonly DbHandler $dbHandler,
+        private readonly bool $logSql,
+    ) {
     }
 
     public function wrap(DriverInterface $driver): DriverInterface
     {
-        return new Driver($driver, $this->dbHandler);
+        return new Driver($driver, $this->dbHandler, $this->logSql);
     }
 }
