@@ -90,7 +90,7 @@ final class Utility
      *
      * The values are quoted and then returned as a comma-separated string, so:
      *
-     * ```php
+     * ```
      * Utility::quoteArray(['foo bar', 2]); // "'foo bar', '2'"
      * ```
      *

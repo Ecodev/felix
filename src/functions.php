@@ -77,7 +77,7 @@ function w(): never
  *
  * If replacements are given, they will be replaced after translation:
  *
- * ```php
+ * ```
  * _tr('Hello %my-name%', ['my-name' => 'John']); // Bonjour John
  * ```
  *

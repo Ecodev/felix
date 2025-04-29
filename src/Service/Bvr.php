@@ -11,7 +11,7 @@ use Exception;
  *
  * Typically, usage would one of the following:
  *
- * ```php
+ * ```
  * <?php
  *
  * // Provided by your bank
