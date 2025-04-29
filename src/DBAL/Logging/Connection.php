@@ -28,14 +28,14 @@ final class Connection extends AbstractConnectionMiddleware
 
     public function query(string $sql): Result
     {
-        _log()->debug('Executing query: {sql}', ['sql' => $sql]);
+        _log()->debug($sql);
 
         return parent::query($sql);
     }
 
     public function exec(string $sql): int|string
     {
-        _log()->debug('Executing statement: {sql}', ['sql' => $sql]);
+        _log()->debug($sql);
 
         return parent::exec($sql);
     }
