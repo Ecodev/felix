@@ -45,10 +45,10 @@ final class TransportFactory implements FactoryInterface
             return $configSmtp;
         }
 
-        $host = $configSmtp['host'] ?? '';
+        $host = urlencode($configSmtp['host'] ?? '');
         $port = $configSmtp['port'] ?? null ?: 587;
-        $user = $configSmtp['user'] ?? $configSmtp['connection_config']['username'] ?? '';
-        $password = $configSmtp['password'] ?? $configSmtp['connection_config']['password'] ?? '';
+        $user = urlencode($configSmtp['user'] ?? $configSmtp['connection_config']['username'] ?? '');
+        $password = urlencode($configSmtp['password'] ?? $configSmtp['connection_config']['password'] ?? '');
 
         if (!$host) {
             return 'null://null';

@@ -15,6 +15,8 @@ class TransportFactoryTest extends TestCase
     public function testDsn(null|array|string $input, string $expected): void
     {
         $actual = TransportFactory::dsn($input);
+
+        self::assertIsArray(parse_url($expected), 'resulting value must be parseable');
         self::assertSame($expected, $actual);
     }
 
@@ -31,5 +33,16 @@ class TransportFactoryTest extends TestCase
         yield 'custom port' => [['host' => 'my-host', 'port' => '123'], 'smtp://my-host:123'];
         yield 'new style credentials' => [['host' => 'my-host', 'port' => '123', 'user' => 'my-user', 'password' => 'my-pass'], 'smtp://my-user:my-pass@my-host:123'];
         yield 'okpilot style credentials' => [['host' => 'my-host', 'port' => '123', 'connection_config' => ['username' => 'my-user', 'password' => 'my-pass']], 'smtp://my-user:my-pass@my-host:123'];
+        yield 'escape' => [
+            [
+                'host' => 'smtp.example.com',
+                'port' => 465,
+                'connection_config' => [
+                    'username' => 'john@example.com',
+                    'password' => 'foo#:@/',
+                    'ssl' => 'ssl',
+                ],
+            ],
+            'smtp://john%40example.com:foo%23%3A%40%2F@smtp.example.com:465'];
     }
 }
