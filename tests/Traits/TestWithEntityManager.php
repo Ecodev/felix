@@ -8,6 +8,7 @@ use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\UnderscoreNamingStrategy;
 use Doctrine\ORM\ORMSetup;
+use Ecodev\Felix\ORM\Query\Filter\AclFilter;
 use Ecodev\Felix\ORM\Query\NativeIn;
 use Laminas\ServiceManager\ServiceManager;
 
@@ -24,6 +25,7 @@ trait TestWithEntityManager
         $config = ORMSetup::createAttributeMetadataConfiguration([__DIR__ . '/Blog/Model'], true);
         $config->addCustomNumericFunction('native_in', NativeIn::class);
         $config->setNamingStrategy(new UnderscoreNamingStrategy(CASE_LOWER));
+        $config->addFilter(AclFilter::class, AclFilter::class);
 
         $connection = DriverManager::getConnection([
             'wrapperClass' => MariaDbQuotingConnection::class,

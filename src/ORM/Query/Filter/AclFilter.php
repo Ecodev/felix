@@ -101,6 +101,7 @@ final class AclFilter extends SQLFilter
      */
     public function setUser(?User $user): void
     {
+        $this->setParameter('user', $user?->getId());
         $this->user = $user;
         $this->resetCache();
 

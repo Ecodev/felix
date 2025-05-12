@@ -118,4 +118,24 @@ final class AclFilterTest extends TestCase
 
         self::assertNotSame('', $filter->addFilterConstraint($targetEntity, 'test'), 'enabled even after exception');
     }
+
+    public function testFilterCollectionHashMustChangeWheneverTheUserIsChanged(): void
+    {
+        $collection = $this->entityManager->getFilters();
+        self::assertSame('', $collection->getHash());
+
+        $collection->enable(AclFilter::class);
+        self::assertSame('Ecodev\Felix\ORM\Query\Filter\AclFiltera:0:{}', $collection->getHash());
+
+        $user = $this->createMock(\Ecodev\Felix\Model\User::class);
+        $user->method('getId')->willReturn(123);
+
+        /** @var AclFilter $filter */
+        $filter = $collection->getFilter(AclFilter::class);
+        $filter->setUser($user);
+        self::assertSame('Ecodev\Felix\ORM\Query\Filter\AclFiltera:1:{s:4:"user";a:3:{s:5:"value";i:123;s:4:"type";s:7:"integer";s:7:"is_list";b:0;}}', $collection->getHash());
+
+        $filter->setUser(null);
+        self::assertSame('Ecodev\Felix\ORM\Query\Filter\AclFiltera:1:{s:4:"user";a:3:{s:5:"value";N;s:4:"type";E:34:"Doctrine\DBAL\ParameterType:STRING";s:7:"is_list";b:0;}}', $collection->getHash());
+    }
 }
