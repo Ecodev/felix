@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Ecodev\Felix;
 
+use Ecodev\Felix\DBAL\EventListener\HideMigrationStorage;
+use Ecodev\Felix\DBAL\EventListener\HideMigrationStorageFactory;
+
 class ConfigProvider
 {
     public function __invoke(): array
@@ -20,10 +23,14 @@ class ConfigProvider
                     'orm_default' => [
                         // Log all SQL queries from Doctrine (to logs/all.log)
                         'middlewares' => [DBAL\Logging\Middleware::class],
+                        'schema_assets_filter' => HideMigrationStorage::class,
                     ],
                 ],
             ],
             'dependencies' => [
+                'aliases' => [
+                    \Doctrine\ORM\EntityManager::class => 'doctrine.entity_manager.orm_default',
+                ],
                 'invokables' => [
                 ],
                 'factories' => [
@@ -39,6 +46,10 @@ class ConfigProvider
                     \Psr\Log\LoggerInterface::class => Log\LoggerFactory::class,
                     \Symfony\Component\Mailer\Transport\TransportInterface::class => Service\TransportFactory::class,
                     \Laminas\View\Renderer\RendererInterface::class => Service\RendererFactory::class,
+                    \Doctrine\Migrations\DependencyFactory::class => \Roave\PsrContainerDoctrine\Migrations\DependencyFactoryFactory::class,
+                    \Symfony\Component\Console\Application::class => Console\ApplicationFactory::class,
+                    \Doctrine\Migrations\Configuration\Migration\ConfigurationLoader::class => \Roave\PsrContainerDoctrine\Migrations\ConfigurationLoaderFactory::class,
+                    HideMigrationStorage::class => HideMigrationStorageFactory::class,
                 ],
             ],
         ];

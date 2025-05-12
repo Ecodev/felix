@@ -57,6 +57,7 @@
         "mezzio/mezzio-session": "^1.16",
         "moneyphp/money": "^4.7",
         "monolog/monolog": "^3.9",
+        "roave/psr-container-doctrine": "^5.2",
         "spomky-labs/otphp": "^11.3",
         "symfony/cache": "^7.2",
         "symfony/mailer": "^7.2"
