@@ -21,7 +21,9 @@ final class Driver extends AbstractDriverMiddleware
 
     public function connect(#[SensitiveParameter] array $params): DriverInterface\Connection
     {
-        _log()->debug('Connecting to DB', $this->maskPassword($params));
+        if ($this->logSql) {
+            _log()->debug('Connecting to DB', $this->maskPassword($params));
+        }
 
         // Don't bother to wrap the connection if we will never log SQL queries to file...
         $connection = parent::connect($params);
