@@ -19,6 +19,17 @@ use Symfony\Component\Mime\Email;
  */
 class Mailer
 {
+    /**
+     * DO NOT REMOVE THIS PROPERTY !
+     *
+     * When it is garbage collected, the lock will be released.
+     * And the lock must only be released at the end of PHP process,
+     * never at the end of the method.
+     *
+     * @var false|resource
+     */
+    private $lock;
+
     public function __construct(
         private readonly EntityManager $entityManager,
         private readonly MessageRepository $messageRepository,
@@ -119,12 +130,12 @@ class Mailer
     {
         $lockFile = 'data/tmp/mailer.lock';
         touch($lockFile);
-        $lock = fopen($lockFile, 'r+b');
-        if ($lock === false) {
+        $this->lock = fopen($lockFile, 'r+b');
+        if ($this->lock === false) {
             throw new Exception('Could not read lock file. This is not normal and might be a permission issue');
         }
 
-        if (!flock($lock, LOCK_EX | LOCK_NB)) {
+        if (!flock($this->lock, LOCK_EX | LOCK_NB)) {
             $message = LogRepository::MAILER_LOCKED;
             _log()->info($message);
 
