@@ -35,7 +35,7 @@ final class MailerTest extends TestCase
             '/user/bin/php',
             null,
             'noreply@example.com',
-            'Epicerio'
+            'Epicerio',
         );
 
         return $mailer;
@@ -86,22 +86,16 @@ final class MailerTest extends TestCase
                 return null;
             }
 
-            public function setSubject(string $subject): void
-            {
-            }
+            public function setSubject(string $subject): void {}
 
-            public function setBody(string $body): void
-            {
-            }
+            public function setBody(string $body): void {}
 
             public function getDateSent(): ?Chronos
             {
                 return $this->dateSent;
             }
 
-            public function setEmail(string $email): void
-            {
-            }
+            public function setEmail(string $email): void {}
 
             public function getType(): string
             {

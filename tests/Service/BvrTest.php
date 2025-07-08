@@ -18,7 +18,7 @@ final class BvrTest extends TestCase
         self::assertSame($expected, $actual);
     }
 
-    public static function providerGetReferenceNumber(): array
+    public static function providerGetReferenceNumber(): iterable
     {
         return [
             ['123456', '', '123456000000000000000000006'],
@@ -53,7 +53,7 @@ final class BvrTest extends TestCase
         self::assertSame($expected, $actual);
     }
 
-    public static function providerModulo10(): array
+    public static function providerModulo10(): iterable
     {
         return [
             ['', 0],
@@ -84,7 +84,7 @@ final class BvrTest extends TestCase
         self::assertSame($expected, $actual);
     }
 
-    public static function providerExtractCustomId(): array
+    public static function providerExtractCustomId(): iterable
     {
         return [
             ['800826000000000000000002016', '00000000000000000201'],
@@ -105,7 +105,16 @@ final class BvrTest extends TestCase
         Bvr::extractCustomId('800826000000000000000002010');
     }
 
-    public static function providerIban(): array
+    /**
+     * @dataProvider providerQrIban
+     */
+    public function testQrIban(string $iban, bool $expected): void
+    {
+        $actual = Bvr::isQrIban($iban);
+        self::assertSame($expected, $actual);
+    }
+
+    public static function providerQrIban(): iterable
     {
         return [
             ['30-12465-5', false],
@@ -113,14 +122,5 @@ final class BvrTest extends TestCase
             ['CH2208390037471510005', false],
             ['CH7030123036078110002', true],
         ];
-    }
-
-    /**
-     * @dataProvider providerIban
-     */
-    public function testQrIban(string $iban, bool $expected): void
-    {
-        $actual = Bvr::isQrIban($iban);
-        self::assertSame($expected, $actual);
     }
 }

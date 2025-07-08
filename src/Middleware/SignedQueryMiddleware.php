@@ -35,7 +35,7 @@ final class SignedQueryMiddleware implements MiddlewareInterface
     public function __construct(
         private readonly array $keys,
         private readonly array $allowedIps,
-        private readonly bool $required = true
+        private readonly bool $required = true,
     ) {
         if ($this->required && !$this->keys) {
             throw new Exception('Signed queries are required, but no keys are configured');

@@ -61,7 +61,7 @@ final class SearchOperatorTypeTest extends OperatorType
         self::assertSame($expectedParameters, $parameters);
     }
 
-    public static function providerSearch(): array
+    public static function providerSearch(): iterable
     {
         return [
             'empty term' => [

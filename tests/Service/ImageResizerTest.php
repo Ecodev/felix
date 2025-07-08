@@ -44,7 +44,7 @@ class ImageResizerTest extends TestCase
         self::assertStringEndsWith($expected, $actual);
     }
 
-    public static function providerResize(): array
+    public static function providerResize(): iterable
     {
         return [
             'png smaller' => ['png', 100, false, 'data/cache/images/image-100.jpg'],

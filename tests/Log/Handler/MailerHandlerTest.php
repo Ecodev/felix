@@ -42,7 +42,7 @@ class MailerHandlerTest extends TestCase
         $handler->handle($record);
     }
 
-    public static function providerHandle(): array
+    public static function providerHandle(): iterable
     {
         return [
             [[], true],

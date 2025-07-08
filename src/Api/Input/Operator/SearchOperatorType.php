@@ -98,7 +98,7 @@ abstract class SearchOperatorType extends AbstractOperator
                 foreach ($fieldNames as $fieldName) {
                     $fields = array_merge(
                         $fields,
-                        $this->searchOnJoinedEntity($uniqueNameFactory, $metadata, $queryBuilder, $alias, $fieldName)
+                        $this->searchOnJoinedEntity($uniqueNameFactory, $metadata, $queryBuilder, $alias, $fieldName),
                     );
                 }
             }

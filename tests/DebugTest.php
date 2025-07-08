@@ -18,7 +18,7 @@ class DebugTest extends TestCase
         self::assertEquals($expected, $actual);
     }
 
-    public static function providerExport(): array
+    public static function providerExport(): iterable
     {
         return [
             [123, '123'],

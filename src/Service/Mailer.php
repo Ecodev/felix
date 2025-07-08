@@ -37,9 +37,8 @@ class Mailer
         private readonly string $phpPath,
         private readonly ?string $toEmailOverride,
         private readonly string $fromEmail,
-        protected string $fromName
-    ) {
-    }
+        protected string $fromName,
+    ) {}
 
     /**
      * Send a message asynchronously in a separate process.

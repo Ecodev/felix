@@ -126,7 +126,7 @@ trait Image
 
             // Replace extension
             if ($worseThanWebp) {
-                $this->setFilename(preg_replace('~((\\.[^.]+)?$)~', '', $this->getFilename()) . '.webp');
+                $this->setFilename(preg_replace('~((\.[^.]+)?$)~', '', $this->getFilename()) . '.webp');
                 $newPath = $this->getPath();
                 $image->save($newPath);
                 unlink($path);

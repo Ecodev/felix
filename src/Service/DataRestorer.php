@@ -25,8 +25,7 @@ class DataRestorer
         private readonly string $databaseToRestore,
         private readonly string $tableToRestore,
         private readonly array $idsToRestore,
-    ) {
-    }
+    ) {}
 
     /**
      * This will connect to the given backup database to generate the SQL queries necessary to restore the given data.
@@ -178,7 +177,7 @@ class DataRestorer
         // Generate UPDATE queries to recover the values that were erased by the SET NULL FK constraint
         /** @var array<array<string, string>> $foreignKeys */
         $foreignKeys = $this->connection->fetchAllAssociative(
-            "SELECT * FROM information_schema.KEY_COLUMN_USAGE WHERE CONSTRAINT_SCHEMA = '$this->databaseToRestore' AND REFERENCED_TABLE_NAME = '$this->tableToRestore';"
+            "SELECT * FROM information_schema.KEY_COLUMN_USAGE WHERE CONSTRAINT_SCHEMA = '$this->databaseToRestore' AND REFERENCED_TABLE_NAME = '$this->tableToRestore';",
         );
 
         foreach ($foreignKeys as $foreignKey) {
@@ -228,11 +227,11 @@ class DataRestorer
         $tableSelects[$this->tableToRestore][] = "SELECT * FROM `$this->databaseToRestore`.`$this->tableToRestore` WHERE id IN (" . implode(',', $this->idsToRestore) . ')';
 
         // Queries to export the records in other tables that were deleted via the CASCADE FK constraint
-        $foreignKeysQuery = <<<EOH
+        $foreignKeysQuery = <<<STRING
             SELECT DISTINCT(u.TABLE_NAME),u.COLUMN_NAME
             FROM information_schema.KEY_COLUMN_USAGE as u INNER JOIN information_schema.REFERENTIAL_CONSTRAINTS as c
             WHERE c.CONSTRAINT_SCHEMA='$this->databaseToRestore' AND c.REFERENCED_TABLE_NAME='$this->tableToRestore' AND c.DELETE_RULE='CASCADE' AND c.CONSTRAINT_NAME=u.CONSTRAINT_NAME
-            EOH;
+            STRING;
 
         /** @var array<array<string, string>> $foreignKeys */
         $foreignKeys = $this->connection->fetchAllAssociative($foreignKeysQuery);

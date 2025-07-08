@@ -187,7 +187,7 @@ final class DebugAcl extends \Laminas\Permissions\Acl\Acl
      *
      * @return array{privilege: null|string, allowed: bool, allowIf: string[], denyIf: string[]}
      */
-    public function show(null|RoleInterface|string $role, null|ResourceInterface|string $resource, null|string $privilege): array
+    public function show(null|RoleInterface|string $role, null|ResourceInterface|string $resource, ?string $privilege): array
     {
         $allowed = $this->isAllowed($role, $resource, $privilege);
         sort($this->usedAllowAssertions);

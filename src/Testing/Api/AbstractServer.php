@@ -73,7 +73,7 @@ abstract class AbstractServer extends TestCase
         }
     }
 
-    public function providerQuery(): array
+    public static function providerQuery(): iterable
     {
         $data = [];
         $files = glob('tests/data/query/*.php');

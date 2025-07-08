@@ -120,8 +120,8 @@ class MailerHandlerFactoryTest extends TestCase
                 '',
                 Level::Error,
                 'some message',
-                ['exception' => $exception]
-            )
+                ['exception' => $exception],
+            ),
         );
 
         $handler->close();

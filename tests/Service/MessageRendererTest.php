@@ -55,7 +55,7 @@ final class MessageRendererTest extends TestCase
 
                         return 'mocked-rendered-layout';
                     }),
-                    default => fn () => $this->fail()
+                    default => fn () => $this->fail(),
                 };
 
                 return $callback();

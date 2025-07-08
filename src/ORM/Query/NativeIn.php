@@ -61,12 +61,12 @@ class NativeIn extends FunctionNode
     {
         $field = is_string($this->field) ? $sqlWalker->walkResultVariable($this->field) : $this->field->dispatch($sqlWalker);
         $nativeSql = $this->nativeQuery->dispatch($sqlWalker);
-        $nativeSql = preg_replace("~^'(.*)'$~", '\\1', $nativeSql);
+        $nativeSql = preg_replace("~^'(.*)'$~", '\1', $nativeSql);
         if ($nativeSql === null) {
             throw new Exception('Error while unquoting native SQL');
         }
 
-        $unquotedNativeSql = str_replace(["\\'", '\\n'], ["'", "\n"], $nativeSql);
+        $unquotedNativeSql = str_replace(["\\'", '\n'], ["'", "\n"], $nativeSql);
 
         $isNot = $this->isNot->dispatch($sqlWalker);
 

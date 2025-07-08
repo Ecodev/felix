@@ -10,7 +10,16 @@ use PHPUnit\Framework\TestCase;
 
 final class FormatTest extends TestCase
 {
-    public static function providerTruncate(): array
+    /**
+     * @dataProvider providerTruncate
+     */
+    public function testTruncate(array $args, string $expected): void
+    {
+        $actual = Format::truncate(...$args);
+        self::assertSame($expected, $actual);
+    }
+
+    public static function providerTruncate(): iterable
     {
         return [
             [['abcdef', 100], 'abcdef'],
@@ -19,15 +28,6 @@ final class FormatTest extends TestCase
             [['abcdef', 3, ''], 'abc'],
             [['abcdefghi', 5, 'foo'], 'abfoo'],
         ];
-    }
-
-    /**
-     * @dataProvider providerTruncate
-     */
-    public function testTruncate(array $args, string $expected): void
-    {
-        $actual = Format::truncate(...$args);
-        self::assertSame($expected, $actual);
     }
 
     /**

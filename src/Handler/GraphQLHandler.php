@@ -12,9 +12,9 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 final class GraphQLHandler implements RequestHandlerInterface
 {
-    public function __construct(private readonly Server $server)
-    {
-    }
+    public function __construct(
+        private readonly Server $server,
+    ) {}
 
     /**
      * Process an incoming server request and return a response, optionally delegating

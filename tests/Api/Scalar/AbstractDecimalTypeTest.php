@@ -20,8 +20,11 @@ final class AbstractDecimalTypeTest extends TestCase
         return new class($decimal, $minimum, $maximum) extends AbstractDecimalType {
             public string $name = 'TestDecimal';
 
-            public function __construct(private readonly int $decimal, private readonly ?string $minimum, private readonly ?string $maximum)
-            {
+            public function __construct(
+                private readonly int $decimal,
+                private readonly ?string $minimum,
+                private readonly ?string $maximum,
+            ) {
                 parent::__construct();
             }
 
@@ -61,7 +64,7 @@ final class AbstractDecimalTypeTest extends TestCase
 
         if ($expected === null) {
             $this->expectException(Error::class);
-            $this->expectExceptionMessage('Query error: Not a valid TestDecimal' . ': ' . Utils::printSafe($input));
+            $this->expectExceptionMessage('Query error: Not a valid TestDecimal: ' . Utils::printSafe($input));
         }
 
         $actual = $type->parseValue($input);
@@ -94,19 +97,7 @@ final class AbstractDecimalTypeTest extends TestCase
         self::assertSame($expected, $actual);
     }
 
-    public function testParseLiteralThrowIfInvalidNodeType(): void
-    {
-        $type = $this->createType(3, null, null);
-
-        $ast = new NullValueNode([]);
-
-        $this->expectException(Error::class);
-        $this->expectExceptionMessage('Query error: Can only parse strings got: NullValue');
-
-        $type->parseLiteral($ast);
-    }
-
-    public static function providerInputs(): array
+    public static function providerInputs(): iterable
     {
         return [
             [3, null, null, '', null],
@@ -130,5 +121,17 @@ final class AbstractDecimalTypeTest extends TestCase
             [2, '0.00', '1.00', '1.01', null],
             [2, '0.00', '1.00', '0.000', null],
         ];
+    }
+
+    public function testParseLiteralThrowIfInvalidNodeType(): void
+    {
+        $type = $this->createType(3, null, null);
+
+        $ast = new NullValueNode([]);
+
+        $this->expectException(Error::class);
+        $this->expectExceptionMessage('Query error: Can only parse strings got: NullValue');
+
+        $type->parseLiteral($ast);
     }
 }

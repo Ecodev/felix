@@ -13,7 +13,7 @@ class MariaDbQuotingConnection extends Connection
      */
     public function quote(string $value): string
     {
-        $quoted = "'" . str_replace(["'", "\n"], ["\\'", '\\n'], $value) . "'";
+        $quoted = "'" . str_replace(["'", "\n"], ["\\'", '\n'], $value) . "'";
 
         return $quoted;
     }

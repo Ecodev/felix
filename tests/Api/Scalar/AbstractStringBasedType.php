@@ -11,8 +11,6 @@ use PHPUnit\Framework\TestCase;
 
 abstract class AbstractStringBasedType extends TestCase
 {
-    abstract public static function providerValues(): iterable;
-
     abstract public function createType(): \Ecodev\Felix\Api\Scalar\AbstractStringBasedType;
 
     abstract public function getTypeName(): string;
@@ -61,6 +59,8 @@ abstract class AbstractStringBasedType extends TestCase
 
         self::assertSame($expected, $actual);
     }
+
+    abstract public static function providerValues(): iterable;
 
     public function testParseInvalidNodeWillThrow(): void
     {

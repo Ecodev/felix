@@ -12,9 +12,9 @@ use Psr\Http\Message\ServerRequestInterface;
 
 final class FileHandler extends AbstractHandler
 {
-    public function __construct(private readonly ObjectRepository $fileRepository)
-    {
-    }
+    public function __construct(
+        private readonly ObjectRepository $fileRepository,
+    ) {}
 
     /**
      * Serve a downloaded file from disk.

@@ -20,12 +20,32 @@ use stdClass;
 
 final class FilteredFieldResolverTest extends TestCase
 {
-    public static function providerLoad(): array
+    /**
+     * @dataProvider providerLoad
+     */
+    public function testLoad(mixed $value, mixed $expected): void
+    {
+        $model = new class($value) {
+            public function __construct(
+                private mixed $value,
+            ) {}
+
+            public function getField(): mixed
+            {
+                return $this->value;
+            }
+        };
+
+        $fieldDefinition = new FieldDefinition(['name' => 'field', 'type' => Type::boolean()]);
+        $resolve = new ResolveInfo($fieldDefinition, new ArrayObject(), new ObjectType(['name' => 'foo', 'fields' => []]), [], new Schema([]), [], null, new OperationDefinitionNode([]), []);
+        $resolver = new FilteredFieldResolver();
+        self::assertSame($expected, $resolver($model, [], [], $resolve));
+    }
+
+    public static function providerLoad(): iterable
     {
         $loadableClass = new class() implements Proxy {
-            public function __load(): void
-            {
-            }
+            public function __load(): void {}
 
             public function __isInitialized(): bool
             {
@@ -59,27 +79,5 @@ final class FilteredFieldResolverTest extends TestCase
             [$loadable, $loadable],
             [$unloadable, null],
         ];
-    }
-
-    /**
-     * @dataProvider providerLoad
-     */
-    public function testLoad(mixed $value, mixed $expected): void
-    {
-        $model = new class($value) {
-            public function __construct(private mixed $value)
-            {
-            }
-
-            public function getField(): mixed
-            {
-                return $this->value;
-            }
-        };
-
-        $fieldDefinition = new FieldDefinition(['name' => 'field', 'type' => Type::boolean()]);
-        $resolve = new ResolveInfo($fieldDefinition, new ArrayObject(), new ObjectType(['name' => 'foo', 'fields' => []]), [], new Schema([]), [], null, new OperationDefinitionNode([]), []);
-        $resolver = new FilteredFieldResolver();
-        self::assertSame($expected, $resolver($model, [], [], $resolve));
     }
 }

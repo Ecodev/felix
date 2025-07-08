@@ -64,8 +64,9 @@ final class AclTest extends TestCase
     public function testMultipleReasons(): void
     {
         $acl = new class($this->createRejectAssertion()) extends Acl {
-            public function __construct(private AssertionInterface $reject)
-            {
+            public function __construct(
+                private AssertionInterface $reject,
+            ) {
                 parent::__construct();
                 $user = $this->createModelResource(User::class);
                 $this->addRole('anonymous');
@@ -92,8 +93,9 @@ final class AclTest extends TestCase
     public function testMultipleReasonsNotDuplicated(): void
     {
         $acl = new class($this->createRejectAssertion()) extends Acl {
-            public function __construct(private AssertionInterface $reject)
-            {
+            public function __construct(
+                private AssertionInterface $reject,
+            ) {
                 parent::__construct();
                 $user = $this->createModelResource(User::class);
                 $this->addRole('anonymous');

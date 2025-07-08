@@ -20,7 +20,7 @@ class TransportFactoryTest extends TestCase
         self::assertSame($expected, $actual);
     }
 
-    public function providerDsn(): iterable
+    public static function providerDsn(): iterable
     {
         yield [null, 'null://null'];
         yield ['', 'null://null'];

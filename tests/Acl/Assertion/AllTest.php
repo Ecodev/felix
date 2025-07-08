@@ -40,7 +40,7 @@ class AllTest extends TestCase
         self::assertSame($expected, $assertion->assert($acl));
     }
 
-    public static function providerAssert(): array
+    public static function providerAssert(): iterable
     {
         return [
             [[], true],

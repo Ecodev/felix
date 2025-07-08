@@ -18,9 +18,9 @@ final class HideMigrationStorage implements EventDispatcherInterface
 {
     private bool $enabled = false;
 
-    public function __construct(private readonly ?string $configurationTableName)
-    {
-    }
+    public function __construct(
+        private readonly ?string $configurationTableName,
+    ) {}
 
     public function __invoke(AbstractAsset|string $asset): bool
     {

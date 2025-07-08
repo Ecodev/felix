@@ -28,7 +28,7 @@ final class ModelResource extends GenericResource
      */
     public function __construct(
         string $class,
-        private readonly ?Model $instance = null
+        private readonly ?Model $instance = null,
     ) {
         if (!is_subclass_of($class, Model::class)) {
             throw new InvalidArgumentException('The class name must be an implementation of Model but given: ' . $class);

@@ -13,9 +13,10 @@ use Laminas\View\Renderer\RendererInterface;
  */
 final class MessageRenderer
 {
-    public function __construct(private readonly RendererInterface $viewRenderer, private string $hostname)
-    {
-    }
+    public function __construct(
+        private readonly RendererInterface $viewRenderer,
+        private string $hostname,
+    ) {}
 
     /**
      * Render a message by templating.

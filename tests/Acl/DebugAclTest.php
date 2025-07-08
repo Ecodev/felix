@@ -78,7 +78,7 @@ class DebugAclTest extends TestCase
                 'allowIf' => [],
                 'denyIf' => [],
             ],
-            $this->acl->show('member', 'user', 'create')
+            $this->acl->show('member', 'user', 'create'),
         );
     }
 
@@ -123,7 +123,7 @@ class DebugAclTest extends TestCase
                 'allowIf' => ["c'est moi-même"],
                 'denyIf' => [],
             ],
-            $this->acl->show('member', 'user', 'read')
+            $this->acl->show('member', 'user', 'read'),
         );
 
         self::assertSame(
@@ -133,7 +133,7 @@ class DebugAclTest extends TestCase
                 'allowIf' => ['admin assertion'],
                 'denyIf' => [],
             ],
-            $this->acl->show('admin', 'user', 'read')
+            $this->acl->show('admin', 'user', 'read'),
         );
 
         self::assertSame(
@@ -143,7 +143,7 @@ class DebugAclTest extends TestCase
                 'allowIf' => ['admin assertion', "c'est moi-même"],
                 'denyIf' => [],
             ],
-            $this->acl->show(new MultipleRoles(['member', 'admin']), 'user', 'read')
+            $this->acl->show(new MultipleRoles(['member', 'admin']), 'user', 'read'),
         );
 
         self::assertSame(
@@ -153,7 +153,7 @@ class DebugAclTest extends TestCase
                 'allowIf' => [],
                 'denyIf' => [],
             ],
-            $this->acl->show('member', 'user', 'non-existing-privilege')
+            $this->acl->show('member', 'user', 'non-existing-privilege'),
         );
 
         self::assertSame(
@@ -163,7 +163,7 @@ class DebugAclTest extends TestCase
                 'allowIf' => ["c'est moi-même"],
                 'denyIf' => [],
             ],
-            $this->acl->show('member', 'user', null)
+            $this->acl->show('member', 'user', null),
         );
     }
 
@@ -181,7 +181,7 @@ class DebugAclTest extends TestCase
                 'allowIf' => [],
                 'denyIf' => ["c'est moi-même"],
             ],
-            $this->acl->show('member', 'user', 'read')
+            $this->acl->show('member', 'user', 'read'),
         );
 
         self::assertSame(
@@ -191,7 +191,7 @@ class DebugAclTest extends TestCase
                 'allowIf' => [],
                 'denyIf' => ['admin assertion'],
             ],
-            $this->acl->show('admin', 'user', 'read')
+            $this->acl->show('admin', 'user', 'read'),
         );
 
         self::assertSame(
@@ -201,7 +201,7 @@ class DebugAclTest extends TestCase
                 'allowIf' => [],
                 'denyIf' => ['admin assertion', "c'est moi-même"],
             ],
-            $this->acl->show(new MultipleRoles(['member', 'admin']), 'user', 'read')
+            $this->acl->show(new MultipleRoles(['member', 'admin']), 'user', 'read'),
         );
 
         self::assertSame(
@@ -211,7 +211,7 @@ class DebugAclTest extends TestCase
                 'allowIf' => [],
                 'denyIf' => [],
             ],
-            $this->acl->show('member', 'user', 'non-existing-privilege')
+            $this->acl->show('member', 'user', 'non-existing-privilege'),
         );
     }
 }

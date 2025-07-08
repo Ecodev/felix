@@ -12,6 +12,17 @@ class NativeInTest extends TestCase
 {
     use TestWithTypes;
 
+    /**
+     * @dataProvider providerNativeIn
+     */
+    public function testNativeIn(string $dql, string $expected): void
+    {
+        $query = $this->entityManager->createQuery($dql);
+        $actual = $query->getSQL();
+
+        self::assertSame($expected, $actual);
+    }
+
     public static function providerNativeIn(): iterable
     {
         yield 'normal with string' => [
@@ -53,16 +64,5 @@ class NativeInTest extends TestCase
             "SELECT u0_.id AS id_0 FROM user u0_ WHERE id_0 IN (SELECT '123') = 1",
 
         ];
-    }
-
-    /**
-     * @dataProvider providerNativeIn
-     */
-    public function testNativeIn(string $dql, string $expected): void
-    {
-        $query = $this->entityManager->createQuery($dql);
-        $actual = $query->getSQL();
-
-        self::assertSame($expected, $actual);
     }
 }

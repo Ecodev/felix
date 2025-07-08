@@ -64,6 +64,16 @@ final class ChronosTypeTest extends TestCase
         self::assertSame($expected, $actual);
     }
 
+    public static function providerValues(): iterable
+    {
+        return [
+            'UTC' => ['2018-09-14T22:00:00.000Z', '2018-09-15T00:00:00+02:00'],
+            'local time' => ['2018-09-15T00:00:00+02:00', '2018-09-15T00:00:00+02:00'],
+            'other time' => ['2018-09-15T02:00:00+04:00', '2018-09-15T00:00:00+02:00'],
+            'empty string' => ['', null],
+        ];
+    }
+
     public function testParseLiteralAsInt(): void
     {
         $type = new ChronosType();
@@ -81,15 +91,5 @@ final class ChronosTypeTest extends TestCase
         $this->expectException(Error::class);
         $this->expectExceptionMessage('Cannot represent value as Chronos date: 123');
         $type->parseValue(123);
-    }
-
-    public static function providerValues(): array
-    {
-        return [
-            'UTC' => ['2018-09-14T22:00:00.000Z', '2018-09-15T00:00:00+02:00'],
-            'local time' => ['2018-09-15T00:00:00+02:00', '2018-09-15T00:00:00+02:00'],
-            'other time' => ['2018-09-15T02:00:00+04:00', '2018-09-15T00:00:00+02:00'],
-            'empty string' => ['', null],
-        ];
     }
 }

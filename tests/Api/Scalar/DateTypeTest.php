@@ -58,6 +58,16 @@ final class DateTypeTest extends TestCase
         self::assertSame($expected, $actual->format('c'));
     }
 
+    public static function providerValues(): iterable
+    {
+        return [
+            'normal' => ['2010-06-09', '2010-06-09T00:00:00+02:00'],
+            'time should be ignored' => ['2010-06-09T23:00:00', '2010-06-09T00:00:00+02:00'],
+            'timezone should be ignored' => ['2010-06-09T02:00:00+08:00', '2010-06-09T00:00:00+02:00'],
+            'unusual timezone should be ignored' => ['2020-06-24T23:30:00+04.5:0-30', '2020-06-24T00:00:00+02:00'],
+        ];
+    }
+
     public function testParseLiteralAsInt(): void
     {
         $type = new DateType();
@@ -66,15 +76,5 @@ final class DateTypeTest extends TestCase
         $this->expectException(Error::class);
         $this->expectExceptionMessage('Query error: Can only parse strings got: IntValue');
         $type->parseLiteral($ast);
-    }
-
-    public static function providerValues(): array
-    {
-        return [
-            'normal' => ['2010-06-09', '2010-06-09T00:00:00+02:00'],
-            'time should be ignored' => ['2010-06-09T23:00:00', '2010-06-09T00:00:00+02:00'],
-            'timezone should be ignored' => ['2010-06-09T02:00:00+08:00', '2010-06-09T00:00:00+02:00'],
-            'unusual timezone should be ignored' => ['2020-06-24T23:30:00+04.5:0-30', '2020-06-24T00:00:00+02:00'],
-        ];
     }
 }

@@ -56,6 +56,20 @@ final class TimeTypeTest extends TestCase
         self::assertSame($expected, $actual);
     }
 
+    public static function providerValues(): iterable
+    {
+        return [
+            'empty string' => ['', null],
+            'normal time' => ['14:30', '14:30:00'],
+            'alternative separator' => ['14h30', '14:30:00'],
+            'only hour' => ['14h', '14:00:00'],
+            'only hour alternative' => ['14:', '14:00:00'],
+            'even shorter' => ['9', '09:00:00'],
+            'spaces are fines' => ['  14h00  ', '14:00:00'],
+            'a bit weird, but why not' => ['  14h6  ', '14:06:00'],
+        ];
+    }
+
     public function testParseLiteralAsInt(): void
     {
         $type = new TimeType();
@@ -82,19 +96,5 @@ final class TimeTypeTest extends TestCase
         $this->expectException(Error::class);
         $this->expectExceptionMessage('Invalid format for ChronosTime. Expected "14h35", "14:35" or "14h", but got: "123"');
         $type->parseValue('123');
-    }
-
-    public static function providerValues(): array
-    {
-        return [
-            'empty string' => ['', null],
-            'normal time' => ['14:30', '14:30:00'],
-            'alternative separator' => ['14h30', '14:30:00'],
-            'only hour' => ['14h', '14:00:00'],
-            'only hour alternative' => ['14:', '14:00:00'],
-            'even shorter' => ['9', '09:00:00'],
-            'spaces are fines' => ['  14h00  ', '14:00:00'],
-            'a bit weird, but why not' => ['  14h6  ', '14:06:00'],
-        ];
     }
 }

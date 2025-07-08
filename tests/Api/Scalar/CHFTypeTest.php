@@ -52,7 +52,7 @@ final class CHFTypeTest extends TestCase
     }
 
     /**
-     * @dataProvider providerIntValues
+     * @dataProvider providerParseValueAsInt
      */
     public function testParseValueAsInt(int $input, Money $expected): void
     {
@@ -60,6 +60,16 @@ final class CHFTypeTest extends TestCase
         $actual = $type->parseValue($input);
         self::assertInstanceOf(Money::class, $actual);
         self::assertSame((int) $expected->getAmount(), (int) $actual->getAmount());
+    }
+
+    public static function providerParseValueAsInt(): iterable
+    {
+        return [
+            [2, Money::CHF(200)],
+            [0, Money::CHF(0)],
+            [9, Money::CHF(900)],
+            [-9, Money::CHF(-900)],
+        ];
     }
 
     /**
@@ -101,6 +111,18 @@ final class CHFTypeTest extends TestCase
         self::assertTrue($expected->equals($actual));
     }
 
+    public static function providerValues(): iterable
+    {
+        return [
+            ['2', Money::CHF(200)],
+            ['2.95', Money::CHF(295)],
+            ['0', Money::CHF(0)],
+            ['9.00', Money::CHF(900)],
+            ['-9.00', Money::CHF(-900)],
+            ['-0.00', Money::CHF(0)],
+        ];
+    }
+
     /**
      * @dataProvider providerInvalidValues
      */
@@ -135,29 +157,7 @@ final class CHFTypeTest extends TestCase
         $type->parseLiteral($ast);
     }
 
-    public static function providerValues(): array
-    {
-        return [
-            ['2', Money::CHF(200)],
-            ['2.95', Money::CHF(295)],
-            ['0', Money::CHF(0)],
-            ['9.00', Money::CHF(900)],
-            ['-9.00', Money::CHF(-900)],
-            ['-0.00', Money::CHF(0)],
-        ];
-    }
-
-    public static function providerIntValues(): array
-    {
-        return [
-            [2, Money::CHF(200)],
-            [0, Money::CHF(0)],
-            [9, Money::CHF(900)],
-            [-9, Money::CHF(-900)],
-        ];
-    }
-
-    public static function providerInvalidValues(): array
+    public static function providerInvalidValues(): iterable
     {
         return [
             'non numeric' => ['foo'],

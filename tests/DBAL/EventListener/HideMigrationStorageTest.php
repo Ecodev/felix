@@ -28,8 +28,7 @@ class HideMigrationStorageTest extends TestCase
     public function testItFiltersNothingWhenNotRunningSpecificCommands(): void
     {
         $service = new HideMigrationStorage('doctrine_migration_versions');
-        $migrationsCommand = new class() extends DoctrineCommand {
-        };
+        $migrationsCommand = new class() extends DoctrineCommand {};
 
         $service->dispatch(new ConsoleCommandEvent(
             $migrationsCommand,

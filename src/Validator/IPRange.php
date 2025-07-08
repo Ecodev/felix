@@ -56,7 +56,7 @@ abstract class IPRange
             sprintf('%032b', $ip),
             sprintf('%032b', $subnet),
             0,
-            $mask
+            $mask,
         );
     }
 

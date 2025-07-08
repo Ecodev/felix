@@ -28,7 +28,7 @@ class SignedQueryMiddlewareTest extends TestCase
     /**
      * @dataProvider dataProviderQuery
      */
-    public function testRequiredSignedQuery(array $keys, string $body, null|array $parsedBody, string $signature, string $expectExceptionMessage = '', string $ip = ''): void
+    public function testRequiredSignedQuery(array $keys, string $body, ?array $parsedBody, string $signature, string $expectExceptionMessage = '', string $ip = ''): void
     {
         $this->process($keys, true, $ip, $body, $parsedBody, $signature, $expectExceptionMessage);
     }
@@ -36,44 +36,9 @@ class SignedQueryMiddlewareTest extends TestCase
     /**
      * @dataProvider dataProviderQuery
      */
-    public function testNonRequiredSignedQuery(array $keys, string $body, null|array $parsedBody, string $signature): void
+    public function testNonRequiredSignedQuery(array $keys, string $body, ?array $parsedBody, string $signature): void
     {
         $this->process($keys, false, '', $body, $parsedBody, $signature, '');
-    }
-
-    public function testThrowIfNoKeys(): void
-    {
-        $this->expectExceptionMessage('Signed queries are required, but no keys are configured');
-        $this->expectExceptionCode(0);
-        new SignedQueryMiddleware([], []);
-    }
-
-    private function process(array $keys, bool $required, string $ip, string $body, null|array $parsedBody, string $signature, string $expectExceptionMessage): void
-    {
-        $request = new ServerRequest(['REMOTE_ADDR' => $ip]);
-        $request = $request->withBody(new CallbackStream(fn () => $body))->withParsedBody($parsedBody);
-
-        if ($signature) {
-            $request = $request->withHeader('X-Signature', $signature);
-        }
-
-        $handler = $this->createMock(RequestHandlerInterface::class);
-        $handler->expects($expectExceptionMessage ? self::never() : self::once())
-            ->method('handle')
-            ->willReturnCallback(function (ServerRequestInterface $incomingRequest) use ($body) {
-                self::assertSame($body, $incomingRequest->getBody()->getContents(), 'the original body content is still available for next middlewares');
-
-                return new Response();
-            });
-
-        $middleware = new SignedQueryMiddleware($keys, ['1.2.3.4', '2a01:198:603:0::/65'], $required);
-
-        if ($expectExceptionMessage) {
-            $this->expectExceptionMessage($expectExceptionMessage);
-            $this->expectExceptionCode(403);
-        }
-
-        $middleware->process($request, $handler);
     }
 
     public static function dataProviderQuery(): iterable
@@ -190,7 +155,7 @@ class SignedQueryMiddlewareTest extends TestCase
             [$key1],
             '',
             null,
-            'v1.1577964600.ff8a9f2bc8090207b824d88251ed8e9d39434607d86e0f0b2837c597d6642c26', //,. str_repeat('a', 64),
+            'v1.1577964600.ff8a9f2bc8090207b824d88251ed8e9d39434607d86e0f0b2837c597d6642c26',
             '',
         ];
 
@@ -265,5 +230,40 @@ class SignedQueryMiddlewareTest extends TestCase
             'Invalid `X-Signature` HTTP header in signed query',
             '40.77.188.165',
         ];
+    }
+
+    public function testThrowIfNoKeys(): void
+    {
+        $this->expectExceptionMessage('Signed queries are required, but no keys are configured');
+        $this->expectExceptionCode(0);
+        new SignedQueryMiddleware([], []);
+    }
+
+    private function process(array $keys, bool $required, string $ip, string $body, ?array $parsedBody, string $signature, string $expectExceptionMessage): void
+    {
+        $request = new ServerRequest(['REMOTE_ADDR' => $ip]);
+        $request = $request->withBody(new CallbackStream(fn () => $body))->withParsedBody($parsedBody);
+
+        if ($signature) {
+            $request = $request->withHeader('X-Signature', $signature);
+        }
+
+        $handler = $this->createMock(RequestHandlerInterface::class);
+        $handler->expects($expectExceptionMessage ? self::never() : self::once())
+            ->method('handle')
+            ->willReturnCallback(function (ServerRequestInterface $incomingRequest) use ($body) {
+                self::assertSame($body, $incomingRequest->getBody()->getContents(), 'the original body content is still available for next middlewares');
+
+                return new Response();
+            });
+
+        $middleware = new SignedQueryMiddleware($keys, ['1.2.3.4', '2a01:198:603:0::/65'], $required);
+
+        if ($expectExceptionMessage) {
+            $this->expectExceptionMessage($expectExceptionMessage);
+            $this->expectExceptionCode(403);
+        }
+
+        $middleware->process($request, $handler);
     }
 }

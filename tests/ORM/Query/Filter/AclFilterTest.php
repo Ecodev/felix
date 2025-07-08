@@ -16,7 +16,29 @@ final class AclFilterTest extends TestCase
 {
     use TestWithEntityManager;
 
-    public static function providerFilter(): array
+    /**
+     * @dataProvider providerFilter
+     *
+     * @param class-string $class
+     */
+    public function testFilter(bool $anonymous, string $class, string $expected): void
+    {
+        $classMetadataFactory = $this->entityManager->getMetadataFactory();
+        /** @var ClassMetadata $targetEntity */
+        $targetEntity = $classMetadataFactory->getMetadataFor($class);
+        $filter = new AclFilter($this->entityManager);
+
+        $filter->setUser($anonymous ? null : new User());
+        $actual = $filter->addFilterConstraint($targetEntity, 'test');
+
+        if ($expected === '') {
+            self::assertSame($expected, $actual);
+        } else {
+            self::assertStringStartsWith($expected, $actual);
+        }
+    }
+
+    public static function providerFilter(): iterable
     {
         return [
             'users are accessible to anonymous' => [
@@ -40,28 +62,6 @@ final class AclFilterTest extends TestCase
                 'test.id IN (SELECT',
             ],
         ];
-    }
-
-    /**
-     * @dataProvider providerFilter
-     *
-     * @param class-string $class
-     */
-    public function testFilter(bool $anonymous, string $class, string $expected): void
-    {
-        $classMetadataFactory = $this->entityManager->getMetadataFactory();
-        /** @var ClassMetadata $targetEntity */
-        $targetEntity = $classMetadataFactory->getMetadataFor($class);
-        $filter = new AclFilter($this->entityManager);
-
-        $filter->setUser($anonymous ? null : new User());
-        $actual = $filter->addFilterConstraint($targetEntity, 'test');
-
-        if ($expected === '') {
-            self::assertSame($expected, $actual);
-        } else {
-            self::assertStringStartsWith($expected, $actual);
-        }
     }
 
     public function testDeactivable(): void

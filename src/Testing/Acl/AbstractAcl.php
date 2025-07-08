@@ -11,8 +11,6 @@ abstract class AbstractAcl extends TestCase
 {
     abstract protected function createAcl(): Acl;
 
-    abstract public function providerRole(): iterable;
-
     /**
      * @dataProvider providerRole
      */
@@ -44,6 +42,8 @@ abstract class AbstractAcl extends TestCase
         $expected = require $file;
         self::assertTrue($expected === $actual, 'File content does not match, compare with: meld ' . $file . ' ' . $logFile);
     }
+
+    abstract public function providerRole(): iterable;
 
     final public function testEverythingIsTranslated(): void
     {

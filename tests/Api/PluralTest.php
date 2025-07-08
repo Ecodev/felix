@@ -17,7 +17,7 @@ class PluralTest extends TestCase
         self::assertSame($expected, Plural::make($input));
     }
 
-    public function providerMake(): iterable
+    public static function providerMake(): iterable
     {
         yield ['Account', 'Accounts'];
         yield ['AccountingDocument', 'AccountingDocuments'];

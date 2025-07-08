@@ -29,7 +29,7 @@ class EventCompleterTest extends TestCase
                 '',
                 Level::Error,
                 'some message',
-            )
+            ),
         );
         $actual = $completedRecord->extra;
 
@@ -75,8 +75,8 @@ class EventCompleterTest extends TestCase
                 [
                     'errno' => 1,
                     'password' => 'sensitive',
-                ]
-            )
+                ],
+            ),
         );
         $actual = $completedRecord->extra;
 

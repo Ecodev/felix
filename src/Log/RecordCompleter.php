@@ -10,9 +10,9 @@ use Monolog\Processor\ProcessorInterface;
 
 class RecordCompleter implements ProcessorInterface
 {
-    public function __construct(private readonly string $baseUrl)
-    {
-    }
+    public function __construct(
+        private readonly string $baseUrl,
+    ) {}
 
     /**
      * Complete a log record with extra data, including any global stuff relevant to the app.

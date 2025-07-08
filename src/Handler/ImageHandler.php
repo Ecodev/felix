@@ -13,9 +13,10 @@ use Psr\Http\Message\ServerRequestInterface;
 
 final class ImageHandler extends AbstractHandler
 {
-    public function __construct(private readonly ObjectRepository $imageRepository, private readonly ImageResizer $imageResizer)
-    {
-    }
+    public function __construct(
+        private readonly ObjectRepository $imageRepository,
+        private readonly ImageResizer $imageResizer,
+    ) {}
 
     /**
      * Serve an image from disk, with optional dynamic resizing.

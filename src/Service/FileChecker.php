@@ -14,9 +14,9 @@ use Exception;
  */
 class FileChecker
 {
-    public function __construct(private readonly Connection $connection)
-    {
-    }
+    public function __construct(
+        private readonly Connection $connection,
+    ) {}
 
     /**
      * Print the result.

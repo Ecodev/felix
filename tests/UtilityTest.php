@@ -33,9 +33,9 @@ final class UtilityTest extends TestCase
             4 => 1,
             'model' => new User(),
             'entity' => new class($fakeEntity) extends EntityID {
-                public function __construct(private readonly object $fakeEntity)
-                {
-                }
+                public function __construct(
+                    private readonly object $fakeEntity,
+                ) {}
 
                 public function getEntity(): object
                 {
@@ -79,11 +79,9 @@ final class UtilityTest extends TestCase
 
     private function createArray(): array
     {
-        $object1 = new class() {
-        };
+        $object1 = new class() {};
 
-        $object2 = new class() {
-        };
+        $object2 = new class() {};
 
         return [
             $object1,
@@ -122,7 +120,7 @@ final class UtilityTest extends TestCase
                 restore_error_handler();
 
                 throw new Exception($message);
-            }
+            },
         );
 
         try {
@@ -161,7 +159,16 @@ final class UtilityTest extends TestCase
         yield [[1.23], "'1.23'"];
     }
 
-    public function getCookieDomainProvider(): iterable
+    /**
+     * @dataProvider providerGetCookieDomain
+     */
+    public function testGetCookieDomain(string $input, ?string $expected): void
+    {
+        $actual = Utility::getCookieDomain($input);
+        self::assertSame($expected, $actual);
+    }
+
+    public static function providerGetCookieDomain(): iterable
     {
         yield ['', null];
         yield ['localhost', null];
@@ -169,15 +176,6 @@ final class UtilityTest extends TestCase
         yield ['www.example.com', '.example.com'];
         yield ['example.com:123', '.example.com'];
         yield ['www.example.com:123', '.example.com'];
-    }
-
-    /**
-     * @dataProvider getCookieDomainProvider
-     */
-    public function testGetCookieDomain(string $input, ?string $expected): void
-    {
-        $actual = Utility::getCookieDomain($input);
-        self::assertSame($expected, $actual);
     }
 
     public function testConcat(): void

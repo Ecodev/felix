@@ -12,7 +12,7 @@ trait MessageRepository
     /**
      * Creates a new QueryBuilder instance that is prepopulated for this entity name.
      */
-    abstract public function createQueryBuilder(string $alias, string|null $indexBy = null): QueryBuilder;
+    abstract public function createQueryBuilder(string $alias, ?string $indexBy = null): QueryBuilder;
 
     /**
      * @return Message[]

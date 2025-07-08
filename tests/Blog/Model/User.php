@@ -28,9 +28,9 @@ final class User extends AbstractModel implements \Ecodev\Felix\Model\User
     #[ORM\OneToMany(targetEntity: 'EcodevTests\Felix\Blog\Model\Post', mappedBy: 'user')]
     private Collection $posts;
 
-    public function __construct(private MultipleRoles|string $role = 'member')
-    {
-    }
+    public function __construct(
+        private MultipleRoles|string $role = 'member',
+    ) {}
 
     public function getName(): string
     {
