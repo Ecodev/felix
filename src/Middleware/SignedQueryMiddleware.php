@@ -21,6 +21,9 @@ use Psr\Http\Server\RequestHandlerInterface;
  *
  * The signature is valid for a limited time only, ~15 minutes.
  *
+ * If valid the `$request` will have a new attribute `"Ecodev\Felix\Middleware\SignedQueryMiddleware"` whose value is
+ * the name (`int|string`) of the key used to successfully validate the request.
+ *
  * The signature syntax is:
  *
  * ```ebnf
@@ -91,10 +94,10 @@ final class SignedQueryMiddleware implements MiddlewareInterface
         ['request' => $request, 'operations' => $operations] = $this->getOperations($request);
         $payload = $timestamp . $operations;
 
-        foreach ($this->keys as $key) {
-            $computedHash = hash_hmac('sha256', $payload, $key);
+        foreach ($this->keys as $name => $value) {
+            $computedHash = hash_hmac('sha256', $payload, $value);
             if ($hash === $computedHash) {
-                return $request;
+                return $request->withAttribute($this::class, $name);
             }
         }
 

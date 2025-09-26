@@ -28,17 +28,28 @@ class SignedQueryMiddlewareTest extends TestCase
     /**
      * @dataProvider dataProviderQuery
      */
-    public function testRequiredSignedQuery(array $keys, string $body, ?array $parsedBody, string $signature, string $expectExceptionMessage = '', string $ip = ''): void
-    {
-        $this->process($keys, true, $ip, $body, $parsedBody, $signature, $expectExceptionMessage);
+    public function testRequiredSignedQuery(
+        array $keys,
+        string $body,
+        ?array $parsedBody,
+        string $signature,
+        string|int|null $keyName = null,
+        string $expectExceptionMessage = '',
+        string $ip = '',
+    ): void {
+        $this->process($keys, true, $ip, $body, $parsedBody, $signature, $keyName, $expectExceptionMessage);
     }
 
     /**
      * @dataProvider dataProviderQuery
      */
-    public function testNonRequiredSignedQuery(array $keys, string $body, ?array $parsedBody, string $signature): void
-    {
-        $this->process($keys, false, '', $body, $parsedBody, $signature, '');
+    public function testNonRequiredSignedQuery(
+        array $keys,
+        string $body,
+        ?array $parsedBody,
+        string $signature,
+    ): void {
+        $this->process($keys, false, '', $body, $parsedBody, $signature, null, '');
     }
 
     public static function dataProviderQuery(): iterable
@@ -51,6 +62,15 @@ class SignedQueryMiddlewareTest extends TestCase
             '{"operationName":"CurrentUser","variables":{},"query":"query CurrentUser { viewer { id }}',
             null,
             'v1.1577964600.a4d664cd3d9903e4fecf6f9f671ad953586a7faeb16e67c306fd9f29999dfdd7',
+            0,
+        ];
+
+        yield 'simple with key name' => [
+            ['my custom key name' => $key1],
+            '{"operationName":"CurrentUser","variables":{},"query":"query CurrentUser { viewer { id }}',
+            null,
+            'v1.1577964600.a4d664cd3d9903e4fecf6f9f671ad953586a7faeb16e67c306fd9f29999dfdd7',
+            'my custom key name',
         ];
 
         yield 'simple but wrong key' => [
@@ -58,6 +78,7 @@ class SignedQueryMiddlewareTest extends TestCase
             '{"operationName":"CurrentUser","variables":{},"query":"query CurrentUser { viewer { id }}',
             null,
             'v1.1577964600.a4d664cd3d9903e4fecf6f9f671ad953586a7faeb16e67c306fd9f29999dfdd7',
+            null,
             'Invalid signed query',
         ];
 
@@ -66,6 +87,7 @@ class SignedQueryMiddlewareTest extends TestCase
             '{"operationName":"CurrentUser","variables":{},"query":"query CurrentUser { viewer { id }}',
             null,
             'v1.1577964600.a4d664cd3d9903e4fecf6f9f671ad953586a7faeb16e67c306fd9f29999dfdd7',
+            1,
         ];
 
         yield 'simple but slightly in the past' => [
@@ -73,6 +95,7 @@ class SignedQueryMiddlewareTest extends TestCase
             '{"operationName":"CurrentUser","variables":{},"query":"query CurrentUser { viewer { id }}',
             null,
             'v1.1577951100.7d3b639703584e3ea4c68b30a37b56bcf94d19ccdc11c7f05a737c4e7e663a6c',
+            0,
         ];
 
         yield 'simple but too much in the past' => [
@@ -80,6 +103,7 @@ class SignedQueryMiddlewareTest extends TestCase
             '{"operationName":"CurrentUser","variables":{},"query":"query CurrentUser { viewer { id }}',
             null,
             'v1.1577951099.' . str_repeat('a', 64),
+            null,
             'Signed query is expired',
         ];
 
@@ -88,6 +112,7 @@ class SignedQueryMiddlewareTest extends TestCase
             '{"operationName":"CurrentUser","variables":{},"query":"query CurrentUser { viewer { id }}',
             null,
             'v1.1577978100.b6fb50cd1aa3974ec9df0c320bf32ff58a28f6fc2040aa13e529a7ef57212e49',
+            0,
         ];
 
         yield 'simple but too much in the future' => [
@@ -95,6 +120,7 @@ class SignedQueryMiddlewareTest extends TestCase
             '{"operationName":"CurrentUser","variables":{},"query":"query CurrentUser { viewer { id }}',
             null,
             'v1.1577978101.' . str_repeat('a', 64),
+            null,
             'Signed query is expired',
         ];
 
@@ -103,7 +129,7 @@ class SignedQueryMiddlewareTest extends TestCase
             '[{"operationName":"CurrentUser","variables":{},"query":"query CurrentUser { viewer { id }},{"operationName":"Configuration","variables":{"key":"announcement-active"},"query":"query Configuration($key: String!) { configuration(key: $key)}"}]',
             null,
             'v1.1577964600.566fafed794d956d662662b0df3d88e5c0a1e52e19111c08cc122f64a54bd8ec',
-
+            0,
         ];
 
         yield 'file upload' => [
@@ -114,6 +140,7 @@ class SignedQueryMiddlewareTest extends TestCase
                 'map' => '{"1":["variables.input.file"]}',
             ],
             'v1.1577964600.69dd1f396016e284afb221966ae5e61323a23222f2ad2a5086e4ba2354f99e58',
+            0,
         ];
 
         yield 'file upload will ignore map and uploaded file to sign' => [
@@ -125,6 +152,7 @@ class SignedQueryMiddlewareTest extends TestCase
                 1 => 'fake file',
             ],
             'v1.1577964600.69dd1f396016e284afb221966ae5e61323a23222f2ad2a5086e4ba2354f99e58',
+            0,
         ];
 
         yield 'no header' => [
@@ -132,6 +160,7 @@ class SignedQueryMiddlewareTest extends TestCase
             '{"operationName":"CurrentUser","variables":{},"query":"query CurrentUser { viewer { id }}',
             null,
             '',
+            null,
             'Missing `X-Signature` HTTP header in signed query',
         ];
 
@@ -140,6 +169,7 @@ class SignedQueryMiddlewareTest extends TestCase
             '{"operationName":"CurrentUser","variables":{},"query":"query CurrentUser { viewer { id }}',
             null,
             'foo',
+            null,
             'Invalid `X-Signature` HTTP header in signed query',
         ];
 
@@ -148,6 +178,7 @@ class SignedQueryMiddlewareTest extends TestCase
             '',
             null,
             'v1.1577964600.' . str_repeat('a', 64),
+            null,
             'Invalid signed query',
         ];
 
@@ -156,6 +187,7 @@ class SignedQueryMiddlewareTest extends TestCase
             '',
             null,
             'v1.1577964600.ff8a9f2bc8090207b824d88251ed8e9d39434607d86e0f0b2837c597d6642c26',
+            0,
             '',
         ];
 
@@ -164,6 +196,7 @@ class SignedQueryMiddlewareTest extends TestCase
             '{"operationName":"CurrentUser","variables":{},"query":"query CurrentUser { viewer { id }}',
             null,
             '',
+            'no-attribute-at-all',
             '',
             '1.2.3.4',
         ];
@@ -173,6 +206,7 @@ class SignedQueryMiddlewareTest extends TestCase
             '{"operationName":"CurrentUser","variables":{},"query":"query CurrentUser { viewer { id }}',
             null,
             'v1.1577964600.a4d664cd3d9903e4fecf6f9f671ad953586a7faeb16e67c306fd9f29999dfdd7',
+            null,
             'Invalid signed query',
             '1.2.3.4',
         ];
@@ -182,6 +216,7 @@ class SignedQueryMiddlewareTest extends TestCase
             '{"operationName":"CurrentUser","variables":{},"query":"query CurrentUser { viewer { id }}',
             null,
             '',
+            null,
             'Missing `X-Signature` HTTP header in signed query',
             '66.249.70.134',
         ];
@@ -191,6 +226,7 @@ class SignedQueryMiddlewareTest extends TestCase
             '{"operationName":"CurrentUser","variables":{},"query":"query CurrentUser { viewer { id }}',
             null,
             'v1.1577951099.20177a7face4e05a75c4b2e41bc97a8225f420f5b7bb1709dd5499821dba0807',
+            0,
             '',
             '66.249.70.134',
         ];
@@ -200,6 +236,7 @@ class SignedQueryMiddlewareTest extends TestCase
             '{"operationName":"CurrentUser","variables":{},"query":"query CurrentUser { viewer { id }}',
             null,
             'v1.1577951099' . str_repeat('a', 64),
+            null,
             'Invalid `X-Signature` HTTP header in signed query',
             '66.249.70.134',
         ];
@@ -209,6 +246,7 @@ class SignedQueryMiddlewareTest extends TestCase
             '{"operationName":"CurrentUser","variables":{},"query":"query CurrentUser { viewer { id }}',
             null,
             '',
+            'no-attribute-at-all',
             '',
             '40.77.188.165',
         ];
@@ -218,6 +256,7 @@ class SignedQueryMiddlewareTest extends TestCase
             '{"operationName":"CurrentUser","variables":{},"query":"query CurrentUser { viewer { id }}',
             null,
             'v1.1577951099.20177a7face4e05a75c4b2e41bc97a8225f420f5b7bb1709dd5499821dba0807',
+            null,
             'Signed query is expired',
             '40.77.188.165',
         ];
@@ -227,6 +266,7 @@ class SignedQueryMiddlewareTest extends TestCase
             '{"operationName":"CurrentUser","variables":{},"query":"query CurrentUser { viewer { id }}',
             null,
             'v1.1577951099' . str_repeat('a', 64),
+            null,
             'Invalid `X-Signature` HTTP header in signed query',
             '40.77.188.165',
         ];
@@ -239,8 +279,16 @@ class SignedQueryMiddlewareTest extends TestCase
         new SignedQueryMiddleware([], []);
     }
 
-    private function process(array $keys, bool $required, string $ip, string $body, ?array $parsedBody, string $signature, string $expectExceptionMessage): void
-    {
+    private function process(
+        array $keys,
+        bool $required,
+        string $ip,
+        string $body,
+        ?array $parsedBody,
+        string $signature,
+        string|int|null $keyName,
+        string $expectExceptionMessage,
+    ): void {
         $request = new ServerRequest(['REMOTE_ADDR' => $ip]);
         $request = $request->withBody(new CallbackStream(fn () => $body))->withParsedBody($parsedBody);
 
@@ -251,8 +299,9 @@ class SignedQueryMiddlewareTest extends TestCase
         $handler = $this->createMock(RequestHandlerInterface::class);
         $handler->expects($expectExceptionMessage ? self::never() : self::once())
             ->method('handle')
-            ->willReturnCallback(function (ServerRequestInterface $incomingRequest) use ($body) {
+            ->willReturnCallback(function (ServerRequestInterface $incomingRequest) use ($required, $body, $keyName) {
                 self::assertSame($body, $incomingRequest->getBody()->getContents(), 'the original body content is still available for next middlewares');
+                self::assertSame($required ? $keyName : 'no-attribute-at-all', $incomingRequest->getAttribute(SignedQueryMiddleware::class, 'no-attribute-at-all'), 'the name of the key used');
 
                 return new Response();
             });
