@@ -68,7 +68,7 @@ abstract class AbstractDatabase
     /**
      * Load SQL dump in local database.
      */
-    final public static function loadData(string $dumpFile): void
+    final public static function loadData(string $dumpFile, bool $loadTestUsers = true): void
     {
         $mariadbArgs = self::getMariadbArgs();
         $dumpFile = self::absolutePath($dumpFile);
@@ -87,7 +87,10 @@ abstract class AbstractDatabase
         self::executeLocalCommand("gunzip -c \"$dumpFile\" | LC_CTYPE=C LANG=C sed 's/ALTER DATABASE `[^`]*`/ALTER DATABASE `$database`/g' | mariadb $mariadbArgs");
         self::executeLocalCommand(PHP_BINARY . ' ./bin/doctrine migrations:migrate --ansi --no-interaction');
         static::loadTriggers();
-        static::loadTestUsers();
+
+        if ($loadTestUsers) {
+            static::loadTestUsers();
+        }
     }
 
     protected static function getDatabaseName(): string
