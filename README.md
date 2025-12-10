@@ -6,7 +6,6 @@
 [![Total Downloads](https://poser.pugx.org/Ecodev/felix/downloads.png)](https://packagist.org/packages/Ecodev/felix)
 [![Latest Stable Version](https://poser.pugx.org/Ecodev/felix/v/stable.png)](https://packagist.org/packages/Ecodev/felix)
 [![License](https://poser.pugx.org/Ecodev/felix/license.png)](https://packagist.org/packages/Ecodev/felix)
-[![Join the chat at https://gitter.im/Ecodev/felix](https://badges.gitter.im/Ecodev/felix.svg)](https://gitter.im/Ecodev/felix)
 
 A collection of opinionated tools to work well with [ecodev/graphql-doctrine](https://github.com/Ecodev/graphql-doctrine) and [@ecodev/natural](https://github.com/Ecodev/natural). 
 
