@@ -9,6 +9,7 @@ use Ecodev\Felix\Api\Scalar\ChronosType;
 use GraphQL\Error\Error;
 use GraphQL\Language\AST\IntValueNode;
 use GraphQL\Language\AST\StringValueNode;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class ChronosTypeTest extends TestCase
@@ -34,9 +35,7 @@ final class ChronosTypeTest extends TestCase
         self::assertSame('2018-09-15T00:00:00+02:00', $actual);
     }
 
-    /**
-     * @dataProvider providerValues
-     */
+    #[DataProvider('providerValues')]
     public function testParseValue(string $input, ?string $expected): void
     {
         $type = new ChronosType();
@@ -48,9 +47,7 @@ final class ChronosTypeTest extends TestCase
         self::assertSame($expected, $actual);
     }
 
-    /**
-     * @dataProvider providerValues
-     */
+    #[DataProvider('providerValues')]
     public function testParseLiteral(string $input, ?string $expected): void
     {
         $type = new ChronosType();

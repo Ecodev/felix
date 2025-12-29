@@ -10,6 +10,7 @@ use GraphQL\Language\AST\FloatValueNode;
 use GraphQL\Language\AST\IntValueNode;
 use GraphQL\Language\AST\StringValueNode;
 use Money\Money;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
@@ -27,9 +28,7 @@ final class CHFTypeTest extends TestCase
         self::assertSame('9.95', $actual, 'should also accept raw value when aggregated from DB');
     }
 
-    /**
-     * @dataProvider providerValues
-     */
+    #[DataProvider('providerValues')]
     public function testParseValue(string $input, Money $expected): void
     {
         $type = new CHFType();
@@ -39,9 +38,7 @@ final class CHFTypeTest extends TestCase
         self::assertTrue($expected->equals($actual));
     }
 
-    /**
-     * @dataProvider providerValues
-     */
+    #[DataProvider('providerValues')]
     public function testParseValueAsFloat(string $input, Money $expected): void
     {
         $type = new CHFType();
@@ -51,9 +48,7 @@ final class CHFTypeTest extends TestCase
         self::assertTrue($expected->equals($actual));
     }
 
-    /**
-     * @dataProvider providerParseValueAsInt
-     */
+    #[DataProvider('providerParseValueAsInt')]
     public function testParseValueAsInt(int $input, Money $expected): void
     {
         $type = new CHFType();
@@ -72,9 +67,7 @@ final class CHFTypeTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider providerValues
-     */
+    #[DataProvider('providerValues')]
     public function testParseLiteral(string $input, Money $expected): void
     {
         $type = new CHFType();
@@ -85,9 +78,7 @@ final class CHFTypeTest extends TestCase
         self::assertTrue($expected->equals($actual));
     }
 
-    /**
-     * @dataProvider providerValues
-     */
+    #[DataProvider('providerValues')]
     public function testParseLiteralAsFloat(string $input, Money $expected): void
     {
         $type = new CHFType();
@@ -98,9 +89,7 @@ final class CHFTypeTest extends TestCase
         self::assertTrue($expected->equals($actual));
     }
 
-    /**
-     * @dataProvider providerValues
-     */
+    #[DataProvider('providerValues')]
     public function testParseLiteralAsInt(string $input, Money $expected): void
     {
         $type = new CHFType();
@@ -123,9 +112,7 @@ final class CHFTypeTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider providerInvalidValues
-     */
+    #[DataProvider('providerInvalidValues')]
     public function testParseValueThrowsWithInvalidValue(string $invalidValue): void
     {
         $type = new CHFType();
@@ -144,9 +131,7 @@ final class CHFTypeTest extends TestCase
         $type->parseValue(new stdClass());
     }
 
-    /**
-     * @dataProvider providerInvalidValues
-     */
+    #[DataProvider('providerInvalidValues')]
     public function testParseLiteralThrowsWithInvalidValue(string $invalidValue): void
     {
         $type = new CHFType();

@@ -40,8 +40,10 @@ final class LoggerFactory implements FactoryInterface
                 $this->logger->pushHandler($mailHandler);
             }
 
-            // Register to log all kinds of PHP errors
-            ErrorHandler::register($this->logger);
+            // Register to log all kinds of PHP errors if not running unit tests
+            if (!class_exists(\PHPUnit\Framework\TestCase::class, false)) {
+                ErrorHandler::register($this->logger);
+            }
         }
 
         return $this->logger;

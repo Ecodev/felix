@@ -10,6 +10,7 @@ use EcodevTests\Felix\Blog\Model\Post;
 use EcodevTests\Felix\Blog\Model\User;
 use EcodevTests\Felix\Traits\TestWithEntityManager;
 use Exception;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class AclFilterTest extends TestCase
@@ -17,10 +18,9 @@ final class AclFilterTest extends TestCase
     use TestWithEntityManager;
 
     /**
-     * @dataProvider providerFilter
-     *
      * @param class-string $class
      */
+    #[DataProvider('providerFilter')]
     public function testFilter(bool $anonymous, string $class, string $expected): void
     {
         $classMetadataFactory = $this->entityManager->getMetadataFactory();

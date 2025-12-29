@@ -763,12 +763,6 @@ parameters:
 			path: tests/UtilityTest.php
 
 		-
-			message: '#^Method Ecodev\\Felix\\Model\\Model@anonymous/tests/UtilityTest\.php\:61\:\:getId\(\) never returns null so it can be removed from the return type\.$#'
-			identifier: return.unusedType
-			count: 1
-			path: tests/UtilityTest.php
-
-		-
 			message: '#^Parameter \#1 \$values of static method Ecodev\\Felix\\Utility\:\:quoteArray\(\) expects array\<bool\|float\|int\|string\|null\>, array given\.$#'
 			identifier: argument.type
 			count: 1

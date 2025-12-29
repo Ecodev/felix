@@ -11,6 +11,7 @@ use GraphQL\Language\AST\IntValueNode;
 use GraphQL\Language\AST\NullValueNode;
 use GraphQL\Language\AST\StringValueNode;
 use GraphQL\Utils\Utils;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class AbstractDecimalTypeTest extends TestCase
@@ -45,9 +46,7 @@ final class AbstractDecimalTypeTest extends TestCase
         };
     }
 
-    /**
-     * @dataProvider providerInputs
-     */
+    #[DataProvider('providerInputs')]
     public function testSerialize(int $decimal, ?string $minimum, ?string $maximum, null|float|int|string $input): void
     {
         $type = $this->createType($decimal, $minimum, $maximum);
@@ -55,9 +54,7 @@ final class AbstractDecimalTypeTest extends TestCase
         self::assertSame($input, $actual);
     }
 
-    /**
-     * @dataProvider providerInputs
-     */
+    #[DataProvider('providerInputs')]
     public function testParseValue(int $decimal, ?string $minimum, ?string $maximum, null|float|int|string $input, ?string $expected): void
     {
         $type = $this->createType($decimal, $minimum, $maximum);
@@ -72,9 +69,7 @@ final class AbstractDecimalTypeTest extends TestCase
         self::assertSame($expected, $actual);
     }
 
-    /**
-     * @dataProvider providerInputs
-     */
+    #[DataProvider('providerInputs')]
     public function testParseLiteral(int $decimal, ?string $minimum, ?string $maximum, null|float|int|string $input, ?string $expected): void
     {
         $type = $this->createType($decimal, $minimum, $maximum);

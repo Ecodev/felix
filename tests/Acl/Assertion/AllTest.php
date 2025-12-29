@@ -8,6 +8,7 @@ use Ecodev\Felix\Acl\Acl;
 use Ecodev\Felix\Acl\Assertion\All;
 use Ecodev\Felix\Acl\Assertion\NamedAssertion;
 use EcodevTests\Felix\Traits\TestWithContainer;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class AllTest extends TestCase
@@ -19,9 +20,7 @@ class AllTest extends TestCase
         $this->createDefaultFelixContainer();
     }
 
-    /**
-     * @dataProvider providerAssert
-     */
+    #[DataProvider('providerAssert')]
     public function testAssert(array $input, bool $expected): void
     {
         $assertions = [];

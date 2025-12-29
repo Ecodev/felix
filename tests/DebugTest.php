@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace EcodevTests\Felix;
 
 use Ecodev\Felix\Debug;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class DebugTest extends TestCase
 {
-    /**
-     * @dataProvider providerExport
-     */
+    #[DataProvider('providerExport')]
     public function testExport(mixed $data, string $expected): void
     {
         $actual = Debug::export($data, true);

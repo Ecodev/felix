@@ -9,6 +9,7 @@ use Ecodev\Felix\Api\Scalar\DateType;
 use GraphQL\Error\Error;
 use GraphQL\Language\AST\IntValueNode;
 use GraphQL\Language\AST\StringValueNode;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class DateTypeTest extends TestCase
@@ -34,9 +35,7 @@ final class DateTypeTest extends TestCase
         self::assertSame('2010-02-03', $actual);
     }
 
-    /**
-     * @dataProvider providerValues
-     */
+    #[DataProvider('providerValues')]
     public function testParseValue(string $input, string $expected): void
     {
         $type = new DateType();
@@ -45,9 +44,7 @@ final class DateTypeTest extends TestCase
         self::assertSame($expected, $actual->format('c'));
     }
 
-    /**
-     * @dataProvider providerValues
-     */
+    #[DataProvider('providerValues')]
     public function testParseLiteral(string $input, string $expected): void
     {
         $type = new DateType();

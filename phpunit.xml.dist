@@ -3,15 +3,17 @@
          xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
          bootstrap="./vendor/autoload.php"
          colors="true"
-         cacheResultFile="/tmp/.felix.phpunit.result.cache">
-    <coverage>
-        <include>
-            <directory>./src</directory>
-        </include>
-    </coverage>
+         cacheDirectory="/tmp/.phpunit.cache.felix"
+         displayDetailsOnAllIssues="true"
+>
     <testsuites>
         <testsuite name="tests">
             <directory>./tests/</directory>
         </testsuite>
     </testsuites>
+    <source>
+        <include>
+            <directory>./src</directory>
+        </include>
+    </source>
 </phpunit>

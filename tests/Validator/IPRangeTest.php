@@ -5,20 +5,19 @@ declare(strict_types=1);
 namespace EcodevTests\Felix\Validator;
 
 use Ecodev\Felix\Validator\IPRange;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class IPRangeTest extends TestCase
 {
-    /**
-     * @dataProvider IPv4Data
-     * @dataProvider IPv6Data
-     */
+    #[DataProvider('providerMatches')]
+    #[DataProvider('IPv6Data')]
     public function testMatches(bool $result, string $remoteAddr, string $cidr): void
     {
         self::assertSame($result, IPRange::matches($remoteAddr, [$cidr]));
     }
 
-    public static function IPv4Data(): iterable
+    public static function providerMatches(): iterable
     {
         return [
             'valid - exact (no mask; /32 equiv)' => [true, '192.168.1.1', '192.168.1.1'],
@@ -40,16 +39,16 @@ class IPRangeTest extends TestCase
     public static function IPv6Data(): iterable
     {
         return [
-            'valid - ipv4 subnet' => [true, '2a01:198:603:0:396e:4789:8e99:890f', '2a01:198:603:0::/65'],
+            'valid - ipv6 subnet' => [true, '2a01:198:603:0:396e:4789:8e99:890f', '2a01:198:603:0::/65'],
             'valid - exact' => [true, '0:0:0:0:0:0:0:1', '::1'],
             'valid - all subnets' => [true, '0:0:603:0:396e:4789:8e99:0001', '::/0'],
-            'valid - subnet expands to all' => [true, '0:0:603:0:396e:4789:8e99:0001', '2a01:198:603:0::/0'],
+            'valid - ipv6 subnet expands to all' => [true, '0:0:603:0:396e:4789:8e99:0001', '2a01:198:603:0::/0'],
             'invalid - not in subnet' => [false, '2a00:198:603:0:396e:4789:8e99:890f', '2a01:198:603:0::/65'],
             'invalid - does not match exact' => [false, '2a01:198:603:0:396e:4789:8e99:890f', '::1'],
             'invalid - compressed notation, does not match exact' => [false, '0:0:603:0:396e:4789:8e99:0001', '::1'],
             'invalid - garbage IP' => [false, '}__test|O:21:&quot;JDatabaseDriverMysqli&quot;:3:{s:2', '::1'],
             'invalid - invalid cidr' => [false, '2a01:198:603:0:396e:4789:8e99:890f', 'unknown'],
-            'invalid - empty IP address' => [false, '', '::1'],
+            'invalid - ipv6 empty IP address' => [false, '', '::1'],
         ];
     }
 

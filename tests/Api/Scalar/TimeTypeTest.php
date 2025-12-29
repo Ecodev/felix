@@ -9,6 +9,7 @@ use Ecodev\Felix\Api\Scalar\TimeType;
 use GraphQL\Error\Error;
 use GraphQL\Language\AST\IntValueNode;
 use GraphQL\Language\AST\StringValueNode;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class TimeTypeTest extends TestCase
@@ -26,9 +27,7 @@ final class TimeTypeTest extends TestCase
         self::assertSame('23:59', $actual);
     }
 
-    /**
-     * @dataProvider providerValues
-     */
+    #[DataProvider('providerValues')]
     public function testParseValue(string $input, ?string $expected): void
     {
         $type = new TimeType();
@@ -40,9 +39,7 @@ final class TimeTypeTest extends TestCase
         self::assertSame($expected, $actual);
     }
 
-    /**
-     * @dataProvider providerValues
-     */
+    #[DataProvider('providerValues')]
     public function testParseLiteral(string $input, ?string $expected): void
     {
         $type = new TimeType();

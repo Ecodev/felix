@@ -9,15 +9,15 @@ use Ecodev\Felix\Service\ImageResizer;
 use Exception;
 use Imagine\Image\ImageInterface;
 use Imagine\Image\ImagineInterface;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class ImageResizerTest extends TestCase
 {
     /**
-     * @dataProvider providerResize
-     *
      * @param non-empty-string $expected
      */
+    #[DataProvider('providerResize')]
     public function testResize(string $extension, int $wantedHeight, bool $useWebp, string $expected): void
     {
         $mime = match ($extension) {

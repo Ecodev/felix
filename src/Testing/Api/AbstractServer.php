@@ -12,6 +12,7 @@ use GraphQL\Type\Schema;
 use Laminas\Diactoros\ServerRequest;
 use Mezzio\Session\Session;
 use Mezzio\Session\SessionMiddleware;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Throwable;
 
@@ -39,9 +40,7 @@ abstract class AbstractServer extends TestCase
         self::assertTrue(true, 'schema passes validation');
     }
 
-    /**
-     * @dataProvider providerQuery
-     */
+    #[DataProvider('providerQuery')]
     public function testQuery(?string $user, ServerRequest $request, array $expected, ?callable $dataPreparator = null, ?callable $additionalAsserts = null): void
     {
         $this->setCurrentUser($user);

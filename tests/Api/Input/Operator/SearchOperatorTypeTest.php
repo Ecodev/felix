@@ -13,6 +13,7 @@ use EcodevTests\Felix\Blog\Model\User;
 use EcodevTests\Felix\Traits\TestWithTypes;
 use GraphQL\Doctrine\Factory\UniqueNameFactory;
 use GraphQL\Type\Definition\Type;
+use PHPUnit\Framework\Attributes\DataProvider;
 use ReflectionClass;
 
 final class SearchOperatorTypeTest extends OperatorType
@@ -20,10 +21,9 @@ final class SearchOperatorTypeTest extends OperatorType
     use TestWithTypes;
 
     /**
-     * @dataProvider providerSearch
-     *
      * @param class-string $class
      */
+    #[DataProvider('providerSearch')]
     public function testSearch(string $class, string $term, int $expectedJoinCount, ?string $expected, array $expectedParameters): void
     {
         $operator = new class($this->types, Type::string()) extends SearchOperatorType {

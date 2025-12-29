@@ -6,15 +6,14 @@ namespace EcodevTests\Felix\ORM\Query;
 
 use Ecodev\Felix\ORM\Query\NativeIn;
 use EcodevTests\Felix\Traits\TestWithTypes;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class NativeInTest extends TestCase
 {
     use TestWithTypes;
 
-    /**
-     * @dataProvider providerNativeIn
-     */
+    #[DataProvider('providerNativeIn')]
     public function testNativeIn(string $dql, string $expected): void
     {
         $query = $this->entityManager->createQuery($dql);

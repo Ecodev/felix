@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace EcodevTests\Felix\Service;
 
 use Ecodev\Felix\Service\TransportFactory;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class TransportFactoryTest extends TestCase
 {
-    /**
-     * @dataProvider providerDsn
-     */
+    #[DataProvider('providerDsn')]
     public function testDsn(null|array|string $input, string $expected): void
     {
         $actual = TransportFactory::dsn($input);

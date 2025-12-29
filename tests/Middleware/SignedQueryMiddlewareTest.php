@@ -9,6 +9,7 @@ use Ecodev\Felix\Middleware\SignedQueryMiddleware;
 use Laminas\Diactoros\CallbackStream;
 use Laminas\Diactoros\Response;
 use Laminas\Diactoros\ServerRequest;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -25,9 +26,7 @@ class SignedQueryMiddlewareTest extends TestCase
         Chronos::setTestNow();
     }
 
-    /**
-     * @dataProvider dataProviderQuery
-     */
+    #[DataProvider('dataProviderQuery')]
     public function testRequiredSignedQuery(
         array $keys,
         string $body,
@@ -40,9 +39,7 @@ class SignedQueryMiddlewareTest extends TestCase
         $this->process($keys, true, $ip, $body, $parsedBody, $signature, $keyName, $expectExceptionMessage);
     }
 
-    /**
-     * @dataProvider dataProviderQuery
-     */
+    #[DataProvider('dataProviderQuery')]
     public function testNonRequiredSignedQuery(
         array $keys,
         string $body,

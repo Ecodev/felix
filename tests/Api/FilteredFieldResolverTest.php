@@ -15,14 +15,13 @@ use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Schema;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
 final class FilteredFieldResolverTest extends TestCase
 {
-    /**
-     * @dataProvider providerLoad
-     */
+    #[DataProvider('providerLoad')]
     public function testLoad(mixed $value, mixed $expected): void
     {
         $model = new class($value) {

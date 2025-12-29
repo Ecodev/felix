@@ -7,6 +7,7 @@ namespace EcodevTests\Felix\Api\Scalar;
 use GraphQL\Error\Error;
 use GraphQL\Language\AST\IntValueNode;
 use GraphQL\Language\AST\StringValueNode;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 abstract class AbstractStringBasedType extends TestCase
@@ -15,9 +16,7 @@ abstract class AbstractStringBasedType extends TestCase
 
     abstract public function getTypeName(): string;
 
-    /**
-     * @dataProvider providerValues
-     */
+    #[DataProvider('providerValues')]
     public function testSerialize(?string $input, ?string $expected): void
     {
         $type = $this->createType();
@@ -25,9 +24,7 @@ abstract class AbstractStringBasedType extends TestCase
         self::assertSame($expected, $actual);
     }
 
-    /**
-     * @dataProvider providerValues
-     */
+    #[DataProvider('providerValues')]
     public function testParseValue(?string $input, ?string $expected, bool $isValid): void
     {
         $type = $this->createType();
@@ -42,9 +39,7 @@ abstract class AbstractStringBasedType extends TestCase
         self::assertSame($expected, $actual);
     }
 
-    /**
-     * @dataProvider providerValues
-     */
+    #[DataProvider('providerValues')]
     public function testParseLiteral(string $input, ?string $expected, bool $isValid): void
     {
         $type = $this->createType();

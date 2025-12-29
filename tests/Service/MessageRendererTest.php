@@ -26,7 +26,7 @@ final class MessageRendererTest extends TestCase
         $viewRenderer->expects($matcher)
             ->method('render')
             ->willReturnCallback(function (ViewModel $viewModel) use ($matcher, $user) {
-                $callback = match ($matcher->getInvocationCount()) {
+                $callback = match ($matcher->numberOfInvocations()) {
                     1 => (function () use ($viewModel, $user) {
                         $variables = [
                             'fooMail' => 'barMail',

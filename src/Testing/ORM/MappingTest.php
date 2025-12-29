@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Ecodev\Felix\Testing\ORM;
 
 use Doctrine\ORM\Tools\SchemaValidator;
+use PHPUnit\Framework\Attributes\PreserveGlobalState;
+use PHPUnit\Framework\Attributes\RunInSeparateProcess;
 use PHPUnit\Framework\TestCase;
 
 class MappingTest extends TestCase
@@ -27,11 +29,8 @@ class MappingTest extends TestCase
         self::assertSame('', trim($result), 'should have valid mapping');
     }
 
-    /**
-     * @runInSeparateProcess
-     *
-     * @preserveGlobalState disabled
-     */
+    #[PreserveGlobalState(false)]
+    #[RunInSeparateProcess]
     public function testMappingIsSync(): void
     {
         $em = _em();

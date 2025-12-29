@@ -6,6 +6,7 @@ namespace EcodevTests\Felix\Model\Traits;
 
 use Ecodev\Felix\Model\Traits\Image;
 use EcodevTests\Felix\Traits\TestWithContainer;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\UploadedFileInterface;
 
@@ -49,9 +50,7 @@ final class ImageTest extends TestCase
         self::assertSame(456, $image->getHeight());
     }
 
-    /**
-     * @dataProvider providerSetFile
-     */
+    #[DataProvider('providerSetFile')]
     public function testSetFile(string $filename, int $width, int $height, bool $isSvg = false): void
     {
         $this->createDefaultFelixContainer();

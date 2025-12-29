@@ -69,6 +69,6 @@
         "mikey179/vfsstream": "@stable",
         "phpstan/phpstan": "@stable",
         "phpstan/phpstan-phpunit": "@stable",
-        "phpunit/phpunit": "^9.6"
+        "phpunit/phpunit": "@stable"
     }
 }

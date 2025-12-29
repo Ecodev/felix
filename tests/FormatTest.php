@@ -6,13 +6,12 @@ namespace EcodevTests\Felix;
 
 use Ecodev\Felix\Format;
 use Money\Money;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class FormatTest extends TestCase
 {
-    /**
-     * @dataProvider providerTruncate
-     */
+    #[DataProvider('providerTruncate')]
     public function testTruncate(array $args, string $expected): void
     {
         $actual = Format::truncate(...$args);
@@ -30,9 +29,7 @@ final class FormatTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider providerSplitSearchTerms
-     */
+    #[DataProvider('providerSplitSearchTerms')]
     public function testSplitSearchTerms(?string $search, array $expected): void
     {
         self::assertSame($expected, Format::splitSearchTerms($search));

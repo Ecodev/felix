@@ -11,6 +11,7 @@ use EcodevTests\Felix\Blog\Model\User;
 use EcodevTests\Felix\Traits\TestWithEntityManager;
 use Exception;
 use GraphQL\Doctrine\Definition\EntityID;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 use Throwable;
@@ -59,7 +60,7 @@ final class UtilityTest extends TestCase
         $input = [
             3 => new stdClass(),
             'model' => new class() implements Model {
-                public function getId(): ?int
+                public function getId(): int
                 {
                     return 123456;
                 }
@@ -110,15 +111,11 @@ final class UtilityTest extends TestCase
         self::assertSame($expected, $actual);
     }
 
-    /**
-     * @dataProvider providerNativeUniqueWillThrowWithOurTestObject
-     */
+    #[DataProvider('providerNativeUniqueWillThrowWithOurTestObject')]
     public function testNativeUniqueWillThrowWithOurTestObject(int $flag): void
     {
         set_error_handler(
             function (int $errno, string $message): void {
-                restore_error_handler();
-
                 throw new Exception($message);
             },
         );
@@ -127,6 +124,8 @@ final class UtilityTest extends TestCase
             $foo = array_unique($this->createArray(), $flag);
         } catch (Throwable $e) {
             self::assertStringStartsWith('Object of class class@anonymous could not be converted to ', $e->getMessage());
+        } finally {
+            restore_error_handler();
         }
     }
 
@@ -138,9 +137,7 @@ final class UtilityTest extends TestCase
         yield [SORT_LOCALE_STRING];
     }
 
-    /**
-     * @dataProvider providerQuoteArray
-     */
+    #[DataProvider('providerQuoteArray')]
     public function testQuoteArray(array $input, string $expected): void
     {
         self::assertSame($expected, Utility::quoteArray($input));
@@ -159,9 +156,7 @@ final class UtilityTest extends TestCase
         yield [[1.23], "'1.23'"];
     }
 
-    /**
-     * @dataProvider providerGetCookieDomain
-     */
+    #[DataProvider('providerGetCookieDomain')]
     public function testGetCookieDomain(string $input, ?string $expected): void
     {
         $actual = Utility::getCookieDomain($input);

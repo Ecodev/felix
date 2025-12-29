@@ -5,15 +5,14 @@ declare(strict_types=1);
 namespace Ecodev\Felix\Testing\Acl;
 
 use Ecodev\Felix\Acl\Acl;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 abstract class AbstractAcl extends TestCase
 {
     abstract protected function createAcl(): Acl;
 
-    /**
-     * @dataProvider providerRole
-     */
+    #[DataProvider('providerRole')]
     final public function testRole(string $role): void
     {
         $acl = $this->createAcl();
@@ -43,7 +42,7 @@ abstract class AbstractAcl extends TestCase
         self::assertTrue($expected === $actual, 'File content does not match, compare with: meld ' . $file . ' ' . $logFile);
     }
 
-    abstract public function providerRole(): iterable;
+    abstract public static function providerRole(): iterable;
 
     final public function testEverythingIsTranslated(): void
     {

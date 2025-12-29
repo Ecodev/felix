@@ -11,15 +11,14 @@ use Exception;
 use GraphQL\Error\Error;
 use Monolog\Level;
 use Monolog\LogRecord;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Mailer\Transport\TransportInterface;
 use Symfony\Component\Mime\Email;
 
 class MailerHandlerTest extends TestCase
 {
-    /**
-     * @dataProvider providerHandle
-     */
+    #[DataProvider('providerHandle')]
     public function testHandle(array $event, bool $expected): void
     {
         $record = new LogRecord(

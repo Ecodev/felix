@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace EcodevTests\Felix\Service;
 
 use Ecodev\Felix\Service\Bvr;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class BvrTest extends TestCase
 {
-    /**
-     * @dataProvider providerGetReferenceNumber
-     */
+    #[DataProvider('providerGetReferenceNumber')]
     public function testGetReferenceNumber(string $bankAccount, string $referenceNumber, string $expected): void
     {
         $actual = Bvr::getReferenceNumber($bankAccount, $referenceNumber);
@@ -44,9 +43,7 @@ final class BvrTest extends TestCase
         Bvr::getReferenceNumber('123456', '1.5');
     }
 
-    /**
-     * @dataProvider providerModulo10
-     */
+    #[DataProvider('providerModulo10')]
     public function testModulo10(string $number, int $expected): void
     {
         $actual = Bvr::modulo10($number);
@@ -75,9 +72,7 @@ final class BvrTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider providerExtractCustomId
-     */
+    #[DataProvider('providerExtractCustomId')]
     public function testExtractCustomId(string $referenceNumber, string $expected): void
     {
         $actual = Bvr::extractCustomId($referenceNumber);
@@ -105,9 +100,7 @@ final class BvrTest extends TestCase
         Bvr::extractCustomId('800826000000000000000002010');
     }
 
-    /**
-     * @dataProvider providerQrIban
-     */
+    #[DataProvider('providerQrIban')]
     public function testQrIban(string $iban, bool $expected): void
     {
         $actual = Bvr::isQrIban($iban);

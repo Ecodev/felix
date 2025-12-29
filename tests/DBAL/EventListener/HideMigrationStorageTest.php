@@ -11,6 +11,7 @@ use Doctrine\ORM\Tools\Console\Command\SchemaTool\UpdateCommand;
 use Doctrine\ORM\Tools\Console\Command\ValidateSchemaCommand;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider;
 use Ecodev\Felix\DBAL\EventListener\HideMigrationStorage;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Event\ConsoleCommandEvent;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -42,9 +43,8 @@ class HideMigrationStorageTest extends TestCase
 
     /**
      * @param class-string<AbstractEntityManagerCommand> $command
-     *
-     * @dataProvider providerItFiltersOutMigrationMetadataTableWhenRunningSpecificCommands
      */
+    #[DataProvider('providerItFiltersOutMigrationMetadataTableWhenRunningSpecificCommands')]
     public function testItFiltersOutMigrationMetadataTableWhenRunningSpecificCommands(string $command): void
     {
         $service = new HideMigrationStorage('doctrine_migration_versions');

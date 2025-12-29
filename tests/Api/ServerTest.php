@@ -16,6 +16,8 @@ use Laminas\ConfigAggregator\ArrayProvider;
 use Laminas\ConfigAggregator\ConfigAggregator;
 use Laminas\Diactoros\CallbackStream;
 use Laminas\Diactoros\ServerRequest;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 
@@ -24,7 +26,7 @@ class ServerTest extends TestCase
     use TestWithContainer;
 
     /**
-     * @var LoggerInterface&\PHPUnit\Framework\MockObject\MockObject
+     * @var LoggerInterface&MockObject
      */
     private LoggerInterface $logger;
 
@@ -44,9 +46,7 @@ class ServerTest extends TestCase
         $this->createContainer($aggregator);
     }
 
-    /**
-     * @dataProvider providerExecute
-     */
+    #[DataProvider('providerExecute')]
     public function testExecute(string $body, array $expected, string $expectedLog = ''): void
     {
         $schema = new Schema(['query' => new ObjectType([

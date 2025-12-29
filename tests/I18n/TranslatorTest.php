@@ -10,6 +10,8 @@ use EcodevTests\Felix\Traits\TestWithContainer;
 use Laminas\ConfigAggregator\ArrayProvider;
 use Laminas\ConfigAggregator\ConfigAggregator;
 use Laminas\I18n\Translator\Loader\PhpArray;
+use Laminas\I18n\Translator\TranslatorServiceFactory;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class TranslatorTest extends TestCase
@@ -32,7 +34,7 @@ class TranslatorTest extends TestCase
                 ],
                 'dependencies' => [
                     'factories' => [
-                        Translator::class => \Laminas\I18n\Translator\TranslatorServiceFactory::class,
+                        Translator::class => TranslatorServiceFactory::class,
                     ],
                 ],
             ]),
@@ -65,9 +67,7 @@ class TranslatorTest extends TestCase
         self::assertSame('translated value translated value', _tr('foo %param% param %param%', ['param' => 'value']));
     }
 
-    /**
-     * @dataProvider providerTr
-     */
+    #[DataProvider('providerTr')]
     public function testTr(string $message, array $replacements, string $expected): void
     {
         $this->createDefaultFelixContainer();

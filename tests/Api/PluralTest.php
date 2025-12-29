@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace EcodevTests\Felix\Api;
 
 use Ecodev\Felix\Api\Plural;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class PluralTest extends TestCase
 {
-    /**
-     * @dataProvider providerMake
-     */
+    #[DataProvider('providerMake')]
     public function testMake(string $input, string $expected): void
     {
         self::assertSame($expected, Plural::make($input));
