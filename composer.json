@@ -45,7 +45,7 @@
         "ext-pdo": "*",
         "ext-readline": "*",
         "cakephp/chronos": "^3.3",
-        "doctrine/dbal": "^4.4",
+        "doctrine/dbal": "^4.3",
         "doctrine/migrations": "^3.9",
         "ecodev/graphql-doctrine": "^11.0",
         "imagine/imagine": "^1.5",
