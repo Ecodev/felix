@@ -13,13 +13,7 @@ abstract class IPRange
      */
     final public static function matches(string $ip, array $cidrs): bool
     {
-        foreach ($cidrs as $cidr) {
-            if (self::matchesOne($ip, $cidr)) {
-                return true;
-            }
-        }
-
-        return false;
+        return array_any($cidrs, fn (string $cidr) => self::matchesOne($ip, $cidr));
     }
 
     private static function matchesOne(string $ip, string $cidr): bool

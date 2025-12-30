@@ -172,14 +172,7 @@ final class DebugAcl extends \Laminas\Permissions\Acl\Acl
             $roles = [$role];
         }
 
-        // If at least one role is allowed, then return early
-        foreach ($roles as $role) {
-            if (parent::isAllowed($role, $resource, $privilege)) {
-                return true;
-            }
-        }
-
-        return false;
+        return array_any($roles, fn (null|RoleInterface|string $role) => parent::isAllowed($role, $resource, $privilege));
     }
 
     /**

@@ -64,13 +64,8 @@ abstract class SetType extends Type
         }
 
         $possibleValues = $this->getPossibleValues();
-        foreach ($values as $value) {
-            if (!in_array($value, $possibleValues, true)) {
-                return false;
-            }
-        }
 
-        return true;
+        return array_all($values, fn (mixed $value) => in_array($value, $possibleValues, true));
     }
 
     /**

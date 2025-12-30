@@ -31,13 +31,7 @@ final class All implements NamedAssertion
      */
     public function assert(Acl $acl, ?RoleInterface $role = null, ?ResourceInterface $resource = null, $privilege = null): bool
     {
-        foreach ($this->asserts as $assert) {
-            if (!$assert->assert($acl, $role, $resource, $privilege)) {
-                return false;
-            }
-        }
-
-        return true;
+        return array_all($this->asserts, fn (NamedAssertion $assert) => $assert->assert($acl, $role, $resource, $privilege));
     }
 
     public function getName(): string
