@@ -10,14 +10,14 @@ use PHPUnit\Framework\TestCase;
 
 class IPRangeTest extends TestCase
 {
-    #[DataProvider('providerMatches')]
+    #[DataProvider('IPv4Data')]
     #[DataProvider('IPv6Data')]
     public function testMatches(bool $result, string $remoteAddr, string $cidr): void
     {
         self::assertSame($result, IPRange::matches($remoteAddr, [$cidr]));
     }
 
-    public static function providerMatches(): iterable
+    public static function IPv4Data(): iterable
     {
         return [
             'valid - exact (no mask; /32 equiv)' => [true, '192.168.1.1', '192.168.1.1'],
