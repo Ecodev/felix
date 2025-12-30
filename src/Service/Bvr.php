@@ -28,7 +28,7 @@ use Exception;
  */
 final class Bvr
 {
-    private const TABLE = [
+    private const array TABLE = [
         [0, 9, 4, 6, 8, 2, 7, 1, 3, 5],
         [9, 4, 6, 8, 2, 7, 1, 3, 5, 0],
         [4, 6, 8, 2, 7, 1, 3, 5, 0, 9],

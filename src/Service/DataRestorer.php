@@ -10,7 +10,7 @@ use Exception;
 
 class DataRestorer
 {
-    private const NULL_TOKEN = 'MY_SECRET_NULL_TOKEN';
+    private const string NULL_TOKEN = 'MY_SECRET_NULL_TOKEN';
 
     private array $restoreQueries = [];
 

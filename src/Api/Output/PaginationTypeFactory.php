@@ -18,7 +18,7 @@ use Psr\Container\ContainerInterface;
  */
 class PaginationTypeFactory implements AbstractFactoryInterface
 {
-    private const PATTERN = '~^(.*)Pagination$~';
+    private const string PATTERN = '~^(.*)Pagination$~';
 
     public function canCreate(ContainerInterface $container, $requestedName): bool
     {

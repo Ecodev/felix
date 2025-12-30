@@ -13,7 +13,7 @@ use Imagine\Image\ImagineInterface;
  */
 class ImageResizer
 {
-    private const CACHE_IMAGE_PATH = 'data/cache/images/';
+    private const string CACHE_IMAGE_PATH = 'data/cache/images/';
 
     public function __construct(
         private readonly ImagineInterface $imagine,

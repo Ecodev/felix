@@ -12,7 +12,7 @@ use Psr\Http\Message\UploadedFileInterface;
 
 final class ImageTest extends TestCase
 {
-    private const TEMP = '/tmp/felix';
+    private const string TEMP = '/tmp/felix';
 
     use TestWithContainer {
         tearDown as tearDownWithContainer;
