@@ -96,7 +96,7 @@ final class SignedQueryMiddleware implements MiddlewareInterface
 
         foreach ($this->keys as $name => $value) {
             $computedHash = hash_hmac('sha256', $payload, $value);
-            if ($hash === $computedHash) {
+            if (hash_equals($hash, $computedHash)) {
                 return $request->withAttribute($this::class, $name);
             }
         }
