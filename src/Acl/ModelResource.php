@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Ecodev\Felix\Acl;
 
-use Doctrine\ORM\Proxy\DefaultProxyClassNameResolver;
 use Ecodev\Felix\Model\Model;
 use Ecodev\Felix\Utility;
 use InvalidArgumentException;
@@ -33,9 +32,6 @@ final class ModelResource extends GenericResource
         if (!is_subclass_of($class, Model::class)) {
             throw new InvalidArgumentException('The class name must be an implementation of Model but given: ' . $class);
         }
-
-        $resolver = new DefaultProxyClassNameResolver();
-        $class = $resolver->resolveClassName($class);
 
         parent::__construct($class);
     }

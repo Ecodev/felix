@@ -85,7 +85,7 @@ class DataRestorer
                     throw new Exception('Cannot write to ' . $fileName);
                 }
                 $columnNames = array_keys($row);
-                fputcsv($buffer, $columnNames);
+                fputcsv($buffer, $columnNames, escape: '');
                 $firstRow = false;
             }
 
@@ -117,7 +117,7 @@ class DataRestorer
             throw new Exception('Cannot write in memory');
         }
 
-        fputcsv($fp, $fields);
+        fputcsv($fp, $fields, escape: '');
         rewind($fp);
         $data = stream_get_contents($fp);
         if ($data === false) {
