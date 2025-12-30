@@ -39,7 +39,7 @@ class SignedQueryMiddlewareTest extends TestCase
         $this->process($keys, true, $ip, $body, $parsedBody, $signature, $keyName, $expectExceptionMessage);
     }
 
-    #[DataProvider('dataProviderQuery')]
+    #[DataProvider('dataProviderQuery', false)]
     public function testNonRequiredSignedQuery(
         array $keys,
         string $body,

@@ -189,8 +189,8 @@ return (new PhpCsFixer\Config())
         'php_unit_assert_new_names' => true,
         'php_unit_attributes' => false, // Requires PHPUnit 10
         'php_unit_construct' => true,
-        'php_unit_data_provider_method_order' => true,
-        'php_unit_data_provider_name' => ['prefix' => 'provider', 'suffix' => ''],
+        'php_unit_data_provider_method_order' => false, // In most cases, yes, but we still have a few exceptions of data providers shared across multiple tests
+        'php_unit_data_provider_name' => false, // In most cases, yes, but we still have a few exceptions of data providers shared across multiple tests
         'php_unit_data_provider_return_type' => true,
         'php_unit_data_provider_static' => true,
         'php_unit_dedicate_assert' => true,

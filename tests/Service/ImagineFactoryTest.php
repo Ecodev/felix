@@ -17,7 +17,7 @@ class ImagineFactoryTest extends TestCase
     {
         $factory = new ImagineFactory();
 
-        $actual = $factory($this->createMock(ContainerInterface::class), '');
+        $actual = $factory(self::createStub(ContainerInterface::class), '');
         self::assertInstanceOf(ImagineInterface::class, $actual);
 
         $image = $actual->create(new Box(10, 10));

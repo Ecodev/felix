@@ -235,7 +235,7 @@ parameters:
 			path: tests/Service/ImagineFactoryTest.php
 
 		-
-			message: '#^PHPDoc tag @var with type Doctrine\\ORM\\EntityManager is not subtype of native type PHPUnit\\Framework\\MockObject\\MockObject\.$#'
+			message: '#^PHPDoc tag @var with type Doctrine\\ORM\\EntityManager is not subtype of native type PHPUnit\\Framework\\MockObject\\Stub\.$#'
 			identifier: varTag.nativeType
 			count: 1
 			path: tests/Service/MailerTest.php

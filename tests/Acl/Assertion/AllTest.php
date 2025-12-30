@@ -35,7 +35,7 @@ class AllTest extends TestCase
 
         $assertion = new All(...$assertions);
 
-        $acl = $this->createMock(Acl::class);
+        $acl = self::createStub(Acl::class);
         self::assertSame($expected, $assertion->assert($acl));
     }
 

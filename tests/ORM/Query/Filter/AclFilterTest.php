@@ -127,7 +127,7 @@ final class AclFilterTest extends TestCase
         $collection->enable(AclFilter::class);
         self::assertSame('Ecodev\Felix\ORM\Query\Filter\AclFiltera:0:{}', $collection->getHash());
 
-        $user = $this->createMock(\Ecodev\Felix\Model\User::class);
+        $user = self::createStub(\Ecodev\Felix\Model\User::class);
         $user->method('getId')->willReturn(123);
 
         /** @var AclFilter $filter */

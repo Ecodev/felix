@@ -27,8 +27,8 @@ class LoggerFactoryTest extends TestCase
     {
         $container = new ServiceManager([
             'factories' => [
-                DbHandler::class => fn () => $this->createMock(DbHandler::class),
-                MailerHandler::class => fn () => $this->createMock(MailerHandler::class),
+                DbHandler::class => fn () => self::createStub(DbHandler::class),
+                MailerHandler::class => fn () => self::createStub(MailerHandler::class),
             ],
         ]);
 
@@ -42,7 +42,7 @@ class LoggerFactoryTest extends TestCase
     {
         $container = new ServiceManager([
             'factories' => [
-                DbHandler::class => fn () => $this->createMock(DbHandler::class),
+                DbHandler::class => fn () => self::createStub(DbHandler::class),
                 MailerHandler::class => fn () => null,
             ],
         ]);

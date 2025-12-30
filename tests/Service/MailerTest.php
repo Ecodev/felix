@@ -18,7 +18,7 @@ final class MailerTest extends TestCase
     private function createMockMailer(): Mailer
     {
         /** @var EntityManager $entityManager */
-        $entityManager = $this->createMock(EntityManager::class);
+        $entityManager = self::createStub(EntityManager::class);
         $transport = new InMemoryTransport();
 
         $messageRepository = new class() implements MessageRepository {

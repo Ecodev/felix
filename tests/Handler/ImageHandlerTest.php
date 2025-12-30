@@ -81,7 +81,7 @@ class ImageHandlerTest extends TestCase
         $image = $this->createImageMock('vfs://felix/image.webp');
         $repository = $this->createRepositoryMock($image);
 
-        $imageResizer = $this->createMock(ImageResizer::class);
+        $imageResizer = self::createStub(ImageResizer::class);
 
         // A request specifically accepting webp images
         $request = new ServerRequest();
@@ -119,7 +119,7 @@ class ImageHandlerTest extends TestCase
     public function testWillErrorIfImageNotFoundInDatabase(): void
     {
         $repository = $this->createRepositoryMock(null);
-        $imageResizer = $this->createMock(ImageResizer::class);
+        $imageResizer = self::createStub(ImageResizer::class);
         $request = new ServerRequest();
 
         $response = $this->handle($repository, $imageResizer, $request);
@@ -130,7 +130,7 @@ class ImageHandlerTest extends TestCase
     {
         $image = $this->createImageMock('vfs://felix/totally-non-existing-path');
         $repository = $this->createRepositoryMock($image);
-        $imageResizer = $this->createMock(ImageResizer::class);
+        $imageResizer = self::createStub(ImageResizer::class);
         $request = new ServerRequest();
 
         $response = $this->handle($repository, $imageResizer, $request);

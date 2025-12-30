@@ -74,7 +74,7 @@ class ImageResizerTest extends TestCase
 
     public function testWebpToJpg(): void
     {
-        $imagineImage = $this->createMock(ImageInterface::class);
+        $imagineImage = self::createStub(ImageInterface::class);
 
         $imagine = $this->createMock(ImagineInterface::class);
         $imagine->expects(self::once())->method('open')->willReturn($imagineImage);
