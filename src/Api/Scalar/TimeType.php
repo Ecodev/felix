@@ -40,7 +40,7 @@ final class TimeType extends ScalarType
             return null;
         }
 
-        if (!preg_match('~^(?<hour>\d{1,2})(([h:]$)|([h:](?<minute>\d{1,2}))?$)~', trim($value), $m)) {
+        if (!preg_match('~^(?<hour>\d{1,2})(([h:]$)|([h:](?<minute>\d{1,2}))?$)~', mb_trim($value), $m)) {
             throw new Error('Invalid format for ChronosTime. Expected "14h35", "14:35" or "14h", but got: ' . Utils::printSafe($value));
         }
 

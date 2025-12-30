@@ -26,7 +26,7 @@ class MappingTest extends TestCase
             $result .= PHP_EOL;
         }
 
-        self::assertSame('', trim($result), 'should have valid mapping');
+        self::assertSame('', mb_trim($result), 'should have valid mapping');
     }
 
     #[PreserveGlobalState(false)]

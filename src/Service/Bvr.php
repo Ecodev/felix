@@ -96,7 +96,7 @@ final class Bvr
 
     private static function pad(string $string): string
     {
-        return str_pad($string, 20, '0', STR_PAD_LEFT);
+        return mb_str_pad($string, 20, '0', STR_PAD_LEFT);
     }
 
     /**

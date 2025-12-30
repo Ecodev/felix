@@ -106,7 +106,7 @@ abstract class IPRange
                 break;
         }
 
-        $binMask = str_pad($binMask, 32, '0');
+        $binMask = mb_str_pad($binMask, 32, '0');
         $binMask = pack('H*', $binMask);
 
         return ($ip & $binMask) === $subnet;

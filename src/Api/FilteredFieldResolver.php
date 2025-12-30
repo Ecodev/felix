@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Ecodev\Felix\Api;
 
 use Doctrine\ORM\EntityNotFoundException;
-use Doctrine\Persistence\Proxy;
 use GraphQL\Doctrine\DefaultFieldResolver;
 use GraphQL\Type\Definition\ResolveInfo;
+use ReflectionClass;
 
 /**
  * A field resolver that will ensure that filtered entity are never returned via getter.
@@ -42,9 +42,11 @@ final class FilteredFieldResolver
      */
     private function load(mixed $object): mixed
     {
-        if ($object instanceof Proxy) {
+        if (is_object($object)) {
+            $reflector = new ReflectionClass($object);
+
             try {
-                $object->__load();
+                $reflector->initializeLazyObject($object);
             } catch (EntityNotFoundException) {
                 return null;
             }

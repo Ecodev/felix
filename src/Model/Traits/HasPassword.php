@@ -60,7 +60,7 @@ trait HasPassword
      */
     public function createToken(bool $mobileToken = false): string
     {
-        $this->token = $mobileToken ? str_pad((string) random_int(0, 999999), 6, '0', STR_PAD_LEFT) : bin2hex(random_bytes(16));
+        $this->token = $mobileToken ? mb_str_pad((string) random_int(0, 999999), 6, '0', STR_PAD_LEFT) : bin2hex(random_bytes(16));
         $this->tokenCreationDate = new Chronos();
 
         return $this->token;

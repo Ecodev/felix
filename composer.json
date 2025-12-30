@@ -38,7 +38,7 @@
         }
     },
     "require": {
-        "php": "^8.2",
+        "php": "^8.4",
         "ext-bcmath": "*",
         "ext-fileinfo": "*",
         "ext-json": "*",
@@ -57,10 +57,10 @@
         "mezzio/mezzio-session": "^1.17",
         "moneyphp/money": "^4.8",
         "monolog/monolog": "^3.9",
-        "roave/psr-container-doctrine": "^5.2",
+        "roave/psr-container-doctrine": "^6.1",
         "spomky-labs/otphp": "^11.3",
-        "symfony/cache": "^7.4",
-        "symfony/mailer": "^7.4"
+        "symfony/cache": "^8.0",
+        "symfony/mailer": "^8.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "@stable",
@@ -69,6 +69,6 @@
         "mikey179/vfsstream": "@stable",
         "phpstan/phpstan": "@stable",
         "phpstan/phpstan-phpunit": "@stable",
-        "phpunit/phpunit": "@stable"
+        "phpunit/phpunit": "^11.5"
     }
 }

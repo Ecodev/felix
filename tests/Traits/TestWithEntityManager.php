@@ -22,7 +22,8 @@ trait TestWithEntityManager
     public function setUp(): void
     {
         // Create the entity manager
-        $config = ORMSetup::createAttributeMetadataConfiguration([__DIR__ . '/Blog/Model'], true);
+        $config = ORMSetup::createAttributeMetadataConfig([__DIR__ . '/Blog/Model'], true);
+        $config->enableNativeLazyObjects(true);
         $config->addCustomNumericFunction('native_in', NativeIn::class);
         $config->setNamingStrategy(new UnderscoreNamingStrategy(CASE_LOWER));
         $config->addFilter(AclFilter::class, AclFilter::class);

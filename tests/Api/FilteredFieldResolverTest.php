@@ -6,7 +6,6 @@ namespace EcodevTests\Felix\Api;
 
 use ArrayObject;
 use Doctrine\ORM\EntityNotFoundException;
-use Doctrine\Persistence\Proxy;
 use Ecodev\Felix\Api\FilteredFieldResolver;
 use EcodevTests\Felix\Blog\Model\User;
 use GraphQL\Language\AST\OperationDefinitionNode;
@@ -17,6 +16,7 @@ use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Schema;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
+use ReflectionClass;
 use stdClass;
 
 final class FilteredFieldResolverTest extends TestCase
@@ -43,31 +43,13 @@ final class FilteredFieldResolverTest extends TestCase
 
     public static function providerLoad(): iterable
     {
-        $loadableClass = new class() implements Proxy {
-            public function __load(): void {}
+        $reflector = new ReflectionClass(self::class);
 
-            public function __isInitialized(): bool
-            {
-                return true;
-            }
-        };
-
-        $unLoadableClass = new class() implements Proxy {
-            public function __load(): void
-            {
-                throw new EntityNotFoundException();
-            }
-
-            public function __isInitialized(): bool
-            {
-                return true;
-            }
-        };
+        $loadable = $reflector->newLazyGhost(fn () => null); // nothing to initialize
+        $unloadable = $reflector->newLazyGhost(fn () => throw new EntityNotFoundException());
 
         $object = new stdClass();
         $user = new User();
-        $loadable = new $loadableClass();
-        $unloadable = new $unLoadableClass();
 
         return [
             [null, null],
