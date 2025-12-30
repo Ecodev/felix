@@ -1072,23 +1072,23 @@
         },
         {
             "name": "ecodev/graphql-doctrine",
-            "version": "11.0.0",
+            "version": "11.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Ecodev/graphql-doctrine.git",
-                "reference": "9ce071d70edb37b0119c12c1c8c1d1e8cf58c3b2"
+                "reference": "e72eac0b72e1db87fe9da3a5dc6f776293d6dcb4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Ecodev/graphql-doctrine/zipball/9ce071d70edb37b0119c12c1c8c1d1e8cf58c3b2",
-                "reference": "9ce071d70edb37b0119c12c1c8c1d1e8cf58c3b2",
+                "url": "https://api.github.com/repos/Ecodev/graphql-doctrine/zipball/e72eac0b72e1db87fe9da3a5dc6f776293d6dcb4",
+                "reference": "e72eac0b72e1db87fe9da3a5dc6f776293d6dcb4",
                 "shasum": ""
             },
             "require": {
-                "doctrine/orm": "^3.3",
-                "php": "^8.2",
+                "doctrine/orm": "^3.6",
+                "php": "^8.4",
                 "psr/container": "^1.1 || ^2.0",
-                "webonyx/graphql-php": "^15.20"
+                "webonyx/graphql-php": "^15.29"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "@stable",
@@ -1116,9 +1116,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Ecodev/graphql-doctrine/issues",
-                "source": "https://github.com/Ecodev/graphql-doctrine/tree/11.0.0"
+                "source": "https://github.com/Ecodev/graphql-doctrine/tree/11.0.1"
             },
-            "time": "2025-04-24T09:22:42+00:00"
+            "time": "2025-12-30T11:29:49+00:00"
         },
         {
             "name": "egulias/email-validator",
