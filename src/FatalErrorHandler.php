@@ -13,7 +13,7 @@ final class FatalErrorHandler
      * This must be called exactly **ONE TIME**.
      *
      * This will only work if HTTP headers were not sent already. So in development,
-     * where `error_reporting` is most likely enabled, it might not work.
+     * where `display_errors` is most likely enabled, it might not work.
      */
     public static function register(): void
     {
