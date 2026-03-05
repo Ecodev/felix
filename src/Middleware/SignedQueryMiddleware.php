@@ -205,7 +205,6 @@ final class SignedQueryMiddleware implements MiddlewareInterface
             '2001:4860:4801:40::/64',
             '2001:4860:4801:41::/64',
             '2001:4860:4801:42::/64',
-            '2001:4860:4801:43::/64',
             '2001:4860:4801:44::/64',
             '2001:4860:4801:45::/64',
             '2001:4860:4801:46::/64',
@@ -226,6 +225,7 @@ final class SignedQueryMiddleware implements MiddlewareInterface
             '2001:4860:4801:56::/64',
             '2001:4860:4801:57::/64',
             '2001:4860:4801:58::/64',
+            '2001:4860:4801:59::/64',
             '2001:4860:4801:60::/64',
             '2001:4860:4801:61::/64',
             '2001:4860:4801:62::/64',
@@ -369,6 +369,7 @@ final class SignedQueryMiddleware implements MiddlewareInterface
             '66.249.66.96/27',
             '66.249.67.0/27',
             '66.249.67.32/27',
+            '66.249.67.64/27',
             '66.249.68.0/27',
             '66.249.68.128/27',
             '66.249.68.160/27',
@@ -460,7 +461,6 @@ final class SignedQueryMiddleware implements MiddlewareInterface
             '66.249.79.224/27',
             '66.249.79.32/27',
             '66.249.79.64/27',
-            '66.249.79.96/27',
         ];
 
         return IPRange::matches($remoteAddress, $googleBotIps);
