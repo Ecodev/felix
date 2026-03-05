@@ -53,8 +53,8 @@ class RecordCompleter implements ProcessorInterface
             'login' => $user?->getLogin() ?: '<anonymous>',
             'url' => $url,
             'referer' => $referer,
-            'request' => json_encode($request, JSON_PRETTY_PRINT),
             'ip' => $ip,
+            'request' => json_encode($request, JSON_PRETTY_PRINT),
         ];
 
         return $envData;
