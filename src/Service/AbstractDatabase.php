@@ -198,7 +198,7 @@ abstract class AbstractDatabase
 
         echo 'importing ' . $file . "\n";
 
-        $importCommand = "echo 'SET NAMES utf8mb4;' | cat - $file | mariadb $mariadbArgs";
+        $importCommand = "echo 'SET NAMES utf8mb4; SET sql_mode = STRICT_TRANS_TABLES;' | cat - $file | mariadb $mariadbArgs";
 
         self::executeLocalCommand($importCommand);
     }

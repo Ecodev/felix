@@ -23,7 +23,7 @@ trait Log
     #[ORM\Column(type: 'string', length: 500, options: ['default' => ''])]
     private string $referer = '';
 
-    #[ORM\Column(type: 'string', length: 1000, options: ['default' => ''])]
+    #[ORM\Column(type: 'text', options: ['default' => ''])]
     private string $request = '';
 
     #[ORM\Column(type: 'string', length: 40, options: ['default' => ''])]

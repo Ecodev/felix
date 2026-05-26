@@ -89,22 +89,13 @@ class Server
         // Always log exception in DB (and by email)
         _log()->error($exception->__toString(), ['exception' => $exception]);
 
-        // If we are absolutely certain that the error comes from one of our trigger with a custom message for end-user,
-        // then wrap the exception to make it showable to the end-user
-        $previous = $exception->getPrevious();
-        if ($previous instanceof DriverException && $previous->getSQLState() === '45000' && $previous->getPrevious() && $previous->getPrevious()->getPrevious()) {
-            $message = $previous->getPrevious()->getPrevious()->getMessage();
-            $userMessage = (string) preg_replace('~SQLSTATE\[45000]: <<Unknown error>>: \d+ ~', '', $message, -1, $count);
-            if ($count === 1) {
-                $exception = new Exception($userMessage, 0, $exception);
-            }
-        }
+        $exception = $this->userFriendlyException($exception);
 
         $result = $formatter($exception);
 
         // Invalid variable that end-user might have crafted via the URL
         $isInvalidVariables = preg_match('~^Variable \".*\" got invalid value ~', $exception->getMessage());
-        $isFelixException = $exception->getPrevious() instanceof Exception;
+        $isFelixException = $exception instanceof Exception || $exception->getPrevious() instanceof Exception;
         if ($isFelixException || $isInvalidVariables) {
             $result['extensions']['showSnack'] = true;
         }
@@ -115,5 +106,36 @@ class Server
         }
 
         return $result;
+    }
+
+    /**
+     * If we are absolutely certain that the error comes from one of our trigger with a custom message for end-user,
+     * or a specific, well-known, safe error, then wrap the exception to make it showable to the end-user.
+     */
+    private function userFriendlyException(Throwable $exception): Throwable
+    {
+        $previous = $exception->getPrevious();
+        $message = $previous?->getPrevious()?->getPrevious()?->getMessage();
+
+        if (!($previous instanceof DriverException) || !$message) {
+            return $exception;
+        }
+
+        $patterns = [
+            '~^SQLSTATE\[45000]: <<Unknown error>>: \d+ (.*)~',
+            '~^SQLSTATE\[22003]: (Numeric value out of range): 1264~',
+            '~^SQLSTATE\[22001]: (String data, right truncated): 1406~',
+            '~^SQLSTATE\[22007]: (Invalid datetime format): 1292~',
+        ];
+
+        foreach ($patterns as $pattern) {
+            if (preg_match($pattern, $message, $m)) {
+                $userMessage = $m[1];
+
+                return new Exception($userMessage, 0, $exception);
+            }
+        }
+
+        return $exception;
     }
 }

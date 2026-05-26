@@ -72,12 +72,11 @@ abstract class AbstractServer extends TestCase
         }
     }
 
-    public static function providerQuery(): iterable
+    protected static function readQueries(string $folder): iterable
     {
-        $data = [];
-        $files = glob('tests/data/query/*.php');
-        if ($files === false) {
-            throw new Exception('Could not find any queries to test server');
+        $files = glob($folder);
+        if (!$files) {
+            throw new Exception('Could not find any queries to test server in ' . $folder);
         }
 
         foreach ($files as $file) {
@@ -98,10 +97,14 @@ abstract class AbstractServer extends TestCase
                 ->withHeader('content-type', ['application/json']);
 
             array_unshift($args, $user);
-            $data[$name] = $args;
-        }
 
-        return $data;
+            yield $name => $args;
+        }
+    }
+
+    public static function providerQuery(): iterable
+    {
+        return self::readQueries('tests/data/query/*.php');
     }
 
     /**
