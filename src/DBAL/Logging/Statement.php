@@ -38,7 +38,7 @@ final class Statement extends AbstractStatementMiddleware
 
         _log()->debug($this->sql, [
             'params' => $this->params,
-            'time' => number_format(($end - $start) / 1000, 6),
+            'time' => number_format($end - $start, 6),
         ]);
 
         return $result;
