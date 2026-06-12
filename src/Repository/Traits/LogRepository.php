@@ -31,11 +31,11 @@ trait LogRepository
     {
         $data = [
             'level' => $record->level->value,
-            'message' => $record->message,
+            'message' => mb_substr($record->message, 0, 5000),
             'creation_date' => Chronos::instance($record->datetime)->toDateTimeString(),
             'creator_id' => $record->extra['creator_id'] ?? null,
             'url' => $record->extra['url'] ?? '',
-            'referer' => $record->extra['referer'] ?? '',
+            'referer' => mb_substr($record->extra['referer'] ?? '', 0, 500),
             'request' => $record->extra['request'] ?? '',
             'ip' => $record->extra['ip'] ?? '',
             'context' => json_encode($record->context, JSON_THROW_ON_ERROR),
