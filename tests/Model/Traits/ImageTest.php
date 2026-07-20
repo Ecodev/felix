@@ -53,7 +53,6 @@ final class ImageTest extends TestCase
     #[DataProvider('providerSetFile')]
     public function testSetFile(string $filename, int $width, int $height, bool $isSvg = false): void
     {
-        $this->requireImagickCanProcess($filename);
         $this->createDefaultFelixContainer();
 
         $file = $this->createFileToUpload($filename);
@@ -76,16 +75,6 @@ final class ImageTest extends TestCase
         yield 'webp is untouched' => ['image.webp', 400, 400];
         yield 'huge jpg is resized to webp' => ['huge.jpg', 3500, 19];
         yield 'huge webp is resized' => ['huge.webp', 3500, 19];
-    }
-
-    private function requireImagickCanProcess(string $filename): void
-    {
-        try {
-            $im = new \Imagick("tests/data/images/$filename");
-            $im->clear();
-        } catch (\ImagickException $e) {
-            self::markTestSkipped('Imagick cannot process this format: ' . $e->getMessage());
-        }
     }
 
     private function createImage(): \Ecodev\Felix\Model\Image
