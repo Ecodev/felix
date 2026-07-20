@@ -37,7 +37,9 @@ jobs:
         run: composer install
 
       - name: Install HEIF codecs for ImageMagick
-        run: sudo apt-get install -y --no-install-recommends libheif-plugin-libde265
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libheif-plugin-libde265
 
       - name: Setup problem matchers for PHP
         run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
