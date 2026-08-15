@@ -95,11 +95,8 @@ class DataRestorer
                 }
             }
 
-            if ($buffer) {
-                $line = $this->toCsv($row);
-                fwrite($buffer, $line);
-            }
-
+            $line = $this->toCsv($row);
+            fwrite($buffer, $line);
             ++$count;
         }
 
