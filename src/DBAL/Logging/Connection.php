@@ -28,36 +28,46 @@ final class Connection extends AbstractConnectionMiddleware
 
     public function query(string $sql): Result
     {
-        _log()->debug($sql);
-
-        return parent::query($sql);
+        return $this->withLog($sql, fn () => parent::query($sql));
     }
 
     public function exec(string $sql): int|string
     {
-        _log()->debug($sql);
-
-        return parent::exec($sql);
+        return $this->withLog($sql, fn () => parent::exec($sql));
     }
 
     public function beginTransaction(): void
     {
-        _log()->debug('Beginning transaction');
-
-        parent::beginTransaction();
+        $this->withLog('Beginning transaction', fn () => parent::beginTransaction());
     }
 
     public function commit(): void
     {
-        _log()->debug('Committing transaction');
-
-        parent::commit();
+        $this->withLog('Committing transaction', fn () => parent::commit());
     }
 
     public function rollBack(): void
     {
-        _log()->debug('Rolling back transaction');
+        $this->withLog('Rolling back transaction', fn () => parent::rollBack());
+    }
 
-        parent::rollBack();
+    /**
+     * @template T
+     *
+     * @param callable(): T $callable
+     *
+     * @return T whatever the callable returned
+     */
+    public function withLog(string $message, callable $callable): mixed
+    {
+        $start = microtime(true);
+        $result = $callable();
+        $end = microtime(true);
+
+        _log()->debug($message, [
+            'time' => number_format($end - $start, 6),
+        ]);
+
+        return $result;
     }
 }
