@@ -32,7 +32,7 @@ class OperatorType extends TestCase
     protected function getFilteredResult(string $class, string $field, string $operator, array $values): array
     {
         $filter = $this->getFilter($field, $operator, $values);
-        $qb = _types()->createFilteredQueryBuilder($class, $filter, []);
+        $qb = _types()->createFilteredQueryBuilder($class, $filter, [['field' => 'id', 'order' => 'asc']]);
 
         return $qb->getQuery()->getResult();
     }
