@@ -164,7 +164,17 @@ class DataRestorer
                 FROM information_schema.TABLES AS t1
                 CROSS JOIN information_schema.TABLES AS t2
                 WHERE t1.TABLE_SCHEMA = '$this->databaseToRestore' AND t2.TABLE_SCHEMA = '$this->databaseToRestore'
-                HAVING relation IN (SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA = '$this->databaseToRestore')
+                HAVING relation IN (
+                    SELECT TABLE_NAME FROM (
+                        SELECT TABLE_NAME,
+                        COUNT(*) AS total_count,
+                        SUM(IF(COLUMN_KEY = 'PRI' AND DATA_TYPE = 'int' AND IS_NULLABLE = 'NO', 1, 0)) AS primary_columns_count
+                        FROM information_schema.COLUMNS
+                        WHERE TABLE_SCHEMA = '$this->databaseToRestore'
+                        GROUP BY TABLE_NAME
+                        HAVING primary_columns_count = total_count AND total_count = 2
+                    ) AS possible_relations
+                ) 
                 SQL
         );
     }
