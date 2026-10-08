@@ -62,7 +62,7 @@ final class SignedQueryMiddleware implements MiddlewareInterface
                 return $request;
             }
 
-            throw new Exception('Missing `X-Signature` HTTP header in signed query', 403);
+            throw new Exception('Missing `X-Signature` HTTP header in signed query', 400);
         }
 
         if (preg_match('~^v1\.(?<timestamp>\d{10})\.(?<hash>[0-9a-f]{64})$~', $signature, $m)) {
@@ -74,7 +74,7 @@ final class SignedQueryMiddleware implements MiddlewareInterface
             return $this->verifyHash($request, $timestamp, $hash);
         }
 
-        throw new Exception('Invalid `X-Signature` HTTP header in signed query', 403);
+        throw new Exception('Invalid `X-Signature` HTTP header in signed query', 400);
     }
 
     private function verifyTimestamp(ServerRequestInterface $request, string $timestamp): void
@@ -101,7 +101,7 @@ final class SignedQueryMiddleware implements MiddlewareInterface
             }
         }
 
-        throw new Exception('Invalid signed query', 403);
+        throw new Exception('Invalid signed query', 400);
     }
 
     /**

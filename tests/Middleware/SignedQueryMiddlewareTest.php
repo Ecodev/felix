@@ -33,10 +33,11 @@ class SignedQueryMiddlewareTest extends TestCase
         ?array $parsedBody,
         string $signature,
         string|int|null $keyName = null,
+        int $expectExceptionCode = 0,
         string $expectExceptionMessage = '',
         string $ip = '',
     ): void {
-        $this->process($keys, true, $ip, $body, $parsedBody, $signature, $keyName, $expectExceptionMessage);
+        $this->process($keys, true, $ip, $body, $parsedBody, $signature, $keyName, $expectExceptionCode, $expectExceptionMessage);
     }
 
     #[DataProvider('dataProviderQuery', false)]
@@ -46,7 +47,7 @@ class SignedQueryMiddlewareTest extends TestCase
         ?array $parsedBody,
         string $signature,
     ): void {
-        $this->process($keys, false, '', $body, $parsedBody, $signature, null, '');
+        $this->process($keys, false, '', $body, $parsedBody, $signature, null, 0, '');
     }
 
     public static function dataProviderQuery(): iterable
@@ -76,6 +77,7 @@ class SignedQueryMiddlewareTest extends TestCase
             null,
             'v1.1577964600.a4d664cd3d9903e4fecf6f9f671ad953586a7faeb16e67c306fd9f29999dfdd7',
             null,
+            400,
             'Invalid signed query',
         ];
 
@@ -101,6 +103,7 @@ class SignedQueryMiddlewareTest extends TestCase
             null,
             'v1.1577951099.' . str_repeat('a', 64),
             null,
+            403,
             'Signed query is expired',
         ];
 
@@ -118,6 +121,7 @@ class SignedQueryMiddlewareTest extends TestCase
             null,
             'v1.1577978101.' . str_repeat('a', 64),
             null,
+            403,
             'Signed query is expired',
         ];
 
@@ -158,6 +162,7 @@ class SignedQueryMiddlewareTest extends TestCase
             null,
             '',
             null,
+            400,
             'Missing `X-Signature` HTTP header in signed query',
         ];
 
@@ -167,6 +172,7 @@ class SignedQueryMiddlewareTest extends TestCase
             null,
             'foo',
             null,
+            400,
             'Invalid `X-Signature` HTTP header in signed query',
         ];
 
@@ -176,6 +182,7 @@ class SignedQueryMiddlewareTest extends TestCase
             null,
             'v1.1577964600.' . str_repeat('a', 64),
             null,
+            400,
             'Invalid signed query',
         ];
 
@@ -185,7 +192,6 @@ class SignedQueryMiddlewareTest extends TestCase
             null,
             'v1.1577964600.ff8a9f2bc8090207b824d88251ed8e9d39434607d86e0f0b2837c597d6642c26',
             0,
-            '',
         ];
 
         yield 'no header, but allowed IPv4' => [
@@ -194,6 +200,7 @@ class SignedQueryMiddlewareTest extends TestCase
             null,
             '',
             'no-attribute-at-all',
+            0,
             '',
             '1.2.3.4',
         ];
@@ -204,6 +211,7 @@ class SignedQueryMiddlewareTest extends TestCase
             null,
             'v1.1577964600.a4d664cd3d9903e4fecf6f9f671ad953586a7faeb16e67c306fd9f29999dfdd7',
             null,
+            400,
             'Invalid signed query',
             '1.2.3.4',
         ];
@@ -214,6 +222,7 @@ class SignedQueryMiddlewareTest extends TestCase
             null,
             '',
             null,
+            400,
             'Missing `X-Signature` HTTP header in signed query',
             '66.249.70.134',
         ];
@@ -223,6 +232,7 @@ class SignedQueryMiddlewareTest extends TestCase
             '{"operationName":"CurrentUser","variables":{},"query":"query CurrentUser { viewer { id }}',
             null,
             'v1.1577951099.20177a7face4e05a75c4b2e41bc97a8225f420f5b7bb1709dd5499821dba0807',
+            0,
             0,
             '',
             '66.249.70.134',
@@ -234,6 +244,7 @@ class SignedQueryMiddlewareTest extends TestCase
             null,
             'v1.1577951099' . str_repeat('a', 64),
             null,
+            400,
             'Invalid `X-Signature` HTTP header in signed query',
             '66.249.70.134',
         ];
@@ -244,6 +255,7 @@ class SignedQueryMiddlewareTest extends TestCase
             null,
             '',
             'no-attribute-at-all',
+            0,
             '',
             '40.77.188.165',
         ];
@@ -254,6 +266,7 @@ class SignedQueryMiddlewareTest extends TestCase
             null,
             'v1.1577951099.20177a7face4e05a75c4b2e41bc97a8225f420f5b7bb1709dd5499821dba0807',
             null,
+            403,
             'Signed query is expired',
             '40.77.188.165',
         ];
@@ -264,6 +277,7 @@ class SignedQueryMiddlewareTest extends TestCase
             null,
             'v1.1577951099' . str_repeat('a', 64),
             null,
+            400,
             'Invalid `X-Signature` HTTP header in signed query',
             '40.77.188.165',
         ];
@@ -284,6 +298,7 @@ class SignedQueryMiddlewareTest extends TestCase
         ?array $parsedBody,
         string $signature,
         string|int|null $keyName,
+        int $expectCode,
         string $expectExceptionMessage,
     ): void {
         $request = new ServerRequest(['REMOTE_ADDR' => $ip]);
@@ -307,7 +322,7 @@ class SignedQueryMiddlewareTest extends TestCase
 
         if ($expectExceptionMessage) {
             $this->expectExceptionMessage($expectExceptionMessage);
-            $this->expectExceptionCode(403);
+            $this->expectExceptionCode($expectCode);
         }
 
         $middleware->process($request, $handler);
