@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace EcodevTests\Felix\Middleware;
 
 use Cake\Chronos\Chronos;
+use Ecodev\Felix\Middleware\SignedQueryAbuse;
 use Ecodev\Felix\Middleware\SignedQueryMiddleware;
+use Exception;
 use Laminas\Diactoros\CallbackStream;
 use Laminas\Diactoros\Response;
 use Laminas\Diactoros\ServerRequest;
@@ -323,6 +325,7 @@ class SignedQueryMiddlewareTest extends TestCase
         if ($expectExceptionMessage) {
             $this->expectExceptionMessage($expectExceptionMessage);
             $this->expectExceptionCode($expectCode);
+            $this->expectException($expectCode === 400 ? SignedQueryAbuse::class : Exception::class);
         }
 
         $middleware->process($request, $handler);
