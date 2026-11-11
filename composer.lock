@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b4ccbadf175a8cbe1f0dc8be1d63081a",
+    "content-hash": "d0c300134c95e3816ba327ab499bd71b",
     "packages": [
         {
             "name": "cakephp/chronos",
@@ -5803,7 +5803,8 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-08-04T22:21:45+00:00"
+            "time": "2026-08-04T22:21:45+00:00",
+            "published-time": "2026-08-04T22:21:59+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -8593,5 +8594,5 @@
         "ext-readline": "*"
     },
     "platform-dev": {},
-    "plugin-api-version": "2.9.0"
+    "plugin-api-version": "2.11.0"
 }
