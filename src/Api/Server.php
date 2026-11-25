@@ -105,6 +105,9 @@ class Server
             $result['extensions']['objectNotFound'] = true;
         }
 
+        // Add placeholder to avoid debug=false flag to clear the entire key "extensions" when it's an empty object
+        $result['extensions'] ??= ['placeholder' => true];
+
         return $result;
     }
 

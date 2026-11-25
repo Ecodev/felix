@@ -149,6 +149,9 @@ class ServerTest extends TestCase
                         'path' => [
                             'nativeException',
                         ],
+                        'extensions' => [
+                            'placeholder' => true,
+                        ],
                     ],
                 ],
                 'data' => [
@@ -229,6 +232,62 @@ class ServerTest extends TestCase
                 GraphQL request (1:3)
                 1: { notFoundException }
                      ^
+
+                STRING
+        ];
+
+        yield 'unknown field keeps extensions without debug' => [
+            '{"query": "{ unknownField }"}',
+            [
+                'errors' => [
+                    [
+                        'message' => 'Cannot query field "unknownField" on type "Query".',
+                        'locations' => [
+                            [
+                                'line' => 1,
+                                'column' => 3,
+                            ],
+                        ],
+                        'extensions' => [
+                            'placeholder' => true,
+                        ],
+                    ],
+                ],
+            ],
+            <<<STRING
+                Cannot query field "unknownField" on type "Query".
+
+                GraphQL request (1:3)
+                1: { unknownField }
+                     ^
+
+                STRING
+        ];
+
+        yield 'syntax error keeps extensions without debug' => [
+            '{"query": "{ __typename"}',
+            [
+                'errors' => [
+                    [
+                        'message' => 'Syntax Error: Expected Name, found <EOF>',
+                        'locations' => [
+                            [
+                                'line' => 1,
+                                'column' => 13,
+                            ],
+                        ],
+                        'extensions' => [
+                            'placeholder' => true,
+                        ],
+                    ],
+                ],
+            ],
+            <<<STRING
+                Syntax Error: Expected Name, found <EOF>
+
+                GraphQL request (1:13)
+                1: { __typename
+                               ^
 
                 STRING
         ];
